@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sunblognuke.github.io/"/>
-  <updated>2015-11-18T10:46:01.009Z</updated>
+  <updated>2015-10-22T02:33:35.563Z</updated>
   <id>http://sunblognuke.github.io/</id>
   
   <author>
@@ -13,6 +13,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Hello Hexo & Github]]></title>
+    <link href="http://sunblognuke.github.io/2015/11/20/Hello%20Hexo%20&%20Github/"/>
+    <id>http://sunblognuke.github.io/2015/11/20/Hello Hexo & Github/</id>
+    <published>2015-11-20T00:57:24.746Z</published>
+    <updated>2015-10-22T02:33:35.563Z</updated>
+    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
+    </summary>
+    
+      <category term="Github" scheme="http://sunblognuke.github.io/tags/Github/"/>
+    
+      <category term="Hexo" scheme="http://sunblognuke.github.io/tags/Hexo/"/>
+    
+      <category term="Blog" scheme="http://sunblognuke.github.io/categories/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[摄影篇 - 小区也能DIY]]></title>
@@ -35,30 +63,48 @@
   </entry>
   
   <entry>
-    <title><![CDATA[Hello Hexo & Github]]></title>
-    <link href="http://sunblognuke.github.io/2015/11/18/hello-world/"/>
-    <id>http://sunblognuke.github.io/2015/11/18/hello-world/</id>
-    <published>2015-11-18T04:44:33.331Z</published>
-    <updated>2015-10-22T02:33:35.563Z</updated>
-    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+    <title><![CDATA[在Github平台搭建Hexo免费静态博客]]></title>
+    <link href="http://sunblognuke.github.io/2015/11/18/Integratd%20Hexo%20with%20Github/"/>
+    <id>http://sunblognuke.github.io/2015/11/18/Integratd Hexo with Github/</id>
+    <published>2015-11-18T10:23:30.000Z</published>
+    <updated>2015-11-20T01:35:02.201Z</updated>
+    <content type="html"><![CDATA[<h2 id="环境准备">环境准备</h2><h4 id="1-1_安装Git">1.1 安装Git</h4><p>在此下载:<a href="http://git-scm.com/download/win" target="_blank" rel="external">http://git-scm.com/download/win</a></p>
+<p>推荐安装绿色版本PortableGit, 下载解压到一个新文件夹即可，随即添加git.exe所在路径（比如E:\Dev\PortableGit\bin）到环境变量（如何添加环境变量请自行百度）</p>
+<p><a href="http://www.cnblogs.com/zhcncn/p/3787849.html" target="_blank" rel="external">Windows下Git安装指南</a></p>
+<h4 id="1-2_安装node-js">1.2 安装node.js</h4><p>在此下载:<a href="http://nodejs.org/download/" target="_blank" rel="external">http://nodejs.org/download/</a></p>
+<p>不必纠缠版本，选择对应系统版本 - x86或x64即可</p>
+<p>安装时直接保持默认配置即可。</p>
+<h2 id="安装Hexo">安装Hexo</h2><h4 id="2-1_Installation">2.1 Installation</h4><p>确保git， node安装正确（包括环境变量的配置），可在命令提示符CMD窗口输入git和node，npm看看是否有相关提示。</p>
+<p>打开命令提示符，执行如下命令：</p>
+<p>$ npm install -g hexo</p>
+<h4 id="2-2_Quick_Start">2.2 Quick Start</h4><h4 id="2-3_命令总结">2.3 命令总结</h4><p>2.3.1 常用命令</p>
+<p>hexo new postName #新建文章</p>
+<p>hexo new page pageName #新建页面</p>
+<p>hexo generate #生成静态页面至public目录</p>
+<p>hexo server #开启预览访问端口（默认端口4000，ctrl + c关闭server）</p>
+<p>hexo deploy #将.deploy_git目录部署到GitHub</p>
+<p>hexo help  #查看帮助</p>
+<p>hexo version  #查看Hexo的版本</p>
+<p>2.3.2 复合命令</p>
+<p>hexo deploy -#生成加部署</p>
+<p>hexo server -g  #生成加预览</p>
+<p>命令的简写为：</p>
+<p>hexo n == hexo new</p>
+<p>hexo g == hexo generate</p>
+<p>hexo s == hexo server</p>
+<p>hexo d == hexo deploy</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
+    <![CDATA[<h2 id="环境准备">环境准备</h2><h4 id="1-1_安装Git">1.1 安装Git</h4><p>在此下载:<a href="http://git-scm.com/download/win" target="_blank" rel="external">htt]]>
     </summary>
+    
+      <category term="Blogging" scheme="http://sunblognuke.github.io/tags/Blogging/"/>
     
       <category term="Github" scheme="http://sunblognuke.github.io/tags/Github/"/>
     
       <category term="Hexo" scheme="http://sunblognuke.github.io/tags/Hexo/"/>
     
-      <category term="Blog" scheme="http://sunblognuke.github.io/categories/Blog/"/>
+      <category term="Life" scheme="http://sunblognuke.github.io/categories/Life/"/>
     
   </entry>
   
