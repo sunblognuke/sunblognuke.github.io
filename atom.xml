@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sunblognuke.github.io/"/>
-  <updated>2015-11-20T03:56:48.705Z</updated>
+  <updated>2015-11-20T08:17:07.290Z</updated>
   <id>http://sunblognuke.github.io/</id>
   
   <author>
@@ -13,6 +13,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Hexo折腾记（一）]]></title>
+    <link href="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/"/>
+    <id>http://sunblognuke.github.io/2015/11/20/Hexo-Customization/</id>
+    <published>2015-11-20T08:06:23.000Z</published>
+    <updated>2015-11-20T08:17:07.290Z</updated>
+    <content type="html"><![CDATA[<h2 id="自定义404页面">自定义404页面</h2><p>直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：</p>
+<pre><code><span class="tag">&lt;<span class="title">html</span>&gt;</span>
+<span class="tag">&lt;<span class="title">head</span>&gt;</span>
+<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span> /&gt;</span>
+<span class="tag">&lt;<span class="title">title</span>&gt;</span>404 | Hacker's Blog<span class="tag">&lt;/<span class="title">title</span>&gt;</span>                   
+<span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+<span class="tag">&lt;<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://www.qq.com/404/search_children.js"</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</code></pre><h2 id="启用第三方评论系统">启用第三方评论系统</h2><p>在此整合<strong>多说</strong>为例。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="自定义404页面">自定义404页面</h2><p>直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：</p>
+<pre><code><span class="tag">&lt;<]]>
+    </summary>
+    
+      <category term="Blogging" scheme="http://sunblognuke.github.io/tags/Blogging/"/>
+    
+      <category term="Hexo" scheme="http://sunblognuke.github.io/tags/Hexo/"/>
+    
+      <category term="Blog" scheme="http://sunblognuke.github.io/categories/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[在Github平台搭建Hexo免费静态博客]]></title>
