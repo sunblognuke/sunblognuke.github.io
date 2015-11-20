@@ -11,25 +11,25 @@
     
 
     
-    <meta name="description" content="环境准备1.1 安装Git在此下载:http://git-scm.com/download/win
+    <meta name="description" content="环境准备安装Git在此下载:http://git-scm.com/download/win
 推荐安装绿色版本PortableGit, 下载解压到一个新文件夹即可，随即添加git.exe所在路径（比如E:\Dev\PortableGit\bin）到环境变量（如何添加环境变量请自行百度）
 Windows下Git安装指南
-1.2 安装node.js在此下载:http://nodejs.org/d">
+安装node.js在此下载:http://nodejs.org/download/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Github平台搭建Hexo免费静态博客">
 <meta property="og:url" content="http://sunblognuke.github.io/2015/11/20/Integratd Hexo with Github/index.html">
 <meta property="og:site_name" content="Hacker">
-<meta property="og:description" content="环境准备1.1 安装Git在此下载:http://git-scm.com/download/win
+<meta property="og:description" content="环境准备安装Git在此下载:http://git-scm.com/download/win
 推荐安装绿色版本PortableGit, 下载解压到一个新文件夹即可，随即添加git.exe所在路径（比如E:\Dev\PortableGit\bin）到环境变量（如何添加环境变量请自行百度）
 Windows下Git安装指南
-1.2 安装node.js在此下载:http://nodejs.org/d">
-<meta property="og:updated_time" content="2015-11-20T01:41:21.551Z">
+安装node.js在此下载:http://nodejs.org/download/">
+<meta property="og:updated_time" content="2015-11-20T03:48:36.873Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Github平台搭建Hexo免费静态博客">
-<meta name="twitter:description" content="环境准备1.1 安装Git在此下载:http://git-scm.com/download/win
+<meta name="twitter:description" content="环境准备安装Git在此下载:http://git-scm.com/download/win
 推荐安装绿色版本PortableGit, 下载解压到一个新文件夹即可，随即添加git.exe所在路径（比如E:\Dev\PortableGit\bin）到环境变量（如何添加环境变量请自行百度）
 Windows下Git安装指南
-1.2 安装node.js在此下载:http://nodejs.org/d">
+安装node.js在此下载:http://nodejs.org/download/">
 <meta name="twitter:creator" content="@sunblognuke">
 
     
@@ -99,7 +99,7 @@ Windows下Git安装指南
 		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
 		
   <p class="article-time">
-    <time datetime="2015-11-20T01:41:21.551Z" itemprop="datePublished"> 發表於 2015-11-20</time>
+    <time datetime="2015-11-20T03:48:36.873Z" itemprop="datePublished"> 發表於 2015-11-20</time>
     
   </p>
 </header>
@@ -108,20 +108,52 @@ Windows下Git安装指南
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境准备"><span class="toc-number">1.</span> <span class="toc-text">环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1_安装Git"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.1 安装Git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2_安装node-js"><span class="toc-number">1.0.2.</span> <span class="toc-text">1.2 安装node.js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Hexo"><span class="toc-number">2.</span> <span class="toc-text">安装Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1_Installation"><span class="toc-number">2.0.1.</span> <span class="toc-text">2.1 Installation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2_Quick_Start"><span class="toc-number">2.0.2.</span> <span class="toc-text">2.2 Quick Start</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3_命令总结"><span class="toc-number">2.0.3.</span> <span class="toc-text">2.3 命令总结</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境准备"><span class="toc-number">1.</span> <span class="toc-text">环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Git"><span class="toc-number">1.1.</span> <span class="toc-text">安装Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装node-js"><span class="toc-number">1.2.</span> <span class="toc-text">安装node.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Hexo"><span class="toc-number">2.</span> <span class="toc-text">安装Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Installation"><span class="toc-number">2.1.</span> <span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick_Start"><span class="toc-number">2.2.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#setup_your_blog"><span class="toc-number">2.2.1.</span> <span class="toc-text">setup your blog</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Start_the_server"><span class="toc-number">2.2.2.</span> <span class="toc-text">Start the server</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Create_new_post"><span class="toc-number">2.2.3.</span> <span class="toc-text">Create new post</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">2.2.4.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#部署到Github"><span class="toc-number">2.2.5.</span> <span class="toc-text">部署到Github</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令总结"><span class="toc-number">2.3.</span> <span class="toc-text">命令总结</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h2 id="环境准备">环境准备</h2><h4 id="1-1_安装Git">1.1 安装Git</h4><p>在此下载:<a href="http://git-scm.com/download/win" target="_blank" rel="external">http://git-scm.com/download/win</a></p>
+		<h2 id="环境准备">环境准备</h2><h3 id="安装Git">安装Git</h3><p>在此下载:<a href="http://git-scm.com/download/win" target="_blank" rel="external">http://git-scm.com/download/win</a></p>
 <p>推荐安装绿色版本PortableGit, 下载解压到一个新文件夹即可，随即添加git.exe所在路径（比如E:\Dev\PortableGit\bin）到环境变量（如何添加环境变量请自行百度）</p>
 <p><a href="http://www.cnblogs.com/zhcncn/p/3787849.html" target="_blank" rel="external">Windows下Git安装指南</a></p>
-<h4 id="1-2_安装node-js">1.2 安装node.js</h4><p>在此下载:<a href="http://nodejs.org/download/" target="_blank" rel="external">http://nodejs.org/download/</a></p>
+<h3 id="安装node-js">安装node.js</h3><p>在此下载:<a href="http://nodejs.org/download/" target="_blank" rel="external">http://nodejs.org/download/</a></p>
 <p>不必纠缠版本，选择对应系统版本 - x86或x64即可</p>
 <p>安装时直接保持默认配置即可。</p>
-<h2 id="安装Hexo">安装Hexo</h2><h4 id="2-1_Installation">2.1 Installation</h4><p>确保git， node安装正确（包括环境变量的配置），可在命令提示符CMD窗口输入git和node，npm看看是否有相关提示。</p>
+<h2 id="安装Hexo">安装Hexo</h2><h3 id="Installation">Installation</h3><p>确保git， node安装正确（包括环境变量的配置），可在命令提示符CMD窗口输入git和node，npm看看是否有相关提示。</p>
 <p>打开命令提示符，执行如下命令：</p>
 <p>$ npm install -g hexo</p>
-<h4 id="2-2_Quick_Start">2.2 Quick Start</h4><h4 id="2-3_命令总结">2.3 命令总结</h4><p>2.3.1 常用命令</p>
+<h3 id="Quick_Start">Quick Start</h3><h4 id="setup_your_blog">setup your blog</h4><p>新建目录，比如D:\Hexo, 目录右键进入命令提示符窗口，执行如下命令：</p>
+<p>$ hexo init</p>
+<p>[] Copying data</p>
+<p>[] You are almost ! Dont forget to run <code>npm install</code> before you start b<br>logging with Hexo!</p>
+<p>Hexo随后会自动在目标文件夹建立网站所需要的文件。然后按照提示，运行 npm install（在 D:\Hexo下）</p>
+<p>$ npm install</p>
+<p>会在D:\Hexo目录中安装 node_modules。</p>
+<h4 id="Start_the_server">Start the server</h4><p>运行下面的命令（在D:\Hexo下）</p>
+<p>$ hexo server</p>
+<p>[] Hexo is running at http:localhost:4000/. Press Ctrl+C to stop.</p>
+<p>表明Hexo Server已经启动了，在浏览器中打开 <a href="http://localhost:4000/，这时可以看到Hexo已为你生成了一篇blog。你可以按Ctrl+C" target="_blank" rel="external">http://localhost:4000/，这时可以看到Hexo已为你生成了一篇blog。你可以按Ctrl+C</a> 停止Server。</p>
+<h4 id="Create_new_post">Create new post</h4><p>运行下面的命令（在D:\Hexo下）</p>
+<p>$ hexo new “My New Post” </p>
+<p>会在D:\Hexo\source_posts目录下生成一个markdown文件：My-New-Post.md</p>
+<p>可以使用一个支持markdown语法的编辑器（比如Sublime Text）来编辑该文件。</p>
+<h4 id="Generate_static_files">Generate static files</h4><p>执行下面的命令，将markdown文件生成静态网页。</p>
+<p>$ hexo generate</p>
+<p>该命令执行完后，会在 D:\Hexo\public\ 目录下生成一系列html，css等文件。</p>
+<h4 id="部署到Github">部署到Github</h4><p>部署到Github前需要配置_config.yml文件，首先找到下面的内容</p>
+<pre><code><span class="preprocessor"># Deployment </span>
+<span class="preprocessor">## Docs: http:hexo.io/docs/deployment.html </span>
+<span class="label">deploy:</span> 
+<span class="label">type:</span>
+</code></pre><p>然后修改成如下格式：</p>
+<pre><code><span class="preprocessor"># Deployment </span>
+<span class="preprocessor">## Docs: http:hexo.io/docs/deployment.html </span>
+<span class="label">deploy:</span> 
+<span class="label">type:</span> git 
+<span class="label">repository:</span> https://github.com/xx_yourname/xx_yourname.github.io.git 
+<span class="label">branch:</span> master
+</code></pre><p>执行部署命令如下：</p>
+<p>$ hexo deploy</p>
+<h3 id="命令总结">命令总结</h3><p>2.3.1 常用命令</p>
 <p>hexo new postName #新建文章</p>
 <p>hexo new page pageName #新建页面</p>
 <p>hexo generate #生成静态页面至public目录</p>
@@ -191,7 +223,7 @@ Windows下Git安装指南
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境准备"><span class="toc-number">1.</span> <span class="toc-text">环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1_安装Git"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.1 安装Git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2_安装node-js"><span class="toc-number">1.0.2.</span> <span class="toc-text">1.2 安装node.js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Hexo"><span class="toc-number">2.</span> <span class="toc-text">安装Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1_Installation"><span class="toc-number">2.0.1.</span> <span class="toc-text">2.1 Installation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2_Quick_Start"><span class="toc-number">2.0.2.</span> <span class="toc-text">2.2 Quick Start</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3_命令总结"><span class="toc-number">2.0.3.</span> <span class="toc-text">2.3 命令总结</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境准备"><span class="toc-number">1.</span> <span class="toc-text">环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Git"><span class="toc-number">1.1.</span> <span class="toc-text">安装Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装node-js"><span class="toc-number">1.2.</span> <span class="toc-text">安装node.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Hexo"><span class="toc-number">2.</span> <span class="toc-text">安装Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Installation"><span class="toc-number">2.1.</span> <span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick_Start"><span class="toc-number">2.2.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#setup_your_blog"><span class="toc-number">2.2.1.</span> <span class="toc-text">setup your blog</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Start_the_server"><span class="toc-number">2.2.2.</span> <span class="toc-text">Start the server</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Create_new_post"><span class="toc-number">2.2.3.</span> <span class="toc-text">Create new post</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">2.2.4.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#部署到Github"><span class="toc-number">2.2.5.</span> <span class="toc-text">部署到Github</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令总结"><span class="toc-number">2.3.</span> <span class="toc-text">命令总结</span></a></li></ol></li></ol>
  
   </div>
 
