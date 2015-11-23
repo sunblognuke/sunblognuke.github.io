@@ -27,7 +27,7 @@
 &amp;lt;meta charset=&quot;UTF-8&quot; /&amp;gt;
 &amp;lt;title&amp;gt;404 | Hacker&apos;s Blog&amp;lt;/title&amp;gt;                   
 &amp;">
-<meta property="og:updated_time" content="2015-11-22T09:29:15.592Z">
+<meta property="og:updated_time" content="2015-11-23T10:04:17.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo折腾记（一）">
 <meta name="twitter:description" content="自定义404页面直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：
@@ -78,11 +78,10 @@
 					
 					<li>
  					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:sunblognuke.github.io">
-					</form>
+						<form class="search">
+							<label>Search</label>
+						<input type="text" id="ts-search-input" class="st-default-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
 					
 					</li>
 				</ul>
@@ -112,7 +111,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义404页面"><span class="toc-number">1.</span> <span class="toc-text">自定义404页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启用第三方评论系统"><span class="toc-number">2.</span> <span class="toc-text">启用第三方评论系统</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义404页面"><span class="toc-number">1.</span> <span class="toc-text">自定义404页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启用第三方评论系统"><span class="toc-number">2.</span> <span class="toc-text">启用第三方评论系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整合Swiftype站内搜索"><span class="toc-number">3.</span> <span class="toc-text">整合Swiftype站内搜索</span></a></li></ol>
 		
 		</div>
 		
@@ -145,6 +144,15 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 -webkit-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span>
 -moz-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span>}
 </code></pre><p>更多教程参看《<a href="http://dev.duoshuo.com/threads/4ff1cfd0397309552c000017" target="_blank" rel="external">多说CSS修改</a>》</p>
+<h2 id="整合Swiftype站内搜索">整合Swiftype站内搜索</h2><p>参考这两篇教程：</p>
+<p><a href="http://gsgundam.com/2015-03-03-swiftype-professional-search-tool/" target="_blank" rel="external">Swiftype 专业站内搜索工具</a></p>
+<p><a href="http://www.jerryfu.net/post/search-engine-for-hexo-with-swiftype-v2.html" target="_blank" rel="external">利用swiftype为hexo添加站内搜索v2.0</a></p>
+<p>Note:</p>
+<ol>
+<li>每个网址唯一的代码，不能通用或变量设置。添加代码到文件after_footer.ejs。</li>
+<li>添加配置项到主题文件_config.yml</li>
+<li>添加class - st-default-search-input到header.ejs</li>
+</ol>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -203,7 +211,7 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义404页面"><span class="toc-number">1.</span> <span class="toc-text">自定义404页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启用第三方评论系统"><span class="toc-number">2.</span> <span class="toc-text">启用第三方评论系统</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义404页面"><span class="toc-number">1.</span> <span class="toc-text">自定义404页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启用第三方评论系统"><span class="toc-number">2.</span> <span class="toc-text">启用第三方评论系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整合Swiftype站内搜索"><span class="toc-number">3.</span> <span class="toc-text">整合Swiftype站内搜索</span></a></li></ol>
  
   </div>
 
@@ -551,6 +559,19 @@ $(document).ready(function(){
 <!-- Tiny_search Begin -->
 
 <!-- Tiny_search End -->
+
+<!-- Swiftype_search Begin -->
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','zpAq-EQUfMzEzP6ybWEU','2.0.0');
+</script>
+
+<!-- Swiftype_search End -->
 
   </body>
 </html>
