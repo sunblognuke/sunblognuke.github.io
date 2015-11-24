@@ -2,13 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://sunblognuke.github.io/2015/11/20/Hexo-Customization/</loc>
-    <lastmod>2015-11-23T10:04:17.987Z</lastmod>
+    <loc>http://sunblognuke.github.io/about/index.html</loc>
+    <lastmod>2015-11-24T08:05:18.059Z</lastmod>
   </url>
   
   <url>
-    <loc>http://sunblognuke.github.io/about/index.html</loc>
-    <lastmod>2015-11-23T03:49:04.358Z</lastmod>
+    <loc>http://sunblognuke.github.io/2015/11/24/hexo-customization-%E2%85%A1/</loc>
+    <lastmod>2015-11-24T08:03:44.435Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sunblognuke.github.io/resume/index.html</loc>
+    <lastmod>2015-11-24T07:30:29.691Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sunblognuke.github.io/2015/11/20/Hexo-Customization/</loc>
+    <lastmod>2015-11-24T05:45:53.514Z</lastmod>
   </url>
   
   <url>
@@ -24,6 +34,11 @@
   <url>
     <loc>http://sunblognuke.github.io/2015/11/18/%E6%91%84%E5%BD%B1%E7%AF%87-%E5%B0%8F%E5%8C%BA%E4%B9%9F%E8%83%BDDIY/</loc>
     <lastmod>2015-11-18T10:46:01.009Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sunblognuke.github.io/README.html</loc>
+    <lastmod>2015-11-12T00:36:32.320Z</lastmod>
   </url>
   
   <url>

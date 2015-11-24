@@ -58,7 +58,9 @@
 					
 						<li><a href="/archives">归档 | Archives</a></li>
 					
-						<li><a href="/about">简介 | About</a></li>
+						<li><a href="/about">关于 | About</a></li>
+					
+						<li><a href="/resume">简历 | Resume</a></li>
 					
 					<li>
  					
@@ -74,6 +76,114 @@
     </header>
     <div id="container">
       <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/24/hexo-customization-Ⅱ/" title="Hexo折腾记 Ⅱ" itemprop="url">Hexo折腾记 Ⅱ</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-24T06:16:50.000Z" itemprop="datePublished"> 发表于 2015-11-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>继续捣鼓Hexo博客框架，细化更为个性的地方。比如：</p>
+<h2 id="新增自定义页面">新增自定义页面</h2><p>不妨以新增一个简历页面（个人博客建立优雅的简历页面不失为一个推销自己的方式）为例，不同的主题可能会有些微区别，修改步骤如下：</p>
+<ol>
+<li><p>命令新增页面 $ hexo new page resume</p>
+</li>
+<li><p>拷贝page.ejs并重命名为resume.ejs， 修改代码如下：</p>
+<pre><code>&lt;%- partial(<span class="string">'_partial/post/resume'</span>, {<span class="string">item:</span> page, <span class="string">index:</span> <span class="literal">false</span>,<span class="string">table:</span> <span class="literal">false</span>}) %&gt;
+</code></pre></li>
+<li><p>按照路径_partial/post/resume在目录post下拷贝article.ejs并重命名为resume.ejs，修改代码如下:</p>
+<pre><code><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"main"</span> <span class="attribute">class</span>=<span class="value">"page"</span> <span class="attribute">itemscope</span> <span class="attribute">itemprop</span>=<span class="value">"blogPost"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">article</span> <span class="attribute">itemprop</span>=<span class="value">"articleBody"</span>&gt;</span> 
+    <span class="tag">&lt;<span class="title">header</span> <span class="attribute">class</span>=<span class="value">"article-info clearfix"</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">h1</span> <span class="attribute">itemprop</span>=<span class="value">"name"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">%=</span> <span class="attribute">item.title</span> %&gt;</span>
+      <span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">header</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"article-content"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">%-</span> <span class="attribute">item.content</span> %&gt;</span>  
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>             
+    <span class="tag">&lt;/<span class="title">article</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>     
+</code></pre></li>
+<li><p>打开文件layout.ejs, 增加resume布局的判断代码如下:</p>
+<pre><code><span class="xml"></span>&lt;%<span class="ruby"> } <span class="keyword">else</span> <span class="keyword">if</span>(page.layout==<span class="string">'resume'</span>){ </span>%&gt;<span class="xml">
+    </span>&lt;%-<span class="ruby"> partial(<span class="string">'_partial/head'</span>) </span>%&gt;<span class="xml">
+      <span class="tag">&lt;<span class="title">body</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"container"</span>&gt;</span>
+          </span>&lt;%-<span class="ruby"> body </span>%&gt;<span class="xml">
+        <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+      <span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+     <span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</span>&lt;%<span class="ruby"> } <span class="keyword">else</span> <span class="keyword">if</span>(page.layout==<span class="string">'page'</span>){ </span>%&gt;<span class="xml"></span>
+</code></pre></li>
+<li><p>打开路径Hexo\source\resume下的index.md，增加layout: resume设置。</p>
+</li>
+<li><p>（可选）在主题配置文件_config.yml新增菜单：</p>
+<pre><code><span class="preprocessor">##### Menu</span>
+menu:
+  主页 <span class="string">| Home: /</span>
+  <span class="preprocessor">##索引 | Index: /index</span>
+  归档 <span class="string">| Archives: /archives</span>
+  关于 <span class="string">| About: /about</span>
+  简历 <span class="string">| Resume: /resume</span>
+</code></pre></li>
+</ol>
+<p>此时全部设置完毕，部署后可直接访问your_github_name.github.io/resume访问到该独立简历页面。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Blog/">Blog</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/Hexo/">Hexo</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/11/24/hexo-customization-Ⅱ/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/11/24/hexo-customization-Ⅱ/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
 
    
     
@@ -132,6 +242,13 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 <li>添加配置项到主题文件_config.yml</li>
 <li>添加class - st-default-search-input到header.ejs</li>
 </ol>
+<h2 id="部署Github的README-md">部署Github的README.md</h2><p>如何部署Github时保证README.md不被渲染：</p>
+<ul>
+<li><p>添加README.md文件：Hexo目录下的source根目录下创建README.md文件，编辑保存。</p>
+</li>
+<li><p>防止README.md被渲染：编辑Hexo目录的_config.yml文件中的“skip_render”参数，skip_render: README.md</p>
+</li>
+</ul>
 
         
         
@@ -454,7 +571,7 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 		<ul>
 		
 		  
-			<li><a href="/categories/Blog/" title="Blog">Blog<sup>3</sup></a></li>
+			<li><a href="/categories/Blog/" title="Blog">Blog<sup>4</sup></a></li>
 		  
 		
 		  
@@ -471,15 +588,15 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>3</sup></a></li>
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>3</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>2</sup></a></li>
 			
 		
 			
