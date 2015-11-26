@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sunblognuke.github.io/"/>
-  <updated>2015-11-24T08:03:44.435Z</updated>
+  <updated>2015-11-26T05:59:49.332Z</updated>
   <id>http://sunblognuke.github.io/</id>
   
   <author>
@@ -19,11 +19,11 @@
     <link href="http://sunblognuke.github.io/2015/11/24/hexo-customization-%E2%85%A1/"/>
     <id>http://sunblognuke.github.io/2015/11/24/hexo-customization-Ⅱ/</id>
     <published>2015-11-24T06:16:50.000Z</published>
-    <updated>2015-11-24T08:03:44.435Z</updated>
+    <updated>2015-11-26T05:59:49.332Z</updated>
     <content type="html"><![CDATA[<p>继续捣鼓Hexo博客框架，细化更为个性的地方。比如：</p>
 <h2 id="新增自定义页面">新增自定义页面</h2><p>不妨以新增一个简历页面（个人博客建立优雅的简历页面不失为一个推销自己的方式）为例，不同的主题可能会有些微区别，修改步骤如下：</p>
 <ol>
-<li><p>命令新增页面 $ hexo new page resume</p>
+<li><p>命令新增页面 <code>$ hexo new page resume</code></p>
 </li>
 <li><p>拷贝page.ejs并重命名为resume.ejs， 修改代码如下：</p>
 <pre><code>&lt;%- partial(<span class="string">'_partial/post/resume'</span>, {<span class="string">item:</span> page, <span class="string">index:</span> <span class="literal">false</span>,<span class="string">table:</span> <span class="literal">false</span>}) %&gt;
@@ -66,6 +66,66 @@ menu:
 </code></pre></li>
 </ol>
 <p>此时全部设置完毕，部署后可直接访问your_github_name.github.io/resume访问到该独立简历页面。</p>
+<h2 id="创建Filter_-_文章尾部增加版权信息">创建Filter - 文章尾部增加版权信息</h2><p>参考教程 - <a href="http://kuangqi.me/tricks/append-a-copyright-info-after-every-post/index.html" target="_blank" rel="external">为Hexo博客的每一篇文章自动追加版权信息</a></p>
+<h2 id="创建模板帮助插件">创建模板帮助插件</h2><p>你可以在主题目录下的scripts文件夹里创建一些全局性的模板帮助方法，从而在模板直接调用即可。比如我们可以创建一个页面标题的方法，代码如下：</p>
+<pre><code><span class="comment"><span class="markdown">/** 
+<span class="bullet">* </span>page_title helper
+<span class="bullet">*
+</span><span class="bullet">* </span>Usage:
+<span class="bullet">*   </span><span class="xml"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span>
+<span class="bullet">*     </span><span class="xml"><span class="tag">&lt;<span class="title">title</span>&gt;</span></span><span class="xml"><span class="tag">&lt;<span class="title">%=</span> <span class="attribute">page_title</span>() %&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="title">title</span>&gt;</span></span>
+<span class="bullet">*   </span><span class="xml"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span>
+*/</span></span>
+
+hexo.extend.helper.register(<span class="string">"page_title"</span>, function () {
+  <span class="keyword">var</span> title = <span class="keyword">this</span>.page.title;
+
+  <span class="keyword">if</span> (<span class="keyword">this</span>.is_archive()){
+    title = <span class="keyword">this</span>.__(<span class="string">'archive_a'</span>);
+
+    <span class="keyword">if</span> (<span class="keyword">this</span>.is_month()){
+      title += <span class="string">': '</span> + <span class="keyword">this</span>.page.year + <span class="string">'/'</span> + <span class="keyword">this</span>.page.month;
+    } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_year()){
+      title += <span class="string">': '</span> + <span class="keyword">this</span>.page.year;
+    }
+  } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_category()){
+    title =  <span class="keyword">this</span>.__(<span class="string">'categories'</span>)+<span class="string">' : '</span> + <span class="keyword">this</span>.page.category;
+  } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_tag()){
+    title = <span class="keyword">this</span>.__(<span class="string">'tags'</span>)+<span class="string">' : '</span> + <span class="keyword">this</span>.page.tag;
+  }
+
+  <span class="keyword">return</span> title;
+});
+</code></pre><p>注意在此方法体你可以通过this访问到对象page，site，config等，如你所见，一些全局方法比如<code>is_archive()</code>或本地化方法<code>__(&#39;archive_a&#39;)</code>都必须经由this来调用。</p>
+<p>复制以上代码到新建文件page_title.js里。接下来打开head.ejs并修改呈现页面标题的代码如下：</p>
+<p><strong>原代码：</strong></p>
+<pre><code><span class="xml"></span>&lt;%<span class="ruby">
+  var title = page.title;
+
+  <span class="keyword">if</span> (is_archive()){
+    title = _<span class="number">_</span>(<span class="string">'archive_a'</span>);
+
+    <span class="keyword">if</span> (is_month()){
+      title += <span class="string">': '</span> + page.year + <span class="string">'/'</span> + page.month;
+    } <span class="keyword">else</span> <span class="keyword">if</span> (is_year()){
+      title += <span class="string">': '</span> + page.year;
+    }
+  } <span class="keyword">else</span> <span class="keyword">if</span> (is_category()){
+    title =  _<span class="number">_</span>(<span class="string">'categories'</span>)+<span class="string">' : '</span> + page.category;
+  } <span class="keyword">else</span> <span class="keyword">if</span> (is_tag()){
+    title = _<span class="number">_</span>(<span class="string">'tags'</span>)+<span class="string">' : '</span> + page.tag;
+  }
+  </span>%&gt;<span class="xml">
+    <span class="tag">&lt;<span class="title">title</span>&gt;</span></span>&lt;%<span class="ruby"> <span class="keyword">if</span> (title){ </span>%&gt;<span class="xml"></span>&lt;%=<span class="ruby"> title </span>%&gt;<span class="xml"> | </span>&lt;%<span class="ruby"> } </span>%&gt;<span class="xml"></span>&lt;%=<span class="ruby"> config.title </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">title</span>&gt;</span></span>
+</code></pre><p><strong>新代码：</strong></p>
+<pre><code>&lt;% var <span class="built_in">title</span> = page_title(); %&gt;
+    &lt;<span class="built_in">title</span>&gt;&lt;% <span class="flow">if</span> (<span class="built_in">title</span>){ <span class="envvar">%&gt;&lt;%</span>= <span class="built_in">title</span> %&gt; | &lt;% } <span class="envvar">%&gt;&lt;%</span>= config.<span class="built_in">title</span> %&gt;&lt;/<span class="built_in">title</span>&gt;
+</code></pre><p>参考教程 - <a href="http://1pixelout.net/2015/09/18/writing-hexo-template-helpers/" target="_blank" rel="external">WRITING HEXO TEMPLATE HELPERS</a></p>
+<hr>
+<p><strong>版权声明</strong></p>
+<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/cc.png" alt=""></p>
+<p><a href="http://sunblognuke.github.io">Hacker</a> by <a href="http://sunblognuke.github.io/about">Baldwin Sun</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">Creative Commons BY-NC-ND 4.0 International License</a>.<br>由<a href="http://sunblognuke.github.io/about">Baldwin Sun</a>创作并维护的<a href="http://sunblognuke.github.io">代码人生</a>博客采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。</p>
+<p>本文首发于<a href="http://sunblognuke.github.io">Hacker | 代码人生</a>博客，版权所有，侵权必究。<br>本文永久链接：<a href="http://sunblognuke.github.io/2015/11/24/hexo-customization-Ⅱ/">http://sunblognuke.github.io/2015/11/24/hexo-customization-Ⅱ/</a></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>继续捣鼓Hexo博客框架，细化更为个性的地方。比如：</p>
@@ -83,11 +143,11 @@ menu:
   </entry>
   
   <entry>
-    <title><![CDATA[Hexo折腾记（一）]]></title>
+    <title><![CDATA[Hexo折腾记]]></title>
     <link href="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/"/>
     <id>http://sunblognuke.github.io/2015/11/20/Hexo-Customization/</id>
     <published>2015-11-20T08:06:23.000Z</published>
-    <updated>2015-11-24T05:45:53.514Z</updated>
+    <updated>2015-11-26T06:06:08.955Z</updated>
     <content type="html"><![CDATA[<h2 id="自定义404页面">自定义404页面</h2><p>直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：</p>
 <pre><code><span class="tag">&lt;<span class="title">html</span>&gt;</span>
 <span class="tag">&lt;<span class="title">head</span>&gt;</span>
@@ -102,7 +162,7 @@ menu:
 <pre><code><span class="comment">#### Comment</span>
 duoshuo_shortname: sunblognuke   <span class="comment">## e.g. wuchong   your duoshuo short name.</span>
 disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short name.</span>
-</code></pre><p>你也可以在多说后台自定义CSS，比如评论头像鼠标悬停旋转效果，代码如下：</p>
+</code></pre><p>你也可以在多说后台自定义CSS，比如评论头像鼠标悬停旋转效果和隐藏多说底部版权，代码如下：</p>
 <pre><code><span class="class">.ds-avatar</span>{-webkit-<span class="attribute">border-radius</span><span class="value">: <span class="number">5px</span> <span class="important">!important</span>;</span><span class="comment">/*圆角效果：兼容webkit浏览器*/</span>
 -moz-<span class="attribute">border-radius</span><span class="value">:<span class="number">5px</span> <span class="important">!important</span>;</span>
 <span class="attribute">box-shadow</span><span class="value">: inset <span class="number">0</span> -<span class="number">1px</span> <span class="number">0</span> <span class="hexcolor">#3333</span>sf <span class="important">!important</span>;</span><span class="comment">/*设置图像阴影效果*/</span>
@@ -116,7 +176,12 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 <span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span><span class="comment">/*图像旋转360度*/</span>
 -webkit-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span>
 -moz-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span>}
+<span class="comment">/*隐藏多说底部版权*/</span>
+<span class="id">#ds-thread</span> <span class="id">#ds-reset</span> <span class="class">.ds-powered-by</span> {
+    <span class="attribute">display</span><span class="value">: none;</span>
+}
 </code></pre><p>更多教程参看《<a href="http://dev.duoshuo.com/threads/4ff1cfd0397309552c000017" target="_blank" rel="external">多说CSS修改</a>》</p>
+<p><a href="http://www.arao.me/2015/hexo-next-theme-optimize-duoshuo/" target="_blank" rel="external">动动手指，给你的Hexo站点添加最近访客（多说篇）</a></p>
 <h2 id="整合Swiftype站内搜索">整合Swiftype站内搜索</h2><p>参考这两篇教程：</p>
 <p><a href="http://gsgundam.com/2015-03-03-swiftype-professional-search-tool/" target="_blank" rel="external">Swiftype 专业站内搜索工具</a></p>
 <p><a href="http://www.jerryfu.net/post/search-engine-for-hexo-with-swiftype-v2.html" target="_blank" rel="external">利用swiftype为hexo添加站内搜索v2.0</a></p>
@@ -133,6 +198,11 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 <li><p>防止README.md被渲染：编辑Hexo目录的_config.yml文件中的“skip_render”参数，skip_render: README.md</p>
 </li>
 </ul>
+<hr>
+<p><strong>版权声明</strong></p>
+<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/cc.png" alt=""></p>
+<p><a href="http://sunblognuke.github.io">Hacker</a> by <a href="http://sunblognuke.github.io/about">Baldwin Sun</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">Creative Commons BY-NC-ND 4.0 International License</a>.<br>由<a href="http://sunblognuke.github.io/about">Baldwin Sun</a>创作并维护的<a href="http://sunblognuke.github.io">代码人生</a>博客采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。</p>
+<p>本文首发于<a href="http://sunblognuke.github.io">Hacker | 代码人生</a>博客，版权所有，侵权必究。<br>本文永久链接：<a href="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/">http://sunblognuke.github.io/2015/11/20/Hexo-Customization/</a></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<h2 id="自定义404页面">自定义404页面</h2><p>直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：</p>
@@ -152,7 +222,7 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
     <link href="http://sunblognuke.github.io/2015/11/20/Integratd-Hexo-with-Github/"/>
     <id>http://sunblognuke.github.io/2015/11/20/Integratd-Hexo-with-Github/</id>
     <published>2015-11-20T06:06:23.000Z</published>
-    <updated>2015-11-21T02:45:26.830Z</updated>
+    <updated>2015-11-26T06:02:20.195Z</updated>
     <content type="html"><![CDATA[<h2 id="环境准备">环境准备</h2><h3 id="安装Git">安装Git</h3><p>在此下载:<a href="http://git-scm.com/download/win" target="_blank" rel="external">http://git-scm.com/download/win</a></p>
 <p>推荐安装绿色版本PortableGit, 下载解压到一个新文件夹即可，随即添加git.exe所在路径（比如E:\Dev\PortableGit\bin）到环境变量（如何添加环境变量请自行百度）</p>
 <p><a href="http://www.cnblogs.com/zhcncn/p/3787849.html" target="_blank" rel="external">Windows下Git安装指南</a></p>
@@ -161,25 +231,29 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 <p>安装时直接保持默认配置即可。</p>
 <h2 id="安装Hexo">安装Hexo</h2><h3 id="Installation">Installation</h3><p>确保git， node安装正确（包括环境变量的配置），可在命令提示符CMD窗口输入git和node，npm看看是否有相关提示。</p>
 <p>打开命令提示符，执行如下命令：</p>
-<p>$ npm install -g hexo</p>
-<h3 id="Quick_Start">Quick Start</h3><h4 id="setup_your_blog">setup your blog</h4><p>新建目录，比如D:\Hexo, 目录右键进入命令提示符窗口，执行如下命令：</p>
-<p>$ hexo init</p>
-<p>[] Copying data</p>
-<p>[] You are almost ! Dont forget to run <code>npm install</code> before you start b<br>logging with Hexo!</p>
-<p>Hexo随后会自动在目标文件夹建立网站所需要的文件。然后按照提示，运行 npm install（在 D:\Hexo下）</p>
-<p>$ npm install</p>
-<p>会在D:\Hexo目录中安装 node_modules。</p>
+<pre><code>$ npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> hexo</span>
+</code></pre><h3 id="Quick_Start">Quick Start</h3><h4 id="setup_your_blog">setup your blog</h4><p>新建目录，比如D:\Hexo, 目录右键进入命令提示符窗口，执行如下命令：</p>
+<pre><code>$ hexo init
+
+[] Copying data
+
+[] You are almost ! Dont forget <span class="keyword">to</span> <span class="command">run</span> `npm install` <span class="keyword">before</span> you start b
+logging <span class="keyword">with</span> Hexo!
+</code></pre><p>Hexo随后会自动在目标文件夹建立网站所需要的文件。然后按照提示，运行 npm install（在 D:\Hexo下）</p>
+<pre><code>$ npm <span class="keyword">install</span>
+</code></pre><p>会在D:\Hexo目录中安装 node_modules。</p>
 <h4 id="Start_the_server">Start the server</h4><p>运行下面的命令（在D:\Hexo下）</p>
-<p>$ hexo server</p>
-<p>[] Hexo is running at <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a>. Press Ctrl+C to stop.</p>
-<p>表明Hexo Server已经启动了，在浏览器中打开以上网址，这时可以看到Hexo已为你生成了blog。你可以按Ctrl+C 停止Server。</p>
+<pre><code>$ hexo server
+
+[] Hexo <span class="keyword">is</span> running at http:<span class="comment">//localhost:4000/. Press Ctrl+C to stop.</span>
+</code></pre><p>表明Hexo Server已经启动了，在浏览器中打开以上网址，这时可以看到Hexo已为你生成了blog。你可以按Ctrl+C 停止Server。</p>
 <h4 id="Create_new_post">Create new post</h4><p>运行下面的命令（在D:\Hexo下）</p>
-<p>$ hexo new “My New Post” </p>
-<p>会在D:\Hexo\source_posts目录下生成一个markdown文件：My-New-Post.md</p>
+<pre><code>$ hexo <span class="keyword">new</span> <span class="string">"My New Post"</span> 
+</code></pre><p>会在D:\Hexo\source_posts目录下生成一个markdown文件：My-New-Post.md</p>
 <p>可以使用一个支持markdown语法的编辑器（比如Sublime Text）来编辑该文件。</p>
 <h4 id="Generate_static_files">Generate static files</h4><p>执行下面的命令，将markdown文件生成静态网页。</p>
-<p>$ hexo generate</p>
-<p>该命令执行完后，会在 D:\Hexo\public\ 目录下生成一系列html，css等文件。</p>
+<pre><code><span class="variable">$ </span>hexo generate
+</code></pre><p>该命令执行完后，会在 D:\Hexo\public\ 目录下生成一系列html，css等文件。</p>
 <h4 id="部署到Github">部署到Github</h4><p>部署到Github前需要配置_config.yml文件，首先找到下面的内容</p>
 <pre><code><span class="preprocessor"># Deployment </span>
 <span class="preprocessor">## Docs: http:hexo.io/docs/deployment.html </span>
@@ -193,24 +267,40 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 <span class="label">repository:</span> https://github.com/xx_yourname/xx_yourname.github.io.git 
 <span class="label">branch:</span> master
 </code></pre><p>执行部署命令如下：</p>
-<p>$ hexo clean</p>
-<p>$ hexo deploy</p>
-<h3 id="命令总结">命令总结</h3><p>2.3.1 常用命令</p>
-<p>hexo new postName #新建文章</p>
-<p>hexo new page pageName #新建页面</p>
-<p>hexo generate #生成静态页面至public目录</p>
-<p>hexo server #开启预览访问端口（默认端口4000，ctrl + c关闭server）</p>
-<p>hexo deploy #将.deploy_git目录部署到GitHub</p>
-<p>hexo help  #查看帮助</p>
-<p>hexo version  #查看Hexo的版本</p>
-<p>2.3.2 复合命令</p>
-<p>hexo deploy -#生成加部署</p>
-<p>hexo server -g  #生成加预览</p>
-<p>命令的简写为：</p>
-<p>hexo n == hexo new</p>
-<p>hexo g == hexo generate</p>
-<p>hexo s == hexo server</p>
-<p>hexo d == hexo deploy</p>
+<pre><code><span class="variable">$ </span>hexo clean
+
+<span class="variable">$ </span>hexo deploy
+</code></pre><h3 id="命令总结">命令总结</h3><p>2.3.1 常用命令</p>
+<pre><code>hexo <span class="keyword">new</span> postName <span class="preprocessor">#新建文章</span>
+
+hexo <span class="keyword">new</span> page pageName <span class="preprocessor">#新建页面</span>
+
+hexo generate <span class="preprocessor">#生成静态页面至public目录</span>
+
+hexo <span class="keyword">server</span> <span class="preprocessor">#开启预览访问端口（默认端口4000，ctrl + c关闭server）</span>
+
+hexo deploy <span class="preprocessor">#将.deploy_git目录部署到GitHub</span>
+
+hexo help  <span class="preprocessor">#查看帮助</span>
+
+hexo version  <span class="preprocessor">#查看Hexo的版本</span>
+</code></pre><p>2.3.2 复合命令</p>
+<pre><code>hexo deploy -<span class="preprocessor">#生成加部署</span>
+
+hexo <span class="keyword">server</span> -g  <span class="preprocessor">#生成加预览</span>
+</code></pre><p>命令的简写为：</p>
+<pre><code>hexo <span class="keyword">n</span> == hexo new
+
+hexo <span class="keyword">g</span> == hexo <span class="keyword">generate</span>
+
+hexo s == hexo server
+
+hexo <span class="keyword">d</span> == hexo deploy
+</code></pre><hr>
+<p><strong>版权声明</strong></p>
+<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/cc.png" alt=""></p>
+<p><a href="http://sunblognuke.github.io">Hacker</a> by <a href="http://sunblognuke.github.io/about">Baldwin Sun</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">Creative Commons BY-NC-ND 4.0 International License</a>.<br>由<a href="http://sunblognuke.github.io/about">Baldwin Sun</a>创作并维护的<a href="http://sunblognuke.github.io">代码人生</a>博客采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。</p>
+<p>本文首发于<a href="http://sunblognuke.github.io">Hacker | 代码人生</a>博客，版权所有，侵权必究。<br>本文永久链接：<a href="http://sunblognuke.github.io/2015/11/20/Integratd-Hexo-with-Github/">http://sunblognuke.github.io/2015/11/20/Integratd-Hexo-with-Github/</a></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<h2 id="环境准备">环境准备</h2><h3 id="安装Git">安装Git</h3><p>在此下载:<a href="http://git-scm.com/download/win" target="_blank" rel="external">http://git-]]>
@@ -231,7 +321,7 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
     <link href="http://sunblognuke.github.io/2015/11/18/%E6%91%84%E5%BD%B1%E7%AF%87-%E5%B0%8F%E5%8C%BA%E4%B9%9F%E8%83%BDDIY/"/>
     <id>http://sunblognuke.github.io/2015/11/18/摄影篇-小区也能DIY/</id>
     <published>2015-11-18T10:23:30.000Z</published>
-    <updated>2015-11-18T10:46:01.009Z</updated>
+    <updated>2015-11-25T09:09:26.216Z</updated>
     <content type="html"><![CDATA[<p>好久没给宝贝拍照了，今天特意就在小区来一次DIY，敢情来点后期创意效果修饰也是不错的 :)</p>
 <p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/IMG_6506.jpg" alt="小小的背影，莫名的感动"><br><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/IMG_6488.jpg" alt="林中的小精灵，你在找什么呢？"></p>
 ]]></content>
@@ -261,6 +351,11 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 <p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
 <h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<hr>
+<p><strong>版权声明</strong></p>
+<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/cc.png" alt=""></p>
+<p><a href="http://sunblognuke.github.io">Hacker</a> by <a href="http://sunblognuke.github.io/about">Baldwin Sun</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">Creative Commons BY-NC-ND 4.0 International License</a>.<br>由<a href="http://sunblognuke.github.io/about">Baldwin Sun</a>创作并维护的<a href="http://sunblognuke.github.io">代码人生</a>博客采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。</p>
+<p>本文首发于<a href="http://sunblognuke.github.io">Hacker | 代码人生</a>博客，版权所有，侵权必究。<br>本文永久链接：<a href="http://sunblognuke.github.io/2015/10/22/Hello-Hexo-Github/">http://sunblognuke.github.io/2015/10/22/Hello-Hexo-Github/</a></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>

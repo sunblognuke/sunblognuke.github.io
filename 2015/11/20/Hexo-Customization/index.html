@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hexo折腾记（一） | Hacker</title>
+    <title>Hexo折腾记 | Hacker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Baldwin">
@@ -18,7 +18,7 @@
 &amp;lt;title&amp;gt;404 | Hacker&apos;s Blog&amp;lt;/title&amp;gt;                   
 &amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo折腾记（一）">
+<meta property="og:title" content="Hexo折腾记">
 <meta property="og:url" content="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/index.html">
 <meta property="og:site_name" content="Hacker">
 <meta property="og:description" content="自定义404页面直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：
@@ -27,9 +27,10 @@
 &amp;lt;meta charset=&quot;UTF-8&quot; /&amp;gt;
 &amp;lt;title&amp;gt;404 | Hacker&apos;s Blog&amp;lt;/title&amp;gt;                   
 &amp;">
-<meta property="og:updated_time" content="2015-11-24T05:45:53.514Z">
+<meta property="og:image" content="http://7xof1d.com1.z0.glb.clouddn.com/img/cc.png">
+<meta property="og:updated_time" content="2015-11-26T06:06:08.955Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo折腾记（一）">
+<meta name="twitter:title" content="Hexo折腾记">
 <meta name="twitter:description" content="自定义404页面直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：
 &amp;lt;html&amp;gt;
 &amp;lt;head&amp;gt;
@@ -97,7 +98,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/11/20/Hexo-Customization/" title="Hexo折腾记（一）" itemprop="url">Hexo折腾记（一）</a>
+      <a href="/2015/11/20/Hexo-Customization/" title="Hexo折腾记" itemprop="url">Hexo折腾记</a>
   </h1>
   <p class="article-author">By
        
@@ -131,7 +132,7 @@
 <pre><code><span class="comment">#### Comment</span>
 duoshuo_shortname: sunblognuke   <span class="comment">## e.g. wuchong   your duoshuo short name.</span>
 disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short name.</span>
-</code></pre><p>你也可以在多说后台自定义CSS，比如评论头像鼠标悬停旋转效果，代码如下：</p>
+</code></pre><p>你也可以在多说后台自定义CSS，比如评论头像鼠标悬停旋转效果和隐藏多说底部版权，代码如下：</p>
 <pre><code><span class="class">.ds-avatar</span>{-webkit-<span class="attribute">border-radius</span><span class="value">: <span class="number">5px</span> <span class="important">!important</span>;</span><span class="comment">/*圆角效果：兼容webkit浏览器*/</span>
 -moz-<span class="attribute">border-radius</span><span class="value">:<span class="number">5px</span> <span class="important">!important</span>;</span>
 <span class="attribute">box-shadow</span><span class="value">: inset <span class="number">0</span> -<span class="number">1px</span> <span class="number">0</span> <span class="hexcolor">#3333</span>sf <span class="important">!important</span>;</span><span class="comment">/*设置图像阴影效果*/</span>
@@ -145,7 +146,12 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 <span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span><span class="comment">/*图像旋转360度*/</span>
 -webkit-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span>
 -moz-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span>}
+<span class="comment">/*隐藏多说底部版权*/</span>
+<span class="id">#ds-thread</span> <span class="id">#ds-reset</span> <span class="class">.ds-powered-by</span> {
+    <span class="attribute">display</span><span class="value">: none;</span>
+}
 </code></pre><p>更多教程参看《<a href="http://dev.duoshuo.com/threads/4ff1cfd0397309552c000017" target="_blank" rel="external">多说CSS修改</a>》</p>
+<p><a href="http://www.arao.me/2015/hexo-next-theme-optimize-duoshuo/" target="_blank" rel="external">动动手指，给你的Hexo站点添加最近访客（多说篇）</a></p>
 <h2 id="整合Swiftype站内搜索">整合Swiftype站内搜索</h2><p>参考这两篇教程：</p>
 <p><a href="http://gsgundam.com/2015-03-03-swiftype-professional-search-tool/" target="_blank" rel="external">Swiftype 专业站内搜索工具</a></p>
 <p><a href="http://www.jerryfu.net/post/search-engine-for-hexo-with-swiftype-v2.html" target="_blank" rel="external">利用swiftype为hexo添加站内搜索v2.0</a></p>
@@ -162,6 +168,11 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 <li><p>防止README.md被渲染：编辑Hexo目录的_config.yml文件中的“skip_render”参数，skip_render: README.md</p>
 </li>
 </ul>
+<hr>
+<p><strong>版权声明</strong></p>
+<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/cc.png" alt=""></p>
+<p><a href="http://sunblognuke.github.io">Hacker</a> by <a href="http://sunblognuke.github.io/about">Baldwin Sun</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">Creative Commons BY-NC-ND 4.0 International License</a>.<br>由<a href="http://sunblognuke.github.io/about">Baldwin Sun</a>创作并维护的<a href="http://sunblognuke.github.io">代码人生</a>博客采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。</p>
+<p>本文首发于<a href="http://sunblognuke.github.io">Hacker | 代码人生</a>博客，版权所有，侵权必究。<br>本文永久链接：<a href="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/">http://sunblognuke.github.io/2015/11/20/Hexo-Customization/</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -184,7 +195,7 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/" data-title="Hexo折腾记（一） | Hacker" data-tsina="null" class="share clearfix">
+	  <div data-url="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/" data-title="Hexo折腾记 | Hacker" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -218,7 +229,7 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/11/20/Hexo-Customization/" data-title="Hexo折腾记（一）" data-url="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/"></div>
+	<div class="ds-thread" data-thread-key="2015/11/20/Hexo-Customization/" data-title="Hexo折腾记" data-url="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/"></div>
 </section>
 
 

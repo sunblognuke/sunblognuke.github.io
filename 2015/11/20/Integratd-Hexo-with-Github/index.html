@@ -23,7 +23,8 @@ Windows下Git安装指南
 推荐安装绿色版本PortableGit, 下载解压到一个新文件夹即可，随即添加git.exe所在路径（比如E:\Dev\PortableGit\bin）到环境变量（如何添加环境变量请自行百度）
 Windows下Git安装指南
 安装node.js在此下载:http://nodejs.org/download/">
-<meta property="og:updated_time" content="2015-11-21T02:45:26.830Z">
+<meta property="og:image" content="http://7xof1d.com1.z0.glb.clouddn.com/img/cc.png">
+<meta property="og:updated_time" content="2015-11-26T06:02:20.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Github平台搭建Hexo免费静态博客">
 <meta name="twitter:description" content="环境准备安装Git在此下载:http://git-scm.com/download/win
@@ -119,25 +120,29 @@ Windows下Git安装指南
 <p>安装时直接保持默认配置即可。</p>
 <h2 id="安装Hexo">安装Hexo</h2><h3 id="Installation">Installation</h3><p>确保git， node安装正确（包括环境变量的配置），可在命令提示符CMD窗口输入git和node，npm看看是否有相关提示。</p>
 <p>打开命令提示符，执行如下命令：</p>
-<p>$ npm install -g hexo</p>
-<h3 id="Quick_Start">Quick Start</h3><h4 id="setup_your_blog">setup your blog</h4><p>新建目录，比如D:\Hexo, 目录右键进入命令提示符窗口，执行如下命令：</p>
-<p>$ hexo init</p>
-<p>[] Copying data</p>
-<p>[] You are almost ! Dont forget to run <code>npm install</code> before you start b<br>logging with Hexo!</p>
-<p>Hexo随后会自动在目标文件夹建立网站所需要的文件。然后按照提示，运行 npm install（在 D:\Hexo下）</p>
-<p>$ npm install</p>
-<p>会在D:\Hexo目录中安装 node_modules。</p>
+<pre><code>$ npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> hexo</span>
+</code></pre><h3 id="Quick_Start">Quick Start</h3><h4 id="setup_your_blog">setup your blog</h4><p>新建目录，比如D:\Hexo, 目录右键进入命令提示符窗口，执行如下命令：</p>
+<pre><code>$ hexo init
+
+[] Copying data
+
+[] You are almost ! Dont forget <span class="keyword">to</span> <span class="command">run</span> `npm install` <span class="keyword">before</span> you start b
+logging <span class="keyword">with</span> Hexo!
+</code></pre><p>Hexo随后会自动在目标文件夹建立网站所需要的文件。然后按照提示，运行 npm install（在 D:\Hexo下）</p>
+<pre><code>$ npm <span class="keyword">install</span>
+</code></pre><p>会在D:\Hexo目录中安装 node_modules。</p>
 <h4 id="Start_the_server">Start the server</h4><p>运行下面的命令（在D:\Hexo下）</p>
-<p>$ hexo server</p>
-<p>[] Hexo is running at <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a>. Press Ctrl+C to stop.</p>
-<p>表明Hexo Server已经启动了，在浏览器中打开以上网址，这时可以看到Hexo已为你生成了blog。你可以按Ctrl+C 停止Server。</p>
+<pre><code>$ hexo server
+
+[] Hexo <span class="keyword">is</span> running at http:<span class="comment">//localhost:4000/. Press Ctrl+C to stop.</span>
+</code></pre><p>表明Hexo Server已经启动了，在浏览器中打开以上网址，这时可以看到Hexo已为你生成了blog。你可以按Ctrl+C 停止Server。</p>
 <h4 id="Create_new_post">Create new post</h4><p>运行下面的命令（在D:\Hexo下）</p>
-<p>$ hexo new “My New Post” </p>
-<p>会在D:\Hexo\source_posts目录下生成一个markdown文件：My-New-Post.md</p>
+<pre><code>$ hexo <span class="keyword">new</span> <span class="string">"My New Post"</span> 
+</code></pre><p>会在D:\Hexo\source_posts目录下生成一个markdown文件：My-New-Post.md</p>
 <p>可以使用一个支持markdown语法的编辑器（比如Sublime Text）来编辑该文件。</p>
 <h4 id="Generate_static_files">Generate static files</h4><p>执行下面的命令，将markdown文件生成静态网页。</p>
-<p>$ hexo generate</p>
-<p>该命令执行完后，会在 D:\Hexo\public\ 目录下生成一系列html，css等文件。</p>
+<pre><code><span class="variable">$ </span>hexo generate
+</code></pre><p>该命令执行完后，会在 D:\Hexo\public\ 目录下生成一系列html，css等文件。</p>
 <h4 id="部署到Github">部署到Github</h4><p>部署到Github前需要配置_config.yml文件，首先找到下面的内容</p>
 <pre><code><span class="preprocessor"># Deployment </span>
 <span class="preprocessor">## Docs: http:hexo.io/docs/deployment.html </span>
@@ -151,24 +156,40 @@ Windows下Git安装指南
 <span class="label">repository:</span> https://github.com/xx_yourname/xx_yourname.github.io.git 
 <span class="label">branch:</span> master
 </code></pre><p>执行部署命令如下：</p>
-<p>$ hexo clean</p>
-<p>$ hexo deploy</p>
-<h3 id="命令总结">命令总结</h3><p>2.3.1 常用命令</p>
-<p>hexo new postName #新建文章</p>
-<p>hexo new page pageName #新建页面</p>
-<p>hexo generate #生成静态页面至public目录</p>
-<p>hexo server #开启预览访问端口（默认端口4000，ctrl + c关闭server）</p>
-<p>hexo deploy #将.deploy_git目录部署到GitHub</p>
-<p>hexo help  #查看帮助</p>
-<p>hexo version  #查看Hexo的版本</p>
-<p>2.3.2 复合命令</p>
-<p>hexo deploy -#生成加部署</p>
-<p>hexo server -g  #生成加预览</p>
-<p>命令的简写为：</p>
-<p>hexo n == hexo new</p>
-<p>hexo g == hexo generate</p>
-<p>hexo s == hexo server</p>
-<p>hexo d == hexo deploy</p>
+<pre><code><span class="variable">$ </span>hexo clean
+
+<span class="variable">$ </span>hexo deploy
+</code></pre><h3 id="命令总结">命令总结</h3><p>2.3.1 常用命令</p>
+<pre><code>hexo <span class="keyword">new</span> postName <span class="preprocessor">#新建文章</span>
+
+hexo <span class="keyword">new</span> page pageName <span class="preprocessor">#新建页面</span>
+
+hexo generate <span class="preprocessor">#生成静态页面至public目录</span>
+
+hexo <span class="keyword">server</span> <span class="preprocessor">#开启预览访问端口（默认端口4000，ctrl + c关闭server）</span>
+
+hexo deploy <span class="preprocessor">#将.deploy_git目录部署到GitHub</span>
+
+hexo help  <span class="preprocessor">#查看帮助</span>
+
+hexo version  <span class="preprocessor">#查看Hexo的版本</span>
+</code></pre><p>2.3.2 复合命令</p>
+<pre><code>hexo deploy -<span class="preprocessor">#生成加部署</span>
+
+hexo <span class="keyword">server</span> -g  <span class="preprocessor">#生成加预览</span>
+</code></pre><p>命令的简写为：</p>
+<pre><code>hexo <span class="keyword">n</span> == hexo new
+
+hexo <span class="keyword">g</span> == hexo <span class="keyword">generate</span>
+
+hexo s == hexo server
+
+hexo <span class="keyword">d</span> == hexo deploy
+</code></pre><hr>
+<p><strong>版权声明</strong></p>
+<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/cc.png" alt=""></p>
+<p><a href="http://sunblognuke.github.io">Hacker</a> by <a href="http://sunblognuke.github.io/about">Baldwin Sun</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">Creative Commons BY-NC-ND 4.0 International License</a>.<br>由<a href="http://sunblognuke.github.io/about">Baldwin Sun</a>创作并维护的<a href="http://sunblognuke.github.io">代码人生</a>博客采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。</p>
+<p>本文首发于<a href="http://sunblognuke.github.io">Hacker | 代码人生</a>博客，版权所有，侵权必究。<br>本文永久链接：<a href="http://sunblognuke.github.io/2015/11/20/Integratd-Hexo-with-Github/">http://sunblognuke.github.io/2015/11/20/Integratd-Hexo-with-Github/</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -205,10 +226,10 @@ Windows下Git安装指南
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/11/20/Hexo-Customization/" title="Hexo折腾记（一）">
+ <a href="/2015/11/20/Hexo-Customization/" title="Hexo折腾记">
   <strong>上一篇：</strong><br/>
   <span>
-  Hexo折腾记（一）</span>
+  Hexo折腾记</span>
 </a>
 </div>
 

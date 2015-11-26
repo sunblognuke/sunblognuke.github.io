@@ -29,7 +29,8 @@
 
 拷贝page.ejs并重命名为resume.ejs， 修改代码如下：
 &amp;lt;%- partial(&apos;_partial/post/resume">
-<meta property="og:updated_time" content="2015-11-24T08:03:44.435Z">
+<meta property="og:image" content="http://7xof1d.com1.z0.glb.clouddn.com/img/cc.png">
+<meta property="og:updated_time" content="2015-11-26T05:59:49.332Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo折腾记 Ⅱ">
 <meta name="twitter:description" content="继续捣鼓Hexo博客框架，细化更为个性的地方。比如：
@@ -116,14 +117,14 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#新增自定义页面"><span class="toc-number">1.</span> <span class="toc-text">新增自定义页面</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#新增自定义页面"><span class="toc-number">1.</span> <span class="toc-text">新增自定义页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建Filter_-_文章尾部增加版权信息"><span class="toc-number">2.</span> <span class="toc-text">创建Filter - 文章尾部增加版权信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建模板帮助插件"><span class="toc-number">3.</span> <span class="toc-text">创建模板帮助插件</span></a></li></ol>
 		
 		</div>
 		
 		<p>继续捣鼓Hexo博客框架，细化更为个性的地方。比如：</p>
 <h2 id="新增自定义页面">新增自定义页面</h2><p>不妨以新增一个简历页面（个人博客建立优雅的简历页面不失为一个推销自己的方式）为例，不同的主题可能会有些微区别，修改步骤如下：</p>
 <ol>
-<li><p>命令新增页面 $ hexo new page resume</p>
+<li><p>命令新增页面 <code>$ hexo new page resume</code></p>
 </li>
 <li><p>拷贝page.ejs并重命名为resume.ejs， 修改代码如下：</p>
 <pre><code>&lt;%- partial(<span class="string">'_partial/post/resume'</span>, {<span class="string">item:</span> page, <span class="string">index:</span> <span class="literal">false</span>,<span class="string">table:</span> <span class="literal">false</span>}) %&gt;
@@ -166,6 +167,66 @@ menu:
 </code></pre></li>
 </ol>
 <p>此时全部设置完毕，部署后可直接访问your_github_name.github.io/resume访问到该独立简历页面。</p>
+<h2 id="创建Filter_-_文章尾部增加版权信息">创建Filter - 文章尾部增加版权信息</h2><p>参考教程 - <a href="http://kuangqi.me/tricks/append-a-copyright-info-after-every-post/index.html" target="_blank" rel="external">为Hexo博客的每一篇文章自动追加版权信息</a></p>
+<h2 id="创建模板帮助插件">创建模板帮助插件</h2><p>你可以在主题目录下的scripts文件夹里创建一些全局性的模板帮助方法，从而在模板直接调用即可。比如我们可以创建一个页面标题的方法，代码如下：</p>
+<pre><code><span class="comment"><span class="markdown">/** 
+<span class="bullet">* </span>page_title helper
+<span class="bullet">*
+</span><span class="bullet">* </span>Usage:
+<span class="bullet">*   </span><span class="xml"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span>
+<span class="bullet">*     </span><span class="xml"><span class="tag">&lt;<span class="title">title</span>&gt;</span></span><span class="xml"><span class="tag">&lt;<span class="title">%=</span> <span class="attribute">page_title</span>() %&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="title">title</span>&gt;</span></span>
+<span class="bullet">*   </span><span class="xml"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span>
+*/</span></span>
+
+hexo.extend.helper.register(<span class="string">"page_title"</span>, function () {
+  <span class="keyword">var</span> title = <span class="keyword">this</span>.page.title;
+
+  <span class="keyword">if</span> (<span class="keyword">this</span>.is_archive()){
+    title = <span class="keyword">this</span>.__(<span class="string">'archive_a'</span>);
+
+    <span class="keyword">if</span> (<span class="keyword">this</span>.is_month()){
+      title += <span class="string">': '</span> + <span class="keyword">this</span>.page.year + <span class="string">'/'</span> + <span class="keyword">this</span>.page.month;
+    } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_year()){
+      title += <span class="string">': '</span> + <span class="keyword">this</span>.page.year;
+    }
+  } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_category()){
+    title =  <span class="keyword">this</span>.__(<span class="string">'categories'</span>)+<span class="string">' : '</span> + <span class="keyword">this</span>.page.category;
+  } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_tag()){
+    title = <span class="keyword">this</span>.__(<span class="string">'tags'</span>)+<span class="string">' : '</span> + <span class="keyword">this</span>.page.tag;
+  }
+
+  <span class="keyword">return</span> title;
+});
+</code></pre><p>注意在此方法体你可以通过this访问到对象page，site，config等，如你所见，一些全局方法比如<code>is_archive()</code>或本地化方法<code>__(&#39;archive_a&#39;)</code>都必须经由this来调用。</p>
+<p>复制以上代码到新建文件page_title.js里。接下来打开head.ejs并修改呈现页面标题的代码如下：</p>
+<p><strong>原代码：</strong></p>
+<pre><code><span class="xml"></span>&lt;%<span class="ruby">
+  var title = page.title;
+
+  <span class="keyword">if</span> (is_archive()){
+    title = _<span class="number">_</span>(<span class="string">'archive_a'</span>);
+
+    <span class="keyword">if</span> (is_month()){
+      title += <span class="string">': '</span> + page.year + <span class="string">'/'</span> + page.month;
+    } <span class="keyword">else</span> <span class="keyword">if</span> (is_year()){
+      title += <span class="string">': '</span> + page.year;
+    }
+  } <span class="keyword">else</span> <span class="keyword">if</span> (is_category()){
+    title =  _<span class="number">_</span>(<span class="string">'categories'</span>)+<span class="string">' : '</span> + page.category;
+  } <span class="keyword">else</span> <span class="keyword">if</span> (is_tag()){
+    title = _<span class="number">_</span>(<span class="string">'tags'</span>)+<span class="string">' : '</span> + page.tag;
+  }
+  </span>%&gt;<span class="xml">
+    <span class="tag">&lt;<span class="title">title</span>&gt;</span></span>&lt;%<span class="ruby"> <span class="keyword">if</span> (title){ </span>%&gt;<span class="xml"></span>&lt;%=<span class="ruby"> title </span>%&gt;<span class="xml"> | </span>&lt;%<span class="ruby"> } </span>%&gt;<span class="xml"></span>&lt;%=<span class="ruby"> config.title </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">title</span>&gt;</span></span>
+</code></pre><p><strong>新代码：</strong></p>
+<pre><code>&lt;% var <span class="built_in">title</span> = page_title(); %&gt;
+    &lt;<span class="built_in">title</span>&gt;&lt;% <span class="flow">if</span> (<span class="built_in">title</span>){ <span class="envvar">%&gt;&lt;%</span>= <span class="built_in">title</span> %&gt; | &lt;% } <span class="envvar">%&gt;&lt;%</span>= config.<span class="built_in">title</span> %&gt;&lt;/<span class="built_in">title</span>&gt;
+</code></pre><p>参考教程 - <a href="http://1pixelout.net/2015/09/18/writing-hexo-template-helpers/" target="_blank" rel="external">WRITING HEXO TEMPLATE HELPERS</a></p>
+<hr>
+<p><strong>版权声明</strong></p>
+<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/cc.png" alt=""></p>
+<p><a href="http://sunblognuke.github.io">Hacker</a> by <a href="http://sunblognuke.github.io/about">Baldwin Sun</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">Creative Commons BY-NC-ND 4.0 International License</a>.<br>由<a href="http://sunblognuke.github.io/about">Baldwin Sun</a>创作并维护的<a href="http://sunblognuke.github.io">代码人生</a>博客采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。</p>
+<p>本文首发于<a href="http://sunblognuke.github.io">Hacker | 代码人生</a>博客，版权所有，侵权必究。<br>本文永久链接：<a href="http://sunblognuke.github.io/2015/11/24/hexo-customization-Ⅱ/">http://sunblognuke.github.io/2015/11/24/hexo-customization-Ⅱ/</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -203,9 +264,9 @@ menu:
  
 
 <div class="next">
-<a href="/2015/11/20/Hexo-Customization/"  title="Hexo折腾记（一）">
+<a href="/2015/11/20/Hexo-Customization/"  title="Hexo折腾记">
  <strong>下一篇：</strong><br/> 
- <span>Hexo折腾记（一）
+ <span>Hexo折腾记
 </span>
 </a>
 </div>
@@ -224,7 +285,7 @@ menu:
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#新增自定义页面"><span class="toc-number">1.</span> <span class="toc-text">新增自定义页面</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#新增自定义页面"><span class="toc-number">1.</span> <span class="toc-text">新增自定义页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建Filter_-_文章尾部增加版权信息"><span class="toc-number">2.</span> <span class="toc-text">创建Filter - 文章尾部增加版权信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建模板帮助插件"><span class="toc-number">3.</span> <span class="toc-text">创建模板帮助插件</span></a></li></ol>
  
   </div>
 
