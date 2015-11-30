@@ -28,7 +28,7 @@
 &amp;lt;title&amp;gt;404 | Hacker&apos;s Blog&amp;lt;/title&amp;gt;                   
 &amp;">
 <meta property="og:image" content="http://7xof1d.com1.z0.glb.clouddn.com/img/cc.png">
-<meta property="og:updated_time" content="2015-11-26T06:06:08.955Z">
+<meta property="og:updated_time" content="2015-11-30T09:16:12.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo折腾记">
 <meta name="twitter:description" content="自定义404页面直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：
@@ -155,11 +155,32 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 <h2 id="整合Swiftype站内搜索">整合Swiftype站内搜索</h2><p>参考这两篇教程：</p>
 <p><a href="http://gsgundam.com/2015-03-03-swiftype-professional-search-tool/" target="_blank" rel="external">Swiftype 专业站内搜索工具</a></p>
 <p><a href="http://www.jerryfu.net/post/search-engine-for-hexo-with-swiftype-v2.html" target="_blank" rel="external">利用swiftype为hexo添加站内搜索v2.0</a></p>
-<p>Note:</p>
+<p>步骤大概如下:</p>
 <ol>
-<li>每个网址唯一的代码，不能通用或变量设置。添加代码到文件after_footer.ejs。</li>
-<li>添加配置项到主题文件_config.yml</li>
-<li>添加class - st-default-search-input到header.ejs</li>
+<li><p>新建文件swiftype_search.ejs，代码如下：</p>
+<pre><code><span class="tag">&lt;<span class="title">%</span> <span class="attribute">if</span> (<span class="attribute">theme.swiftype_search.enable</span>){ %&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+  (<span class="function"><span class="keyword">function</span>(<span class="params">w,d,t,u,n,s,e</span>)</span>{w[<span class="string">'SwiftypeObject'</span>]=n;w[n]=w[n]||<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  (w[n].q=w[n].q||[]).push(<span class="built_in">arguments</span>);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[<span class="number">0</span>];s.async=<span class="number">1</span>;s.src=u;e.parentNode.insertBefore(s,e);
+  })(<span class="built_in">window</span>,<span class="built_in">document</span>,<span class="string">'script'</span>,<span class="string">'//s.swiftypecdn.com/install/v2/st.js'</span>,<span class="string">'_st'</span>);
+
+  _st(<span class="string">'install'</span>,<span class="string">'&lt;%= theme.swiftype_search.id %&gt;'</span>,<span class="string">'2.0.0'</span>);
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">%</span> } %&gt;</span>
+</code></pre></li>
+<li><p>添加代码到文件after_footer.ejs：</p>
+<pre><code><span class="xml"><span class="comment">&lt;!-- Swiftype_search Begin --&gt;</span>
+</span>&lt;%-<span class="ruby"> partial(<span class="string">'swiftype_search'</span>) </span>%&gt;<span class="xml">
+<span class="comment">&lt;!-- Swiftype_search End --&gt;</span></span>
+</code></pre></li>
+<li><p>添加配置项到主题文件_config.yml</p>
+<pre><code>swiftype_search:
+  enable: true
+  id: <span class="string">"zpAq-EQUfMzEzP6ybWEU"</span> ## <span class="keyword">e</span>.<span class="keyword">g</span>. <span class="string">"zpAq-EQUfMzEzP6ybWEU"</span> <span class="keyword">for</span> your swiftype <span class="keyword">search</span> id
+</code></pre></li>
+<li><p>添加class - st-default-search-input到header.ejs</p>
+</li>
 </ol>
 <h2 id="部署Github的README-md">部署Github的README.md</h2><p>如何部署Github时保证README.md不被渲染：</p>
 <ul>
@@ -263,11 +284,15 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 		<ul>
 		
 		  
-			<li><a href="/categories/Blog/" title="Blog">Blog<sup>4</sup></a></li>
+			<li><a href="/categories/Blog/" title="Blog">Blog<sup>5</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Life/" title="Life">Life<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Photography/" title="Photography">Photography<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -280,7 +305,7 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>4</sup></a></li>
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>5</sup></a></li>
 			
 		
 			
@@ -293,6 +318,22 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 		
 			
 				<li><a href="/tags/Baby/" title="Baby">Baby<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Website/" title="Website">Website<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bridge-CC/" title="Bridge CC">Bridge CC<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ACR/" title="ACR">ACR<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/PS/" title="PS">PS<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -330,18 +371,9 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
     </ul>
 </div>
 
-  
-
-
   <div class="rsspart">
 	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
 </div>
-
-  <div class="weiboshow">
-  <p class="asidetitle">新浪微博</p>
-    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=&dpc=1"></iframe>
-</div>
-
 
 </aside>
 </div>
@@ -355,8 +387,8 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 	
 	
 	<section class="info">
-		<p> Hello ,I&#39;m Baldwin Sun in SunBlogNuke.com. <br/>
-			This is my blog,believe it or not.</p>
+		<p> Hello, I&#39;m Baldwin Sun in SunBlogNuke.com. <br/>
+			This is my blog, believe it or not.</p>
 	</section>
 	 
 	<div class="social-font" class="clearfix">

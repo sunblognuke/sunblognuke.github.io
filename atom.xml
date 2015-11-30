@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sunblognuke.github.io/"/>
-  <updated>2015-11-26T05:59:49.332Z</updated>
+  <updated>2015-11-30T09:05:31.163Z</updated>
   <id>http://sunblognuke.github.io/</id>
   
   <author>
@@ -13,6 +13,77 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[摄影学习备忘]]></title>
+    <link href="http://sunblognuke.github.io/2015/11/27/Photography-Learning/"/>
+    <id>http://sunblognuke.github.io/2015/11/27/Photography-Learning/</id>
+    <published>2015-11-27T05:51:10.000Z</published>
+    <updated>2015-11-30T09:05:31.163Z</updated>
+    <content type="html"><![CDATA[<p>分享一些学习摄影的资源及笔记心得。</p>
+<p>算是国内比较有诚意的摄影教程，适合入门和明白一些误区和概念</p>
+<p><a href="http://www.ganlantu.com/course/explore/mianfei" target="_blank" rel="external">免费课程 - 橄榄图摄影课堂</a></p>
+<p>本人第一个单反500D，也是目前还在用的，新增EF 50mm f/1.4 USM 人像头：</p>
+<p><a href="http://www.canon.com.cn/specialsite/eos600d/" target="_blank" rel="external">官方教程 - EOS 600D深度解析</a></p>
+<p>李涛老师的教程一定过，了解一些摄影的理念和思想是必须的。</p>
+<p>后期学习方法：</p>
+<ol>
+<li>取法乎上，寻师经典</li>
+<li>务先大体，鉴必穷源</li>
+<li>诚心正意，自证良知</li>
+</ol>
+<p>Adobe Camera Raw预处理步骤：</p>
+<ol>
+<li>自动校准：镜头校准，相机校准，白平衡校准</li>
+<li><p>预处理：</p>
+<p> 全局：正确的黑白场，准确的清晰度，适当的饱和度，丰富的层次<br> 局部：目标调整工具HSL， 画笔，渐变，径向</p>
+</li>
+<li><p>调性：影调（影：明暗黑白关系；调：色彩关系）</p>
+</li>
+<li>输出：锐化除噪</li>
+</ol>
+<p>可关注的微信号：摄影修行，教摄影，摄影笔记，蜂鸟网，POCO摄影社区。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>分享一些学习摄影的资源及笔记心得。</p>
+<p>算是国内比较有诚意的摄影教程，适合入门和明白一些误区和概念</p>
+<p><a href="http://www.ganlantu.com/course/explore/mianfei" target="_blank" re]]>
+    </summary>
+    
+      <category term="ACR" scheme="http://sunblognuke.github.io/tags/ACR/"/>
+    
+      <category term="Bridge CC" scheme="http://sunblognuke.github.io/tags/Bridge-CC/"/>
+    
+      <category term="PS" scheme="http://sunblognuke.github.io/tags/PS/"/>
+    
+      <category term="Photography" scheme="http://sunblognuke.github.io/categories/Photography/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[基于Hexo搭建的博客展示]]></title>
+    <link href="http://sunblognuke.github.io/2015/11/26/Showcase-Weblog-based-on-Hexo/"/>
+    <id>http://sunblognuke.github.io/2015/11/26/Showcase-Weblog-based-on-Hexo/</id>
+    <published>2015-11-26T08:19:25.000Z</published>
+    <updated>2015-11-26T09:14:06.712Z</updated>
+    <content type="html"><![CDATA[<p>在此列举一些用Hexo搭建的博客，算是比较可看的，其中还包含一些教程：</p>
+<p><a href="http://litten.github.io/" target="_blank" rel="external">Yilia主题作者博客</a></p>
+<p><a href="http://ibruce.info/tags/hexo/" target="_blank" rel="external">不如</a></p>
+<p><a href="http://blog.miopeco.com/" target="_blank" rel="external">Pingbo’s Blog</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在此列举一些用Hexo搭建的博客，算是比较可看的，其中还包含一些教程：</p>
+<p><a href="http://litten.github.io/" target="_blank" rel="external">Yilia主题作者博客</a></p>
+<p><a hr]]>
+    </summary>
+    
+      <category term="Hexo" scheme="http://sunblognuke.github.io/tags/Hexo/"/>
+    
+      <category term="Website" scheme="http://sunblognuke.github.io/tags/Website/"/>
+    
+      <category term="Blog" scheme="http://sunblognuke.github.io/categories/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Hexo折腾记 Ⅱ]]></title>
@@ -147,7 +218,7 @@ hexo.extend.helper.register(<span class="string">"page_title"</span>, function (
     <link href="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/"/>
     <id>http://sunblognuke.github.io/2015/11/20/Hexo-Customization/</id>
     <published>2015-11-20T08:06:23.000Z</published>
-    <updated>2015-11-26T06:06:08.955Z</updated>
+    <updated>2015-11-30T09:16:12.405Z</updated>
     <content type="html"><![CDATA[<h2 id="自定义404页面">自定义404页面</h2><p>直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：</p>
 <pre><code><span class="tag">&lt;<span class="title">html</span>&gt;</span>
 <span class="tag">&lt;<span class="title">head</span>&gt;</span>
@@ -185,11 +256,32 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 <h2 id="整合Swiftype站内搜索">整合Swiftype站内搜索</h2><p>参考这两篇教程：</p>
 <p><a href="http://gsgundam.com/2015-03-03-swiftype-professional-search-tool/" target="_blank" rel="external">Swiftype 专业站内搜索工具</a></p>
 <p><a href="http://www.jerryfu.net/post/search-engine-for-hexo-with-swiftype-v2.html" target="_blank" rel="external">利用swiftype为hexo添加站内搜索v2.0</a></p>
-<p>Note:</p>
+<p>步骤大概如下:</p>
 <ol>
-<li>每个网址唯一的代码，不能通用或变量设置。添加代码到文件after_footer.ejs。</li>
-<li>添加配置项到主题文件_config.yml</li>
-<li>添加class - st-default-search-input到header.ejs</li>
+<li><p>新建文件swiftype_search.ejs，代码如下：</p>
+<pre><code><span class="tag">&lt;<span class="title">%</span> <span class="attribute">if</span> (<span class="attribute">theme.swiftype_search.enable</span>){ %&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+  (<span class="function"><span class="keyword">function</span>(<span class="params">w,d,t,u,n,s,e</span>)</span>{w[<span class="string">'SwiftypeObject'</span>]=n;w[n]=w[n]||<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  (w[n].q=w[n].q||[]).push(<span class="built_in">arguments</span>);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[<span class="number">0</span>];s.async=<span class="number">1</span>;s.src=u;e.parentNode.insertBefore(s,e);
+  })(<span class="built_in">window</span>,<span class="built_in">document</span>,<span class="string">'script'</span>,<span class="string">'//s.swiftypecdn.com/install/v2/st.js'</span>,<span class="string">'_st'</span>);
+
+  _st(<span class="string">'install'</span>,<span class="string">'&lt;%= theme.swiftype_search.id %&gt;'</span>,<span class="string">'2.0.0'</span>);
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">%</span> } %&gt;</span>
+</code></pre></li>
+<li><p>添加代码到文件after_footer.ejs：</p>
+<pre><code><span class="xml"><span class="comment">&lt;!-- Swiftype_search Begin --&gt;</span>
+</span>&lt;%-<span class="ruby"> partial(<span class="string">'swiftype_search'</span>) </span>%&gt;<span class="xml">
+<span class="comment">&lt;!-- Swiftype_search End --&gt;</span></span>
+</code></pre></li>
+<li><p>添加配置项到主题文件_config.yml</p>
+<pre><code>swiftype_search:
+  enable: true
+  id: <span class="string">"zpAq-EQUfMzEzP6ybWEU"</span> ## <span class="keyword">e</span>.<span class="keyword">g</span>. <span class="string">"zpAq-EQUfMzEzP6ybWEU"</span> <span class="keyword">for</span> your swiftype <span class="keyword">search</span> id
+</code></pre></li>
+<li><p>添加class - st-default-search-input到header.ejs</p>
+</li>
 </ol>
 <h2 id="部署Github的README-md">部署Github的README.md</h2><p>如何部署Github时保证README.md不被渲染：</p>
 <ul>
