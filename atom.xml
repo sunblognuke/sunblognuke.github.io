@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sunblognuke.github.io/"/>
-  <updated>2015-11-30T09:05:31.163Z</updated>
+  <updated>2015-12-01T04:15:19.668Z</updated>
   <id>http://sunblognuke.github.io/</id>
   
   <author>
@@ -13,6 +13,60 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[开放资源汇总]]></title>
+    <link href="http://sunblognuke.github.io/2015/12/01/Awesome-Resources/"/>
+    <id>http://sunblognuke.github.io/2015/12/01/Awesome-Resources/</id>
+    <published>2015-12-01T03:47:42.000Z</published>
+    <updated>2015-12-01T04:15:19.668Z</updated>
+    <content type="html"><![CDATA[<h2 id="资讯">资讯</h2><ul>
+<li><a href="http://teahour.fm/" target="_blank" rel="external">程序员播客</a></li>
+</ul>
+<p>专注程序员感兴趣的话题，包括 Web 设计和开发，移动应用设计和开发，创业以及一切 Geek 的话题。值得好好过一下。</p>
+<ul>
+<li><a href="http://www.infoq.com/cn/" target="_blank" rel="external">InfoQ</a></li>
+</ul>
+<p>InfoQ（Information Queue）是一个在线新闻/社区网站，上面的资料比较权威，中文版的更新速度比较慢</p>
+<ul>
+<li><a href="http://weekly.manong.io/" target="_blank" rel="external">码农周刊</a></li>
+</ul>
+<p>码农周刊是一份专为程序员打造的IT技术周刊，每周会有小惊喜</p>
+<h2 id="回答网站">回答网站</h2><ul>
+<li><p><a href="http://stackoverflow.com/" target="_blank" rel="external">Stack Overflow</a></p>
+<p> 程序员的问答网站，必备</p>
+</li>
+<li><p><a href="http://segmentfault.com/" target="_blank" rel="external">SegmentFault</a></p>
+</li>
+</ul>
+<p>国内的问答网站，目前还是挺活跃的</p>
+<ul>
+<li><a href="https://www.zhihu.com/" target="_blank" rel="external">知乎</a></li>
+</ul>
+<p>一个神奇的网站，各种奇葩想法</p>
+<h2 id="远程工作">远程工作</h2><ul>
+<li><a href="http://wangyaodi.com/" target="_blank" rel="external">Andy 的个人博客</a></li>
+</ul>
+<hr>
+<p><strong>版权声明</strong></p>
+<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/cc.png" alt=""></p>
+<p><a href="http://sunblognuke.github.io">Hacker</a> by <a href="http://sunblognuke.github.io/about">Baldwin Sun</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">Creative Commons BY-NC-ND 4.0 International License</a>.<br>由<a href="http://sunblognuke.github.io/about">Baldwin Sun</a>创作并维护的<a href="http://sunblognuke.github.io">代码人生</a>博客采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。</p>
+<p>本文首发于<a href="http://sunblognuke.github.io">Hacker | 代码人生</a>博客，版权所有，侵权必究。<br>本文永久链接：<a href="http://sunblognuke.github.io/2015/12/01/Awesome-Resources/">http://sunblognuke.github.io/2015/12/01/Awesome-Resources/</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="资讯">资讯</h2><ul>
+<li><a href="http://teahour.fm/" target="_blank" rel="external">程序员播客</a></li>
+</ul>
+<p>专注程序员感兴趣的话题，包括 Web 设计和开发，移动应]]>
+    </summary>
+    
+      <category term="开发" scheme="http://sunblognuke.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="资源" scheme="http://sunblognuke.github.io/tags/%E8%B5%84%E6%BA%90/"/>
+    
+      <category term="Resources" scheme="http://sunblognuke.github.io/categories/Resources/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[摄影学习备忘]]></title>
@@ -65,11 +119,13 @@
     <link href="http://sunblognuke.github.io/2015/11/26/Showcase-Weblog-based-on-Hexo/"/>
     <id>http://sunblognuke.github.io/2015/11/26/Showcase-Weblog-based-on-Hexo/</id>
     <published>2015-11-26T08:19:25.000Z</published>
-    <updated>2015-11-26T09:14:06.712Z</updated>
+    <updated>2015-12-01T08:27:04.236Z</updated>
     <content type="html"><![CDATA[<p>在此列举一些用Hexo搭建的博客，算是比较可看的，其中还包含一些教程：</p>
 <p><a href="http://litten.github.io/" target="_blank" rel="external">Yilia主题作者博客</a></p>
 <p><a href="http://ibruce.info/tags/hexo/" target="_blank" rel="external">不如</a></p>
 <p><a href="http://blog.miopeco.com/" target="_blank" rel="external">Pingbo’s Blog</a></p>
+<p><a href="https://xuanwo.org/tags/Hexo/" target="_blank" rel="external">XuanWo’s Blog</a></p>
+<p><a href="http://chitanda.me/tags/hexo/" target="_blank" rel="external">我很好奇</a></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>在此列举一些用Hexo搭建的博客，算是比较可看的，其中还包含一些教程：</p>
