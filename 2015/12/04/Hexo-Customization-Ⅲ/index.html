@@ -4,25 +4,35 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>摄影篇 - 小区也能DIY | Baldwin&#39;s Blog</title>
+    <title>Hexo折腾记 Ⅲ | Baldwin&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Baldwin">
     
 
     
-    <meta name="description" content="好久没给宝贝拍照了，今天特意就在小区来一次DIY，敢情来点后期创意效果修饰也是不错的 :)">
+    <meta name="description" content="用Hexo搭建本博客至今为止，感觉不错，管理起来很方便，Markdown排版文字的确很赞。接下来这一篇文章想更为深入的探讨，比如如何编程的方式来修改Hexo成更为灵活的布局或创建新的功能：
+边栏Widget - 最新随笔可直接自己在模板template写或通过帮助创建Hexo helper plugin来实现。在此分享后者的做法：
+代码原理
+获取指定目录或全站的随笔并排序遍历输出而已
+&amp;lt;%">
 <meta property="og:type" content="article">
-<meta property="og:title" content="摄影篇 - 小区也能DIY">
-<meta property="og:url" content="http://sunblognuke.github.io/2015/11/18/摄影篇-小区也能DIY/index.html">
+<meta property="og:title" content="Hexo折腾记 Ⅲ">
+<meta property="og:url" content="http://sunblognuke.github.io/2015/12/04/Hexo-Customization-Ⅲ/index.html">
 <meta property="og:site_name" content="Baldwin's Blog">
-<meta property="og:description" content="好久没给宝贝拍照了，今天特意就在小区来一次DIY，敢情来点后期创意效果修饰也是不错的 :)">
-<meta property="og:image" content="http://7xof1d.com1.z0.glb.clouddn.com/img/IMG_6506.jpg">
-<meta property="og:image" content="http://7xof1d.com1.z0.glb.clouddn.com/img/IMG_6488.jpg">
-<meta property="og:updated_time" content="2015-11-25T09:09:26.216Z">
+<meta property="og:description" content="用Hexo搭建本博客至今为止，感觉不错，管理起来很方便，Markdown排版文字的确很赞。接下来这一篇文章想更为深入的探讨，比如如何编程的方式来修改Hexo成更为灵活的布局或创建新的功能：
+边栏Widget - 最新随笔可直接自己在模板template写或通过帮助创建Hexo helper plugin来实现。在此分享后者的做法：
+代码原理
+获取指定目录或全站的随笔并排序遍历输出而已
+&amp;lt;%">
+<meta property="og:updated_time" content="2015-12-07T03:59:25.532Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="摄影篇 - 小区也能DIY">
-<meta name="twitter:description" content="好久没给宝贝拍照了，今天特意就在小区来一次DIY，敢情来点后期创意效果修饰也是不错的 :)">
+<meta name="twitter:title" content="Hexo折腾记 Ⅲ">
+<meta name="twitter:description" content="用Hexo搭建本博客至今为止，感觉不错，管理起来很方便，Markdown排版文字的确很赞。接下来这一篇文章想更为深入的探讨，比如如何编程的方式来修改Hexo成更为灵活的布局或创建新的功能：
+边栏Widget - 最新随笔可直接自己在模板template写或通过帮助创建Hexo helper plugin来实现。在此分享后者的做法：
+代码原理
+获取指定目录或全站的随笔并排序遍历输出而已
+&amp;lt;%">
 <meta name="twitter:creator" content="@sunblognuke">
 
     
@@ -84,36 +94,108 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/11/18/摄影篇-小区也能DIY/" title="摄影篇 - 小区也能DIY" itemprop="url">摄影篇 - 小区也能DIY</a>
+      <a href="/2015/12/04/Hexo-Customization-Ⅲ/" title="Hexo折腾记 Ⅲ" itemprop="url">Hexo折腾记 Ⅲ</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
 		
   <p class="article-time">
-    <time datetime="2015-11-18T10:23:30.000Z" itemprop="datePublished"> 发表于 2015-11-18</time>
+    <time datetime="2015-12-04T01:17:35.000Z" itemprop="datePublished"> 发表于 2015-12-04</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>好久没给宝贝拍照了，今天特意就在小区来一次DIY，敢情来点后期创意效果修饰也是不错的 :)</p>
-<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/IMG_6506.jpg" alt="小小的背影，莫名的感动"><br><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/IMG_6488.jpg" alt="林中的小精灵，你在找什么呢？"></p>
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#边栏Widget_-_最新随笔"><span class="toc-number">1.</span> <span class="toc-text">边栏Widget - 最新随笔</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建Filter_-_文章尾部增加版权信息"><span class="toc-number">2.</span> <span class="toc-text">创建Filter - 文章尾部增加版权信息</span></a></li></ol>
+		
+		</div>
+		
+		<p>用Hexo搭建本博客至今为止，感觉不错，管理起来很方便，Markdown排版文字的确很赞。接下来这一篇文章想更为深入的探讨，比如如何编程的方式来修改Hexo成更为灵活的布局或创建新的功能：</p>
+<h2 id="边栏Widget_-_最新随笔">边栏Widget - 最新随笔</h2><p>可直接自己在模板template写或通过帮助创建Hexo helper plugin来实现。在此分享后者的做法：</p>
+<p><strong>代码原理</strong></p>
+<p>获取指定目录或全站的随笔并排序遍历输出而已</p>
+<pre><code><span class="xml"></span>&lt;%<span class="perl"> site.categories.findOne({name: <span class="string">'project'</span>}).posts.<span class="keyword">sort</span>(<span class="string">'date'</span>, -<span class="number">1</span>).<span class="keyword">each</span>(function(post){ </span>%&gt;<span class="xml">
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"</span></span></span>&lt;%<span class="perl">- url_for(post.path) </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span>&gt;</span></span>&lt;%=<span class="perl"> post.title || <span class="string">'(no title)'</span> </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+</span>&lt;%<span class="perl"> }) </span>%&gt;<span class="xml"></span>
+</code></pre><ul>
+<li><p>执行代码安装插件recent_posts</p>
+<pre><code>npm <span class="operator"><span class="keyword">install</span> hexo-helper-recent_posts <span class="comment">--save</span></span>
+</code></pre></li>
+<li><p>在主题目录下的_widget目录下新建widget文件recent_posts.ejs (比如ROOT\themes\jacman\layout_widget)，代码如下（如有必要可自定义修改ulClass和liClass并添加相关的样式）：</p>
+<pre><code><span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"linkslist"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"asidetitle"</span>&gt;</span></span>&lt;%=<span class="ruby"> _<span class="number">_</span>(<span class="string">'recent_posts'</span>) </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"linkslist clearfix"</span>&gt;</span>
+        </span>&lt;%-<span class="ruby"> recent_posts({     <span class="symbol">count:</span> <span class="number">6</span>, 
+                            <span class="symbol">ulClass:</span> <span class="string">''</span>,
+                            <span class="symbol">liClass:</span> <span class="string">''</span>}) </span>%&gt;<span class="xml">
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>    </span>
+</code></pre></li>
+</ul>
+<ul>
+<li><p>打开主题_config.yml, 启用recent_posts这一widget：</p>
+<pre><code>#### Widgets
+widgets: 
+-<span class="ruby"> github-card
+</span>-<span class="ruby"> category
+</span>-<span class="ruby"> tag
+</span>-<span class="ruby"> recent_posts /<span class="regexp">/ 启用recent_posts
+</span></span>-<span class="ruby"><span class="regexp"> links
+</span></span>##- douban
+-<span class="ruby"><span class="regexp"> rss
+</span></span>##- weibo
+</code></pre></li>
+</ul>
+<p>相关链接：</p>
+<p><a href="https://github.com/floriancargoet/hexo-helper-recent_posts" target="_blank" rel="external">hexo-helper-recent_posts</a></p>
+<p><a href="https://github.com/hexojs/hexo/issues/459" target="_blank" rel="external">https://github.com/hexojs/hexo/issues/459</a></p>
+<p><a href="http://tobuildsomething.com/2015/08/01/Finding-all-posts-with-a-given-category-in-Hexo/" target="_blank" rel="external">Querying posts in Hexo</a></p>
+<p><a href="https://github.com/JamesPan/hexo-theme-icarus/blob/master/layout/_widget/recent_posts.ejs" target="_blank" rel="external">https://github.com/JamesPan/hexo-theme-icarus/blob/master/layout/_widget/recent_posts.ejs</a></p>
+<h2 id="创建Filter_-_文章尾部增加版权信息">创建Filter - 文章尾部增加版权信息</h2><p>Hexo博客系统天生具有良好的可扩展性，Hexo的插件基本上分为Deployer、Filter、Generator、Renderer、Tag等很多种类。其中Filter插件可用于修改一些特定的数据。比如这种<a href="https://hexo.io/api/filter.html#before_post_render" target="_blank" rel="external">before_post_render Filter</a>会在文章正式渲染之前执行，具体的执行和渲染步骤可以参见关于<a href="https://hexo.io/api/posts.html#Render" target="_blank" rel="external">渲染的官方文档</a>。</p>
+<p>相关链接:</p>
+<p><a href="http://kuangqi.me/tricks/append-a-copyright-info-after-every-post/index.html" target="_blank" rel="external">为Hexo博客的每一篇文章自动追加版权信息</a></p>
 
-		    
+		
+<style type="text/css">
+.article-content hr {
+  text-align: center;
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+}
+.article-content hr:after {
+  content: 'EOF';
+  display: inline-block;
+  position: relative;
+  top: -13px;
+  padding: 0 10px;
+  background: #fafafa;
+  color: #8c8b8b;
+}
+</style>
+    
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Life/">Life</a>
+  <a class="article-category-link" href="/categories/Blog/">Blog</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Baby/">Baby</a>
+  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/Hexo/">Hexo</a>
   </div>
 
 </div>
@@ -122,7 +204,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://sunblognuke.github.io/2015/11/18/摄影篇-小区也能DIY/" data-title="摄影篇 - 小区也能DIY | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://sunblognuke.github.io/2015/12/04/Hexo-Customization-Ⅲ/" data-title="Hexo折腾记 Ⅲ | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -135,19 +217,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/11/20/Integratd-Hexo-with-Github/" title="在Github平台搭建Hexo免费静态博客">
-  <strong>上一篇：</strong><br/>
-  <span>
-  在Github平台搭建Hexo免费静态博客</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/10/22/Hello-Hexo-Github/"  title="Hello Hexo &amp; Github">
+<a href="/2015/12/03/Blog-CMS-DotNetNuke/"  title="Blog &amp; CMS &amp; DotNetNuke">
  <strong>下一篇：</strong><br/> 
- <span>Hello Hexo &amp; Github
+ <span>Blog &amp; CMS &amp; DotNetNuke
 </span>
 </a>
 </div>
@@ -156,12 +230,19 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/11/18/摄影篇-小区也能DIY/" data-title="摄影篇 - 小区也能DIY" data-url="http://sunblognuke.github.io/2015/11/18/摄影篇-小区也能DIY/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/04/Hexo-Customization-Ⅲ/" data-title="Hexo折腾记 Ⅲ" data-url="http://sunblognuke.github.io/2015/12/04/Hexo-Customization-Ⅲ/"></div>
 </section>
 
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#边栏Widget_-_最新随笔"><span class="toc-number">1.</span> <span class="toc-text">边栏Widget - 最新随笔</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建Filter_-_文章尾部增加版权信息"><span class="toc-number">2.</span> <span class="toc-text">创建Filter - 文章尾部增加版权信息</span></a></li></ol>
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -415,6 +496,8 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
