@@ -2,13 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://sunblognuke.github.io/2015/12/08/Notes-about-The-Passionate-Programmer/</loc>
-    <lastmod>2015-12-10T07:34:26.332Z</lastmod>
+    <loc>http://sunblognuke.github.io/2015/12/10/Laws-Rules-You-Should-Know/</loc>
+    <lastmod>2015-12-14T06:19:41.997Z</lastmod>
   </url>
   
   <url>
-    <loc>http://sunblognuke.github.io/2015/12/10/Laws-Rules-You-Should-Know/</loc>
-    <lastmod>2015-12-10T06:04:45.309Z</lastmod>
+    <loc>http://sunblognuke.github.io/2015/12/14/Recover-Password-for-DNN/</loc>
+    <lastmod>2015-12-14T06:16:13.665Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sunblognuke.github.io/about/index.html</loc>
+    <lastmod>2015-12-14T04:14:32.883Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sunblognuke.github.io/2015/12/08/Notes-about-The-Passionate-Programmer/</loc>
+    <lastmod>2015-12-10T07:34:26.332Z</lastmod>
   </url>
   
   <url>
@@ -34,11 +44,6 @@
   <url>
     <loc>http://sunblognuke.github.io/2015/11/20/Hexo-Customization/</loc>
     <lastmod>2015-12-09T06:52:21.521Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sunblognuke.github.io/about/index.html</loc>
-    <lastmod>2015-12-09T01:46:51.132Z</lastmod>
   </url>
   
   <url>

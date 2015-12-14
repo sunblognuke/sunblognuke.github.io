@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sunblognuke.github.io/"/>
-  <updated>2015-12-10T06:04:45.309Z</updated>
+  <updated>2015-12-14T06:16:13.665Z</updated>
   <id>http://sunblognuke.github.io/</id>
   
   <author>
@@ -15,12 +15,161 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[如何重设DNN用户密码]]></title>
+    <link href="http://sunblognuke.github.io/2015/12/14/Recover-Password-for-DNN/"/>
+    <id>http://sunblognuke.github.io/2015/12/14/Recover-Password-for-DNN/</id>
+    <published>2015-12-14T03:18:38.000Z</published>
+    <updated>2015-12-14T06:16:13.665Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/password.jpg?imageView2/2/w/680/q/90" alt=""></p>
+<p>在当今信息时代，管理密码本是一件很费时费力的事情。相对于DNN这一平台，由于版本较多不可避免地在开发过程中会搭建好多本地站点，时不时忘记密码也是常有的事。</p>
+<h2 id="超级用户">超级用户</h2><h3 id="终极方案">终极方案</h3><p><strong>前提：</strong>有权限操作数据库db。</p>
+<p><strong>原理：</strong>把aspnet_membership表中的”XX_UserName”用户的password和password_salt值拷贝并覆盖host用户对应的值。</p>
+<p>在SQL Management Studio执行如下Query SQL script：</p>
+<pre><code>/*
+ -- Database Utility ---------------------------------------------------------------------------
+ Description : Reset a Password <span class="keyword">in</span> a DotNetNuke database
+ Author : Tony Tullemans
+ <span class="built_in">Date</span> Created : <span class="number">18.04</span><span class="number">.2007</span>
+ Note/s : Before you run this script you must know the UserName <span class="keyword">and</span> Password <span class="keyword">of</span> another
+ registered DNN user <span class="keyword">in</span> the database you wish <span class="keyword">to</span> affect.
+ -----------------------------------------------------------------------------------------------
+ */
+
+<span class="keyword">DECLARE</span> @databaseName VARCHAR(<span class="number">128</span>)
+<span class="keyword">SELECT</span> @databaseName = DB_NAME()
+
+PRINT <span class="comment">'RESET PASSWORD IN DATABASE : ' + @databaseName</span>
+PRINT <span class="comment">'-----------------------------' + REPLICATE('-', DATALENGTH(@databaseName ));</span>
+
+<span class="keyword">DECLARE</span> @knownUserName NVARCHAR(<span class="number">128</span>)
+<span class="keyword">DECLARE</span> @lostUserName NVARCHAR(<span class="number">128</span>)
+<span class="keyword">DECLARE</span> @lostUserId NVARCHAR(<span class="number">128</span>)
+<span class="keyword">DECLARE</span> @knownPassword NVARCHAR(<span class="number">128</span>)
+<span class="keyword">DECLARE</span> @knownSalt NVARCHAR(<span class="number">128</span>)
+
+<span class="keyword">SET</span> @knownUserName = <span class="comment">'windy' /* WHAT YOU NEED TO MODIFY */</span>
+<span class="keyword">SET</span> @lostUserName = <span class="comment">'host'</span>
+
+<span class="keyword">SELECT</span> @knownPassword = Password, @knownSalt = PasswordSalt
+<span class="keyword">FROM</span> aspnet_Membership
+INNER <span class="keyword">JOIN</span> aspnet_users
+<span class="keyword">ON</span> aspnet_Membership.UserId = aspnet_users.UserId
+<span class="keyword">where</span> UserName = @knownUserName;
+
+PRINT <span class="comment">''</span>
+PRINT <span class="comment">'Known Password for "' + @knownUserName + '" is : ' + @knownPassword</span>
+PRINT <span class="comment">'Known Password Salt for "' + @knownUserName + '" is : ' + @knownSalt</span>
+
+<span class="keyword">SELECT</span> @lostUserId = aspnet_Membership.UserId
+<span class="keyword">FROM</span> aspnet_Membership
+INNER <span class="keyword">JOIN</span> aspnet_users
+<span class="keyword">ON</span> aspnet_Membership.UserId = aspnet_users.UserId
+<span class="keyword">WHERE</span> UserName = @lostUserName;
+
+PRINT <span class="comment">''</span>
+PRINT <span class="comment">'UserID for "' + @lostUserName + '" is : ' + @lostUserId</span>
+PRINT <span class="comment">''</span>
+
+<span class="keyword">IF</span> (DATALENGTH(@lostUserName) &lt;= <span class="number">0</span> <span class="keyword">OR</span> @lostUserName <span class="keyword">IS</span> NULL)
+PRINT <span class="comment">'Invalid Lost User Name ' + @lostUserName</span>
+<span class="keyword">ELSE</span> BEGIN
+<span class="keyword">IF</span> (DATALENGTH(@knownUserName) &lt;= <span class="number">0</span> <span class="keyword">OR</span> @knownUserName <span class="keyword">IS</span> NULL)
+PRINT <span class="comment">'Invalid Lost User Name ' + @lostUserName</span>
+<span class="keyword">ELSE</span> BEGIN
+<span class="keyword">IF</span> (DATALENGTH(@knownPassword) &lt;= <span class="number">0</span> <span class="keyword">OR</span> @knownPassword <span class="keyword">IS</span> NULL)
+PRINT <span class="comment">'Invalid Known Password ' + @knownPassword</span>
+<span class="keyword">ELSE</span> BEGIN
+<span class="keyword">IF</span> (DATALENGTH(@knownSalt) &lt;= <span class="number">0</span> <span class="keyword">OR</span> @knownSalt <span class="keyword">IS</span> NULL)
+PRINT <span class="comment">'Invalid Known Salt ' + @knownSalt</span>
+<span class="keyword">ELSE</span> BEGIN
+PRINT <span class="comment">''</span>
+PRINT <span class="comment">'BEFORE'</span>
+<span class="keyword">SELECT</span> left(UserName, <span class="number">12</span>) <span class="keyword">as</span> UserName, aspnet_Membership.UserId, left(Email, <span class="number">20</span>) <span class="keyword">as</span> Email, Password, PasswordSalt
+<span class="keyword">FROM</span> aspnet_Membership INNER <span class="keyword">JOIN</span> aspnet_users <span class="keyword">ON</span> aspnet_Membership.UserId = aspnet_users.UserId
+<span class="keyword">WHERE</span> UserName <span class="keyword">IN</span> ( @knownUserName, @lostUserName );
+PRINT <span class="comment">''</span>
+PRINT <span class="comment">'Changing Password for User Id("' + @lostUserId + '") to: "' + @knownPassword + '"'</span>
+PRINT <span class="comment">''</span>
+UPDATE aspnet_Membership
+<span class="keyword">SET</span> Password = @knownPassword,
+PasswordSalt = @knownSalt
+-- <span class="keyword">SELECT</span> UserId, Password, PasswordSalt
+-- <span class="keyword">FROM</span> aspnet_Membership
+<span class="keyword">WHERE</span> UserId = @lostUserId;
+PRINT <span class="comment">''</span>
+PRINT <span class="comment">'AFTER'</span>
+<span class="keyword">SELECT</span> left(UserName, <span class="number">12</span>) <span class="keyword">as</span> UserName, aspnet_Membership.UserId, left(Email, <span class="number">20</span>) <span class="keyword">as</span> Email, Password, PasswordSalt
+<span class="keyword">FROM</span> aspnet_Membership INNER <span class="keyword">JOIN</span> aspnet_users <span class="keyword">ON</span> aspnet_Membership.UserId = aspnet_users.UserId
+<span class="keyword">WHERE</span> UserName <span class="keyword">IN</span> ( @knownUserName, @lostUserName );
+<span class="keyword">END</span>
+<span class="keyword">END</span>
+<span class="keyword">END</span>
+<span class="keyword">END</span>
+GO
+
+PRINT <span class="comment">''</span>
+PRINT <span class="comment">' * * * END OF SCRIPT * * *'</span>
+PRINT <span class="comment">''</span>
+GO
+</code></pre><h3 id="手动模式">手动模式</h3><p><strong>前提：</strong>开放注册功能和有权限操作数据库db。<br><strong>原理：</strong>创建新用户并手动到数据库，在表ASPNet_Membership查询出host和新用户的记录，把新用户的password和password_salt值拷贝并覆盖host用户对应相同的列上。</p>
+<p>As there are frequent requests from users, who lost the password of the host account (and you cannot request the host password by email), the following solution will help for all DNN 3 and 4 installation. Please note, that your need direct access to the database to suceed with the issue:</p>
+<ol>
+<li>if “register” is not displayed for the portal, go to table “Portals”  in your database and enter value “2” into column “Registration”.</li>
+<li>create a new user account by registration (this time, please remember the password you enter!)</li>
+<li>go to database, enter table “ASPNet_Membership”</li>
+<li>go to new user account (usually the last one) and copy the encrypted values of columns “Password” and “PasswordSalt” into the same columns of user account “host” (usually th first entry in this table) </li>
+<li>login as user “host” using the new password and delete the reshly created other user.</li>
+</ol>
+<p>Keep remembering your password ;)</p>
+<h3 id="代码模式（不推荐使用）">代码模式（不推荐使用）</h3><p><strong>前提：</strong>有权限访问FTP。<br><strong>原理：</strong>调用核心API获取Host用户输出到页面。<br><strong>缺点：</strong> 加密方式为Hashed不可用；操作完成务必删除。</p>
+<pre><code><span class="tag">&lt;<span class="title">%@</span> <span class="attribute">Page</span> <span class="attribute">Language</span>=<span class="value">"C#"</span> %&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">runat</span>=<span class="value">"server"</span>&gt;</span><span class="javascript">
+    <span class="keyword">void</span> Page_Load(object sender, System.EventArgs e)
+    {
+        DotNetNuke.Entities.Users.UserInfo uInfo = 
+DotNetNuke.Entities.Users.UserController.GetUserById(<span class="number">0</span>, <span class="number">1</span>);
+        <span class="keyword">if</span> (uInfo != <span class="literal">null</span>)
+        {
+            string password = 
+DotNetNuke.Entities.Users.UserController.GetPassword(ref uInfo, <span class="built_in">String</span>.Empty);
+            Response.Write(<span class="string">"Password: "</span> + password);
+        }
+        <span class="keyword">else</span>
+        {
+            Response.Write(<span class="string">"UserInfo object is null"</span>);
+        }
+    }
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">html</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">head</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">title</span>&gt;</span>Recover Password<span class="tag">&lt;/<span class="title">title</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">body</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</code></pre><h2 id="普通用户">普通用户</h2><h3 id="核心方案">核心方案</h3><p>通过注册模块点击重设密码链接获取邮件提醒。</p>
+<p><a href="http://www.dnnsoftware.com/wiki/recover-passwords" target="_blank" rel="external">DNN Wiki - Recover Passwords</a></p>
+<h3 id="第三方模块">第三方模块</h3><p><a href="https://dnnsecurepasswordrec.codeplex.com/" target="_blank" rel="external">IowaComputerGurus’s Secure Password Recovery module</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/password.jpg?imageView2/2/w/680/q/90" alt=""></p>
+<p>在当今信息时代，管理密码本是一件很费时费力的事情。相对于DNN这]]>
+    </summary>
+    
+      <category term="DotNetNuke" scheme="http://sunblognuke.github.io/tags/DotNetNuke/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[你应该知道的定律和规则]]></title>
     <link href="http://sunblognuke.github.io/2015/12/10/Laws-Rules-You-Should-Know/"/>
     <id>http://sunblognuke.github.io/2015/12/10/Laws-Rules-You-Should-Know/</id>
     <published>2015-12-10T04:14:27.000Z</published>
-    <updated>2015-12-10T06:04:45.309Z</updated>
-    <content type="html"><![CDATA[<h2 id="墨菲定律">墨菲定律</h2><p>“墨菲定律”是一种心理学效应，是由爱德华·墨菲（Edward A. Murphy）提出的。主要内容：</p>
+    <updated>2015-12-14T06:19:41.997Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/clean.png" alt=""></p>
+<h2 id="墨菲定律">墨菲定律</h2><p>“墨菲定律”是一种心理学效应，是由爱德华·墨菲（Edward A. Murphy）提出的。主要内容：</p>
 <p>一、任何事都没有表面看起来那么简单；<br>二、所有的事都会比你预计的时间长；<br>三、会出错的事总会出错；<br>四、如果你担心某种情况发生，那么它就更有可能发生。</p>
 <p>墨菲定律的原句是这样的：如果有两种或两种以上的方式去做某件事情，而其中一种选择方式将导致灾难，则必定有人会做出这种选择。</p>
 <p>这句话迅速流传。墨菲定律是其作出的著名论断，亦称莫非定律、墨菲定理，是西方世界常用的俚语。</p>
@@ -54,8 +203,8 @@
 <p><a href="http://baike.baidu.com/view/47735.htm" target="_blank" rel="external">http://baike.baidu.com/view/47735.htm</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h2 id="墨菲定律">墨菲定律</h2><p>“墨菲定律”是一种心理学效应，是由爱德华·墨菲（Edward A. Murphy）提出的。主要内容：</p>
-<p>一、任何事都没有表面看起来那么简单；<br>二、所有的事都会比你预计的时间长；<br>三、会出错的事总会出错；<]]>
+    <![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/clean.png" alt=""></p>
+<h2 id="墨菲定律">墨菲定律</h2><p>“墨菲定律”是一种心理学效应，是由爱德华·墨菲（Edward A. Mu]]>
     </summary>
     
       <category term="Laws &amp; Rule" scheme="http://sunblognuke.github.io/tags/Laws-Rule/"/>
