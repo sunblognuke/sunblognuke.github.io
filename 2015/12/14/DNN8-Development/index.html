@@ -4,35 +4,28 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>免费的代价 PK 收费的便利 | Baldwin&#39;s Blog</title>
+    <title>DNN8 Development | Baldwin&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Baldwin">
     
 
     
-    <meta name="description" content="最近看了这两篇文章，感觉的确需要重新审视一些原本固有的观念和想法，在此分享大家：
-买贵的，任性地省钱
-一种不一样的生活态度和境界，至少最后一条Tip对我们程序猿来说是明智的选择，工欲善其事必先利其器。
-免费才是最贵的
-程序猿全新的消费观，实实在在的心声和想法，感触颇多，特别是对软件和墙的思考，希望更多的人都能尊重每个行业，其中包括程序猿产出的作品软件，或付费或捐献的方式来支持让你生活更美好的软件。">
+    <meta name="description" content="What is SPA?
+A Single-page application (SPA), also known as a single-page interface (SPI), is a web application or web site that fits on a single web page with the goal of providing a more fluid user">
 <meta property="og:type" content="article">
-<meta property="og:title" content="免费的代价 PK 收费的便利">
-<meta property="og:url" content="http://sunblognuke.github.io/2015/12/02/Free-PK-Paid/index.html">
+<meta property="og:title" content="DNN8 Development">
+<meta property="og:url" content="http://sunblognuke.github.io/2015/12/14/DNN8-Development/index.html">
 <meta property="og:site_name" content="Baldwin's Blog">
-<meta property="og:description" content="最近看了这两篇文章，感觉的确需要重新审视一些原本固有的观念和想法，在此分享大家：
-买贵的，任性地省钱
-一种不一样的生活态度和境界，至少最后一条Tip对我们程序猿来说是明智的选择，工欲善其事必先利其器。
-免费才是最贵的
-程序猿全新的消费观，实实在在的心声和想法，感触颇多，特别是对软件和墙的思考，希望更多的人都能尊重每个行业，其中包括程序猿产出的作品软件，或付费或捐献的方式来支持让你生活更美好的软件。">
-<meta property="og:updated_time" content="2015-12-03T06:22:04.486Z">
+<meta property="og:description" content="What is SPA?
+A Single-page application (SPA), also known as a single-page interface (SPI), is a web application or web site that fits on a single web page with the goal of providing a more fluid user">
+<meta property="og:image" content="http://7xof1d.com1.z0.glb.clouddn.com/img/SPA.png">
+<meta property="og:image" content="http://7xof1d.com1.z0.glb.clouddn.com/img/dnn_versions.jpg">
+<meta property="og:updated_time" content="2015-12-16T07:10:18.833Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="免费的代价 PK 收费的便利">
-<meta name="twitter:description" content="最近看了这两篇文章，感觉的确需要重新审视一些原本固有的观念和想法，在此分享大家：
-买贵的，任性地省钱
-一种不一样的生活态度和境界，至少最后一条Tip对我们程序猿来说是明智的选择，工欲善其事必先利其器。
-免费才是最贵的
-程序猿全新的消费观，实实在在的心声和想法，感触颇多，特别是对软件和墙的思考，希望更多的人都能尊重每个行业，其中包括程序猿产出的作品软件，或付费或捐献的方式来支持让你生活更美好的软件。">
+<meta name="twitter:title" content="DNN8 Development">
+<meta name="twitter:description" content="What is SPA?
+A Single-page application (SPA), also known as a single-page interface (SPI), is a web application or web site that fits on a single web page with the goal of providing a more fluid user">
 <meta name="twitter:creator" content="@sunblognuke">
 
     
@@ -94,14 +87,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/02/Free-PK-Paid/" title="免费的代价 PK 收费的便利" itemprop="url">免费的代价 PK 收费的便利</a>
+      <a href="/2015/12/14/DNN8-Development/" title="DNN8 Development" itemprop="url">DNN8 Development</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-02T06:41:06.000Z" itemprop="datePublished"> 发表于 2015-12-02</time>
+    <time datetime="2015-12-14T13:07:57.000Z" itemprop="datePublished"> 发表于 2015-12-14</time>
     
   </p>
 </header>
@@ -110,35 +103,63 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What_is_SPA?"><span class="toc-number">1.</span> <span class="toc-text">What is SPA?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Breaking_changes"><span class="toc-number">2.</span> <span class="toc-text">Breaking changes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Set_up_environment"><span class="toc-number">3.</span> <span class="toc-text">Set up environment</span></a></li></ol>
 		
 		</div>
 		
-		<p>最近看了这两篇文章，感觉的确需要重新审视一些原本固有的观念和想法，在此分享大家：</p>
-<p><a href="http://yaoleifly.com/2015/09/17/%E4%B9%B0%E8%B4%B5%E7%9A%84%EF%BC%8C%E4%BB%BB%E6%80%A7%E5%9C%B0%E7%9C%81%E9%92%B1/" target="_blank" rel="external">买贵的，任性地省钱</a></p>
-<p>一种不一样的生活态度和境界，至少最后一条Tip对我们程序猿来说是明智的选择，工欲善其事必先利其器。</p>
-<p><a href="http://dbarobin.com/2015/11/29/the-elegant-consuming-philosophy/" target="_blank" rel="external">免费才是最贵的</a></p>
-<p>程序猿全新的消费观，实实在在的心声和想法，感触颇多，特别是对软件和墙的思考，希望更多的人都能尊重每个行业，其中包括程序猿产出的作品软件，或付费或捐献的方式来支持让你生活更美好的软件。</p>
-<p>PS: 今年这季《奇葩说》陆陆续续看了好些集，且不论辩题有多奇葩或辩论过程多虐心，倒是蔡康永每次总结陈词时娓娓道来，核心无非总是强调 - 时间是一件神器，没有时间，一切无从谈起，时间成本是无价，任何观念和价值都可以让位或被时间同化。由此推论，当你为了获取免费的同时，所付出就是时间的代价成本。不妨留更多的时间投资到别处：</p>
-<p><a href="http://mp.weixin.qq.com/s?__biz=MjM5NjM4OTAyMA==&amp;mid=400451588&amp;idx=4&amp;sn=abd8a9184edaa3d086a5dcc2559d7d0c&amp;scene=1&amp;srcid=1125DbRd824X2pW6hSx8xuzv#rd" target="_blank" rel="external">投资要投时间对我们有利的</a></p>
-<p><a href="http://www.jianshu.com/p/12d2e98ac2e0" target="_blank" rel="external">时间自由，是比财务自由更重要的事儿</a></p>
-<p><a href="http://macshuo.com/?p=1042" target="_blank" rel="external">先有 Mac 还是先有钱？</a></p>
-<p>最后还是想说：凡事不可扣上绝对的帽子，故此有时有意地淘淘货消磨时间也算是一种慢生活的节奏 :)</p>
+		<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/SPA.png" alt=""></p>
+<h2 id="What_is_SPA?">What is SPA?</h2><blockquote>
+<p>A Single-page application (SPA), also known as a single-page interface (SPI), is a web application or web site that fits on a single web page with the goal of providing a more fluid user experience.</p>
+</blockquote>
+<p><a href="http://www.seguetech.com/blog/2013/04/18/what-is-single-page-application" target="_blank" rel="external">Single Page Application</a></p>
+<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/dnn_versions.jpg" alt=""></p>
+<h2 id="Breaking_changes">Breaking changes</h2><ol>
+<li>支持.net 4.5+版本</li>
+<li>向上兼容IE8+</li>
+<li>所有管理模块可插拔</li>
+<li>默认删除导航提供模块，只保留DDR</li>
+<li>轻量级default.css</li>
+<li>剔除Telerik控件</li>
+<li>更多查看下边链接…</li>
+</ol>
+<p><a href="http://www.dnnsoftware.com/wiki/dnn-8-breaking-changes" target="_blank" rel="external">DNN 8 BREAKING CHANGES</a></p>
+<h2 id="Set_up_environment">Set up environment</h2><p><a href="http://www.dnnsoftware.com/community-blog/cid/155221/module-development-in-dnn-8-3--introduction-to-spa-modules" target="_blank" rel="external">Introduction to SPA modules</a></p>
 
-		    
+		
+<style type="text/css">
+.article-content hr {
+  text-align: center;
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+}
+.article-content hr:after {
+  content: 'EOF';
+  display: inline-block;
+  position: relative;
+  top: -13px;
+  padding: 0 10px;
+  background: #fafafa;
+  color: #8c8b8b;
+}
+</style>
+    
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/思考/">思考</a><a href="/tags/趋势/">趋势</a>
+  <span></span> <a href="/tags/DNN8/">DNN8</a><a href="/tags/MVC/">MVC</a><a href="/tags/SPA/">SPA</a>
   </div>
 
 </div>
@@ -147,7 +168,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://sunblognuke.github.io/2015/12/02/Free-PK-Paid/" data-title="免费的代价 PK 收费的便利 | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://sunblognuke.github.io/2015/12/14/DNN8-Development/" data-title="DNN8 Development | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -160,19 +181,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/12/02/Children-Issues/" title="小孩教育">
-  <strong>上一篇：</strong><br/>
-  <span>
-  小孩教育</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/12/01/Awesome-Resources/"  title="开发资源汇总">
+<a href="/2015/12/14/Programmers/"  title="神秘的程序员">
  <strong>下一篇：</strong><br/> 
- <span>开发资源汇总
+ <span>神秘的程序员
 </span>
 </a>
 </div>
@@ -181,7 +194,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/12/02/Free-PK-Paid/" data-title="免费的代价 PK 收费的便利" data-url="http://sunblognuke.github.io/2015/12/02/Free-PK-Paid/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/14/DNN8-Development/" data-title="DNN8 Development" data-url="http://sunblognuke.github.io/2015/12/14/DNN8-Development/"></div>
 </section>
 
 
@@ -191,7 +204,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What_is_SPA?"><span class="toc-number">1.</span> <span class="toc-text">What is SPA?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Breaking_changes"><span class="toc-number">2.</span> <span class="toc-text">Breaking changes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Set_up_environment"><span class="toc-number">3.</span> <span class="toc-text">Set up environment</span></a></li></ol>
  
   </div>
 

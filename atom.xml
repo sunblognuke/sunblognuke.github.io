@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sunblognuke.github.io/"/>
-  <updated>2015-12-14T06:16:13.665Z</updated>
+  <updated>2015-12-16T07:10:18.833Z</updated>
   <id>http://sunblognuke.github.io/</id>
   
   <author>
@@ -13,6 +13,83 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[DNN8 Development]]></title>
+    <link href="http://sunblognuke.github.io/2015/12/14/DNN8-Development/"/>
+    <id>http://sunblognuke.github.io/2015/12/14/DNN8-Development/</id>
+    <published>2015-12-14T13:07:57.000Z</published>
+    <updated>2015-12-16T07:10:18.833Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/SPA.png" alt=""></p>
+<h2 id="What_is_SPA?">What is SPA?</h2><blockquote>
+<p>A Single-page application (SPA), also known as a single-page interface (SPI), is a web application or web site that fits on a single web page with the goal of providing a more fluid user experience.</p>
+</blockquote>
+<p><a href="http://www.seguetech.com/blog/2013/04/18/what-is-single-page-application" target="_blank" rel="external">Single Page Application</a></p>
+<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/dnn_versions.jpg" alt=""></p>
+<h2 id="Breaking_changes">Breaking changes</h2><ol>
+<li>支持.net 4.5+版本</li>
+<li>向上兼容IE8+</li>
+<li>所有管理模块可插拔</li>
+<li>默认删除导航提供模块，只保留DDR</li>
+<li>轻量级default.css</li>
+<li>剔除Telerik控件</li>
+<li>更多查看下边链接…</li>
+</ol>
+<p><a href="http://www.dnnsoftware.com/wiki/dnn-8-breaking-changes" target="_blank" rel="external">DNN 8 BREAKING CHANGES</a></p>
+<h2 id="Set_up_environment">Set up environment</h2><p><a href="http://www.dnnsoftware.com/community-blog/cid/155221/module-development-in-dnn-8-3--introduction-to-spa-modules" target="_blank" rel="external">Introduction to SPA modules</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/SPA.png" alt=""></p>
+<h2 id="What_is_SPA?">What is SPA?</h2><blockquote>
+<p>A Single-]]>
+    </summary>
+    
+      <category term="DNN8" scheme="http://sunblognuke.github.io/tags/DNN8/"/>
+    
+      <category term="MVC" scheme="http://sunblognuke.github.io/tags/MVC/"/>
+    
+      <category term="SPA" scheme="http://sunblognuke.github.io/tags/SPA/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[神秘的程序员]]></title>
+    <link href="http://sunblognuke.github.io/2015/12/14/Programmers/"/>
+    <id>http://sunblognuke.github.io/2015/12/14/Programmers/</id>
+    <published>2015-12-14T11:05:00.000Z</published>
+    <updated>2015-12-14T11:58:39.239Z</updated>
+    <content type="html"><![CDATA[<p><strong>来源：</strong><a href="http://blog.xiqiao.info/" target="_blank" rel="external">西乔的八卦</a></p>
+<p>这个系列的漫画讲述程序员——这种神秘人类的囧事，故事多来源于我身边的程序员朋友。</p>
+<ol>
+<li><a href="/2015/12/14/Programmers/#传奇创业">传奇创业</a></li>
+<li><a href="/2015/12/14/Programmers/#最佳注释">最佳注释</a></li>
+<li><a href="/2015/12/14/Programmers/#有效警告">有效警告</a></li>
+</ol>
+<a id="more"></a>
+<h2 id="传奇创业">传奇创业</h2><p><img src="http://blog.xiqiao.info/blogimg/programmers/54_startup_legend.gif" alt=""></p>
+<h2 id="最佳注释">最佳注释</h2><p><img src="http://blog.xiqiao.info/wp-content/uploads/2012/08/40_best_comment.gif" alt=""></p>
+<h2 id="有效警告">有效警告</h2><p><img src="http://blog.xiqiao.info/blogimg/programmers/warning.gif" alt=""></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong>来源：</strong><a href="http://blog.xiqiao.info/">西乔的八卦</a></p>
+<p>这个系列的漫画讲述程序员——这种神秘人类的囧事，故事多来源于我身边的程序员朋友。</p>
+<ol>
+<li><a href="/2015/12/14/Programmers/#传奇创业">传奇创业</a></li>
+<li><a href="/2015/12/14/Programmers/#最佳注释">最佳注释</a></li>
+<li><a href="/2015/12/14/Programmers/#有效警告">有效警告</a></li>
+</ol>]]>
+    
+    </summary>
+    
+      <category term="Programmers" scheme="http://sunblognuke.github.io/tags/Programmers/"/>
+    
+      <category term="Startup" scheme="http://sunblognuke.github.io/tags/Startup/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[如何重设DNN用户密码]]></title>

@@ -83,6 +83,189 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/12/08/Lean-Startup/" title="精益创业" itemprop="url">精益创业</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-08T01:06:02.000Z" itemprop="datePublished"> 发表于 2015-12-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/success_vs_failure.jpg" alt="Lean Startup"></p>
+<h2 id="创业公式">创业公式</h2><ol>
+<li>搭建可运行的原型 - 轻，小，快</li>
+<li>上线运营（别管bug）</li>
+<li>收集反馈</li>
+<li>调整产品</li>
+<li>成长壮大</li>
+</ol>
+<h2 id="Minimium_Viable_Product_(MVP)">Minimium Viable Product (MVP)</h2><ul>
+<li>产品规格：”一個”足夠解決問題的功能範圍</li>
+<li>不作平台，只解决问题</li>
+<li>Complain Driven Development</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Startup/">Startup</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/创业/">创业</a><a href="/tags/商业模式/">商业模式</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/08/Lean-Startup/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/08/Lean-Startup/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/04/Hexo-Customization-Ⅲ/" title="Hexo折腾记 Ⅲ" itemprop="url">Hexo折腾记 Ⅲ</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-04T01:17:35.000Z" itemprop="datePublished"> 发表于 2015-12-04</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>用Hexo搭建本博客至今为止，感觉不错，管理起来很方便，Markdown排版文字的确很赞。接下来这一篇文章想更为深入的探讨，比如如何编程的方式来修改Hexo成更为灵活的布局或创建新的功能：</p>
+<h2 id="边栏Widget_-_最新随笔">边栏Widget - 最新随笔</h2><p>可直接自己在模板template写或通过帮助创建Hexo helper plugin来实现。在此分享后者的做法：</p>
+<p><strong>代码原理</strong></p>
+<p>获取指定目录或全站的随笔并排序遍历输出而已</p>
+<pre><code><span class="xml"></span>&lt;%<span class="perl"> site.categories.findOne({name: <span class="string">'project'</span>}).posts.<span class="keyword">sort</span>(<span class="string">'date'</span>, -<span class="number">1</span>).<span class="keyword">each</span>(function(post){ </span>%&gt;<span class="xml">
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"</span></span></span>&lt;%<span class="perl">- url_for(post.path) </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span>&gt;</span></span>&lt;%=<span class="perl"> post.title || <span class="string">'(no title)'</span> </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+</span>&lt;%<span class="perl"> }) </span>%&gt;<span class="xml"></span>
+</code></pre><ul>
+<li><p>执行代码安装插件recent_posts</p>
+<pre><code>npm <span class="operator"><span class="keyword">install</span> hexo-helper-recent_posts <span class="comment">--save</span></span>
+</code></pre></li>
+<li><p>在主题目录下的_widget目录下新建widget文件recent_posts.ejs (比如ROOT\themes\jacman\layout_widget)，代码如下（如有必要可自定义修改ulClass和liClass并添加相关的样式）：</p>
+<pre><code><span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"linkslist"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"asidetitle"</span>&gt;</span></span>&lt;%=<span class="ruby"> _<span class="number">_</span>(<span class="string">'recent_posts'</span>) </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"linkslist clearfix"</span>&gt;</span>
+        </span>&lt;%-<span class="ruby"> recent_posts({     <span class="symbol">count:</span> <span class="number">6</span>, 
+                            <span class="symbol">ulClass:</span> <span class="string">''</span>,
+                            <span class="symbol">liClass:</span> <span class="string">''</span>}) </span>%&gt;<span class="xml">
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>    </span>
+</code></pre></li>
+</ul>
+<ul>
+<li><p>打开主题_config.yml, 启用recent_posts这一widget：</p>
+<pre><code>#### Widgets
+widgets: 
+-<span class="ruby"> github-card
+</span>-<span class="ruby"> category
+</span>-<span class="ruby"> tag
+</span>-<span class="ruby"> recent_posts /<span class="regexp">/ 启用recent_posts
+</span></span>-<span class="ruby"><span class="regexp"> links
+</span></span>##- douban
+-<span class="ruby"><span class="regexp"> rss
+</span></span>##- weibo
+</code></pre></li>
+</ul>
+<p>相关链接：</p>
+<p><a href="https://github.com/floriancargoet/hexo-helper-recent_posts" target="_blank" rel="external">hexo-helper-recent_posts</a></p>
+<p><a href="https://github.com/hexojs/hexo/issues/459" target="_blank" rel="external">https://github.com/hexojs/hexo/issues/459</a></p>
+<p><a href="http://tobuildsomething.com/2015/08/01/Finding-all-posts-with-a-given-category-in-Hexo/" target="_blank" rel="external">Querying posts in Hexo</a></p>
+<p><a href="https://github.com/JamesPan/hexo-theme-icarus/blob/master/layout/_widget/recent_posts.ejs" target="_blank" rel="external">https://github.com/JamesPan/hexo-theme-icarus/blob/master/layout/_widget/recent_posts.ejs</a></p>
+<h2 id="创建Filter_-_文章尾部增加版权信息">创建Filter - 文章尾部增加版权信息</h2><p>Hexo博客系统天生具有良好的可扩展性，Hexo的插件基本上分为Deployer、Filter、Generator、Renderer、Tag等很多种类。其中Filter插件可用于修改一些特定的数据。比如这种<a href="https://hexo.io/api/filter.html#before_post_render" target="_blank" rel="external">before_post_render Filter</a>会在文章正式渲染之前执行，具体的执行和渲染步骤可以参见关于<a href="https://hexo.io/api/posts.html#Render" target="_blank" rel="external">渲染的官方文档</a>。</p>
+<p>相关链接:</p>
+<p><a href="http://kuangqi.me/tricks/append-a-copyright-info-after-every-post/index.html" target="_blank" rel="external">为Hexo博客的每一篇文章自动追加版权信息</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Blog/">Blog</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/Hexo/">Hexo</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/04/Hexo-Customization-Ⅲ/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/04/Hexo-Customization-Ⅲ/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/12/03/Blog-CMS-DotNetNuke/" title="Blog &amp; CMS &amp; DotNetNuke" itemprop="url">Blog &amp; CMS &amp; DotNetNuke</a>
   </h1>
   <p class="article-author">By
@@ -290,181 +473,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/01/Awesome-Resources/" title="开发资源汇总" itemprop="url">开发资源汇总</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-01T03:47:42.000Z" itemprop="datePublished"> 发表于 2015-12-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="资讯">资讯</h2><ul>
-<li><a href="http://teahour.fm/" target="_blank" rel="external">程序员播客</a></li>
-</ul>
-<p>专注程序员感兴趣的话题，包括 Web 设计和开发，移动应用设计和开发，创业以及一切 Geek 的话题。值得好好过一下。</p>
-<ul>
-<li><a href="http://www.infoq.com/cn/" target="_blank" rel="external">InfoQ</a></li>
-</ul>
-<p>InfoQ（Information Queue）是一个在线新闻/社区网站，上面的资料比较权威，中文版的更新速度比较慢</p>
-<ul>
-<li><a href="http://weekly.manong.io/" target="_blank" rel="external">码农周刊</a></li>
-</ul>
-<p>码农周刊是一份专为程序员打造的IT技术周刊，每周会有小惊喜</p>
-<h2 id="回答网站">回答网站</h2><ul>
-<li><p><a href="http://stackoverflow.com/" target="_blank" rel="external">Stack Overflow</a></p>
-<p> 程序员的问答网站，必备</p>
-</li>
-<li><p><a href="http://segmentfault.com/" target="_blank" rel="external">SegmentFault</a></p>
-</li>
-</ul>
-<p>国内的问答网站，目前还是挺活跃的</p>
-<ul>
-<li><a href="https://www.zhihu.com/" target="_blank" rel="external">知乎</a></li>
-</ul>
-<p>一个神奇的网站，各种奇葩想法</p>
-<h2 id="远程工作">远程工作</h2><ul>
-<li><a href="http://wangyaodi.com/" target="_blank" rel="external">Andy 的个人博客</a></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Resources/">Resources</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/开发/">开发</a><a href="/tags/资源/">资源</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/01/Awesome-Resources/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/01/Awesome-Resources/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/11/27/Photography-Learning/" title="摄影学习备忘" itemprop="url">摄影学习备忘</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-11-27T05:51:10.000Z" itemprop="datePublished"> 发表于 2015-11-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/ps.png" alt=""></p>
-<p>分享一些学习摄影的资源及笔记心得。</p>
-<p>算是国内比较有诚意的摄影教程，适合入门和明白一些误区和概念</p>
-<p><a href="http://www.ganlantu.com/course/explore/mianfei" target="_blank" rel="external">免费课程 - 橄榄图摄影课堂</a></p>
-<p>本人第一个单反500D，也是目前还在用的，新增EF 50mm f/1.4 USM 人像头：</p>
-<p><a href="http://www.canon.com.cn/specialsite/eos600d/" target="_blank" rel="external">官方教程 - EOS 600D深度解析</a></p>
-<p>李涛老师的教程一定过，了解一些摄影的理念和思想是必须的。</p>
-<p>后期学习方法：</p>
-<ol>
-<li>取法乎上，寻师经典</li>
-<li>务先大体，鉴必穷源</li>
-<li>诚心正意，自证良知</li>
-</ol>
-<p>Adobe Camera Raw预处理步骤：</p>
-<ol>
-<li>自动校准：镜头校准，相机校准，白平衡校准</li>
-<li><p>预处理：</p>
-<p> 全局：正确的黑白场，准确的清晰度，适当的饱和度，丰富的层次<br> 局部：目标调整工具HSL， 画笔，渐变，径向</p>
-</li>
-<li><p>调性：影调（影：明暗黑白关系；调：色彩关系）</p>
-</li>
-<li>输出：锐化除噪</li>
-</ol>
-<p>可关注的微信号：摄影修行，教摄影，摄影笔记，蜂鸟网，POCO摄影社区。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Photography/">Photography</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/ACR/">ACR</a><a href="/tags/Bridge-CC/">Bridge CC</a><a href="/tags/PS/">PS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/11/27/Photography-Learning/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/11/27/Photography-Learning/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -487,7 +495,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Dev/" title="Dev">Dev<sup>1</sup></a></li>
+			<li><a href="/categories/Dev/" title="Dev">Dev<sup>3</sup></a></li>
 		  
 		
 		  
@@ -544,6 +552,14 @@
 			
 		
 			
+				<li><a href="/tags/DNN8/" title="DNN8">DNN8<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bridge-CC/" title="Bridge CC">Bridge CC<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/ACR/" title="ACR">ACR<sup>1</sup></a></li>
 			
 		
@@ -568,7 +584,7 @@
 			
 		
 			
-				<li><a href="/tags/Bridge-CC/" title="Bridge CC">Bridge CC<sup>1</sup></a></li>
+				<li><a href="/tags/Programmers/" title="Programmers">Programmers<sup>1</sup></a></li>
 			
 		
 			
@@ -580,23 +596,15 @@
 			
 		
 			
-				<li><a href="/tags/Education/" title="Education">Education<sup>1</sup></a></li>
+				<li><a href="/tags/Startup/" title="Startup">Startup<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CMS/" title="CMS">CMS<sup>1</sup></a></li>
+				<li><a href="/tags/SPA/" title="SPA">SPA<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/DNN8/" title="DNN8">DNN8<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/资源/" title="资源">资源<sup>1</sup></a></li>
+				<li><a href="/tags/MVC/" title="MVC">MVC<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -606,7 +614,7 @@
   <div class="linkslist">
     <p class="asidetitle">最新随笔</p>
     <div class="linkslist clearfix">
-		<ul class=""><li class=""><a href="/2015/12/14/Recover-Password-for-DNN/">如何重设DNN用户密码</a></li><li class=""><a href="/2015/12/10/Laws-Rules-You-Should-Know/">你应该知道的定律和规则</a></li><li class=""><a href="/2015/12/08/Notes-about-The-Passionate-Programmer/">读书摘抄《我编程，我快乐：程序员职业规划之道》</a></li><li class=""><a href="/2015/12/08/Lean-Startup/">精益创业</a></li><li class=""><a href="/2015/12/04/Hexo-Customization-Ⅲ/">Hexo折腾记 Ⅲ</a></li><li class=""><a href="/2015/12/03/Blog-CMS-DotNetNuke/">Blog & CMS & DotNetNuke</a></li></ul>
+		<ul class=""><li class=""><a href="/2015/12/14/DNN8-Development/">DNN8 Development</a></li><li class=""><a href="/2015/12/14/Programmers/">神秘的程序员</a></li><li class=""><a href="/2015/12/14/Recover-Password-for-DNN/">如何重设DNN用户密码</a></li><li class=""><a href="/2015/12/10/Laws-Rules-You-Should-Know/">你应该知道的定律和规则</a></li><li class=""><a href="/2015/12/08/Notes-about-The-Passionate-Programmer/">读书摘抄《我编程，我快乐：程序员职业规划之道》</a></li><li class=""><a href="/2015/12/08/Lean-Startup/">精益创业</a></li></ul>
 	</div>
 </div>
 
