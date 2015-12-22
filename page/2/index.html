@@ -83,260 +83,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/08/Lean-Startup/" title="精益创业" itemprop="url">精益创业</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-08T01:06:02.000Z" itemprop="datePublished"> 发表于 2015-12-08</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/success_vs_failure.jpg" alt="Lean Startup"></p>
-<h2 id="创业公式">创业公式</h2><ol>
-<li>搭建可运行的原型 - 轻，小，快</li>
-<li>上线运营（别管bug）</li>
-<li>收集反馈</li>
-<li>调整产品</li>
-<li>成长壮大</li>
-</ol>
-<h2 id="Minimium_Viable_Product_(MVP)">Minimium Viable Product (MVP)</h2><ul>
-<li>产品规格：”一個”足夠解決問題的功能範圍</li>
-<li>不作平台，只解决问题</li>
-<li>Complain Driven Development</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Startup/">Startup</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/创业/">创业</a><a href="/tags/商业模式/">商业模式</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/08/Lean-Startup/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/08/Lean-Startup/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/04/Hexo-Customization-Ⅲ/" title="Hexo折腾记 Ⅲ" itemprop="url">Hexo折腾记 Ⅲ</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-04T01:17:35.000Z" itemprop="datePublished"> 发表于 2015-12-04</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>用Hexo搭建本博客至今为止，感觉不错，管理起来很方便，Markdown排版文字的确很赞。接下来这一篇文章想更为深入的探讨，比如如何编程的方式来修改Hexo成更为灵活的布局或创建新的功能：</p>
-<h2 id="边栏Widget_-_最新随笔">边栏Widget - 最新随笔</h2><p>可直接自己在模板template写或通过帮助创建Hexo helper plugin来实现。在此分享后者的做法：</p>
-<p><strong>代码原理</strong></p>
-<p>获取指定目录或全站的随笔并排序遍历输出而已</p>
-<pre><code><span class="xml"></span>&lt;%<span class="perl"> site.categories.findOne({name: <span class="string">'project'</span>}).posts.<span class="keyword">sort</span>(<span class="string">'date'</span>, -<span class="number">1</span>).<span class="keyword">each</span>(function(post){ </span>%&gt;<span class="xml">
-    <span class="tag">&lt;<span class="title">li</span>&gt;</span>
-      <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"</span></span></span>&lt;%<span class="perl">- url_for(post.path) </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span>&gt;</span></span>&lt;%=<span class="perl"> post.title || <span class="string">'(no title)'</span> </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">a</span>&gt;</span>
-    <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-</span>&lt;%<span class="perl"> }) </span>%&gt;<span class="xml"></span>
-</code></pre><ul>
-<li><p>执行代码安装插件recent_posts</p>
-<pre><code>npm <span class="operator"><span class="keyword">install</span> hexo-helper-recent_posts <span class="comment">--save</span></span>
-</code></pre></li>
-<li><p>在主题目录下的_widget目录下新建widget文件recent_posts.ejs (比如ROOT\themes\jacman\layout_widget)，代码如下（如有必要可自定义修改ulClass和liClass并添加相关的样式）：</p>
-<pre><code><span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"linkslist"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"asidetitle"</span>&gt;</span></span>&lt;%=<span class="ruby"> _<span class="number">_</span>(<span class="string">'recent_posts'</span>) </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"linkslist clearfix"</span>&gt;</span>
-        </span>&lt;%-<span class="ruby"> recent_posts({     <span class="symbol">count:</span> <span class="number">6</span>, 
-                            <span class="symbol">ulClass:</span> <span class="string">''</span>,
-                            <span class="symbol">liClass:</span> <span class="string">''</span>}) </span>%&gt;<span class="xml">
-    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>    </span>
-</code></pre></li>
-</ul>
-<ul>
-<li><p>打开主题_config.yml, 启用recent_posts这一widget：</p>
-<pre><code>#### Widgets
-widgets: 
--<span class="ruby"> github-card
-</span>-<span class="ruby"> category
-</span>-<span class="ruby"> tag
-</span>-<span class="ruby"> recent_posts /<span class="regexp">/ 启用recent_posts
-</span></span>-<span class="ruby"><span class="regexp"> links
-</span></span>##- douban
--<span class="ruby"><span class="regexp"> rss
-</span></span>##- weibo
-</code></pre></li>
-</ul>
-<p>相关链接：</p>
-<p><a href="https://github.com/floriancargoet/hexo-helper-recent_posts" target="_blank" rel="external">hexo-helper-recent_posts</a></p>
-<p><a href="https://github.com/hexojs/hexo/issues/459" target="_blank" rel="external">https://github.com/hexojs/hexo/issues/459</a></p>
-<p><a href="http://tobuildsomething.com/2015/08/01/Finding-all-posts-with-a-given-category-in-Hexo/" target="_blank" rel="external">Querying posts in Hexo</a></p>
-<p><a href="https://github.com/JamesPan/hexo-theme-icarus/blob/master/layout/_widget/recent_posts.ejs" target="_blank" rel="external">https://github.com/JamesPan/hexo-theme-icarus/blob/master/layout/_widget/recent_posts.ejs</a></p>
-<h2 id="创建Filter_-_文章尾部增加版权信息">创建Filter - 文章尾部增加版权信息</h2><p>Hexo博客系统天生具有良好的可扩展性，Hexo的插件基本上分为Deployer、Filter、Generator、Renderer、Tag等很多种类。其中Filter插件可用于修改一些特定的数据。比如这种<a href="https://hexo.io/api/filter.html#before_post_render" target="_blank" rel="external">before_post_render Filter</a>会在文章正式渲染之前执行，具体的执行和渲染步骤可以参见关于<a href="https://hexo.io/api/posts.html#Render" target="_blank" rel="external">渲染的官方文档</a>。</p>
-<p>相关链接:</p>
-<p><a href="http://kuangqi.me/tricks/append-a-copyright-info-after-every-post/index.html" target="_blank" rel="external">为Hexo博客的每一篇文章自动追加版权信息</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Blog/">Blog</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/Hexo/">Hexo</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/04/Hexo-Customization-Ⅲ/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/04/Hexo-Customization-Ⅲ/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/03/Blog-CMS-DotNetNuke/" title="Blog &amp; CMS &amp; DotNetNuke" itemprop="url">Blog &amp; CMS &amp; DotNetNuke</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-03T06:08:43.000Z" itemprop="datePublished"> 发表于 2015-12-03</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/website.jpg?imageView2/0/w/600/q/80" alt=""></p>
-<p>最近重新拾起CMS这一领域的研究，希望借助DNN重新规划自己的职业生涯或工作方式。</p>
-<ul>
-<li><p><a href="http://blog.xdite.net/posts/2014/02/26/growing-cms-scaling-2" target="_blank" rel="external">CMS的扩展之术</a></p>
-</li>
-<li><p><a href="http://blog.xdite.net/posts/2013/09/27/mvp-logdown-learn" target="_blank" rel="external">一趟 MVP 的旅程：在 Logdown 學到的幾件事</a></p>
-<p>  一个台湾华人创建的博客网站，专注优雅的书写平台（Markdown）, 可对比国内的<a href="www.jianshu.com">简书</a> 或国外的 <a href="https://medium.com/" target="_blank" rel="external">Medium</a>。</p>
-</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Blog/">Blog</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/CMS/">CMS</a><a href="/tags/DNN8/">DNN8</a><a href="/tags/DotNetNuke/">DotNetNuke</a><a href="/tags/Markdown/">Markdown</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/03/Blog-CMS-DotNetNuke/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/03/Blog-CMS-DotNetNuke/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2015/12/02/Children-Issues/" title="小孩教育" itemprop="url">小孩教育</a>
   </h1>
   <p class="article-author">By
@@ -473,9 +219,824 @@ widgets:
 
 
 
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/01/Awesome-Resources/" title="开发资源汇总" itemprop="url">开发资源汇总</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-01T03:47:42.000Z" itemprop="datePublished"> 发表于 2015-12-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="资讯">资讯</h2><ul>
+<li><a href="http://teahour.fm/" target="_blank" rel="external">程序员播客</a></li>
+</ul>
+<p>专注程序员感兴趣的话题，包括 Web 设计和开发，移动应用设计和开发，创业以及一切 Geek 的话题。值得好好过一下。</p>
+<ul>
+<li><a href="http://www.infoq.com/cn/" target="_blank" rel="external">InfoQ</a></li>
+</ul>
+<p>InfoQ（Information Queue）是一个在线新闻/社区网站，上面的资料比较权威，中文版的更新速度比较慢</p>
+<ul>
+<li><a href="http://weekly.manong.io/" target="_blank" rel="external">码农周刊</a></li>
+</ul>
+<p>码农周刊是一份专为程序员打造的IT技术周刊，每周会有小惊喜</p>
+<h2 id="回答网站">回答网站</h2><ul>
+<li><p><a href="http://stackoverflow.com/" target="_blank" rel="external">Stack Overflow</a></p>
+<p> 程序员的问答网站，必备</p>
+</li>
+<li><p><a href="http://segmentfault.com/" target="_blank" rel="external">SegmentFault</a></p>
+</li>
+</ul>
+<p>国内的问答网站，目前还是挺活跃的</p>
+<ul>
+<li><a href="https://www.zhihu.com/" target="_blank" rel="external">知乎</a></li>
+</ul>
+<p>一个神奇的网站，各种奇葩想法</p>
+<h2 id="远程工作">远程工作</h2><ul>
+<li><a href="http://wangyaodi.com/" target="_blank" rel="external">Andy 的个人博客</a></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/开发/">开发</a><a href="/tags/资源/">资源</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/01/Awesome-Resources/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/01/Awesome-Resources/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/27/Photography-Learning/" title="摄影学习备忘" itemprop="url">摄影学习备忘</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-27T05:51:10.000Z" itemprop="datePublished"> 发表于 2015-11-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/ps.png" alt=""></p>
+<p>分享一些学习摄影的资源及笔记心得。</p>
+<p>算是国内比较有诚意的摄影教程，适合入门和明白一些误区和概念</p>
+<p><a href="http://www.ganlantu.com/course/explore/mianfei" target="_blank" rel="external">免费课程 - 橄榄图摄影课堂</a></p>
+<p>本人第一个单反500D，也是目前还在用的，新增EF 50mm f/1.4 USM 人像头：</p>
+<p><a href="http://www.canon.com.cn/specialsite/eos600d/" target="_blank" rel="external">官方教程 - EOS 600D深度解析</a></p>
+<p>李涛老师的教程一定过，了解一些摄影的理念和思想是必须的。</p>
+<p>后期学习方法：</p>
+<ol>
+<li>取法乎上，寻师经典</li>
+<li>务先大体，鉴必穷源</li>
+<li>诚心正意，自证良知</li>
+</ol>
+<p>Adobe Camera Raw预处理步骤：</p>
+<ol>
+<li>自动校准：镜头校准，相机校准，白平衡校准</li>
+<li><p>预处理：</p>
+<p> 全局：正确的黑白场，准确的清晰度，适当的饱和度，丰富的层次<br> 局部：目标调整工具HSL， 画笔，渐变，径向</p>
+</li>
+<li><p>调性：影调（影：明暗黑白关系；调：色彩关系）</p>
+</li>
+<li>输出：锐化除噪</li>
+</ol>
+<p>可关注的微信号：摄影修行，教摄影，摄影笔记，蜂鸟网，POCO摄影社区。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Photography/">Photography</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ACR/">ACR</a><a href="/tags/Bridge-CC/">Bridge CC</a><a href="/tags/PS/">PS</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/11/27/Photography-Learning/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/11/27/Photography-Learning/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/26/Showcase-Weblog-based-on-Hexo/" title="基于Hexo搭建的博客展示" itemprop="url">基于Hexo搭建的博客展示</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-26T08:19:25.000Z" itemprop="datePublished"> 发表于 2015-11-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>在此列举一些用Hexo搭建的博客，算是比较可看的，其中还包含一些教程：</p>
+<p><a href="https://hexo.io/themes/" target="_blank" rel="external">官方主题库</a></p>
+<p><a href="http://litten.github.io/" target="_blank" rel="external">Yilia主题作者博客</a></p>
+<p><a href="http://wuchong.me/tags/Hexo/" target="_blank" rel="external">Jark’s Blog | Jacman主题作者博客</a></p>
+<p><a href="http://notes.iissnan.com/" target="_blank" rel="external">IIssNan’s Notes | Next主题作者博客</a></p>
+<p><a href="http://ibruce.info/tags/hexo/" target="_blank" rel="external">不如</a></p>
+<p><a href="http://blog.miopeco.com/" target="_blank" rel="external">Pingbo’s Blog</a></p>
+<p><a href="https://xuanwo.org/tags/Hexo/" target="_blank" rel="external">XuanWo’s Blog</a></p>
+<p><a href="http://chitanda.me/tags/hexo/" target="_blank" rel="external">我很好奇</a></p>
+<p><a href="http://blog.jamespan.me/" target="_blank" rel="external">James Pan’s Blog</a></p>
+<p><a href="http://kuangqi.me/" target="_blank" rel="external">The Bloom of Youth | 锦瑟华年</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Blog/">Blog</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Hexo/">Hexo</a><a href="/tags/Website/">Website</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/11/26/Showcase-Weblog-based-on-Hexo/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/11/26/Showcase-Weblog-based-on-Hexo/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/24/hexo-customization-Ⅱ/" title="Hexo折腾记 Ⅱ" itemprop="url">Hexo折腾记 Ⅱ</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-24T06:16:50.000Z" itemprop="datePublished"> 发表于 2015-11-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>继续捣鼓Hexo博客框架，细化更为个性的地方。比如：</p>
+<h2 id="新增自定义页面">新增自定义页面</h2><p>不妨以新增一个简历页面（个人博客建立优雅的简历页面不失为一个推销自己的方式）为例，不同的主题可能会有些微区别，修改步骤如下：</p>
+<ol>
+<li><p>命令新增页面 <code>$ hexo new page resume</code></p>
+</li>
+<li><p>拷贝page.ejs并重命名为resume.ejs， 修改代码如下：</p>
+<pre><code>&lt;%- partial(<span class="string">'_partial/post/resume'</span>, {<span class="string">item:</span> page, <span class="string">index:</span> <span class="literal">false</span>,<span class="string">table:</span> <span class="literal">false</span>}) %&gt;
+</code></pre></li>
+<li><p>按照路径_partial/post/resume在目录post下拷贝article.ejs并重命名为resume.ejs，修改代码如下:</p>
+<pre><code><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"main"</span> <span class="attribute">class</span>=<span class="value">"page"</span> <span class="attribute">itemscope</span> <span class="attribute">itemprop</span>=<span class="value">"blogPost"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">article</span> <span class="attribute">itemprop</span>=<span class="value">"articleBody"</span>&gt;</span> 
+    <span class="tag">&lt;<span class="title">header</span> <span class="attribute">class</span>=<span class="value">"article-info clearfix"</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">h1</span> <span class="attribute">itemprop</span>=<span class="value">"name"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">%=</span> <span class="attribute">item.title</span> %&gt;</span>
+      <span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">header</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"article-content"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">%-</span> <span class="attribute">item.content</span> %&gt;</span>  
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>             
+    <span class="tag">&lt;/<span class="title">article</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>     
+</code></pre></li>
+<li><p>打开文件layout.ejs, 增加resume布局的判断代码如下:</p>
+<pre><code><span class="xml"></span>&lt;%<span class="ruby"> } <span class="keyword">else</span> <span class="keyword">if</span>(page.layout==<span class="string">'resume'</span>){ </span>%&gt;<span class="xml">
+    </span>&lt;%-<span class="ruby"> partial(<span class="string">'_partial/head'</span>) </span>%&gt;<span class="xml">
+      <span class="tag">&lt;<span class="title">body</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"container"</span>&gt;</span>
+          </span>&lt;%-<span class="ruby"> body </span>%&gt;<span class="xml">
+        <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+      <span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+     <span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</span>&lt;%<span class="ruby"> } <span class="keyword">else</span> <span class="keyword">if</span>(page.layout==<span class="string">'page'</span>){ </span>%&gt;<span class="xml"></span>
+</code></pre></li>
+<li><p>打开路径Hexo\source\resume下的index.md，增加layout: resume设置。</p>
+</li>
+<li><p>（可选）在主题配置文件_config.yml新增菜单：</p>
+<pre><code><span class="preprocessor">##### Menu</span>
+menu:
+  主页 <span class="string">| Home: /</span>
+  <span class="preprocessor">##索引 | Index: /index</span>
+  归档 <span class="string">| Archives: /archives</span>
+  关于 <span class="string">| About: /about</span>
+  简历 <span class="string">| Resume: /resume</span>
+</code></pre></li>
+</ol>
+<p>此时全部设置完毕，部署后可直接访问your_github_name.github.io/resume访问到该独立简历页面。</p>
+<h2 id="创建模板帮助插件">创建模板帮助插件</h2><p>你可以在主题目录下的scripts文件夹里创建一些全局性的模板帮助方法，从而在模板直接调用即可。比如我们可以创建一个页面标题的方法，代码如下：</p>
+<pre><code><span class="comment"><span class="markdown">/** 
+<span class="bullet">* </span>page_title helper
+<span class="bullet">*
+</span><span class="bullet">* </span>Usage:
+<span class="bullet">*   </span><span class="xml"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span>
+<span class="bullet">*     </span><span class="xml"><span class="tag">&lt;<span class="title">title</span>&gt;</span></span><span class="xml"><span class="tag">&lt;<span class="title">%=</span> <span class="attribute">page_title</span>() %&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="title">title</span>&gt;</span></span>
+<span class="bullet">*   </span><span class="xml"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span>
+*/</span></span>
+
+hexo.extend.helper.register(<span class="string">"page_title"</span>, function () {
+  <span class="keyword">var</span> title = <span class="keyword">this</span>.page.title;
+
+  <span class="keyword">if</span> (<span class="keyword">this</span>.is_archive()){
+    title = <span class="keyword">this</span>.__(<span class="string">'archive_a'</span>);
+
+    <span class="keyword">if</span> (<span class="keyword">this</span>.is_month()){
+      title += <span class="string">': '</span> + <span class="keyword">this</span>.page.year + <span class="string">'/'</span> + <span class="keyword">this</span>.page.month;
+    } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_year()){
+      title += <span class="string">': '</span> + <span class="keyword">this</span>.page.year;
+    }
+  } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_category()){
+    title =  <span class="keyword">this</span>.__(<span class="string">'categories'</span>)+<span class="string">' : '</span> + <span class="keyword">this</span>.page.category;
+  } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_tag()){
+    title = <span class="keyword">this</span>.__(<span class="string">'tags'</span>)+<span class="string">' : '</span> + <span class="keyword">this</span>.page.tag;
+  }
+
+  <span class="keyword">return</span> title;
+});
+</code></pre><p>注意在此方法体你可以通过this访问到对象page，site，config等，如你所见，一些全局方法比如<code>is_archive()</code>或本地化方法<code>__(&#39;archive_a&#39;)</code>都必须经由this来调用。</p>
+<p>复制以上代码到新建文件page_title.js里。接下来打开head.ejs并修改呈现页面标题的代码如下：</p>
+<p><strong>原代码：</strong></p>
+<pre><code><span class="xml"></span>&lt;%<span class="ruby">
+  var title = page.title;
+
+  <span class="keyword">if</span> (is_archive()){
+    title = _<span class="number">_</span>(<span class="string">'archive_a'</span>);
+
+    <span class="keyword">if</span> (is_month()){
+      title += <span class="string">': '</span> + page.year + <span class="string">'/'</span> + page.month;
+    } <span class="keyword">else</span> <span class="keyword">if</span> (is_year()){
+      title += <span class="string">': '</span> + page.year;
+    }
+  } <span class="keyword">else</span> <span class="keyword">if</span> (is_category()){
+    title =  _<span class="number">_</span>(<span class="string">'categories'</span>)+<span class="string">' : '</span> + page.category;
+  } <span class="keyword">else</span> <span class="keyword">if</span> (is_tag()){
+    title = _<span class="number">_</span>(<span class="string">'tags'</span>)+<span class="string">' : '</span> + page.tag;
+  }
+  </span>%&gt;<span class="xml">
+    <span class="tag">&lt;<span class="title">title</span>&gt;</span></span>&lt;%<span class="ruby"> <span class="keyword">if</span> (title){ </span>%&gt;<span class="xml"></span>&lt;%=<span class="ruby"> title </span>%&gt;<span class="xml"> | </span>&lt;%<span class="ruby"> } </span>%&gt;<span class="xml"></span>&lt;%=<span class="ruby"> config.title </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">title</span>&gt;</span></span>
+</code></pre><p><strong>新代码：</strong></p>
+<pre><code>&lt;% var <span class="built_in">title</span> = page_title(); %&gt;
+    &lt;<span class="built_in">title</span>&gt;&lt;% <span class="flow">if</span> (<span class="built_in">title</span>){ <span class="envvar">%&gt;&lt;%</span>= <span class="built_in">title</span> %&gt; | &lt;% } <span class="envvar">%&gt;&lt;%</span>= config.<span class="built_in">title</span> %&gt;&lt;/<span class="built_in">title</span>&gt;
+</code></pre><p>参考教程 - <a href="http://1pixelout.net/2015/09/18/writing-hexo-template-helpers/" target="_blank" rel="external">WRITING HEXO TEMPLATE HELPERS</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Blog/">Blog</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/Hexo/">Hexo</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/11/24/hexo-customization-Ⅱ/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/11/24/hexo-customization-Ⅱ/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/20/Hexo-Customization/" title="Hexo折腾记" itemprop="url">Hexo折腾记</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-20T08:06:23.000Z" itemprop="datePublished"> 发表于 2015-11-20</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="自定义404页面">自定义404页面</h2><p>直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：</p>
+<pre><code><span class="tag">&lt;<span class="title">html</span>&gt;</span>
+<span class="tag">&lt;<span class="title">head</span>&gt;</span>
+<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span> /&gt;</span>
+<span class="tag">&lt;<span class="title">title</span>&gt;</span>404 | Hacker's Blog<span class="tag">&lt;/<span class="title">title</span>&gt;</span>                   
+<span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+<span class="tag">&lt;<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://www.qq.com/404/search_children.js"</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</code></pre><h2 id="启用第三方评论系统">启用第三方评论系统</h2><p>静态博客只能使用第三方评论系统，在此整合<strong>多说</strong>为例。直接用你的微博/豆瓣/人人/百度/开心网帐号登录多说。同时修改当前主题的配置文件，比如/themes/jacman/_config.yml，找到选项duoshuo_shortname, 替换成你的账号即可：</p>
+<pre><code><span class="comment">#### Comment</span>
+duoshuo_shortname: sunblognuke   <span class="comment">## e.g. wuchong   your duoshuo short name.</span>
+disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short name.</span>
+</code></pre><p>你也可以在多说后台自定义CSS，比如评论头像鼠标悬停旋转效果和隐藏多说底部版权，代码如下：</p>
+<pre><code><span class="class">.ds-avatar</span>{-webkit-<span class="attribute">border-radius</span><span class="value">: <span class="number">5px</span> <span class="important">!important</span>;</span><span class="comment">/*圆角效果：兼容webkit浏览器*/</span>
+-moz-<span class="attribute">border-radius</span><span class="value">:<span class="number">5px</span> <span class="important">!important</span>;</span>
+<span class="attribute">box-shadow</span><span class="value">: inset <span class="number">0</span> -<span class="number">1px</span> <span class="number">0</span> <span class="hexcolor">#3333</span>sf <span class="important">!important</span>;</span><span class="comment">/*设置图像阴影效果*/</span>
+-webkit-<span class="attribute">box-shadow</span><span class="value">: inset <span class="number">0</span> -<span class="number">1px</span> <span class="number">0</span> <span class="hexcolor">#3333</span>sf <span class="important">!important</span>;</span>
+-webkit-<span class="attribute">transition</span><span class="value">: <span class="number">0.4s</span> <span class="important">!important</span>;</span>
+-webkit-<span class="attribute">transition</span><span class="value">: -webkit-transform <span class="number">0.4s</span> ease-out <span class="important">!important</span>;</span>
+<span class="attribute">transition</span><span class="value">: transform <span class="number">0.4s</span> ease-out <span class="important">!important</span>;</span><span class="comment">/*变化时间设置为0.4秒(变化动作即为下面的图像旋转360度）*/</span>
+-moz-<span class="attribute">transition</span><span class="value">: -moz-transform <span class="number">0.4s</span> ease-out <span class="important">!important</span>;</span> }
+<span class="class">.ds-avatar</span><span class="pseudo">:hover</span>{<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="hexcolor">#fff</span> <span class="important">!important</span>;</span> <span class="function">rgba</span>(255,255,255,<span class="class">.6</span>), <span class="value">inset</span> 0 0 20px <span class="function">rgba</span>(255,255,255,1) !important;
+-webkit-<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="hexcolor">#fff</span>;</span> <span class="function">rgba</span>(255,255,255,<span class="class">.6</span>), <span class="value">inset</span> 0 0 20px <span class="function">rgba</span>(255,255,255,1) !important;
+<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span><span class="comment">/*图像旋转360度*/</span>
+-webkit-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span>
+-moz-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span>}
+<span class="comment">/*隐藏多说底部版权*/</span>
+<span class="id">#ds-thread</span> <span class="id">#ds-reset</span> <span class="class">.ds-powered-by</span> {
+    <span class="attribute">display</span><span class="value">: none;</span>
+}
+</code></pre><p>更多教程参看《<a href="http://dev.duoshuo.com/threads/4ff1cfd0397309552c000017" target="_blank" rel="external">多说CSS修改</a>》</p>
+<p><a href="http://www.arao.me/2015/hexo-next-theme-optimize-duoshuo/" target="_blank" rel="external">动动手指，给你的Hexo站点添加最近访客（多说篇）</a></p>
+<h2 id="整合Swiftype站内搜索">整合Swiftype站内搜索</h2><p>参考这两篇教程：</p>
+<p><a href="http://opiece.me/2015/04/16/site-search-by-swiftype/" target="_blank" rel="external">使用swiftype实现站内搜索</a></p>
+<p><a href="http://gsgundam.com/2015-03-03-swiftype-professional-search-tool/" target="_blank" rel="external">Swiftype 专业站内搜索工具</a></p>
+<p><a href="http://www.jerryfu.net/post/search-engine-for-hexo-with-swiftype-v2.html" target="_blank" rel="external">利用swiftype为hexo添加站内搜索v2.0</a></p>
+<p>步骤大概如下:</p>
+<ol>
+<li><p>新建文件swiftype_search.ejs，代码如下：</p>
+<pre><code><span class="tag">&lt;<span class="title">%</span> <span class="attribute">if</span> (<span class="attribute">theme.swiftype_search.enable</span>){ %&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+  (<span class="function"><span class="keyword">function</span>(<span class="params">w,d,t,u,n,s,e</span>)</span>{w[<span class="string">'SwiftypeObject'</span>]=n;w[n]=w[n]||<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  (w[n].q=w[n].q||[]).push(<span class="built_in">arguments</span>);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[<span class="number">0</span>];s.async=<span class="number">1</span>;s.src=u;e.parentNode.insertBefore(s,e);
+  })(<span class="built_in">window</span>,<span class="built_in">document</span>,<span class="string">'script'</span>,<span class="string">'//s.swiftypecdn.com/install/v2/st.js'</span>,<span class="string">'_st'</span>);
+
+  _st(<span class="string">'install'</span>,<span class="string">'&lt;%= theme.swiftype_search.id %&gt;'</span>,<span class="string">'2.0.0'</span>);
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">%</span> } %&gt;</span>
+</code></pre></li>
+<li><p>添加代码到文件after_footer.ejs：</p>
+<pre><code><span class="xml"><span class="comment">&lt;!-- Swiftype_search Begin --&gt;</span>
+</span>&lt;%-<span class="ruby"> partial(<span class="string">'swiftype_search'</span>) </span>%&gt;<span class="xml">
+<span class="comment">&lt;!-- Swiftype_search End --&gt;</span></span>
+</code></pre></li>
+<li><p>添加配置项到主题文件_config.yml</p>
+<pre><code>swiftype_search:
+  enable: true
+  id: <span class="string">"zpAq-EQUfMzEzP6ybWEU"</span> ## <span class="keyword">e</span>.<span class="keyword">g</span>. <span class="string">"zpAq-EQUfMzEzP6ybWEU"</span> <span class="keyword">for</span> your swiftype <span class="keyword">search</span> id
+</code></pre></li>
+<li><p>添加class - st-default-search-input到header.ejs</p>
+</li>
+</ol>
+<h2 id="部署Github的README-md">部署Github的README.md</h2><p>如何部署Github时保证README.md不被渲染：</p>
+<ul>
+<li><p>添加README.md文件：Hexo目录下的source根目录下创建README.md文件，编辑保存。</p>
+</li>
+<li><p>防止README.md被渲染：编辑Hexo目录的_config.yml文件中的“skip_render”参数，skip_render: README.md</p>
+</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Blog/">Blog</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/Hexo/">Hexo</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/11/20/Hexo-Customization/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/11/20/Hexo-Customization/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/20/Integratd-Hexo-with-Github/" title="在Github平台搭建Hexo免费静态博客" itemprop="url">在Github平台搭建Hexo免费静态博客</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-20T06:06:23.000Z" itemprop="datePublished"> 发表于 2015-11-20</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/Github_Hexo.png" alt="Github+Hexo"></p>
+<h2 id="环境准备">环境准备</h2><h3 id="安装Git">安装Git</h3><p>在此下载:<a href="http://git-scm.com/download/win" target="_blank" rel="external">http://git-scm.com/download/win</a></p>
+<p>推荐安装绿色版本PortableGit, 下载解压到一个新文件夹即可，随即添加git.exe所在路径（比如E:\Dev\PortableGit\bin）到环境变量（如何添加环境变量请自行百度）</p>
+<p><a href="http://www.cnblogs.com/zhcncn/p/3787849.html" target="_blank" rel="external">Windows下Git安装指南</a></p>
+<h3 id="安装node-js">安装node.js</h3><p>在此下载:<a href="http://nodejs.org/download/" target="_blank" rel="external">http://nodejs.org/download/</a></p>
+<p>不必纠缠版本，选择对应系统版本 - x86或x64即可</p>
+<p>安装时直接保持默认配置即可。</p>
+<h2 id="安装Hexo">安装Hexo</h2><h3 id="Installation">Installation</h3><p>确保git， node安装正确（包括环境变量的配置），可在命令提示符CMD窗口输入git和node，npm看看是否有相关提示。</p>
+<p>打开命令提示符，执行如下命令：</p>
+<pre><code>$ npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> hexo</span>
+</code></pre><h3 id="Quick_Start">Quick Start</h3><h4 id="setup_your_blog">setup your blog</h4><p>新建目录，比如D:\Hexo, 目录右键进入命令提示符窗口，执行如下命令：</p>
+<pre><code>$ hexo init
+
+[] Copying data
+
+[] You are almost ! Dont forget <span class="keyword">to</span> <span class="command">run</span> `npm install` <span class="keyword">before</span> you start b
+logging <span class="keyword">with</span> Hexo!
+</code></pre><p>Hexo随后会自动在目标文件夹建立网站所需要的文件。然后按照提示，运行 npm install（在 D:\Hexo下）</p>
+<pre><code>$ npm <span class="keyword">install</span>
+</code></pre><p>会在D:\Hexo目录中安装 node_modules。</p>
+<h4 id="Start_the_server">Start the server</h4><p>运行下面的命令（在D:\Hexo下）</p>
+<pre><code>$ hexo server
+
+[] Hexo <span class="keyword">is</span> running at http:<span class="comment">//localhost:4000/. Press Ctrl+C to stop.</span>
+</code></pre><p>表明Hexo Server已经启动了，在浏览器中打开以上网址，这时可以看到Hexo已为你生成了blog。你可以按Ctrl+C 停止Server。</p>
+<h4 id="Create_new_post">Create new post</h4><p>运行下面的命令（在D:\Hexo下）</p>
+<pre><code>$ hexo <span class="keyword">new</span> <span class="string">"My New Post"</span> 
+</code></pre><p>会在D:\Hexo\source_posts目录下生成一个markdown文件：My-New-Post.md</p>
+<p>可以使用一个支持markdown语法的编辑器（比如Sublime Text）来编辑该文件。</p>
+<h4 id="Generate_static_files">Generate static files</h4><p>执行下面的命令，将markdown文件生成静态网页。</p>
+<pre><code><span class="variable">$ </span>hexo generate
+</code></pre><p>该命令执行完后，会在 D:\Hexo\public\ 目录下生成一系列html，css等文件。</p>
+<h4 id="部署到Github">部署到Github</h4><p>部署到Github前需要配置_config.yml文件，首先找到下面的内容</p>
+<pre><code><span class="preprocessor"># Deployment </span>
+<span class="preprocessor">## Docs: http:hexo.io/docs/deployment.html </span>
+<span class="label">deploy:</span> 
+<span class="label">type:</span>
+</code></pre><p>然后修改成如下格式：</p>
+<pre><code><span class="preprocessor"># Deployment </span>
+<span class="preprocessor">## Docs: http:hexo.io/docs/deployment.html </span>
+<span class="label">deploy:</span> 
+<span class="label">type:</span> git 
+<span class="label">repository:</span> https://github.com/xx_yourname/xx_yourname.github.io.git 
+<span class="label">branch:</span> master
+</code></pre><p>执行部署命令如下：</p>
+<pre><code><span class="variable">$ </span>hexo clean
+
+<span class="variable">$ </span>hexo deploy
+</code></pre><h3 id="命令总结">命令总结</h3><p>2.3.1 常用命令</p>
+<pre><code>hexo <span class="keyword">new</span> postName <span class="preprocessor">#新建文章</span>
+
+hexo <span class="keyword">new</span> page pageName <span class="preprocessor">#新建页面</span>
+
+hexo generate <span class="preprocessor">#生成静态页面至public目录</span>
+
+hexo <span class="keyword">server</span> <span class="preprocessor">#开启预览访问端口（默认端口4000，ctrl + c关闭server）</span>
+
+hexo deploy <span class="preprocessor">#将.deploy_git目录部署到GitHub</span>
+
+hexo help  <span class="preprocessor">#查看帮助</span>
+
+hexo version  <span class="preprocessor">#查看Hexo的版本</span>
+</code></pre><p>2.3.2 复合命令</p>
+<pre><code>hexo deploy -<span class="preprocessor">#生成加部署</span>
+
+hexo <span class="keyword">server</span> -g  <span class="preprocessor">#生成加预览</span>
+</code></pre><p>命令的简写为：</p>
+<pre><code>hexo <span class="keyword">n</span> == hexo new
+
+hexo <span class="keyword">g</span> == hexo <span class="keyword">generate</span>
+
+hexo s == hexo server
+
+hexo <span class="keyword">d</span> == hexo deploy
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Blog/">Blog</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/Github/">Github</a><a href="/tags/Hexo/">Hexo</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/11/20/Integratd-Hexo-with-Github/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/11/20/Integratd-Hexo-with-Github/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/18/摄影篇-小区也能DIY/" title="摄影篇 - 小区也能DIY" itemprop="url">摄影篇 - 小区也能DIY</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-18T10:23:30.000Z" itemprop="datePublished"> 发表于 2015-11-18</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>好久没给宝贝拍照了，今天特意就在小区来一次DIY，敢情来点后期创意效果修饰也是不错的 :)</p>
+<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/IMG_6506.jpg" alt="小小的背影，莫名的感动"><br><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/IMG_6488.jpg" alt="林中的小精灵，你在找什么呢？"></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Life/">Life</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Baby/">Baby</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/11/18/摄影篇-小区也能DIY/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/11/18/摄影篇-小区也能DIY/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/10/22/Hello-Hexo-Github/" title="Hello Hexo &amp; Github" itemprop="url">Hello Hexo &amp; Github</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-10-22T00:23:30.000Z" itemprop="datePublished"> 发表于 2015-10-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Blog/">Blog</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Github/">Github</a><a href="/tags/Hexo/">Hexo</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/10/22/Hello-Hexo-Github/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/10/22/Hello-Hexo-Github/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
 </div>
@@ -495,7 +1056,7 @@ widgets:
 		  
 		
 		  
-			<li><a href="/categories/Dev/" title="Dev">Dev<sup>3</sup></a></li>
+			<li><a href="/categories/Dev/" title="Dev">Dev<sup>4</sup></a></li>
 		  
 		
 		  
@@ -511,7 +1072,7 @@ widgets:
 		  
 		
 		  
-			<li><a href="/categories/Resources/" title="Resources">Resources<sup>2</sup></a></li>
+			<li><a href="/categories/Resources/" title="Resources">Resources<sup>3</sup></a></li>
 		  
 		
 		  
@@ -556,6 +1117,10 @@ widgets:
 			
 		
 			
+				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Bridge-CC/" title="Bridge CC">Bridge CC<sup>1</sup></a></li>
 			
 		
@@ -576,15 +1141,23 @@ widgets:
 			
 		
 			
+				<li><a href="/tags/商业模式/" title="商业模式">商业模式<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/开发/" title="开发">开发<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Laws-Rule/" title="Laws &amp; Rule">Laws &amp; Rule<sup>1</sup></a></li>
+				<li><a href="/tags/Programmers/" title="Programmers">Programmers<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Programmers/" title="Programmers">Programmers<sup>1</sup></a></li>
+				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Workflow/" title="Workflow">Workflow<sup>1</sup></a></li>
 			
 		
 			
@@ -595,18 +1168,6 @@ widgets:
 				<li><a href="/tags/趋势/" title="趋势">趋势<sup>1</sup></a></li>
 			
 		
-			
-				<li><a href="/tags/Startup/" title="Startup">Startup<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SPA/" title="SPA">SPA<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MVC/" title="MVC">MVC<sup>1</sup></a></li>
-			
-		
 		</ul>
 </div>
 
@@ -614,7 +1175,7 @@ widgets:
   <div class="linkslist">
     <p class="asidetitle">最新随笔</p>
     <div class="linkslist clearfix">
-		<ul class=""><li class=""><a href="/2015/12/14/DNN8-Development/">DNN8 Development</a></li><li class=""><a href="/2015/12/14/Programmers/">神秘的程序员</a></li><li class=""><a href="/2015/12/14/Recover-Password-for-DNN/">如何重设DNN用户密码</a></li><li class=""><a href="/2015/12/10/Laws-Rules-You-Should-Know/">你应该知道的定律和规则</a></li><li class=""><a href="/2015/12/08/Notes-about-The-Passionate-Programmer/">读书摘抄《我编程，我快乐：程序员职业规划之道》</a></li><li class=""><a href="/2015/12/08/Lean-Startup/">精益创业</a></li></ul>
+		<ul class=""><li class=""><a href="/2015/12/22/Play-with-DNS/">科学上网之DNS</a></li><li class=""><a href="/2015/12/22/Git-Best-Practices/">Git最佳实践</a></li><li class=""><a href="/2015/12/14/DNN8-Development/">DNN8 Development</a></li><li class=""><a href="/2015/12/14/Programmers/">神秘的程序员</a></li><li class=""><a href="/2015/12/14/Recover-Password-for-DNN/">如何重设DNN用户密码</a></li><li class=""><a href="/2015/12/10/Laws-Rules-You-Should-Know/">你应该知道的定律和规则</a></li></ul>
 	</div>
 </div>
 

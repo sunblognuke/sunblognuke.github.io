@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sunblognuke.github.io/"/>
-  <updated>2015-12-16T07:10:18.833Z</updated>
+  <updated>2015-12-22T06:59:13.267Z</updated>
   <id>http://sunblognuke.github.io/</id>
   
   <author>
@@ -13,6 +13,83 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[科学上网之DNS]]></title>
+    <link href="http://sunblognuke.github.io/2015/12/22/Play-with-DNS/"/>
+    <id>http://sunblognuke.github.io/2015/12/22/Play-with-DNS/</id>
+    <published>2015-12-22T06:31:03.000Z</published>
+    <updated>2015-12-22T06:59:13.267Z</updated>
+    <content type="html"><![CDATA[<h2 id="何为DNS?">何为DNS?</h2><p>DNS 的全称是 Domain Name System 或者 Domain Name Service，以显浅的语言来解释，对于上网的用户来说，DNS 就是一台(或多台)在网络上的服务器，专门为大家上网时解析网址的IP地址的。互联网被发明时是需要靠 IP 地址去定位网络上的服务器或网络设备的，它可以看做是一个网站的门牌号，但IP地址(如 124.122.45.2)这样的数字实在太难被人们所记住，如果上任何网站都需要输入这样的地址恐怕对任何人来说都是噩梦！于是，人们发明了域名（网址），也就是像 iPlaySoft.com 这样有意义的单词组合来帮助人们记忆与输入。</p>
+<p>不过，虽然人能看懂域名，但电脑却只懂 IP 地址，那怎么办呢？嗯，当你用电脑访问异次元的域名 www.iPlaySoft.com 时，就要有一位懂得“翻译”的“指路人”去告诉你的电脑，www.iPlaySoft.com 究竟对应的是哪个IP地址了，这样你的电脑才懂得怎样去找到异次元的服务器并下载你要访问的网页内容。而这个“指路人”的角色就是DNS。</p>
+<p>更详细参看百科词条: <a href="http://baike.baidu.com/item/dns/427444" target="_blank" rel="external">http://baike.baidu.com/item/dns/427444</a></p>
+<p><a href="http://dudns.baidu.com/intro.html" target="_blank" rel="external">DNS知识平台</a></p>
+<h1 id="手动修改DNS">手动修改DNS</h1><p><a href="http://dudns.baidu.com/useDoc.html" target="_blank" rel="external">设置DNS详细教程</a></p>
+<p>一般修改了dns, 需要手动清除本地的dns缓存: 进入命令行提示符，输入 ipconfig /flushdns 并回车即可。</p>
+<h1 id="第三方DNS_服务">第三方DNS 服务</h1><ol>
+<li>114DNS: 114.114.114.114</li>
+<li>谷歌DNS: 8.8.8.8 / 8.8.4.4</li>
+<li><a href="http://www.alidns.com/index.html" target="_blank" rel="external">阿里DNS</a>: 223.5.5.5 / 223.6.6.6</li>
+<li><a href="http://dudns.baidu.com/" target="_blank" rel="external">百度DNS</a>: 180.76.76.76</li>
+</ol>
+<h1 id="自动化软件_-_DnsJumper">自动化软件  - DnsJumper</h1><p>DNS Jumper 完全免费，绿色免安装，体积非常小巧，经测试支持 Windows 8、Win7、Vista、XP，支持64位与32位系统，支持多网卡分别设置（譬如WIFI无线网卡以及普通的以太网网卡），提供了包含简体中文在内的多国语言。</p>
+<p>它不但内置了 Google Open DNS、Comodo DNS 等大量免费公共DNS，还可以让用户自由手动添加/删除自己收集的地址。更实用的是，它还可以为你的DNS列表批量测速并自动选择最快的进行应用，而且也能一键清空本地DNS缓存。</p>
+<p><a href="http://www.iplaysoft.com/dnsjumper.html" target="_blank" rel="external">下载地址</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="何为DNS?">何为DNS?</h2><p>DNS 的全称是 Domain Name System 或者 Domain Name Service，以显浅的语言来解释，对于上网的用户来说，DNS 就是一台(或多台)在网络上的服务器，专门为大家上网时解析网址的IP地址]]>
+    </summary>
+    
+      <category term="DNS" scheme="http://sunblognuke.github.io/tags/DNS/"/>
+    
+      <category term="Resources" scheme="http://sunblognuke.github.io/categories/Resources/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Git最佳实践]]></title>
+    <link href="http://sunblognuke.github.io/2015/12/22/Git-Best-Practices/"/>
+    <id>http://sunblognuke.github.io/2015/12/22/Git-Best-Practices/</id>
+    <published>2015-12-22T00:31:58.000Z</published>
+    <updated>2015-12-22T01:31:54.724Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/Git.png" alt="Git最佳实践"></p>
+<p>参考资源：</p>
+<p><a href="http://blog.jobbole.com/22647/" target="_blank" rel="external">图解Git/图形化的Git参考手册</a><br><a href="http://blog.jobbole.com/23398/" target="_blank" rel="external">Git分支管理策略</a><br><a href="http://blog.jobbole.com/13916/" target="_blank" rel="external">Git 分支管理是一门艺术</a></p>
+<p>1) $ git checkout -b myfeature develop<br>Switched to a new branch “myfeature”</p>
+<p>2) $ git checkout develop<br>Switched to branch ‘develop’</p>
+<p>$ git merge –no-ff myfeature<br>Updating ea1b82a..05e9557<br>(Summary of changes)</p>
+<p>$ git branch -d myfeature<br>Deleted branch myfeature (was 05e9557).</p>
+<p>$ git push origin develop</p>
+<p>3) $ git checkout master<br>Switched to branch ‘master’</p>
+<p>$ git merge –no-ff release-1.2<br>Merge made by recursive.<br>(Summary of changes)</p>
+<p>$ git tag -a 1.2 -m ‘comments here’<br>$ git push –tags</p>
+<p>show all tags<br>$ git tag -n or git tag -n5<br>$ git show v5.0</p>
+<p>git tag -d 12345<br>git push origin :refs/tags/12345</p>
+<p>4) $ git commit -a -m “Bumped version number to 1.2.1”</p>
+<p>5) Push only to a remote branch</p>
+<p>   $ git checkout feature_x<br>   $ git push origin feature_x</p>
+<p>With modern git you should be able to simply “git push origin HEAD”, or even “git push HEAD” to push only currently checked-out branch</p>
+<p>6) push and delete remote branches</p>
+<p>$ git push origin :newfeature</p>
+<p>7) shows all local and remote branches<br>$ git branch -a</p>
+<p>shows only remote branches.<br>$ git branch -r</p>
+<p>8) When “git unable to push to unqualified destination” occured, try to<br>Do “git fetch -p origin” to make refs/remotes/origin/my_remote_branch go away if it’s already deleted in origin. The -p option tells fetch to delete any tracking branches that no longer exist in the corresponding remotes; by default they are kept around.</p>
+<p>9) Git分支管理策略，如图：</p>
+<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/git_art.png" alt=""></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/Git.png" alt="Git最佳实践"></p>
+<p>参考资源：</p>
+<p><a href="http://blog.jobbole.com/22647/" ]]>
+    </summary>
+    
+      <category term="Git" scheme="http://sunblognuke.github.io/tags/Git/"/>
+    
+      <category term="Workflow" scheme="http://sunblognuke.github.io/tags/Workflow/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[DNN8 Development]]></title>

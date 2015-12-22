@@ -4,38 +4,37 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hexo折腾记 | Baldwin&#39;s Blog</title>
+    <title>Git最佳实践 | Baldwin&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Baldwin">
     
 
     
-    <meta name="description" content="自定义404页面直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：
-&amp;lt;html&amp;gt;
-&amp;lt;head&amp;gt;
-&amp;lt;meta charset=&quot;UTF-8&quot; /&amp;gt;
-&amp;lt;title&amp;gt;404 | Hacker&apos;s Blog&amp;lt;/title&amp;gt;                   
-&amp;">
+    <meta name="description" content="参考资源：
+图解Git/图形化的Git参考手册Git分支管理策略Git 分支管理是一门艺术
+1) $ git checkout -b myfeature developSwitched to a new branch “myfeature”
+2) $ git checkout developSwitched to branch ‘develop’
+$ git merge –no-ff myfeat">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo折腾记">
-<meta property="og:url" content="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/index.html">
+<meta property="og:title" content="Git最佳实践">
+<meta property="og:url" content="http://sunblognuke.github.io/2015/12/22/Git-Best-Practices/index.html">
 <meta property="og:site_name" content="Baldwin's Blog">
-<meta property="og:description" content="自定义404页面直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：
-&amp;lt;html&amp;gt;
-&amp;lt;head&amp;gt;
-&amp;lt;meta charset=&quot;UTF-8&quot; /&amp;gt;
-&amp;lt;title&amp;gt;404 | Hacker&apos;s Blog&amp;lt;/title&amp;gt;                   
-&amp;">
-<meta property="og:updated_time" content="2015-12-09T06:52:21.521Z">
+<meta property="og:description" content="参考资源：
+图解Git/图形化的Git参考手册Git分支管理策略Git 分支管理是一门艺术
+1) $ git checkout -b myfeature developSwitched to a new branch “myfeature”
+2) $ git checkout developSwitched to branch ‘develop’
+$ git merge –no-ff myfeat">
+<meta property="og:image" content="http://7xof1d.com1.z0.glb.clouddn.com/img/Git.png">
+<meta property="og:image" content="http://7xof1d.com1.z0.glb.clouddn.com/img/git_art.png">
+<meta property="og:updated_time" content="2015-12-22T01:31:54.724Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo折腾记">
-<meta name="twitter:description" content="自定义404页面直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：
-&amp;lt;html&amp;gt;
-&amp;lt;head&amp;gt;
-&amp;lt;meta charset=&quot;UTF-8&quot; /&amp;gt;
-&amp;lt;title&amp;gt;404 | Hacker&apos;s Blog&amp;lt;/title&amp;gt;                   
-&amp;">
+<meta name="twitter:title" content="Git最佳实践">
+<meta name="twitter:description" content="参考资源：
+图解Git/图形化的Git参考手册Git分支管理策略Git 分支管理是一门艺术
+1) $ git checkout -b myfeature developSwitched to a new branch “myfeature”
+2) $ git checkout developSwitched to branch ‘develop’
+$ git merge –no-ff myfeat">
 <meta name="twitter:creator" content="@sunblognuke">
 
     
@@ -97,98 +96,43 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/11/20/Hexo-Customization/" title="Hexo折腾记" itemprop="url">Hexo折腾记</a>
+      <a href="/2015/12/22/Git-Best-Practices/" title="Git最佳实践" itemprop="url">Git最佳实践</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
 		
   <p class="article-time">
-    <time datetime="2015-11-20T08:06:23.000Z" itemprop="datePublished"> 发表于 2015-11-20</time>
+    <time datetime="2015-12-22T00:31:58.000Z" itemprop="datePublished"> 发表于 2015-12-22</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义404页面"><span class="toc-number">1.</span> <span class="toc-text">自定义404页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启用第三方评论系统"><span class="toc-number">2.</span> <span class="toc-text">启用第三方评论系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整合Swiftype站内搜索"><span class="toc-number">3.</span> <span class="toc-text">整合Swiftype站内搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署Github的README-md"><span class="toc-number">4.</span> <span class="toc-text">部署Github的README.md</span></a></li></ol>
-		
-		</div>
-		
-		<h2 id="自定义404页面">自定义404页面</h2><p>直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：</p>
-<pre><code><span class="tag">&lt;<span class="title">html</span>&gt;</span>
-<span class="tag">&lt;<span class="title">head</span>&gt;</span>
-<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span> /&gt;</span>
-<span class="tag">&lt;<span class="title">title</span>&gt;</span>404 | Hacker's Blog<span class="tag">&lt;/<span class="title">title</span>&gt;</span>                   
-<span class="tag">&lt;/<span class="title">head</span>&gt;</span>
-<span class="tag">&lt;<span class="title">body</span>&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://www.qq.com/404/search_children.js"</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
-</code></pre><h2 id="启用第三方评论系统">启用第三方评论系统</h2><p>静态博客只能使用第三方评论系统，在此整合<strong>多说</strong>为例。直接用你的微博/豆瓣/人人/百度/开心网帐号登录多说。同时修改当前主题的配置文件，比如/themes/jacman/_config.yml，找到选项duoshuo_shortname, 替换成你的账号即可：</p>
-<pre><code><span class="comment">#### Comment</span>
-duoshuo_shortname: sunblognuke   <span class="comment">## e.g. wuchong   your duoshuo short name.</span>
-disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short name.</span>
-</code></pre><p>你也可以在多说后台自定义CSS，比如评论头像鼠标悬停旋转效果和隐藏多说底部版权，代码如下：</p>
-<pre><code><span class="class">.ds-avatar</span>{-webkit-<span class="attribute">border-radius</span><span class="value">: <span class="number">5px</span> <span class="important">!important</span>;</span><span class="comment">/*圆角效果：兼容webkit浏览器*/</span>
--moz-<span class="attribute">border-radius</span><span class="value">:<span class="number">5px</span> <span class="important">!important</span>;</span>
-<span class="attribute">box-shadow</span><span class="value">: inset <span class="number">0</span> -<span class="number">1px</span> <span class="number">0</span> <span class="hexcolor">#3333</span>sf <span class="important">!important</span>;</span><span class="comment">/*设置图像阴影效果*/</span>
--webkit-<span class="attribute">box-shadow</span><span class="value">: inset <span class="number">0</span> -<span class="number">1px</span> <span class="number">0</span> <span class="hexcolor">#3333</span>sf <span class="important">!important</span>;</span>
--webkit-<span class="attribute">transition</span><span class="value">: <span class="number">0.4s</span> <span class="important">!important</span>;</span>
--webkit-<span class="attribute">transition</span><span class="value">: -webkit-transform <span class="number">0.4s</span> ease-out <span class="important">!important</span>;</span>
-<span class="attribute">transition</span><span class="value">: transform <span class="number">0.4s</span> ease-out <span class="important">!important</span>;</span><span class="comment">/*变化时间设置为0.4秒(变化动作即为下面的图像旋转360度）*/</span>
--moz-<span class="attribute">transition</span><span class="value">: -moz-transform <span class="number">0.4s</span> ease-out <span class="important">!important</span>;</span> }
-<span class="class">.ds-avatar</span><span class="pseudo">:hover</span>{<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="hexcolor">#fff</span> <span class="important">!important</span>;</span> <span class="function">rgba</span>(255,255,255,<span class="class">.6</span>), <span class="value">inset</span> 0 0 20px <span class="function">rgba</span>(255,255,255,1) !important;
--webkit-<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="hexcolor">#fff</span>;</span> <span class="function">rgba</span>(255,255,255,<span class="class">.6</span>), <span class="value">inset</span> 0 0 20px <span class="function">rgba</span>(255,255,255,1) !important;
-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span><span class="comment">/*图像旋转360度*/</span>
--webkit-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span>
--moz-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span>}
-<span class="comment">/*隐藏多说底部版权*/</span>
-<span class="id">#ds-thread</span> <span class="id">#ds-reset</span> <span class="class">.ds-powered-by</span> {
-    <span class="attribute">display</span><span class="value">: none;</span>
-}
-</code></pre><p>更多教程参看《<a href="http://dev.duoshuo.com/threads/4ff1cfd0397309552c000017" target="_blank" rel="external">多说CSS修改</a>》</p>
-<p><a href="http://www.arao.me/2015/hexo-next-theme-optimize-duoshuo/" target="_blank" rel="external">动动手指，给你的Hexo站点添加最近访客（多说篇）</a></p>
-<h2 id="整合Swiftype站内搜索">整合Swiftype站内搜索</h2><p>参考这两篇教程：</p>
-<p><a href="http://opiece.me/2015/04/16/site-search-by-swiftype/" target="_blank" rel="external">使用swiftype实现站内搜索</a></p>
-<p><a href="http://gsgundam.com/2015-03-03-swiftype-professional-search-tool/" target="_blank" rel="external">Swiftype 专业站内搜索工具</a></p>
-<p><a href="http://www.jerryfu.net/post/search-engine-for-hexo-with-swiftype-v2.html" target="_blank" rel="external">利用swiftype为hexo添加站内搜索v2.0</a></p>
-<p>步骤大概如下:</p>
-<ol>
-<li><p>新建文件swiftype_search.ejs，代码如下：</p>
-<pre><code><span class="tag">&lt;<span class="title">%</span> <span class="attribute">if</span> (<span class="attribute">theme.swiftype_search.enable</span>){ %&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
-  (<span class="function"><span class="keyword">function</span>(<span class="params">w,d,t,u,n,s,e</span>)</span>{w[<span class="string">'SwiftypeObject'</span>]=n;w[n]=w[n]||<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
-  (w[n].q=w[n].q||[]).push(<span class="built_in">arguments</span>);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[<span class="number">0</span>];s.async=<span class="number">1</span>;s.src=u;e.parentNode.insertBefore(s,e);
-  })(<span class="built_in">window</span>,<span class="built_in">document</span>,<span class="string">'script'</span>,<span class="string">'//s.swiftypecdn.com/install/v2/st.js'</span>,<span class="string">'_st'</span>);
-
-  _st(<span class="string">'install'</span>,<span class="string">'&lt;%= theme.swiftype_search.id %&gt;'</span>,<span class="string">'2.0.0'</span>);
-</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-<span class="tag">&lt;<span class="title">%</span> } %&gt;</span>
-</code></pre></li>
-<li><p>添加代码到文件after_footer.ejs：</p>
-<pre><code><span class="xml"><span class="comment">&lt;!-- Swiftype_search Begin --&gt;</span>
-</span>&lt;%-<span class="ruby"> partial(<span class="string">'swiftype_search'</span>) </span>%&gt;<span class="xml">
-<span class="comment">&lt;!-- Swiftype_search End --&gt;</span></span>
-</code></pre></li>
-<li><p>添加配置项到主题文件_config.yml</p>
-<pre><code>swiftype_search:
-  enable: true
-  id: <span class="string">"zpAq-EQUfMzEzP6ybWEU"</span> ## <span class="keyword">e</span>.<span class="keyword">g</span>. <span class="string">"zpAq-EQUfMzEzP6ybWEU"</span> <span class="keyword">for</span> your swiftype <span class="keyword">search</span> id
-</code></pre></li>
-<li><p>添加class - st-default-search-input到header.ejs</p>
-</li>
-</ol>
-<h2 id="部署Github的README-md">部署Github的README.md</h2><p>如何部署Github时保证README.md不被渲染：</p>
-<ul>
-<li><p>添加README.md文件：Hexo目录下的source根目录下创建README.md文件，编辑保存。</p>
-</li>
-<li><p>防止README.md被渲染：编辑Hexo目录的_config.yml文件中的“skip_render”参数，skip_render: README.md</p>
-</li>
-</ul>
+		<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/Git.png" alt="Git最佳实践"></p>
+<p>参考资源：</p>
+<p><a href="http://blog.jobbole.com/22647/" target="_blank" rel="external">图解Git/图形化的Git参考手册</a><br><a href="http://blog.jobbole.com/23398/" target="_blank" rel="external">Git分支管理策略</a><br><a href="http://blog.jobbole.com/13916/" target="_blank" rel="external">Git 分支管理是一门艺术</a></p>
+<p>1) $ git checkout -b myfeature develop<br>Switched to a new branch “myfeature”</p>
+<p>2) $ git checkout develop<br>Switched to branch ‘develop’</p>
+<p>$ git merge –no-ff myfeature<br>Updating ea1b82a..05e9557<br>(Summary of changes)</p>
+<p>$ git branch -d myfeature<br>Deleted branch myfeature (was 05e9557).</p>
+<p>$ git push origin develop</p>
+<p>3) $ git checkout master<br>Switched to branch ‘master’</p>
+<p>$ git merge –no-ff release-1.2<br>Merge made by recursive.<br>(Summary of changes)</p>
+<p>$ git tag -a 1.2 -m ‘comments here’<br>$ git push –tags</p>
+<p>show all tags<br>$ git tag -n or git tag -n5<br>$ git show v5.0</p>
+<p>git tag -d 12345<br>git push origin :refs/tags/12345</p>
+<p>4) $ git commit -a -m “Bumped version number to 1.2.1”</p>
+<p>5) Push only to a remote branch</p>
+<p>   $ git checkout feature_x<br>   $ git push origin feature_x</p>
+<p>With modern git you should be able to simply “git push origin HEAD”, or even “git push HEAD” to push only currently checked-out branch</p>
+<p>6) push and delete remote branches</p>
+<p>$ git push origin :newfeature</p>
+<p>7) shows all local and remote branches<br>$ git branch -a</p>
+<p>shows only remote branches.<br>$ git branch -r</p>
+<p>8) When “git unable to push to unqualified destination” occured, try to<br>Do “git fetch -p origin” to make refs/remotes/origin/my_remote_branch go away if it’s already deleted in origin. The -p option tells fetch to delete any tracking branches that no longer exist in the corresponding remotes; by default they are kept around.</p>
+<p>9) Git分支管理策略，如图：</p>
+<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/git_art.png" alt=""></p>
 
 		
 <style type="text/css">
@@ -218,13 +162,13 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Blog/">Blog</a>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/Hexo/">Hexo</a>
+  <span></span> <a href="/tags/Git/">Git</a><a href="/tags/Workflow/">Workflow</a>
   </div>
 
 </div>
@@ -233,7 +177,7 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/" data-title="Hexo折腾记 | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://sunblognuke.github.io/2015/12/22/Git-Best-Practices/" data-title="Git最佳实践 | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -247,18 +191,18 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/11/24/hexo-customization-Ⅱ/" title="Hexo折腾记 Ⅱ">
+ <a href="/2015/12/22/Play-with-DNS/" title="科学上网之DNS">
   <strong>上一篇：</strong><br/>
   <span>
-  Hexo折腾记 Ⅱ</span>
+  科学上网之DNS</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/11/20/Integratd-Hexo-with-Github/"  title="在Github平台搭建Hexo免费静态博客">
+<a href="/2015/12/14/DNN8-Development/"  title="DNN8 Development">
  <strong>下一篇：</strong><br/> 
- <span>在Github平台搭建Hexo免费静态博客
+ <span>DNN8 Development
 </span>
 </a>
 </div>
@@ -267,19 +211,12 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/11/20/Hexo-Customization/" data-title="Hexo折腾记" data-url="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/22/Git-Best-Practices/" data-title="Git最佳实践" data-url="http://sunblognuke.github.io/2015/12/22/Git-Best-Practices/"></div>
 </section>
 
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义404页面"><span class="toc-number">1.</span> <span class="toc-text">自定义404页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启用第三方评论系统"><span class="toc-number">2.</span> <span class="toc-text">启用第三方评论系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整合Swiftype站内搜索"><span class="toc-number">3.</span> <span class="toc-text">整合Swiftype站内搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署Github的README-md"><span class="toc-number">4.</span> <span class="toc-text">部署Github的README.md</span></a></li></ol>
- 
-  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -545,8 +482,6 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
         
     }
   });

@@ -4,38 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hexo折腾记 | Baldwin&#39;s Blog</title>
+    <title>科学上网之DNS | Baldwin&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Baldwin">
     
 
     
-    <meta name="description" content="自定义404页面直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：
-&amp;lt;html&amp;gt;
-&amp;lt;head&amp;gt;
-&amp;lt;meta charset=&quot;UTF-8&quot; /&amp;gt;
-&amp;lt;title&amp;gt;404 | Hacker&apos;s Blog&amp;lt;/title&amp;gt;                   
-&amp;">
+    <meta name="description" content="何为DNS?DNS 的全称是 Domain Name System 或者 Domain Name Service，以显浅的语言来解释，对于上网的用户来说，DNS 就是一台(或多台)在网络上的服务器，专门为大家上网时解析网址的IP地址的。互联网被发明时是需要靠 IP 地址去定位网络上的服务器或网络设备的，它可以看做是一个网站的门牌号，但IP地址(如 124.122.45.2)这样的数字实在太难被人们">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo折腾记">
-<meta property="og:url" content="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/index.html">
+<meta property="og:title" content="科学上网之DNS">
+<meta property="og:url" content="http://sunblognuke.github.io/2015/12/22/Play-with-DNS/index.html">
 <meta property="og:site_name" content="Baldwin's Blog">
-<meta property="og:description" content="自定义404页面直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：
-&amp;lt;html&amp;gt;
-&amp;lt;head&amp;gt;
-&amp;lt;meta charset=&quot;UTF-8&quot; /&amp;gt;
-&amp;lt;title&amp;gt;404 | Hacker&apos;s Blog&amp;lt;/title&amp;gt;                   
-&amp;">
-<meta property="og:updated_time" content="2015-12-09T06:52:21.521Z">
+<meta property="og:description" content="何为DNS?DNS 的全称是 Domain Name System 或者 Domain Name Service，以显浅的语言来解释，对于上网的用户来说，DNS 就是一台(或多台)在网络上的服务器，专门为大家上网时解析网址的IP地址的。互联网被发明时是需要靠 IP 地址去定位网络上的服务器或网络设备的，它可以看做是一个网站的门牌号，但IP地址(如 124.122.45.2)这样的数字实在太难被人们">
+<meta property="og:updated_time" content="2015-12-22T06:59:13.267Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo折腾记">
-<meta name="twitter:description" content="自定义404页面直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：
-&amp;lt;html&amp;gt;
-&amp;lt;head&amp;gt;
-&amp;lt;meta charset=&quot;UTF-8&quot; /&amp;gt;
-&amp;lt;title&amp;gt;404 | Hacker&apos;s Blog&amp;lt;/title&amp;gt;                   
-&amp;">
+<meta name="twitter:title" content="科学上网之DNS">
+<meta name="twitter:description" content="何为DNS?DNS 的全称是 Domain Name System 或者 Domain Name Service，以显浅的语言来解释，对于上网的用户来说，DNS 就是一台(或多台)在网络上的服务器，专门为大家上网时解析网址的IP地址的。互联网被发明时是需要靠 IP 地址去定位网络上的服务器或网络设备的，它可以看做是一个网站的门牌号，但IP地址(如 124.122.45.2)这样的数字实在太难被人们">
 <meta name="twitter:creator" content="@sunblognuke">
 
     
@@ -97,14 +82,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/11/20/Hexo-Customization/" title="Hexo折腾记" itemprop="url">Hexo折腾记</a>
+      <a href="/2015/12/22/Play-with-DNS/" title="科学上网之DNS" itemprop="url">科学上网之DNS</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
 		
   <p class="article-time">
-    <time datetime="2015-11-20T08:06:23.000Z" itemprop="datePublished"> 发表于 2015-11-20</time>
+    <time datetime="2015-12-22T06:31:03.000Z" itemprop="datePublished"> 发表于 2015-12-22</time>
     
   </p>
 </header>
@@ -113,82 +98,25 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义404页面"><span class="toc-number">1.</span> <span class="toc-text">自定义404页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启用第三方评论系统"><span class="toc-number">2.</span> <span class="toc-text">启用第三方评论系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整合Swiftype站内搜索"><span class="toc-number">3.</span> <span class="toc-text">整合Swiftype站内搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署Github的README-md"><span class="toc-number">4.</span> <span class="toc-text">部署Github的README.md</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#何为DNS?"><span class="toc-number">1.</span> <span class="toc-text">何为DNS?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#手动修改DNS"><span class="toc-number"></span> <span class="toc-text">手动修改DNS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三方DNS_服务"><span class="toc-number"></span> <span class="toc-text">第三方DNS 服务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自动化软件_-_DnsJumper"><span class="toc-number"></span> <span class="toc-text">自动化软件  - DnsJumper</span></a>
 		
 		</div>
 		
-		<h2 id="自定义404页面">自定义404页面</h2><p>直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：</p>
-<pre><code><span class="tag">&lt;<span class="title">html</span>&gt;</span>
-<span class="tag">&lt;<span class="title">head</span>&gt;</span>
-<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span> /&gt;</span>
-<span class="tag">&lt;<span class="title">title</span>&gt;</span>404 | Hacker's Blog<span class="tag">&lt;/<span class="title">title</span>&gt;</span>                   
-<span class="tag">&lt;/<span class="title">head</span>&gt;</span>
-<span class="tag">&lt;<span class="title">body</span>&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://www.qq.com/404/search_children.js"</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
-</code></pre><h2 id="启用第三方评论系统">启用第三方评论系统</h2><p>静态博客只能使用第三方评论系统，在此整合<strong>多说</strong>为例。直接用你的微博/豆瓣/人人/百度/开心网帐号登录多说。同时修改当前主题的配置文件，比如/themes/jacman/_config.yml，找到选项duoshuo_shortname, 替换成你的账号即可：</p>
-<pre><code><span class="comment">#### Comment</span>
-duoshuo_shortname: sunblognuke   <span class="comment">## e.g. wuchong   your duoshuo short name.</span>
-disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short name.</span>
-</code></pre><p>你也可以在多说后台自定义CSS，比如评论头像鼠标悬停旋转效果和隐藏多说底部版权，代码如下：</p>
-<pre><code><span class="class">.ds-avatar</span>{-webkit-<span class="attribute">border-radius</span><span class="value">: <span class="number">5px</span> <span class="important">!important</span>;</span><span class="comment">/*圆角效果：兼容webkit浏览器*/</span>
--moz-<span class="attribute">border-radius</span><span class="value">:<span class="number">5px</span> <span class="important">!important</span>;</span>
-<span class="attribute">box-shadow</span><span class="value">: inset <span class="number">0</span> -<span class="number">1px</span> <span class="number">0</span> <span class="hexcolor">#3333</span>sf <span class="important">!important</span>;</span><span class="comment">/*设置图像阴影效果*/</span>
--webkit-<span class="attribute">box-shadow</span><span class="value">: inset <span class="number">0</span> -<span class="number">1px</span> <span class="number">0</span> <span class="hexcolor">#3333</span>sf <span class="important">!important</span>;</span>
--webkit-<span class="attribute">transition</span><span class="value">: <span class="number">0.4s</span> <span class="important">!important</span>;</span>
--webkit-<span class="attribute">transition</span><span class="value">: -webkit-transform <span class="number">0.4s</span> ease-out <span class="important">!important</span>;</span>
-<span class="attribute">transition</span><span class="value">: transform <span class="number">0.4s</span> ease-out <span class="important">!important</span>;</span><span class="comment">/*变化时间设置为0.4秒(变化动作即为下面的图像旋转360度）*/</span>
--moz-<span class="attribute">transition</span><span class="value">: -moz-transform <span class="number">0.4s</span> ease-out <span class="important">!important</span>;</span> }
-<span class="class">.ds-avatar</span><span class="pseudo">:hover</span>{<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="hexcolor">#fff</span> <span class="important">!important</span>;</span> <span class="function">rgba</span>(255,255,255,<span class="class">.6</span>), <span class="value">inset</span> 0 0 20px <span class="function">rgba</span>(255,255,255,1) !important;
--webkit-<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="hexcolor">#fff</span>;</span> <span class="function">rgba</span>(255,255,255,<span class="class">.6</span>), <span class="value">inset</span> 0 0 20px <span class="function">rgba</span>(255,255,255,1) !important;
-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span><span class="comment">/*图像旋转360度*/</span>
--webkit-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span>
--moz-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span>}
-<span class="comment">/*隐藏多说底部版权*/</span>
-<span class="id">#ds-thread</span> <span class="id">#ds-reset</span> <span class="class">.ds-powered-by</span> {
-    <span class="attribute">display</span><span class="value">: none;</span>
-}
-</code></pre><p>更多教程参看《<a href="http://dev.duoshuo.com/threads/4ff1cfd0397309552c000017" target="_blank" rel="external">多说CSS修改</a>》</p>
-<p><a href="http://www.arao.me/2015/hexo-next-theme-optimize-duoshuo/" target="_blank" rel="external">动动手指，给你的Hexo站点添加最近访客（多说篇）</a></p>
-<h2 id="整合Swiftype站内搜索">整合Swiftype站内搜索</h2><p>参考这两篇教程：</p>
-<p><a href="http://opiece.me/2015/04/16/site-search-by-swiftype/" target="_blank" rel="external">使用swiftype实现站内搜索</a></p>
-<p><a href="http://gsgundam.com/2015-03-03-swiftype-professional-search-tool/" target="_blank" rel="external">Swiftype 专业站内搜索工具</a></p>
-<p><a href="http://www.jerryfu.net/post/search-engine-for-hexo-with-swiftype-v2.html" target="_blank" rel="external">利用swiftype为hexo添加站内搜索v2.0</a></p>
-<p>步骤大概如下:</p>
-<ol>
-<li><p>新建文件swiftype_search.ejs，代码如下：</p>
-<pre><code><span class="tag">&lt;<span class="title">%</span> <span class="attribute">if</span> (<span class="attribute">theme.swiftype_search.enable</span>){ %&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
-  (<span class="function"><span class="keyword">function</span>(<span class="params">w,d,t,u,n,s,e</span>)</span>{w[<span class="string">'SwiftypeObject'</span>]=n;w[n]=w[n]||<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
-  (w[n].q=w[n].q||[]).push(<span class="built_in">arguments</span>);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[<span class="number">0</span>];s.async=<span class="number">1</span>;s.src=u;e.parentNode.insertBefore(s,e);
-  })(<span class="built_in">window</span>,<span class="built_in">document</span>,<span class="string">'script'</span>,<span class="string">'//s.swiftypecdn.com/install/v2/st.js'</span>,<span class="string">'_st'</span>);
-
-  _st(<span class="string">'install'</span>,<span class="string">'&lt;%= theme.swiftype_search.id %&gt;'</span>,<span class="string">'2.0.0'</span>);
-</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-<span class="tag">&lt;<span class="title">%</span> } %&gt;</span>
-</code></pre></li>
-<li><p>添加代码到文件after_footer.ejs：</p>
-<pre><code><span class="xml"><span class="comment">&lt;!-- Swiftype_search Begin --&gt;</span>
-</span>&lt;%-<span class="ruby"> partial(<span class="string">'swiftype_search'</span>) </span>%&gt;<span class="xml">
-<span class="comment">&lt;!-- Swiftype_search End --&gt;</span></span>
-</code></pre></li>
-<li><p>添加配置项到主题文件_config.yml</p>
-<pre><code>swiftype_search:
-  enable: true
-  id: <span class="string">"zpAq-EQUfMzEzP6ybWEU"</span> ## <span class="keyword">e</span>.<span class="keyword">g</span>. <span class="string">"zpAq-EQUfMzEzP6ybWEU"</span> <span class="keyword">for</span> your swiftype <span class="keyword">search</span> id
-</code></pre></li>
-<li><p>添加class - st-default-search-input到header.ejs</p>
-</li>
+		<h2 id="何为DNS?">何为DNS?</h2><p>DNS 的全称是 Domain Name System 或者 Domain Name Service，以显浅的语言来解释，对于上网的用户来说，DNS 就是一台(或多台)在网络上的服务器，专门为大家上网时解析网址的IP地址的。互联网被发明时是需要靠 IP 地址去定位网络上的服务器或网络设备的，它可以看做是一个网站的门牌号，但IP地址(如 124.122.45.2)这样的数字实在太难被人们所记住，如果上任何网站都需要输入这样的地址恐怕对任何人来说都是噩梦！于是，人们发明了域名（网址），也就是像 iPlaySoft.com 这样有意义的单词组合来帮助人们记忆与输入。</p>
+<p>不过，虽然人能看懂域名，但电脑却只懂 IP 地址，那怎么办呢？嗯，当你用电脑访问异次元的域名 www.iPlaySoft.com 时，就要有一位懂得“翻译”的“指路人”去告诉你的电脑，www.iPlaySoft.com 究竟对应的是哪个IP地址了，这样你的电脑才懂得怎样去找到异次元的服务器并下载你要访问的网页内容。而这个“指路人”的角色就是DNS。</p>
+<p>更详细参看百科词条: <a href="http://baike.baidu.com/item/dns/427444" target="_blank" rel="external">http://baike.baidu.com/item/dns/427444</a></p>
+<p><a href="http://dudns.baidu.com/intro.html" target="_blank" rel="external">DNS知识平台</a></p>
+<h1 id="手动修改DNS">手动修改DNS</h1><p><a href="http://dudns.baidu.com/useDoc.html" target="_blank" rel="external">设置DNS详细教程</a></p>
+<p>一般修改了dns, 需要手动清除本地的dns缓存: 进入命令行提示符，输入 ipconfig /flushdns 并回车即可。</p>
+<h1 id="第三方DNS_服务">第三方DNS 服务</h1><ol>
+<li>114DNS: 114.114.114.114</li>
+<li>谷歌DNS: 8.8.8.8 / 8.8.4.4</li>
+<li><a href="http://www.alidns.com/index.html" target="_blank" rel="external">阿里DNS</a>: 223.5.5.5 / 223.6.6.6</li>
+<li><a href="http://dudns.baidu.com/" target="_blank" rel="external">百度DNS</a>: 180.76.76.76</li>
 </ol>
-<h2 id="部署Github的README-md">部署Github的README.md</h2><p>如何部署Github时保证README.md不被渲染：</p>
-<ul>
-<li><p>添加README.md文件：Hexo目录下的source根目录下创建README.md文件，编辑保存。</p>
-</li>
-<li><p>防止README.md被渲染：编辑Hexo目录的_config.yml文件中的“skip_render”参数，skip_render: README.md</p>
-</li>
-</ul>
+<h1 id="自动化软件_-_DnsJumper">自动化软件  - DnsJumper</h1><p>DNS Jumper 完全免费，绿色免安装，体积非常小巧，经测试支持 Windows 8、Win7、Vista、XP，支持64位与32位系统，支持多网卡分别设置（譬如WIFI无线网卡以及普通的以太网网卡），提供了包含简体中文在内的多国语言。</p>
+<p>它不但内置了 Google Open DNS、Comodo DNS 等大量免费公共DNS，还可以让用户自由手动添加/删除自己收集的地址。更实用的是，它还可以为你的DNS列表批量测速并自动选择最快的进行应用，而且也能一键清空本地DNS缓存。</p>
+<p><a href="http://www.iplaysoft.com/dnsjumper.html" target="_blank" rel="external">下载地址</a></p>
 
 		
 <style type="text/css">
@@ -218,13 +146,13 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Blog/">Blog</a>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/Hexo/">Hexo</a>
+  <span></span> <a href="/tags/DNS/">DNS</a>
   </div>
 
 </div>
@@ -233,7 +161,7 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/" data-title="Hexo折腾记 | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://sunblognuke.github.io/2015/12/22/Play-with-DNS/" data-title="科学上网之DNS | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -246,19 +174,11 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/11/24/hexo-customization-Ⅱ/" title="Hexo折腾记 Ⅱ">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Hexo折腾记 Ⅱ</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/11/20/Integratd-Hexo-with-Github/"  title="在Github平台搭建Hexo免费静态博客">
+<a href="/2015/12/22/Git-Best-Practices/"  title="Git最佳实践">
  <strong>下一篇：</strong><br/> 
- <span>在Github平台搭建Hexo免费静态博客
+ <span>Git最佳实践
 </span>
 </a>
 </div>
@@ -267,7 +187,7 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/11/20/Hexo-Customization/" data-title="Hexo折腾记" data-url="http://sunblognuke.github.io/2015/11/20/Hexo-Customization/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/22/Play-with-DNS/" data-title="科学上网之DNS" data-url="http://sunblognuke.github.io/2015/12/22/Play-with-DNS/"></div>
 </section>
 
 
@@ -277,7 +197,7 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义404页面"><span class="toc-number">1.</span> <span class="toc-text">自定义404页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启用第三方评论系统"><span class="toc-number">2.</span> <span class="toc-text">启用第三方评论系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整合Swiftype站内搜索"><span class="toc-number">3.</span> <span class="toc-text">整合Swiftype站内搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署Github的README-md"><span class="toc-number">4.</span> <span class="toc-text">部署Github的README.md</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#何为DNS?"><span class="toc-number">1.</span> <span class="toc-text">何为DNS?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#手动修改DNS"><span class="toc-number"></span> <span class="toc-text">手动修改DNS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三方DNS_服务"><span class="toc-number"></span> <span class="toc-text">第三方DNS 服务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自动化软件_-_DnsJumper"><span class="toc-number"></span> <span class="toc-text">自动化软件  - DnsJumper</span></a>
  
   </div>
 
