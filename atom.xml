@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sunblognuke.github.io/"/>
-  <updated>2015-12-22T06:59:13.267Z</updated>
+  <updated>2015-12-23T07:20:51.696Z</updated>
   <id>http://sunblognuke.github.io/</id>
   
   <author>
@@ -15,11 +15,65 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[网络排查]]></title>
+    <link href="http://sunblognuke.github.io/2015/12/23/Network-Troubleshooting/"/>
+    <id>http://sunblognuke.github.io/2015/12/23/Network-Troubleshooting/</id>
+    <published>2015-12-23T03:18:54.000Z</published>
+    <updated>2015-12-23T07:20:51.696Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/network%20topology.jpg" alt=""></p>
+<p><a href="http://xpleaf.blog.51cto.com/9315560/1689438" target="_blank" rel="external">网络排错大讲解</a></p>
+<h2 id="基本命令">基本命令</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ipconfig</td>
+<td>查看计算机的IP 地址、子网掩码和网关</td>
+</tr>
+<tr>
+<td>ipconfig /all</td>
+<td>查看计算机的IP 地址、子网掩码、网关和DNS 地址</td>
+</tr>
+<tr>
+<td>ping</td>
+<td>测试主机之间的网络连通性</td>
+</tr>
+<tr>
+<td>nslookup</td>
+<td>请求域名对应的IP 地址，并以此测试DNS 地址是否可用</td>
+</tr>
+<tr>
+<td>tracert -d</td>
+<td>路由追踪，并且不做反向解析</td>
+</tr>
+<tr>
+<td>arp -a</td>
+<td>查看计算机是否已获取到网关的MAC地址</td>
+</tr>
+</tbody>
+</table>
+<h2 id="抓包工具">抓包工具</h2><h2 id="广播风暴">广播风暴</h2><h2 id="VLAN_、IP分部门管理">VLAN 、IP分部门管理</h2><h2 id="ARP防火墙">ARP防火墙</h2>]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/network%20topology.jpg" alt=""></p>
+<p><a href="http://xpleaf.blog.51cto.com/9315560/]]>
+    </summary>
+    
+      <category term="Network" scheme="http://sunblognuke.github.io/tags/Network/"/>
+    
+      <category term="Resources" scheme="http://sunblognuke.github.io/categories/Resources/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[科学上网之DNS]]></title>
     <link href="http://sunblognuke.github.io/2015/12/22/Play-with-DNS/"/>
     <id>http://sunblognuke.github.io/2015/12/22/Play-with-DNS/</id>
     <published>2015-12-22T06:31:03.000Z</published>
-    <updated>2015-12-22T06:59:13.267Z</updated>
+    <updated>2015-12-23T03:04:12.054Z</updated>
     <content type="html"><![CDATA[<h2 id="何为DNS?">何为DNS?</h2><p>DNS 的全称是 Domain Name System 或者 Domain Name Service，以显浅的语言来解释，对于上网的用户来说，DNS 就是一台(或多台)在网络上的服务器，专门为大家上网时解析网址的IP地址的。互联网被发明时是需要靠 IP 地址去定位网络上的服务器或网络设备的，它可以看做是一个网站的门牌号，但IP地址(如 124.122.45.2)这样的数字实在太难被人们所记住，如果上任何网站都需要输入这样的地址恐怕对任何人来说都是噩梦！于是，人们发明了域名（网址），也就是像 iPlaySoft.com 这样有意义的单词组合来帮助人们记忆与输入。</p>
 <p>不过，虽然人能看懂域名，但电脑却只懂 IP 地址，那怎么办呢？嗯，当你用电脑访问异次元的域名 www.iPlaySoft.com 时，就要有一位懂得“翻译”的“指路人”去告诉你的电脑，www.iPlaySoft.com 究竟对应的是哪个IP地址了，这样你的电脑才懂得怎样去找到异次元的服务器并下载你要访问的网页内容。而这个“指路人”的角色就是DNS。</p>
 <p>更详细参看百科词条: <a href="http://baike.baidu.com/item/dns/427444" target="_blank" rel="external">http://baike.baidu.com/item/dns/427444</a></p>
@@ -27,7 +81,7 @@
 <h1 id="手动修改DNS">手动修改DNS</h1><p><a href="http://dudns.baidu.com/useDoc.html" target="_blank" rel="external">设置DNS详细教程</a></p>
 <p>一般修改了dns, 需要手动清除本地的dns缓存: 进入命令行提示符，输入 ipconfig /flushdns 并回车即可。</p>
 <h1 id="第三方DNS_服务">第三方DNS 服务</h1><ol>
-<li>114DNS: 114.114.114.114</li>
+<li><a href="http://www.114dns.com/index.html" target="_blank" rel="external">114DNS</a>: 114.114.114.114</li>
 <li>谷歌DNS: 8.8.8.8 / 8.8.4.4</li>
 <li><a href="http://www.alidns.com/index.html" target="_blank" rel="external">阿里DNS</a>: 223.5.5.5 / 223.6.6.6</li>
 <li><a href="http://dudns.baidu.com/" target="_blank" rel="external">百度DNS</a>: 180.76.76.76</li>
@@ -715,11 +769,12 @@ widgets:
     <link href="http://sunblognuke.github.io/2015/11/27/Photography-Learning/"/>
     <id>http://sunblognuke.github.io/2015/11/27/Photography-Learning/</id>
     <published>2015-11-27T05:51:10.000Z</published>
-    <updated>2015-12-09T09:27:20.083Z</updated>
+    <updated>2015-12-24T11:32:43.817Z</updated>
     <content type="html"><![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/ps.png" alt=""></p>
 <p>分享一些学习摄影的资源及笔记心得。</p>
 <p>算是国内比较有诚意的摄影教程，适合入门和明白一些误区和概念</p>
 <p><a href="http://www.ganlantu.com/course/explore/mianfei" target="_blank" rel="external">免费课程 - 橄榄图摄影课堂</a></p>
+<p><a href="http://www.liangzhishu.com/" target="_blank" rel="external">良知塾 - 李涛老师教程</a></p>
 <p>本人第一个单反500D，也是目前还在用的，新增EF 50mm f/1.4 USM 人像头：</p>
 <p><a href="http://www.canon.com.cn/specialsite/eos600d/" target="_blank" rel="external">官方教程 - EOS 600D深度解析</a></p>
 <p>李涛老师的教程一定过，了解一些摄影的理念和思想是必须的。</p>
@@ -740,6 +795,9 @@ widgets:
 <li>输出：锐化除噪</li>
 </ol>
 <p>可关注的微信号：摄影修行，教摄影，摄影笔记，蜂鸟网，POCO摄影社区。</p>
+<p>最近关注的素材资源网站：</p>
+<p><a href="http://97ui.com/sucai" target="_blank" rel="external">优界网</a></p>
+<p><a href="http://www.58pic.com/" target="_blank" rel="external">千图网</a></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/ps.png" alt=""></p>
@@ -1117,34 +1175,6 @@ hexo <span class="keyword">d</span> == hexo deploy
       <category term="Baby" scheme="http://sunblognuke.github.io/tags/Baby/"/>
     
       <category term="Life" scheme="http://sunblognuke.github.io/categories/Life/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Hello Hexo & Github]]></title>
-    <link href="http://sunblognuke.github.io/2015/10/22/Hello-Hexo-Github/"/>
-    <id>http://sunblognuke.github.io/2015/10/22/Hello-Hexo-Github/</id>
-    <published>2015-10-22T00:23:30.000Z</published>
-    <updated>2015-11-20T01:41:03.856Z</updated>
-    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
-    </summary>
-    
-      <category term="Github" scheme="http://sunblognuke.github.io/tags/Github/"/>
-    
-      <category term="Hexo" scheme="http://sunblognuke.github.io/tags/Hexo/"/>
-    
-      <category term="Blog" scheme="http://sunblognuke.github.io/categories/Blog/"/>
     
   </entry>
   
