@@ -83,6 +83,200 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/01/11/Python-Troubleshooting/" title="Python Troubleshooting" itemprop="url">Python Troubleshooting</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-11T03:57:03.000Z" itemprop="datePublished"> 发表于 2016-01-11</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="PyQuery:_一个类似jQuery的Python库">PyQuery: 一个类似jQuery的Python库</h2><p>PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：<a href="http://pyquery.readthedocs.org/en/latest/api.html" target="_blank" rel="external">http://pyquery.org</a></p>
+<h2 id="Python轻量级ORM_-_Peewee">Python轻量级ORM - Peewee</h2><p>最新API：<a href="http://peewee.readthedocs.org/en/latest/" target="_blank" rel="external">Python轻量级ORM - Peewee</a></p>
+<h2 id="urllib2-HTTPError:_HTTP_Error_403:_Forbidden">urllib2.HTTPError: HTTP Error 403: Forbidden</h2><p>解决方案：ulr请求需要模拟真实的浏览器访问，需要设置User-Agent项，最简便的方式就是随机获取，代码如下:</p>
+<pre><code><span class="preprocessor"># -*- coding: UTF-8 -*-</span>
+import sys
+import <span class="built_in">random</span>
+
+reload(sys)
+sys.setdefaultencoding(<span class="string">'utf-8'</span>)
+
+USER_AGENTS = [
+                <span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'</span>,
+                <span class="string">'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11'</span>,
+                <span class="string">'Opera/9.25 (Windows NT 5.1; U; en)'</span>,
+                <span class="string">'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)'</span>,
+                <span class="string">'Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Kubuntu)'</span>,
+                <span class="string">'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'</span>,
+                <span class="string">'Lynx/2.8.5rel.1 libwww-FM/2.14 SSL-MM/1.4.1 GNUTLS/1.2.9'</span>,
+                <span class="string">'Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.7 (KHTML, like Gecko) Ubuntu/11.04 Chromium/16.0.912.77 Chrome/16.0.912.77 Safari/535.7'</span>,
+                <span class="string">'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:10.0) Gecko/20100101 Firefox/10.0'</span>
+            ]
+
+<span class="preprocessor">#伪装浏览器头</span>
+HEADERS = {
+    <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'</span>,
+    <span class="string">'User-Agent'</span>: <span class="built_in">random</span>.choice(USER_AGENTS),
+    <span class="string">'Referer'</span>: <span class="string">'http://www.baidu.com'</span> <span class="preprocessor"># or <span class="string">'http://www.google.cpm'</span></span>
+}
+</code></pre><h2 id="装饰器">装饰器</h2><h2 id="@classmethod_或_@staticmethod">@classmethod 或 @staticmethod</h2><p>参考知乎话题 - <a href="https://www.zhihu.com/question/21084971" target="_blank" rel="external">https://www.zhihu.com/question/21084971</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Framework/">Framework</a><a href="/tags/Python/">Python</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/01/11/Python-Troubleshooting/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/01/11/Python-Troubleshooting/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/07/The-Zen-of-Python/" title="The Zen of Python" itemprop="url">The Zen of Python</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-07T03:47:25.000Z" itemprop="datePublished"> 发表于 2016-01-07</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>&gt;&gt;&gt; <span class="keyword">import</span> <span class="keyword">this</span>
+</code></pre><p>The Zen of Python, by Tim Peters</p>
+<blockquote>
+<p>Beautiful is better than ugly.</p>
+<p>Explicit is better than implicit.</p>
+<p>Simple is better than complex.</p>
+<p>Complex is better than complicated.</p>
+<p>Flat is better than nested.</p>
+<p>Sparse is better than dense.</p>
+<p>Readability counts.</p>
+<p>Special cases aren’t special enough to break the rules.</p>
+<p>Although practicality beats purity.</p>
+<p>Errors should never pass silently.</p>
+<p>Unless explicitly silenced.</p>
+<p>In the face of ambiguity, refuse the temptation to guess.</p>
+<p>There should be one– and preferably only one –obvious way to do it.</p>
+<p>Although that way may not be obvious at first unless you’re Dutch.</p>
+<p>Now is better than never.</p>
+<p>Although never is often better than <em>right</em> now.</p>
+<p>If the implementation is hard to explain, it’s a bad idea.</p>
+<p>If the implementation is easy to explain, it may be a good idea.</p>
+<p>Namespaces are one honking great idea – let’s do more of those!</p>
+</blockquote>
+<p><strong>翻译如下：</strong></p>
+<p>Python之禅 by Tim Peters</p>
+<blockquote>
+<p>优美胜于丑陋（Python 以编写优美的代码为目标）</p>
+<p>明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似）</p>
+<p>简洁胜于复杂（优美的代码应当是简洁的，不要有复杂的内部实现）</p>
+<p>复杂胜于凌乱（如果复杂不可避免，那代码间也不能有难懂的关系，要保持接口简洁）</p>
+<p>扁平胜于嵌套（优美的代码应当是扁平的，不能有太多的嵌套）</p>
+<p>间隔胜于紧凑（优美的代码有适当的间隔，不要奢望一行代码解决问题）</p>
+<p>可读性很重要（优美的代码是可读的）</p>
+<p>即便假借特例的实用性之名，也不可违背这些规则（这些规则至高无上）</p>
+<p>不要包容所有错误，除非你确定需要这样做（精准地捕获异常，不写 except:pass 风格的代码）</p>
+<p>当存在多种可能，不要尝试去猜测，而是尽量找一种，最好是唯一一种明显的解决方案（如果不确定，就用穷举法）</p>
+<p>虽然这并不容易，因为你不是 Python 之父（这里的 Dutch 是指 Guido ）</p>
+<p>做也许好过不做，但不假思索就动手还不如不做（动手之前要细思量）</p>
+<p>如果你无法向人描述你的方案，那肯定不是一个好方案；反之亦然（方案测评标准）</p>
+<p>命名空间是一种绝妙的理念，我们应当多加利用（倡导与号召）</p>
+</blockquote>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python/">Python</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/01/07/The-Zen-of-Python/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/01/07/The-Zen-of-Python/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/12/23/Network-Troubleshooting/" title="网络排查" itemprop="url">网络排查</a>
   </h1>
   <p class="article-author">By
@@ -916,189 +1110,6 @@ DotNetNuke.Entities.Users.UserController.GetPassword(ref uInfo, <span class="bui
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/08/Lean-Startup/" title="精益创业" itemprop="url">精益创业</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-08T01:06:02.000Z" itemprop="datePublished"> 发表于 2015-12-08</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/success_vs_failure.jpg" alt="Lean Startup"></p>
-<h2 id="创业公式">创业公式</h2><ol>
-<li>搭建可运行的原型 - 轻，小，快</li>
-<li>上线运营（别管bug）</li>
-<li>收集反馈</li>
-<li>调整产品</li>
-<li>成长壮大</li>
-</ol>
-<h2 id="Minimium_Viable_Product_(MVP)">Minimium Viable Product (MVP)</h2><ul>
-<li>产品规格：”一個”足夠解決問題的功能範圍</li>
-<li>不作平台，只解决问题</li>
-<li>Complain Driven Development</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Startup/">Startup</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/创业/">创业</a><a href="/tags/商业模式/">商业模式</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/08/Lean-Startup/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/08/Lean-Startup/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/04/Hexo-Customization-Ⅲ/" title="Hexo折腾记 Ⅲ" itemprop="url">Hexo折腾记 Ⅲ</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-04T01:17:35.000Z" itemprop="datePublished"> 发表于 2015-12-04</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>用Hexo搭建本博客至今为止，感觉不错，管理起来很方便，Markdown排版文字的确很赞。接下来这一篇文章想更为深入的探讨，比如如何编程的方式来修改Hexo成更为灵活的布局或创建新的功能：</p>
-<h2 id="边栏Widget_-_最新随笔">边栏Widget - 最新随笔</h2><p>可直接自己在模板template写或通过帮助创建Hexo helper plugin来实现。在此分享后者的做法：</p>
-<p><strong>代码原理</strong></p>
-<p>获取指定目录或全站的随笔并排序遍历输出而已</p>
-<pre><code><span class="xml"></span>&lt;%<span class="perl"> site.categories.findOne({name: <span class="string">'project'</span>}).posts.<span class="keyword">sort</span>(<span class="string">'date'</span>, -<span class="number">1</span>).<span class="keyword">each</span>(function(post){ </span>%&gt;<span class="xml">
-    <span class="tag">&lt;<span class="title">li</span>&gt;</span>
-      <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"</span></span></span>&lt;%<span class="perl">- url_for(post.path) </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span>&gt;</span></span>&lt;%=<span class="perl"> post.title || <span class="string">'(no title)'</span> </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">a</span>&gt;</span>
-    <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-</span>&lt;%<span class="perl"> }) </span>%&gt;<span class="xml"></span>
-</code></pre><ul>
-<li><p>执行代码安装插件recent_posts</p>
-<pre><code>npm <span class="operator"><span class="keyword">install</span> hexo-helper-recent_posts <span class="comment">--save</span></span>
-</code></pre></li>
-<li><p>在主题目录下的_widget目录下新建widget文件recent_posts.ejs (比如ROOT\themes\jacman\layout_widget)，代码如下（如有必要可自定义修改ulClass和liClass并添加相关的样式）：</p>
-<pre><code><span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"linkslist"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"asidetitle"</span>&gt;</span></span>&lt;%=<span class="ruby"> _<span class="number">_</span>(<span class="string">'recent_posts'</span>) </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"linkslist clearfix"</span>&gt;</span>
-        </span>&lt;%-<span class="ruby"> recent_posts({     <span class="symbol">count:</span> <span class="number">6</span>, 
-                            <span class="symbol">ulClass:</span> <span class="string">''</span>,
-                            <span class="symbol">liClass:</span> <span class="string">''</span>}) </span>%&gt;<span class="xml">
-    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>    </span>
-</code></pre></li>
-</ul>
-<ul>
-<li><p>打开主题_config.yml, 启用recent_posts这一widget：</p>
-<pre><code>#### Widgets
-widgets: 
--<span class="ruby"> github-card
-</span>-<span class="ruby"> category
-</span>-<span class="ruby"> tag
-</span>-<span class="ruby"> recent_posts /<span class="regexp">/ 启用recent_posts
-</span></span>-<span class="ruby"><span class="regexp"> links
-</span></span>##- douban
--<span class="ruby"><span class="regexp"> rss
-</span></span>##- weibo
-</code></pre></li>
-</ul>
-<p>相关链接：</p>
-<p><a href="https://github.com/floriancargoet/hexo-helper-recent_posts" target="_blank" rel="external">hexo-helper-recent_posts</a></p>
-<p><a href="https://github.com/hexojs/hexo/issues/459" target="_blank" rel="external">https://github.com/hexojs/hexo/issues/459</a></p>
-<p><a href="http://tobuildsomething.com/2015/08/01/Finding-all-posts-with-a-given-category-in-Hexo/" target="_blank" rel="external">Querying posts in Hexo</a></p>
-<p><a href="https://github.com/JamesPan/hexo-theme-icarus/blob/master/layout/_widget/recent_posts.ejs" target="_blank" rel="external">https://github.com/JamesPan/hexo-theme-icarus/blob/master/layout/_widget/recent_posts.ejs</a></p>
-<h2 id="创建Filter_-_文章尾部增加版权信息">创建Filter - 文章尾部增加版权信息</h2><p>Hexo博客系统天生具有良好的可扩展性，Hexo的插件基本上分为Deployer、Filter、Generator、Renderer、Tag等很多种类。其中Filter插件可用于修改一些特定的数据。比如这种<a href="https://hexo.io/api/filter.html#before_post_render" target="_blank" rel="external">before_post_render Filter</a>会在文章正式渲染之前执行，具体的执行和渲染步骤可以参见关于<a href="https://hexo.io/api/posts.html#Render" target="_blank" rel="external">渲染的官方文档</a>。</p>
-<p>相关链接:</p>
-<p><a href="http://kuangqi.me/tricks/append-a-copyright-info-after-every-post/index.html" target="_blank" rel="external">为Hexo博客的每一篇文章自动追加版权信息</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Blog/">Blog</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/Hexo/">Hexo</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/04/Hexo-Customization-Ⅲ/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/04/Hexo-Customization-Ⅲ/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -1121,7 +1132,7 @@ widgets:
 		  
 		
 		  
-			<li><a href="/categories/Dev/" title="Dev">Dev<sup>4</sup></a></li>
+			<li><a href="/categories/Dev/" title="Dev">Dev<sup>5</sup></a></li>
 		  
 		
 		  
@@ -1137,7 +1148,7 @@ widgets:
 		  
 		
 		  
-			<li><a href="/categories/Resources/" title="Resources">Resources<sup>4</sup></a></li>
+			<li><a href="/categories/Resources/" title="Resources">Resources<sup>5</sup></a></li>
 		  
 		
 		  
@@ -1166,6 +1177,10 @@ widgets:
 			
 		
 			
+				<li><a href="/tags/Python/" title="Python">Python<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
 			
 		
@@ -1179,6 +1194,10 @@ widgets:
 		
 			
 				<li><a href="/tags/DNN8/" title="DNN8">DNN8<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Startup/" title="Startup">Startup<sup>1</sup></a></li>
 			
 		
 			
@@ -1206,11 +1225,11 @@ widgets:
 			
 		
 			
-				<li><a href="/tags/Network/" title="Network">Network<sup>1</sup></a></li>
+				<li><a href="/tags/开发/" title="开发">开发<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/开发/" title="开发">开发<sup>1</sup></a></li>
+				<li><a href="/tags/商业模式/" title="商业模式">商业模式<sup>1</sup></a></li>
 			
 		
 			
@@ -1218,19 +1237,11 @@ widgets:
 			
 		
 			
-				<li><a href="/tags/Programmers/" title="Programmers">Programmers<sup>1</sup></a></li>
+				<li><a href="/tags/Framework/" title="Framework">Framework<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Workflow/" title="Workflow">Workflow<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/思考/" title="思考">思考<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -1240,7 +1251,7 @@ widgets:
   <div class="linkslist">
     <p class="asidetitle">最新随笔</p>
     <div class="linkslist clearfix">
-		<ul class=""><li class=""><a href="/2015/12/23/Network-Troubleshooting/">网络排查</a></li><li class=""><a href="/2015/12/22/Play-with-DNS/">科学上网之DNS</a></li><li class=""><a href="/2015/12/22/Git-Best-Practices/">Git最佳实践</a></li><li class=""><a href="/2015/12/14/DNN8-Development/">DNN8 Development</a></li><li class=""><a href="/2015/12/14/Programmers/">神秘的程序员</a></li><li class=""><a href="/2015/12/14/Recover-Password-for-DNN/">如何重设DNN用户密码</a></li></ul>
+		<ul class=""><li class=""><a href="/2016/01/11/Python-Troubleshooting/">Python Troubleshooting</a></li><li class=""><a href="/2016/01/07/The-Zen-of-Python/">The Zen of Python</a></li><li class=""><a href="/2015/12/23/Network-Troubleshooting/">网络排查</a></li><li class=""><a href="/2015/12/22/Play-with-DNS/">科学上网之DNS</a></li><li class=""><a href="/2015/12/22/Git-Best-Practices/">Git最佳实践</a></li><li class=""><a href="/2015/12/14/DNN8-Development/">DNN8 Development</a></li></ul>
 	</div>
 </div>
 
@@ -1319,7 +1330,7 @@ widgets:
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
 		
 		<a href="/about" target="_blank" title="Baldwin">Baldwin</a>
 		

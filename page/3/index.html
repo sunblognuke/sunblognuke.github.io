@@ -83,6 +83,206 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/11/20/Integratd-Hexo-with-Github/" title="在Github平台搭建Hexo免费静态博客" itemprop="url">在Github平台搭建Hexo免费静态博客</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-20T06:06:23.000Z" itemprop="datePublished"> 发表于 2015-11-20</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/Github_Hexo.png" alt="Github+Hexo"></p>
+<h2 id="环境准备">环境准备</h2><h3 id="安装Git">安装Git</h3><p>在此下载:<a href="http://git-scm.com/download/win" target="_blank" rel="external">http://git-scm.com/download/win</a></p>
+<p>推荐安装绿色版本PortableGit, 下载解压到一个新文件夹即可，随即添加git.exe所在路径（比如E:\Dev\PortableGit\bin）到环境变量（如何添加环境变量请自行百度）</p>
+<p><a href="http://www.cnblogs.com/zhcncn/p/3787849.html" target="_blank" rel="external">Windows下Git安装指南</a></p>
+<h3 id="安装node-js">安装node.js</h3><p>在此下载:<a href="http://nodejs.org/download/" target="_blank" rel="external">http://nodejs.org/download/</a></p>
+<p>不必纠缠版本，选择对应系统版本 - x86或x64即可</p>
+<p>安装时直接保持默认配置即可。</p>
+<h2 id="安装Hexo">安装Hexo</h2><h3 id="Installation">Installation</h3><p>确保git， node安装正确（包括环境变量的配置），可在命令提示符CMD窗口输入git和node，npm看看是否有相关提示。</p>
+<p>打开命令提示符，执行如下命令：</p>
+<pre><code>$ npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> hexo</span>
+</code></pre><h3 id="Quick_Start">Quick Start</h3><h4 id="setup_your_blog">setup your blog</h4><p>新建目录，比如D:\Hexo, 目录右键进入命令提示符窗口，执行如下命令：</p>
+<pre><code>$ hexo init
+
+[] Copying data
+
+[] You are almost ! Dont forget <span class="keyword">to</span> <span class="command">run</span> `npm install` <span class="keyword">before</span> you start b
+logging <span class="keyword">with</span> Hexo!
+</code></pre><p>Hexo随后会自动在目标文件夹建立网站所需要的文件。然后按照提示，运行 npm install（在 D:\Hexo下）</p>
+<pre><code>$ npm <span class="keyword">install</span>
+</code></pre><p>会在D:\Hexo目录中安装 node_modules。</p>
+<h4 id="Start_the_server">Start the server</h4><p>运行下面的命令（在D:\Hexo下）</p>
+<pre><code>$ hexo server
+
+[] Hexo <span class="keyword">is</span> running at http:<span class="comment">//localhost:4000/. Press Ctrl+C to stop.</span>
+</code></pre><p>表明Hexo Server已经启动了，在浏览器中打开以上网址，这时可以看到Hexo已为你生成了blog。你可以按Ctrl+C 停止Server。</p>
+<h4 id="Create_new_post">Create new post</h4><p>运行下面的命令（在D:\Hexo下）</p>
+<pre><code>$ hexo <span class="keyword">new</span> <span class="string">"My New Post"</span> 
+</code></pre><p>会在D:\Hexo\source_posts目录下生成一个markdown文件：My-New-Post.md</p>
+<p>可以使用一个支持markdown语法的编辑器（比如Sublime Text）来编辑该文件。</p>
+<h4 id="Generate_static_files">Generate static files</h4><p>执行下面的命令，将markdown文件生成静态网页。</p>
+<pre><code><span class="variable">$ </span>hexo generate
+</code></pre><p>该命令执行完后，会在 D:\Hexo\public\ 目录下生成一系列html，css等文件。</p>
+<h4 id="部署到Github">部署到Github</h4><p>部署到Github前需要配置_config.yml文件，首先找到下面的内容</p>
+<pre><code><span class="preprocessor"># Deployment </span>
+<span class="preprocessor">## Docs: http:hexo.io/docs/deployment.html </span>
+<span class="label">deploy:</span> 
+<span class="label">type:</span>
+</code></pre><p>然后修改成如下格式：</p>
+<pre><code><span class="preprocessor"># Deployment </span>
+<span class="preprocessor">## Docs: http:hexo.io/docs/deployment.html </span>
+<span class="label">deploy:</span> 
+<span class="label">type:</span> git 
+<span class="label">repository:</span> https://github.com/xx_yourname/xx_yourname.github.io.git 
+<span class="label">branch:</span> master
+</code></pre><p>执行部署命令如下：</p>
+<pre><code><span class="variable">$ </span>hexo clean
+
+<span class="variable">$ </span>hexo deploy
+</code></pre><h3 id="命令总结">命令总结</h3><p>2.3.1 常用命令</p>
+<pre><code>hexo <span class="keyword">new</span> postName <span class="preprocessor">#新建文章</span>
+
+hexo <span class="keyword">new</span> page pageName <span class="preprocessor">#新建页面</span>
+
+hexo generate <span class="preprocessor">#生成静态页面至public目录</span>
+
+hexo <span class="keyword">server</span> <span class="preprocessor">#开启预览访问端口（默认端口4000，ctrl + c关闭server）</span>
+
+hexo deploy <span class="preprocessor">#将.deploy_git目录部署到GitHub</span>
+
+hexo help  <span class="preprocessor">#查看帮助</span>
+
+hexo version  <span class="preprocessor">#查看Hexo的版本</span>
+</code></pre><p>2.3.2 复合命令</p>
+<pre><code>hexo deploy -<span class="preprocessor">#生成加部署</span>
+
+hexo <span class="keyword">server</span> -g  <span class="preprocessor">#生成加预览</span>
+</code></pre><p>命令的简写为：</p>
+<pre><code>hexo <span class="keyword">n</span> == hexo new
+
+hexo <span class="keyword">g</span> == hexo <span class="keyword">generate</span>
+
+hexo s == hexo server
+
+hexo <span class="keyword">d</span> == hexo deploy
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Blog/">Blog</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/Github/">Github</a><a href="/tags/Hexo/">Hexo</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/11/20/Integratd-Hexo-with-Github/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/11/20/Integratd-Hexo-with-Github/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/18/摄影篇-小区也能DIY/" title="摄影篇 - 小区也能DIY" itemprop="url">摄影篇 - 小区也能DIY</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-18T10:23:30.000Z" itemprop="datePublished"> 发表于 2015-11-18</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>好久没给宝贝拍照了，今天特意就在小区来一次DIY，敢情来点后期创意效果修饰也是不错的 :)</p>
+<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/IMG_6506.jpg" alt="小小的背影，莫名的感动"><br><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/IMG_6488.jpg" alt="林中的小精灵，你在找什么呢？"></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Life/">Life</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Baby/">Baby</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/11/18/摄影篇-小区也能DIY/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/11/18/摄影篇-小区也能DIY/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/10/22/Hello-Hexo-Github/" title="Hello Hexo &amp; Github" itemprop="url">Hello Hexo &amp; Github</a>
   </h1>
   <p class="article-author">By
@@ -170,7 +370,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Dev/" title="Dev">Dev<sup>4</sup></a></li>
+			<li><a href="/categories/Dev/" title="Dev">Dev<sup>5</sup></a></li>
 		  
 		
 		  
@@ -186,7 +386,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Resources/" title="Resources">Resources<sup>4</sup></a></li>
+			<li><a href="/categories/Resources/" title="Resources">Resources<sup>5</sup></a></li>
 		  
 		
 		  
@@ -215,6 +415,10 @@
 			
 		
 			
+				<li><a href="/tags/Python/" title="Python">Python<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
 			
 		
@@ -228,6 +432,10 @@
 		
 			
 				<li><a href="/tags/DNN8/" title="DNN8">DNN8<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Startup/" title="Startup">Startup<sup>1</sup></a></li>
 			
 		
 			
@@ -255,11 +463,11 @@
 			
 		
 			
-				<li><a href="/tags/Network/" title="Network">Network<sup>1</sup></a></li>
+				<li><a href="/tags/开发/" title="开发">开发<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/开发/" title="开发">开发<sup>1</sup></a></li>
+				<li><a href="/tags/商业模式/" title="商业模式">商业模式<sup>1</sup></a></li>
 			
 		
 			
@@ -267,19 +475,11 @@
 			
 		
 			
-				<li><a href="/tags/Programmers/" title="Programmers">Programmers<sup>1</sup></a></li>
+				<li><a href="/tags/Framework/" title="Framework">Framework<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Workflow/" title="Workflow">Workflow<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/思考/" title="思考">思考<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -289,7 +489,7 @@
   <div class="linkslist">
     <p class="asidetitle">最新随笔</p>
     <div class="linkslist clearfix">
-		<ul class=""><li class=""><a href="/2015/12/23/Network-Troubleshooting/">网络排查</a></li><li class=""><a href="/2015/12/22/Play-with-DNS/">科学上网之DNS</a></li><li class=""><a href="/2015/12/22/Git-Best-Practices/">Git最佳实践</a></li><li class=""><a href="/2015/12/14/DNN8-Development/">DNN8 Development</a></li><li class=""><a href="/2015/12/14/Programmers/">神秘的程序员</a></li><li class=""><a href="/2015/12/14/Recover-Password-for-DNN/">如何重设DNN用户密码</a></li></ul>
+		<ul class=""><li class=""><a href="/2016/01/11/Python-Troubleshooting/">Python Troubleshooting</a></li><li class=""><a href="/2016/01/07/The-Zen-of-Python/">The Zen of Python</a></li><li class=""><a href="/2015/12/23/Network-Troubleshooting/">网络排查</a></li><li class=""><a href="/2015/12/22/Play-with-DNS/">科学上网之DNS</a></li><li class=""><a href="/2015/12/22/Git-Best-Practices/">Git最佳实践</a></li><li class=""><a href="/2015/12/14/DNN8-Development/">DNN8 Development</a></li></ul>
 	</div>
 </div>
 
@@ -368,7 +568,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
 		
 		<a href="/about" target="_blank" title="Baldwin">Baldwin</a>
 		
