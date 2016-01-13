@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sunblognuke.github.io/"/>
-  <updated>2016-01-13T03:45:57.210Z</updated>
+  <updated>2016-01-13T06:18:21.433Z</updated>
   <id>http://sunblognuke.github.io/</id>
   
   <author>
@@ -15,11 +15,35 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[程序员的数学]]></title>
+    <link href="http://sunblognuke.github.io/2016/01/13/Math-for-Programmers/"/>
+    <id>http://sunblognuke.github.io/2016/01/13/Math-for-Programmers/</id>
+    <published>2016-01-13T06:09:25.000Z</published>
+    <updated>2016-01-13T06:18:21.433Z</updated>
+    <content type="html"><![CDATA[<p>Steve Yegge大神写的一篇文章《Math for Programmers》：</p>
+<p>原文地址: <a href="http://steve-yegge.blogspot.com/2006/03/math-for-programmers.html" target="_blank" rel="external">Math for Programmers</a> (自备梯子查看)<br>译文地址: <a href="http://article.yeeyan.org/view/pluto/2365" target="_blank" rel="external">程序员怎样学数学</a></p>
+<p>本文也被收录在<a href="http://book.douban.com/subject/25884108/" target="_blank" rel="external">《程序员的呐喊》</a></p>
+<p>附带相关的公开课<a href="http://v.163.com/movie/2010/11/J/1/M77TH78HU_M78B4KQJ1.html" target="_blank" rel="external">《用计算机教孩子真正的数学》</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Steve Yegge大神写的一篇文章《Math for Programmers》：</p>
+<p>原文地址: <a href="http://steve-yegge.blogspot.com/2006/03/math-for-programmers.html" targe]]>
+    </summary>
+    
+      <category term="Math" scheme="http://sunblognuke.github.io/tags/Math/"/>
+    
+      <category term="Programmers" scheme="http://sunblognuke.github.io/tags/Programmers/"/>
+    
+      <category term="Notes" scheme="http://sunblognuke.github.io/categories/Notes/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Windows下Python easy_install和pip的安装]]></title>
     <link href="http://sunblognuke.github.io/2016/01/13/Python-esay-install-pip-for-Windows/"/>
     <id>http://sunblognuke.github.io/2016/01/13/Python-esay-install-pip-for-Windows/</id>
     <published>2016-01-13T03:21:00.000Z</published>
-    <updated>2016-01-13T03:45:57.210Z</updated>
+    <updated>2016-01-13T05:51:05.302Z</updated>
     <content type="html"><![CDATA[<h2 id="为何要安装easy_install和pip">为何要安装easy_install和pip</h2><p>easy_install和pip都是用来下载安装Python一个<a href="https://pypi.python.org/pypi/" target="_blank" rel="external">公共资源库PyPI</a>的相关资源包的</p>
 <p>正常情况下，我们要给Python安装第三方的扩展包，我们必须下载压缩包，解压缩到一个目录，然后命令行或者终端打开这个目录，然后执行</p>
 <pre><code>setup<span class="class">.py</span> build
@@ -46,7 +70,7 @@ setup<span class="class">.py</span> install
     
       <category term="Python" scheme="http://sunblognuke.github.io/tags/Python/"/>
     
-      <category term="dev" scheme="http://sunblognuke.github.io/categories/dev/"/>
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
     
   </entry>
   
@@ -1045,58 +1069,6 @@ widgets:
       <category term="资源" scheme="http://sunblognuke.github.io/tags/%E8%B5%84%E6%BA%90/"/>
     
       <category term="Resources" scheme="http://sunblognuke.github.io/categories/Resources/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[摄影学习备忘]]></title>
-    <link href="http://sunblognuke.github.io/2015/11/27/Photography-Learning/"/>
-    <id>http://sunblognuke.github.io/2015/11/27/Photography-Learning/</id>
-    <published>2015-11-27T05:51:10.000Z</published>
-    <updated>2015-12-24T11:32:43.817Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/ps.png" alt=""></p>
-<p>分享一些学习摄影的资源及笔记心得。</p>
-<p>算是国内比较有诚意的摄影教程，适合入门和明白一些误区和概念</p>
-<p><a href="http://www.ganlantu.com/course/explore/mianfei" target="_blank" rel="external">免费课程 - 橄榄图摄影课堂</a></p>
-<p><a href="http://www.liangzhishu.com/" target="_blank" rel="external">良知塾 - 李涛老师教程</a></p>
-<p>本人第一个单反500D，也是目前还在用的，新增EF 50mm f/1.4 USM 人像头：</p>
-<p><a href="http://www.canon.com.cn/specialsite/eos600d/" target="_blank" rel="external">官方教程 - EOS 600D深度解析</a></p>
-<p>李涛老师的教程一定过，了解一些摄影的理念和思想是必须的。</p>
-<p>后期学习方法：</p>
-<ol>
-<li>取法乎上，寻师经典</li>
-<li>务先大体，鉴必穷源</li>
-<li>诚心正意，自证良知</li>
-</ol>
-<p>Adobe Camera Raw预处理步骤：</p>
-<ol>
-<li>自动校准：镜头校准，相机校准，白平衡校准</li>
-<li><p>预处理：</p>
-<p> 全局：正确的黑白场，准确的清晰度，适当的饱和度，丰富的层次<br> 局部：目标调整工具HSL， 画笔，渐变，径向</p>
-</li>
-<li><p>调性：影调（影：明暗黑白关系；调：色彩关系）</p>
-</li>
-<li>输出：锐化除噪</li>
-</ol>
-<p>可关注的微信号：摄影修行，教摄影，摄影笔记，蜂鸟网，POCO摄影社区。</p>
-<p>最近关注的素材资源网站：</p>
-<p><a href="http://97ui.com/sucai" target="_blank" rel="external">优界网</a></p>
-<p><a href="http://www.58pic.com/" target="_blank" rel="external">千图网</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/ps.png" alt=""></p>
-<p>分享一些学习摄影的资源及笔记心得。</p>
-<p>算是国内比较有诚意的摄影教程，适合入门和明白一些误区和概念</p>
-<p>]]>
-    </summary>
-    
-      <category term="ACR" scheme="http://sunblognuke.github.io/tags/ACR/"/>
-    
-      <category term="Bridge CC" scheme="http://sunblognuke.github.io/tags/Bridge-CC/"/>
-    
-      <category term="PS" scheme="http://sunblognuke.github.io/tags/PS/"/>
-    
-      <category term="Photography" scheme="http://sunblognuke.github.io/categories/Photography/"/>
     
   </entry>
   
