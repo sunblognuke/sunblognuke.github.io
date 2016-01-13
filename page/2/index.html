@@ -83,6 +83,435 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/12/14/Recover-Password-for-DNN/" title="如何重设DNN用户密码" itemprop="url">如何重设DNN用户密码</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-14T03:18:38.000Z" itemprop="datePublished"> 发表于 2015-12-14</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/password.jpg?imageView2/2/w/680/q/90" alt=""></p>
+<p>在当今信息时代，管理密码本是一件很费时费力的事情。相对于DNN这一平台，由于版本较多不可避免地在开发过程中会搭建好多本地站点，时不时忘记密码也是常有的事。</p>
+<h2 id="超级用户">超级用户</h2><h3 id="终极方案">终极方案</h3><p><strong>前提：</strong>有权限操作数据库db。</p>
+<p><strong>原理：</strong>把aspnet_membership表中的”XX_UserName”用户的password和password_salt值拷贝并覆盖host用户对应的值。</p>
+<p>在SQL Management Studio执行如下Query SQL script：</p>
+<pre><code>/*
+ -- Database Utility ---------------------------------------------------------------------------
+ Description : Reset a Password <span class="keyword">in</span> a DotNetNuke database
+ Author : Tony Tullemans
+ <span class="built_in">Date</span> Created : <span class="number">18.04</span><span class="number">.2007</span>
+ Note/s : Before you run this script you must know the UserName <span class="keyword">and</span> Password <span class="keyword">of</span> another
+ registered DNN user <span class="keyword">in</span> the database you wish <span class="keyword">to</span> affect.
+ -----------------------------------------------------------------------------------------------
+ */
+
+<span class="keyword">DECLARE</span> @databaseName VARCHAR(<span class="number">128</span>)
+<span class="keyword">SELECT</span> @databaseName = DB_NAME()
+
+PRINT <span class="comment">'RESET PASSWORD IN DATABASE : ' + @databaseName</span>
+PRINT <span class="comment">'-----------------------------' + REPLICATE('-', DATALENGTH(@databaseName ));</span>
+
+<span class="keyword">DECLARE</span> @knownUserName NVARCHAR(<span class="number">128</span>)
+<span class="keyword">DECLARE</span> @lostUserName NVARCHAR(<span class="number">128</span>)
+<span class="keyword">DECLARE</span> @lostUserId NVARCHAR(<span class="number">128</span>)
+<span class="keyword">DECLARE</span> @knownPassword NVARCHAR(<span class="number">128</span>)
+<span class="keyword">DECLARE</span> @knownSalt NVARCHAR(<span class="number">128</span>)
+
+<span class="keyword">SET</span> @knownUserName = <span class="comment">'windy' /* WHAT YOU NEED TO MODIFY */</span>
+<span class="keyword">SET</span> @lostUserName = <span class="comment">'host'</span>
+
+<span class="keyword">SELECT</span> @knownPassword = Password, @knownSalt = PasswordSalt
+<span class="keyword">FROM</span> aspnet_Membership
+INNER <span class="keyword">JOIN</span> aspnet_users
+<span class="keyword">ON</span> aspnet_Membership.UserId = aspnet_users.UserId
+<span class="keyword">where</span> UserName = @knownUserName;
+
+PRINT <span class="comment">''</span>
+PRINT <span class="comment">'Known Password for "' + @knownUserName + '" is : ' + @knownPassword</span>
+PRINT <span class="comment">'Known Password Salt for "' + @knownUserName + '" is : ' + @knownSalt</span>
+
+<span class="keyword">SELECT</span> @lostUserId = aspnet_Membership.UserId
+<span class="keyword">FROM</span> aspnet_Membership
+INNER <span class="keyword">JOIN</span> aspnet_users
+<span class="keyword">ON</span> aspnet_Membership.UserId = aspnet_users.UserId
+<span class="keyword">WHERE</span> UserName = @lostUserName;
+
+PRINT <span class="comment">''</span>
+PRINT <span class="comment">'UserID for "' + @lostUserName + '" is : ' + @lostUserId</span>
+PRINT <span class="comment">''</span>
+
+<span class="keyword">IF</span> (DATALENGTH(@lostUserName) &lt;= <span class="number">0</span> <span class="keyword">OR</span> @lostUserName <span class="keyword">IS</span> NULL)
+PRINT <span class="comment">'Invalid Lost User Name ' + @lostUserName</span>
+<span class="keyword">ELSE</span> BEGIN
+<span class="keyword">IF</span> (DATALENGTH(@knownUserName) &lt;= <span class="number">0</span> <span class="keyword">OR</span> @knownUserName <span class="keyword">IS</span> NULL)
+PRINT <span class="comment">'Invalid Lost User Name ' + @lostUserName</span>
+<span class="keyword">ELSE</span> BEGIN
+<span class="keyword">IF</span> (DATALENGTH(@knownPassword) &lt;= <span class="number">0</span> <span class="keyword">OR</span> @knownPassword <span class="keyword">IS</span> NULL)
+PRINT <span class="comment">'Invalid Known Password ' + @knownPassword</span>
+<span class="keyword">ELSE</span> BEGIN
+<span class="keyword">IF</span> (DATALENGTH(@knownSalt) &lt;= <span class="number">0</span> <span class="keyword">OR</span> @knownSalt <span class="keyword">IS</span> NULL)
+PRINT <span class="comment">'Invalid Known Salt ' + @knownSalt</span>
+<span class="keyword">ELSE</span> BEGIN
+PRINT <span class="comment">''</span>
+PRINT <span class="comment">'BEFORE'</span>
+<span class="keyword">SELECT</span> left(UserName, <span class="number">12</span>) <span class="keyword">as</span> UserName, aspnet_Membership.UserId, left(Email, <span class="number">20</span>) <span class="keyword">as</span> Email, Password, PasswordSalt
+<span class="keyword">FROM</span> aspnet_Membership INNER <span class="keyword">JOIN</span> aspnet_users <span class="keyword">ON</span> aspnet_Membership.UserId = aspnet_users.UserId
+<span class="keyword">WHERE</span> UserName <span class="keyword">IN</span> ( @knownUserName, @lostUserName );
+PRINT <span class="comment">''</span>
+PRINT <span class="comment">'Changing Password for User Id("' + @lostUserId + '") to: "' + @knownPassword + '"'</span>
+PRINT <span class="comment">''</span>
+UPDATE aspnet_Membership
+<span class="keyword">SET</span> Password = @knownPassword,
+PasswordSalt = @knownSalt
+-- <span class="keyword">SELECT</span> UserId, Password, PasswordSalt
+-- <span class="keyword">FROM</span> aspnet_Membership
+<span class="keyword">WHERE</span> UserId = @lostUserId;
+PRINT <span class="comment">''</span>
+PRINT <span class="comment">'AFTER'</span>
+<span class="keyword">SELECT</span> left(UserName, <span class="number">12</span>) <span class="keyword">as</span> UserName, aspnet_Membership.UserId, left(Email, <span class="number">20</span>) <span class="keyword">as</span> Email, Password, PasswordSalt
+<span class="keyword">FROM</span> aspnet_Membership INNER <span class="keyword">JOIN</span> aspnet_users <span class="keyword">ON</span> aspnet_Membership.UserId = aspnet_users.UserId
+<span class="keyword">WHERE</span> UserName <span class="keyword">IN</span> ( @knownUserName, @lostUserName );
+<span class="keyword">END</span>
+<span class="keyword">END</span>
+<span class="keyword">END</span>
+<span class="keyword">END</span>
+GO
+
+PRINT <span class="comment">''</span>
+PRINT <span class="comment">' * * * END OF SCRIPT * * *'</span>
+PRINT <span class="comment">''</span>
+GO
+</code></pre><h3 id="手动模式">手动模式</h3><p><strong>前提：</strong>开放注册功能和有权限操作数据库db。<br><strong>原理：</strong>创建新用户并手动到数据库，在表ASPNet_Membership查询出host和新用户的记录，把新用户的password和password_salt值拷贝并覆盖host用户对应相同的列上。</p>
+<p>As there are frequent requests from users, who lost the password of the host account (and you cannot request the host password by email), the following solution will help for all DNN 3 and 4 installation. Please note, that your need direct access to the database to suceed with the issue:</p>
+<ol>
+<li>if “register” is not displayed for the portal, go to table “Portals”  in your database and enter value “2” into column “Registration”.</li>
+<li>create a new user account by registration (this time, please remember the password you enter!)</li>
+<li>go to database, enter table “ASPNet_Membership”</li>
+<li>go to new user account (usually the last one) and copy the encrypted values of columns “Password” and “PasswordSalt” into the same columns of user account “host” (usually th first entry in this table) </li>
+<li>login as user “host” using the new password and delete the reshly created other user.</li>
+</ol>
+<p>Keep remembering your password ;)</p>
+<h3 id="代码模式（不推荐使用）">代码模式（不推荐使用）</h3><p><strong>前提：</strong>有权限访问FTP。<br><strong>原理：</strong>调用核心API获取Host用户输出到页面。<br><strong>缺点：</strong> 加密方式为Hashed不可用；操作完成务必删除。</p>
+<pre><code><span class="tag">&lt;<span class="title">%@</span> <span class="attribute">Page</span> <span class="attribute">Language</span>=<span class="value">"C#"</span> %&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">runat</span>=<span class="value">"server"</span>&gt;</span><span class="javascript">
+    <span class="keyword">void</span> Page_Load(object sender, System.EventArgs e)
+    {
+        DotNetNuke.Entities.Users.UserInfo uInfo = 
+DotNetNuke.Entities.Users.UserController.GetUserById(<span class="number">0</span>, <span class="number">1</span>);
+        <span class="keyword">if</span> (uInfo != <span class="literal">null</span>)
+        {
+            string password = 
+DotNetNuke.Entities.Users.UserController.GetPassword(ref uInfo, <span class="built_in">String</span>.Empty);
+            Response.Write(<span class="string">"Password: "</span> + password);
+        }
+        <span class="keyword">else</span>
+        {
+            Response.Write(<span class="string">"UserInfo object is null"</span>);
+        }
+    }
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">html</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">head</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">title</span>&gt;</span>Recover Password<span class="tag">&lt;/<span class="title">title</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">body</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</code></pre><h2 id="普通用户">普通用户</h2><h3 id="核心方案">核心方案</h3><p>通过注册模块点击重设密码链接获取邮件提醒。</p>
+<p><a href="http://www.dnnsoftware.com/wiki/recover-passwords" target="_blank" rel="external">DNN Wiki - Recover Passwords</a></p>
+<h3 id="第三方模块">第三方模块</h3><p><a href="https://dnnsecurepasswordrec.codeplex.com/" target="_blank" rel="external">IowaComputerGurus’s Secure Password Recovery module</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/DotNetNuke/">DotNetNuke</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/14/Recover-Password-for-DNN/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/14/Recover-Password-for-DNN/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Laws-Rules-You-Should-Know/" title="你应该知道的定律和规则" itemprop="url">你应该知道的定律和规则</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-10T04:14:27.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/clean.png" alt=""></p>
+<h2 id="墨菲定律">墨菲定律</h2><p>“墨菲定律”是一种心理学效应，是由爱德华·墨菲（Edward A. Murphy）提出的。主要内容：</p>
+<p>一、任何事都没有表面看起来那么简单；<br>二、所有的事都会比你预计的时间长；<br>三、会出错的事总会出错；<br>四、如果你担心某种情况发生，那么它就更有可能发生。</p>
+<p>墨菲定律的原句是这样的：如果有两种或两种以上的方式去做某件事情，而其中一种选择方式将导致灾难，则必定有人会做出这种选择。</p>
+<p>这句话迅速流传。墨菲定律是其作出的著名论断，亦称莫非定律、墨菲定理，是西方世界常用的俚语。</p>
+<p>墨菲定律主要内容是：如果事情有变坏的可能，不管这种可能性有多小，它总会发生。</p>
+<p>参考资源：</p>
+<p><a href="http://baike.baidu.com/view/40544.htm" target="_blank" rel="external">http://baike.baidu.com/view/40544.htm</a></p>
+<h2 id="二八定律">二八定律</h2><p>1897年，意大利经济学家帕列托在对19世纪英国社会各阶层的财富和收益统计分析时发现：80%的社会财富集中在20%的人手里，而80%的人只拥有社会财富的20%，这就是“二八法则”。“二八法则”反应了一种不平衡性，但它却在社会、经济及生活中无处不在。</p>
+<p>在商品营销中，商家往往会认为所有顾客一样重要；所有生意、每一种产品都必须付出相同的努力，所有机会都必须抓住。而“二八法则”恰恰指出了在原因和结果、投入和产出、努力和报酬之间存在这样一种典型的不平衡现象：80%的成绩，归功于20%的努力；市场上80%的产品可能是20%的企业生产的；20% 的顾客可能给商家带来80%的利润。遵循“二八法则”的企业在经营和管理中往往能抓住关键的少数顾客，精确定位，加强服务，达到事半功倍的效果。美国的普尔斯马特会员店始终坚持会员制，就是基于这一经营理念。</p>
+<p>“二八法则”同样适用于我们的生活，如一个人应该选择在几件事上追求卓越，而不必强求在每件事上都有好的表现；锁定少数能完成的人生目标，而不必追求所有的机会。</p>
+<p>参考资源：</p>
+<p><a href="http://baike.baidu.com/view/40591.htm" target="_blank" rel="external">http://baike.baidu.com/view/40591.htm</a></p>
+<h2 id="零和博弈">零和博弈</h2><p>一个游戏无论几个人来玩，总有输家和赢家，赢家所赢的都是输家所翰的，所以无论输赢多少，正负相抵，最后游戏的总和都为零，这就是零和游戏。</p>
+<p>零和游戏之所以受人关注，是因为人们在社会生活中处处都能找到与零和游戏雷同或类似的现象。我们大肆开发利用煤炭石油资源，留给后人的便越来越少；我们研究生产了大量的转基因产品，一些新的病毒也跟着冒了出来；我们修筑了葛洲坝水利工程，白鳍豚就再也不能洄游到金沙江产卵了……</p>
+<p>发展是硬道理。人类在经历了经济高速增长、科技迅猛发展、全球经济一体化及曰益严重的生态破坏、环境污染之后，可持续发展理论才逐渐浮出水面。零和游戏原理正在逐渐为“双赢”观念所取代，人们逐渐认识到“利己”而不“损人”才是最美好的结局。实践证明，通过有效合作，实现皆大欢喜的结局是可能的。</p>
+<p>领导者要善于跳出“零和”的圈子，寻找能够实现“双赢”的机遇和突破口，防止负面影响抵消正面成绩。批评下属如何才能做到使其接受而不抵触，发展经济如何才能做到不损害环境，开展竞争如何使自己胜出而不让对方受到伤害，这些都是每一个为官者应该仔细思考的问题。</p>
+<p>参考资源：</p>
+<p><a href="http://baike.baidu.com/view/196849.htm" target="_blank" rel="external">http://baike.baidu.com/view/196849.htm</a></p>
+<h2 id="破窗理论">破窗理论</h2><p>破窗效应（英语：Broken windows theory）是犯罪学的一个理论，该理论由詹姆士·威尔逊（James Q. Wilson）及乔治·凯林（George L. Kelling）提出，并刊于《The Atlantic Monthly》1982年3月版的一篇题为《Broken Windows》的文章。此理论认为环境中的不良现象如果被放任存在，会诱使人们仿效，甚至变本加厉。</p>
+<p>一幢有少许破窗的建筑为例，如果那些窗不被修理好，可能将会有破坏者破坏更多的窗户。最终他们甚至会闯入建筑内，如果发现无人居住，也许就在那里定居或者纵火。一面墙，如果出现一些涂鸦没有被清洗掉，很快的，墙上就布满了乱七八糟、不堪入目的东西；一条人行道有些许纸屑，不久后就会有更多垃圾，最终人们会视若理所当然地将垃圾顺手丢弃在地上。这个现象，就是犯罪心理学中的破窗效应！</p>
+<p>参考资源：</p>
+<p><a href="http://baike.baidu.com/view/298167.htm" target="_blank" rel="external">http://baike.baidu.com/view/298167.htm</a></p>
+<h2 id="奥卡姆剃刀定律">奥卡姆剃刀定律</h2><p>12世纪，英国奥卡姆的威廉主张唯名论，只承认确实存在的东西，认为那些空洞无物的普遍性概念都是无用的累赘，应当被无情地“剃除”。他主张“如无必要，勿增实体”。这就是常说的“奥卡姆剃刀”。这把剃刀曾使很多人感到威胁，被认为是异端邪说，威廉本人也因此受到迫害。然而，并未损害这把刀的锋利，相反，经过数百年的岁月，奥卡姆剃刀已被历史磨得越来越快，并早已超载原来狭窄的领域，而具有广泛、丰富、深刻的意义。</p>
+<p>奥卡姆剃刀定律在企业管理中可进一步演化为简单与复杂定律：把事情变复杂很简单，把事情变简单很复杂。这个定律要求，我们在处理事情时，要把握事情的主要实质，把握主流，解决最根本的问题，尤其要顺应自然，不要把事情人为地复杂化，这样才能把事情处理好。</p>
+<p>参考资源：</p>
+<p><a href="http://baike.baidu.com/view/646319.htm" target="_blank" rel="external">http://baike.baidu.com/view/646319.htm</a></p>
+<h2 id="水桶效应">水桶效应</h2><p>一只水桶能装多少水取决于水桶中最短的一块木板而不是最长的那块木板。</p>
+<p>任何组织几乎都有一个共同的特点，即构成组织的各个部分往往是优劣不齐的，但劣势部分却往往决定着整个组织的水平。问题是劣势部分是组织中一个有用的部分，你不能把它当成烂苹果扔掉，否则，你会一点水也装不了，可它却让你那些长的东西白长了!</p>
+<p>劣势决定优势，劣势决定生死，这是市场竞争的残酷法则。水桶定律告诉我们，领导者要有忧患意识，如果你个人身上某个方面是“最短的一块”，你应该考虑尽快把它补起来；如果你所领导的集体中存在着“一块最短的木板”，你一定要迅速将它做长补齐，否则，它带给你的损失可能是毁灭性的—叫艮多时候，往往就是因为一件事没做好而毁了所有的努力。有些人也许不知道水桶定律，但都知道“一票否决”，这是中国的“水桶”，有了它你便知道水桶定律是多么重要。</p>
+<p>决策和执行发生的机率。让谋划的人尽心谋划，让执行的人全力执行，让他们都从中获得间接而不是直接的功利，这样我们才能把“粥”分得更好。当然，还应有必不可少的独立的监督。</p>
+<p>参考资源：</p>
+<p><a href="http://baike.baidu.com/view/47735.htm" target="_blank" rel="external">http://baike.baidu.com/view/47735.htm</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Life/">Life</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Laws-Rule/">Laws & Rule</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Laws-Rules-You-Should-Know/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Laws-Rules-You-Should-Know/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/08/Notes-about-The-Passionate-Programmer/" title="读书摘抄《我编程，我快乐：程序员职业规划之道》" itemprop="url">读书摘抄《我编程，我快乐：程序员职业规划之道》</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-08T08:56:23.000Z" itemprop="datePublished"> 发表于 2015-12-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><img src="http://img4.douban.com/lpic/s6378707.jpg" alt=""></p>
+<p><strong>《The Passionate Programmer:Creating A Remarkable Career In Software Development》</strong></p>
+<p>比较赞同另外一个版本的书名翻译《激情码农：迈向卓越之路》。总体而言，这纯粹就是一本方法论的指导教程，无非就是针对某一特殊行业-程序猿来阐述而已。</p>
+<p>如果某些方式或思路吻合自己想做或正在实施过程中的，那就是最好不过了 - “英雄所见略同”。其余的则汲取适合自己即可。</p>
+<p>简单摘抄如下：</p>
+<h2 id="选择市场">选择市场</h2><ul>
+<li><p>如果你把自己的职业当成是一门生意(事实上它就是一门生意)，那么你的”产品”就是由你提供的服务构成的。</p>
+</li>
+<li><p>人们往往纠缠于做某事的方法，而忘记了最初的目的。</p>
+</li>
+<li><p>软件是一门生意，而作为开发人员，我们就是生意人，要学会融入生意并创造利润。选择市场等同于选择投资某项技术或领域。投资时，务必要权衡风险和收益。</p>
+</li>
+<li><p>不要用自己的技术来定位自己，而是用已经做过的和将要做的事情来定位自己。技术只是一种做事的方法。</p>
+</li>
+<li><p>很多人认为专攻某种技术就简单地意味着不知道其他技术。</p>
+</li>
+</ul>
+<h2 id="在产品上投资">在产品上投资</h2><ul>
+<li><p>讲课是最好的学习方法。要主动问，不要等着别人来告诉你。</p>
+</li>
+<li><p>研究大师的作品是成为大师的一个重要步骤。你学习别人的习惯时，就会发展出自己独特的风格。</p>
+</li>
+<li><p>要有雄心，但不必路人皆知。比起只专注在目标上的做法，专注于现在的工作会使你离最终目标更近。</p>
+</li>
+</ul>
+<h2 id="执行">执行</h2><h3 id="26_一桶水中的鹅卵石">26 一桶水中的鹅卵石</h3><ul>
+<li>对公司来说，基本上每个人就像一桶水中的鹅卵石。</li>
+<li><p>你越是成功，就越有可能犯下重大错误。当你得到很多肯定的时候，你就会很少质疑自己的决定。你使用的方法屡试不爽时，你可能就会忽略可能会有更好的方法。你开始变得傲慢。</p>
+<p>  人一旦傲慢，就会产生盲点。越认为自己无可取代，就越有可能被别人取代（你在公司存在的意义就越小）。</p>
+</li>
+</ul>
+<h3 id="29_学习如何失败">29 学习如何失败</h3><ul>
+<li><p>公司对错误处理方式的不同，会产生不同的结果。问题处理得好，会使客户对其产品更加忠诚，甚至比碰到问题之前，更加信任这家公司。要是处理得不好，那就摧毁了客户的信任。工作中犯错误的时候，要时刻谨记客户的这一心理。</p>
+<p>  以下规则适用于解决技术、沟通或者项目管理中出现的错误：</p>
+<ol>
+<li>发现问题后第一时间提出，不要企图隐瞒错误</li>
+<li>接受批评 </li>
+<li>提供可执行的解决方法及可计划的时间表</li>
+<li>寻求帮助</li>
+</ol>
+</li>
+</ul>
+<h3 id="30_敢于说不">30 敢于说不</h3><ul>
+<li><p>有勇气说“不”的人作出的承诺更可信，也更有分量。</p>
+</li>
+<li><p>经常说“是”的人， 要不是天才，要不就是在说谎。后者通常占多数。</p>
+</li>
+</ul>
+<h3 id="32_说出来、行动、展示">32 说出来、行动、展示</h3><ul>
+<li><p>从不做出承诺最容易导致一事无成。没有截止期限，你也就没有压力或者说是动力来完成某项工作，特别是当任务不是十分有趣的时候。</p>
+</li>
+<li><p>编程是创作的工作，要想有成功的原创，失败和抄袭是最佳途径。</p>
+</li>
+</ul>
+<h2 id="推销。。。。。。不仅仅是迎合">推销。。。。。。不仅仅是迎合</h2><h3 id="35_学会沟通，善于写作">35 学会沟通，善于写作</h3><ul>
+<li><p>沟通，不仅仅是以文字方式进行沟通，是你所有绝妙的想法必须要通过的瓶颈。你自己就是你要解释的内容。</p>
+</li>
+<li><p>如果你无法用母语清楚地表达自己的想法，让别人明白，又怎么可能用编程语言来清楚地表达出来呢？组织观点，带领读者思考并最终做出合乎逻辑的推断，这种能力与创作出清晰的设计和系统实施，并让功能维护者理解的能力是一样的。</p>
+</li>
+</ul>
+<h3 id="39_让人们听到你的声音">39 让人们听到你的声音</h3><ul>
+<li><p>让人们听到你的声音的方法中，最重要的一点就是要尽早行动，而不是一味地去想自己是否已经做好了准备。</p>
+</li>
+<li><p>大部分人都低估自己的能力。你一定有某种可以传授给他人的东西。</p>
+</li>
+<li><p>你永远也不会觉得自己已经做好了100%的准备，所以不妨现在就开始行动吧。</p>
+</li>
+</ul>
+<h3 id="40_创建自己的商标和品牌">40 创建自己的商标和品牌</h3><ul>
+<li>得到认知和尊重是值得去创建和维护的资产。</li>
+</ul>
+<h3 id="41_发布你编写的程序">41 发布你编写的程序</h3><ul>
+<li>对开源软件有所建树是一种技术的展示。</li>
+</ul>
+<h2 id="保持技术领先">保持技术领先</h2><h3 id="50_南印度捉猴陷阱">50 南印度捉猴陷阱</h3><ul>
+<li>当你坚信某事的价值时，就会无法客观地批判它，即是价值僵固。</li>
+</ul>
+<h3 id="52_每天都有进步">52 每天都有进步</h3><ul>
+<li>远大的目标会使人散失动力。持续的小目标才是可执行的。</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Notes/">Notes</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Career/">Career</a><a href="/tags/创业/">创业</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/08/Notes-about-The-Passionate-Programmer/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/08/Notes-about-The-Passionate-Programmer/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/12/08/Lean-Startup/" title="精益创业" itemprop="url">精益创业</a>
   </h1>
   <p class="article-author">By
@@ -652,375 +1081,6 @@ widgets:
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/11/26/Showcase-Weblog-based-on-Hexo/" title="基于Hexo搭建的博客展示" itemprop="url">基于Hexo搭建的博客展示</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-11-26T08:19:25.000Z" itemprop="datePublished"> 发表于 2015-11-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>在此列举一些用Hexo搭建的博客，算是比较可看的，其中还包含一些教程：</p>
-<p><a href="https://hexo.io/themes/" target="_blank" rel="external">官方主题库</a></p>
-<p><a href="http://litten.github.io/" target="_blank" rel="external">Yilia主题作者博客</a></p>
-<p><a href="http://wuchong.me/tags/Hexo/" target="_blank" rel="external">Jark’s Blog | Jacman主题作者博客</a></p>
-<p><a href="http://notes.iissnan.com/" target="_blank" rel="external">IIssNan’s Notes | Next主题作者博客</a></p>
-<p><a href="http://ibruce.info/tags/hexo/" target="_blank" rel="external">不如</a></p>
-<p><a href="http://blog.miopeco.com/" target="_blank" rel="external">Pingbo’s Blog</a></p>
-<p><a href="https://xuanwo.org/tags/Hexo/" target="_blank" rel="external">XuanWo’s Blog</a></p>
-<p><a href="http://chitanda.me/tags/hexo/" target="_blank" rel="external">我很好奇</a></p>
-<p><a href="http://blog.jamespan.me/" target="_blank" rel="external">James Pan’s Blog</a></p>
-<p><a href="http://kuangqi.me/" target="_blank" rel="external">The Bloom of Youth | 锦瑟华年</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Blog/">Blog</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Hexo/">Hexo</a><a href="/tags/Website/">Website</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/11/26/Showcase-Weblog-based-on-Hexo/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/11/26/Showcase-Weblog-based-on-Hexo/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/11/24/hexo-customization-Ⅱ/" title="Hexo折腾记 Ⅱ" itemprop="url">Hexo折腾记 Ⅱ</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-11-24T06:16:50.000Z" itemprop="datePublished"> 发表于 2015-11-24</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>继续捣鼓Hexo博客框架，细化更为个性的地方。比如：</p>
-<h2 id="新增自定义页面">新增自定义页面</h2><p>不妨以新增一个简历页面（个人博客建立优雅的简历页面不失为一个推销自己的方式）为例，不同的主题可能会有些微区别，修改步骤如下：</p>
-<ol>
-<li><p>命令新增页面 <code>$ hexo new page resume</code></p>
-</li>
-<li><p>拷贝page.ejs并重命名为resume.ejs， 修改代码如下：</p>
-<pre><code>&lt;%- partial(<span class="string">'_partial/post/resume'</span>, {<span class="string">item:</span> page, <span class="string">index:</span> <span class="literal">false</span>,<span class="string">table:</span> <span class="literal">false</span>}) %&gt;
-</code></pre></li>
-<li><p>按照路径_partial/post/resume在目录post下拷贝article.ejs并重命名为resume.ejs，修改代码如下:</p>
-<pre><code><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"main"</span> <span class="attribute">class</span>=<span class="value">"page"</span> <span class="attribute">itemscope</span> <span class="attribute">itemprop</span>=<span class="value">"blogPost"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">article</span> <span class="attribute">itemprop</span>=<span class="value">"articleBody"</span>&gt;</span> 
-    <span class="tag">&lt;<span class="title">header</span> <span class="attribute">class</span>=<span class="value">"article-info clearfix"</span>&gt;</span>
-      <span class="tag">&lt;<span class="title">h1</span> <span class="attribute">itemprop</span>=<span class="value">"name"</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">%=</span> <span class="attribute">item.title</span> %&gt;</span>
-      <span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
-    <span class="tag">&lt;/<span class="title">header</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"article-content"</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">%-</span> <span class="attribute">item.content</span> %&gt;</span>  
-    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>             
-    <span class="tag">&lt;/<span class="title">article</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>     
-</code></pre></li>
-<li><p>打开文件layout.ejs, 增加resume布局的判断代码如下:</p>
-<pre><code><span class="xml"></span>&lt;%<span class="ruby"> } <span class="keyword">else</span> <span class="keyword">if</span>(page.layout==<span class="string">'resume'</span>){ </span>%&gt;<span class="xml">
-    </span>&lt;%-<span class="ruby"> partial(<span class="string">'_partial/head'</span>) </span>%&gt;<span class="xml">
-      <span class="tag">&lt;<span class="title">body</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"container"</span>&gt;</span>
-          </span>&lt;%-<span class="ruby"> body </span>%&gt;<span class="xml">
-        <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-      <span class="tag">&lt;/<span class="title">body</span>&gt;</span>
-     <span class="tag">&lt;/<span class="title">html</span>&gt;</span>
-</span>&lt;%<span class="ruby"> } <span class="keyword">else</span> <span class="keyword">if</span>(page.layout==<span class="string">'page'</span>){ </span>%&gt;<span class="xml"></span>
-</code></pre></li>
-<li><p>打开路径Hexo\source\resume下的index.md，增加layout: resume设置。</p>
-</li>
-<li><p>（可选）在主题配置文件_config.yml新增菜单：</p>
-<pre><code><span class="preprocessor">##### Menu</span>
-menu:
-  主页 <span class="string">| Home: /</span>
-  <span class="preprocessor">##索引 | Index: /index</span>
-  归档 <span class="string">| Archives: /archives</span>
-  关于 <span class="string">| About: /about</span>
-  简历 <span class="string">| Resume: /resume</span>
-</code></pre></li>
-</ol>
-<p>此时全部设置完毕，部署后可直接访问your_github_name.github.io/resume访问到该独立简历页面。</p>
-<h2 id="创建模板帮助插件">创建模板帮助插件</h2><p>你可以在主题目录下的scripts文件夹里创建一些全局性的模板帮助方法，从而在模板直接调用即可。比如我们可以创建一个页面标题的方法，代码如下：</p>
-<pre><code><span class="comment"><span class="markdown">/** 
-<span class="bullet">* </span>page_title helper
-<span class="bullet">*
-</span><span class="bullet">* </span>Usage:
-<span class="bullet">*   </span><span class="xml"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span>
-<span class="bullet">*     </span><span class="xml"><span class="tag">&lt;<span class="title">title</span>&gt;</span></span><span class="xml"><span class="tag">&lt;<span class="title">%=</span> <span class="attribute">page_title</span>() %&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="title">title</span>&gt;</span></span>
-<span class="bullet">*   </span><span class="xml"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span>
-*/</span></span>
-
-hexo.extend.helper.register(<span class="string">"page_title"</span>, function () {
-  <span class="keyword">var</span> title = <span class="keyword">this</span>.page.title;
-
-  <span class="keyword">if</span> (<span class="keyword">this</span>.is_archive()){
-    title = <span class="keyword">this</span>.__(<span class="string">'archive_a'</span>);
-
-    <span class="keyword">if</span> (<span class="keyword">this</span>.is_month()){
-      title += <span class="string">': '</span> + <span class="keyword">this</span>.page.year + <span class="string">'/'</span> + <span class="keyword">this</span>.page.month;
-    } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_year()){
-      title += <span class="string">': '</span> + <span class="keyword">this</span>.page.year;
-    }
-  } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_category()){
-    title =  <span class="keyword">this</span>.__(<span class="string">'categories'</span>)+<span class="string">' : '</span> + <span class="keyword">this</span>.page.category;
-  } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_tag()){
-    title = <span class="keyword">this</span>.__(<span class="string">'tags'</span>)+<span class="string">' : '</span> + <span class="keyword">this</span>.page.tag;
-  }
-
-  <span class="keyword">return</span> title;
-});
-</code></pre><p>注意在此方法体你可以通过this访问到对象page，site，config等，如你所见，一些全局方法比如<code>is_archive()</code>或本地化方法<code>__(&#39;archive_a&#39;)</code>都必须经由this来调用。</p>
-<p>复制以上代码到新建文件page_title.js里。接下来打开head.ejs并修改呈现页面标题的代码如下：</p>
-<p><strong>原代码：</strong></p>
-<pre><code><span class="xml"></span>&lt;%<span class="ruby">
-  var title = page.title;
-
-  <span class="keyword">if</span> (is_archive()){
-    title = _<span class="number">_</span>(<span class="string">'archive_a'</span>);
-
-    <span class="keyword">if</span> (is_month()){
-      title += <span class="string">': '</span> + page.year + <span class="string">'/'</span> + page.month;
-    } <span class="keyword">else</span> <span class="keyword">if</span> (is_year()){
-      title += <span class="string">': '</span> + page.year;
-    }
-  } <span class="keyword">else</span> <span class="keyword">if</span> (is_category()){
-    title =  _<span class="number">_</span>(<span class="string">'categories'</span>)+<span class="string">' : '</span> + page.category;
-  } <span class="keyword">else</span> <span class="keyword">if</span> (is_tag()){
-    title = _<span class="number">_</span>(<span class="string">'tags'</span>)+<span class="string">' : '</span> + page.tag;
-  }
-  </span>%&gt;<span class="xml">
-    <span class="tag">&lt;<span class="title">title</span>&gt;</span></span>&lt;%<span class="ruby"> <span class="keyword">if</span> (title){ </span>%&gt;<span class="xml"></span>&lt;%=<span class="ruby"> title </span>%&gt;<span class="xml"> | </span>&lt;%<span class="ruby"> } </span>%&gt;<span class="xml"></span>&lt;%=<span class="ruby"> config.title </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">title</span>&gt;</span></span>
-</code></pre><p><strong>新代码：</strong></p>
-<pre><code>&lt;% var <span class="built_in">title</span> = page_title(); %&gt;
-    &lt;<span class="built_in">title</span>&gt;&lt;% <span class="flow">if</span> (<span class="built_in">title</span>){ <span class="envvar">%&gt;&lt;%</span>= <span class="built_in">title</span> %&gt; | &lt;% } <span class="envvar">%&gt;&lt;%</span>= config.<span class="built_in">title</span> %&gt;&lt;/<span class="built_in">title</span>&gt;
-</code></pre><p>参考教程 - <a href="http://1pixelout.net/2015/09/18/writing-hexo-template-helpers/" target="_blank" rel="external">WRITING HEXO TEMPLATE HELPERS</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Blog/">Blog</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/Hexo/">Hexo</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/11/24/hexo-customization-Ⅱ/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/11/24/hexo-customization-Ⅱ/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/11/20/Hexo-Customization/" title="Hexo折腾记" itemprop="url">Hexo折腾记</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-11-20T08:06:23.000Z" itemprop="datePublished"> 发表于 2015-11-20</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="自定义404页面">自定义404页面</h2><p>直接在根目录（指的不是Hexo目录下，而是Hexo/source目录下）下创建自己的 404.html 就可以。如腾讯公益404页面：</p>
-<pre><code><span class="tag">&lt;<span class="title">html</span>&gt;</span>
-<span class="tag">&lt;<span class="title">head</span>&gt;</span>
-<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span> /&gt;</span>
-<span class="tag">&lt;<span class="title">title</span>&gt;</span>404 | Hacker's Blog<span class="tag">&lt;/<span class="title">title</span>&gt;</span>                   
-<span class="tag">&lt;/<span class="title">head</span>&gt;</span>
-<span class="tag">&lt;<span class="title">body</span>&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://www.qq.com/404/search_children.js"</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
-</code></pre><h2 id="启用第三方评论系统">启用第三方评论系统</h2><p>静态博客只能使用第三方评论系统，在此整合<strong>多说</strong>为例。直接用你的微博/豆瓣/人人/百度/开心网帐号登录多说。同时修改当前主题的配置文件，比如/themes/jacman/_config.yml，找到选项duoshuo_shortname, 替换成你的账号即可：</p>
-<pre><code><span class="comment">#### Comment</span>
-duoshuo_shortname: sunblognuke   <span class="comment">## e.g. wuchong   your duoshuo short name.</span>
-disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short name.</span>
-</code></pre><p>你也可以在多说后台自定义CSS，比如评论头像鼠标悬停旋转效果和隐藏多说底部版权，代码如下：</p>
-<pre><code><span class="class">.ds-avatar</span>{-webkit-<span class="attribute">border-radius</span><span class="value">: <span class="number">5px</span> <span class="important">!important</span>;</span><span class="comment">/*圆角效果：兼容webkit浏览器*/</span>
--moz-<span class="attribute">border-radius</span><span class="value">:<span class="number">5px</span> <span class="important">!important</span>;</span>
-<span class="attribute">box-shadow</span><span class="value">: inset <span class="number">0</span> -<span class="number">1px</span> <span class="number">0</span> <span class="hexcolor">#3333</span>sf <span class="important">!important</span>;</span><span class="comment">/*设置图像阴影效果*/</span>
--webkit-<span class="attribute">box-shadow</span><span class="value">: inset <span class="number">0</span> -<span class="number">1px</span> <span class="number">0</span> <span class="hexcolor">#3333</span>sf <span class="important">!important</span>;</span>
--webkit-<span class="attribute">transition</span><span class="value">: <span class="number">0.4s</span> <span class="important">!important</span>;</span>
--webkit-<span class="attribute">transition</span><span class="value">: -webkit-transform <span class="number">0.4s</span> ease-out <span class="important">!important</span>;</span>
-<span class="attribute">transition</span><span class="value">: transform <span class="number">0.4s</span> ease-out <span class="important">!important</span>;</span><span class="comment">/*变化时间设置为0.4秒(变化动作即为下面的图像旋转360度）*/</span>
--moz-<span class="attribute">transition</span><span class="value">: -moz-transform <span class="number">0.4s</span> ease-out <span class="important">!important</span>;</span> }
-<span class="class">.ds-avatar</span><span class="pseudo">:hover</span>{<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="hexcolor">#fff</span> <span class="important">!important</span>;</span> <span class="function">rgba</span>(255,255,255,<span class="class">.6</span>), <span class="value">inset</span> 0 0 20px <span class="function">rgba</span>(255,255,255,1) !important;
--webkit-<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="hexcolor">#fff</span>;</span> <span class="function">rgba</span>(255,255,255,<span class="class">.6</span>), <span class="value">inset</span> 0 0 20px <span class="function">rgba</span>(255,255,255,1) !important;
-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span><span class="comment">/*图像旋转360度*/</span>
--webkit-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span>
--moz-<span class="attribute">transform</span><span class="value">: <span class="function">rotateZ</span>(<span class="number">360deg</span>) <span class="important">!important</span>;</span>}
-<span class="comment">/*隐藏多说底部版权*/</span>
-<span class="id">#ds-thread</span> <span class="id">#ds-reset</span> <span class="class">.ds-powered-by</span> {
-    <span class="attribute">display</span><span class="value">: none;</span>
-}
-</code></pre><p>更多教程参看《<a href="http://dev.duoshuo.com/threads/4ff1cfd0397309552c000017" target="_blank" rel="external">多说CSS修改</a>》</p>
-<p><a href="http://www.arao.me/2015/hexo-next-theme-optimize-duoshuo/" target="_blank" rel="external">动动手指，给你的Hexo站点添加最近访客（多说篇）</a></p>
-<h2 id="整合Swiftype站内搜索">整合Swiftype站内搜索</h2><p>参考这两篇教程：</p>
-<p><a href="http://opiece.me/2015/04/16/site-search-by-swiftype/" target="_blank" rel="external">使用swiftype实现站内搜索</a></p>
-<p><a href="http://gsgundam.com/2015-03-03-swiftype-professional-search-tool/" target="_blank" rel="external">Swiftype 专业站内搜索工具</a></p>
-<p><a href="http://www.jerryfu.net/post/search-engine-for-hexo-with-swiftype-v2.html" target="_blank" rel="external">利用swiftype为hexo添加站内搜索v2.0</a></p>
-<p>步骤大概如下:</p>
-<ol>
-<li><p>新建文件swiftype_search.ejs，代码如下：</p>
-<pre><code><span class="tag">&lt;<span class="title">%</span> <span class="attribute">if</span> (<span class="attribute">theme.swiftype_search.enable</span>){ %&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
-  (<span class="function"><span class="keyword">function</span>(<span class="params">w,d,t,u,n,s,e</span>)</span>{w[<span class="string">'SwiftypeObject'</span>]=n;w[n]=w[n]||<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
-  (w[n].q=w[n].q||[]).push(<span class="built_in">arguments</span>);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[<span class="number">0</span>];s.async=<span class="number">1</span>;s.src=u;e.parentNode.insertBefore(s,e);
-  })(<span class="built_in">window</span>,<span class="built_in">document</span>,<span class="string">'script'</span>,<span class="string">'//s.swiftypecdn.com/install/v2/st.js'</span>,<span class="string">'_st'</span>);
-
-  _st(<span class="string">'install'</span>,<span class="string">'&lt;%= theme.swiftype_search.id %&gt;'</span>,<span class="string">'2.0.0'</span>);
-</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-<span class="tag">&lt;<span class="title">%</span> } %&gt;</span>
-</code></pre></li>
-<li><p>添加代码到文件after_footer.ejs：</p>
-<pre><code><span class="xml"><span class="comment">&lt;!-- Swiftype_search Begin --&gt;</span>
-</span>&lt;%-<span class="ruby"> partial(<span class="string">'swiftype_search'</span>) </span>%&gt;<span class="xml">
-<span class="comment">&lt;!-- Swiftype_search End --&gt;</span></span>
-</code></pre></li>
-<li><p>添加配置项到主题文件_config.yml</p>
-<pre><code>swiftype_search:
-  enable: true
-  id: <span class="string">"zpAq-EQUfMzEzP6ybWEU"</span> ## <span class="keyword">e</span>.<span class="keyword">g</span>. <span class="string">"zpAq-EQUfMzEzP6ybWEU"</span> <span class="keyword">for</span> your swiftype <span class="keyword">search</span> id
-</code></pre></li>
-<li><p>添加class - st-default-search-input到header.ejs</p>
-</li>
-</ol>
-<h2 id="部署Github的README-md">部署Github的README.md</h2><p>如何部署Github时保证README.md不被渲染：</p>
-<ul>
-<li><p>添加README.md文件：Hexo目录下的source根目录下创建README.md文件，编辑保存。</p>
-</li>
-<li><p>防止README.md被渲染：编辑Hexo目录的_config.yml文件中的“skip_render”参数，skip_render: README.md</p>
-</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Blog/">Blog</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/Hexo/">Hexo</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/11/20/Hexo-Customization/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/11/20/Hexo-Customization/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -1043,7 +1103,7 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 		  
 		
 		  
-			<li><a href="/categories/Dev/" title="Dev">Dev<sup>5</sup></a></li>
+			<li><a href="/categories/Dev/" title="Dev">Dev<sup>7</sup></a></li>
 		  
 		
 		  
@@ -1066,6 +1126,10 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 			<li><a href="/categories/Startup/" title="Startup">Startup<sup>1</sup></a></li>
 		  
 		
+		  
+			<li><a href="/categories/dev/" title="dev">dev<sup>1</sup></a></li>
+		  
+		
 		</ul>
 </div>
 
@@ -1084,11 +1148,11 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 			
 		
 			
-				<li><a href="/tags/Baby/" title="Baby">Baby<sup>2</sup></a></li>
+				<li><a href="/tags/Python/" title="Python">Python<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Python/" title="Python">Python<sup>2</sup></a></li>
+				<li><a href="/tags/Baby/" title="Baby">Baby<sup>2</sup></a></li>
 			
 		
 			
@@ -1105,6 +1169,10 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 		
 			
 				<li><a href="/tags/DNN8/" title="DNN8">DNN8<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Programmers/" title="Programmers">Programmers<sup>1</sup></a></li>
 			
 		
 			
@@ -1132,11 +1200,11 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 			
 		
 			
-				<li><a href="/tags/Website/" title="Website">Website<sup>1</sup></a></li>
+				<li><a href="/tags/Sublime-Text/" title="Sublime Text">Sublime Text<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/开发/" title="开发">开发<sup>1</sup></a></li>
+				<li><a href="/tags/Website/" title="Website">Website<sup>1</sup></a></li>
 			
 		
 			
@@ -1148,11 +1216,7 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
 			
 		
 			
-				<li><a href="/tags/Framework/" title="Framework">Framework<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
+				<li><a href="/tags/开发/" title="开发">开发<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -1162,7 +1226,7 @@ disqus_shortname:     <span class="comment">## e.g. wuchong   your disqus short 
   <div class="linkslist">
     <p class="asidetitle">最新随笔</p>
     <div class="linkslist clearfix">
-		<ul class=""><li class=""><a href="/2016/01/11/Python-Troubleshooting/">Python Troubleshooting</a></li><li class=""><a href="/2016/01/07/The-Zen-of-Python/">The Zen of Python</a></li><li class=""><a href="/2015/12/23/Network-Troubleshooting/">网络排查</a></li><li class=""><a href="/2015/12/22/Play-with-DNS/">科学上网之DNS</a></li><li class=""><a href="/2015/12/22/Git-Best-Practices/">Git最佳实践</a></li><li class=""><a href="/2015/12/14/DNN8-Development/">DNN8 Development</a></li></ul>
+		<ul class=""><li class=""><a href="/2016/01/13/Python-esay-install-pip-for-Windows/">Windows下Python easy_install和pip的安装</a></li><li class=""><a href="/2016/01/13/Sublime-Text-for-Python-Dev/">Sublime Text for Python Dev</a></li><li class=""><a href="/2016/01/12/Python-Tricks/">Python Tricks</a></li><li class=""><a href="/2016/01/11/Python-Troubleshooting/">Python Troubleshooting</a></li><li class=""><a href="/2016/01/07/The-Zen-of-Python/">The Zen of Python</a></li><li class=""><a href="/2015/12/23/Network-Troubleshooting/">网络排查</a></li></ul>
 	</div>
 </div>
 

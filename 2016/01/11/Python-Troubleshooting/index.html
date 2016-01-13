@@ -13,20 +13,20 @@
     
     <meta name="description" content="PyQuery: 一个类似jQuery的Python库PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：http://pyquery.org
 Python轻量级ORM - Peewee最新API：Python轻量级ORM - Peewee
-urllib2.">
+like匹配语句">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python Troubleshooting">
 <meta property="og:url" content="http://sunblognuke.github.io/2016/01/11/Python-Troubleshooting/index.html">
 <meta property="og:site_name" content="Baldwin's Blog">
 <meta property="og:description" content="PyQuery: 一个类似jQuery的Python库PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：http://pyquery.org
 Python轻量级ORM - Peewee最新API：Python轻量级ORM - Peewee
-urllib2.">
-<meta property="og:updated_time" content="2016-01-11T07:20:52.526Z">
+like匹配语句">
+<meta property="og:updated_time" content="2016-01-12T06:43:00.232Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python Troubleshooting">
 <meta name="twitter:description" content="PyQuery: 一个类似jQuery的Python库PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：http://pyquery.org
 Python轻量级ORM - Peewee最新API：Python轻量级ORM - Peewee
-urllib2.">
+like匹配语句">
 <meta name="twitter:creator" content="@sunblognuke">
 
     
@@ -104,13 +104,21 @@ urllib2.">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PyQuery:_一个类似jQuery的Python库"><span class="toc-number">1.</span> <span class="toc-text">PyQuery: 一个类似jQuery的Python库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python轻量级ORM_-_Peewee"><span class="toc-number">2.</span> <span class="toc-text">Python轻量级ORM - Peewee</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#urllib2-HTTPError:_HTTP_Error_403:_Forbidden"><span class="toc-number">3.</span> <span class="toc-text">urllib2.HTTPError: HTTP Error 403: Forbidden</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装饰器"><span class="toc-number">4.</span> <span class="toc-text">装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#@classmethod_或_@staticmethod"><span class="toc-number">5.</span> <span class="toc-text">@classmethod 或 @staticmethod</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PyQuery:_一个类似jQuery的Python库"><span class="toc-number">1.</span> <span class="toc-text">PyQuery: 一个类似jQuery的Python库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python轻量级ORM_-_Peewee"><span class="toc-number">2.</span> <span class="toc-text">Python轻量级ORM - Peewee</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#requests-get_获取页面乱码"><span class="toc-number">3.</span> <span class="toc-text">requests.get 获取页面乱码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#urllib2-HTTPError:_HTTP_Error_403:_Forbidden"><span class="toc-number">4.</span> <span class="toc-text">urllib2.HTTPError: HTTP Error 403: Forbidden</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装饰器"><span class="toc-number">5.</span> <span class="toc-text">装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#@classmethod_或_@staticmethod"><span class="toc-number">6.</span> <span class="toc-text">@classmethod 或 @staticmethod</span></a></li></ol>
 		
 		</div>
 		
 		<h2 id="PyQuery:_一个类似jQuery的Python库">PyQuery: 一个类似jQuery的Python库</h2><p>PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：<a href="http://pyquery.readthedocs.org/en/latest/api.html" target="_blank" rel="external">http://pyquery.org</a></p>
 <h2 id="Python轻量级ORM_-_Peewee">Python轻量级ORM - Peewee</h2><p>最新API：<a href="http://peewee.readthedocs.org/en/latest/" target="_blank" rel="external">Python轻量级ORM - Peewee</a></p>
-<h2 id="urllib2-HTTPError:_HTTP_Error_403:_Forbidden">urllib2.HTTPError: HTTP Error 403: Forbidden</h2><p>解决方案：ulr请求需要模拟真实的浏览器访问，需要设置User-Agent项，最简便的方式就是随机获取，代码如下:</p>
+<p>like匹配语句:</p>
+<pre><code>xxModel.<span class="function"><span class="title">select</span><span class="params">()</span></span>.<span class="function"><span class="title">where</span><span class="params">(xxModel.author ** <span class="string">'zh%'</span>)</span></span>
+</code></pre><h2 id="requests-get_获取页面乱码">requests.get 获取页面乱码</h2><p>查看一下网页的编码，比如是gbk</p>
+<pre><code><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"Content-Type"</span> <span class="attribute">content</span>=<span class="value">"text/html; charset=gb2312"</span> /&gt;</span>
+</code></pre><p>那就需要response设置为r.encoding=’gbk’, 代码如下:</p>
+<pre><code>r = requests.<span class="function"><span class="title">get</span><span class="params">(self.url, headers=config.HEADERS)</span></span>
+r<span class="class">.encoding</span> = <span class="string">'gb2312'</span>
+return r.text
+</code></pre><h2 id="urllib2-HTTPError:_HTTP_Error_403:_Forbidden">urllib2.HTTPError: HTTP Error 403: Forbidden</h2><p>解决方案：ulr请求需要模拟真实的浏览器访问，需要设置User-Agent项，最简便的方式就是随机获取，代码如下:</p>
 <pre><code><span class="preprocessor"># -*- coding: UTF-8 -*-</span>
 import sys
 import <span class="built_in">random</span>
@@ -173,6 +181,14 @@ HEADERS = {
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2016/01/12/Python-Tricks/" title="Python Tricks">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Python Tricks</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2016/01/07/The-Zen-of-Python/"  title="The Zen of Python">
@@ -196,7 +212,7 @@ HEADERS = {
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PyQuery:_一个类似jQuery的Python库"><span class="toc-number">1.</span> <span class="toc-text">PyQuery: 一个类似jQuery的Python库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python轻量级ORM_-_Peewee"><span class="toc-number">2.</span> <span class="toc-text">Python轻量级ORM - Peewee</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#urllib2-HTTPError:_HTTP_Error_403:_Forbidden"><span class="toc-number">3.</span> <span class="toc-text">urllib2.HTTPError: HTTP Error 403: Forbidden</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装饰器"><span class="toc-number">4.</span> <span class="toc-text">装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#@classmethod_或_@staticmethod"><span class="toc-number">5.</span> <span class="toc-text">@classmethod 或 @staticmethod</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PyQuery:_一个类似jQuery的Python库"><span class="toc-number">1.</span> <span class="toc-text">PyQuery: 一个类似jQuery的Python库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python轻量级ORM_-_Peewee"><span class="toc-number">2.</span> <span class="toc-text">Python轻量级ORM - Peewee</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#requests-get_获取页面乱码"><span class="toc-number">3.</span> <span class="toc-text">requests.get 获取页面乱码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#urllib2-HTTPError:_HTTP_Error_403:_Forbidden"><span class="toc-number">4.</span> <span class="toc-text">urllib2.HTTPError: HTTP Error 403: Forbidden</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装饰器"><span class="toc-number">5.</span> <span class="toc-text">装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#@classmethod_或_@staticmethod"><span class="toc-number">6.</span> <span class="toc-text">@classmethod 或 @staticmethod</span></a></li></ol>
  
   </div>
 
@@ -214,7 +230,7 @@ HEADERS = {
 		  
 		
 		  
-			<li><a href="/categories/Dev/" title="Dev">Dev<sup>5</sup></a></li>
+			<li><a href="/categories/Dev/" title="Dev">Dev<sup>7</sup></a></li>
 		  
 		
 		  
@@ -237,6 +253,10 @@ HEADERS = {
 			<li><a href="/categories/Startup/" title="Startup">Startup<sup>1</sup></a></li>
 		  
 		
+		  
+			<li><a href="/categories/dev/" title="dev">dev<sup>1</sup></a></li>
+		  
+		
 		</ul>
 </div>
 
@@ -255,11 +275,11 @@ HEADERS = {
 			
 		
 			
-				<li><a href="/tags/Baby/" title="Baby">Baby<sup>2</sup></a></li>
+				<li><a href="/tags/Python/" title="Python">Python<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Python/" title="Python">Python<sup>2</sup></a></li>
+				<li><a href="/tags/Baby/" title="Baby">Baby<sup>2</sup></a></li>
 			
 		
 			
@@ -276,6 +296,10 @@ HEADERS = {
 		
 			
 				<li><a href="/tags/DNN8/" title="DNN8">DNN8<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Programmers/" title="Programmers">Programmers<sup>1</sup></a></li>
 			
 		
 			
@@ -303,11 +327,11 @@ HEADERS = {
 			
 		
 			
-				<li><a href="/tags/Website/" title="Website">Website<sup>1</sup></a></li>
+				<li><a href="/tags/Sublime-Text/" title="Sublime Text">Sublime Text<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/开发/" title="开发">开发<sup>1</sup></a></li>
+				<li><a href="/tags/Website/" title="Website">Website<sup>1</sup></a></li>
 			
 		
 			
@@ -319,11 +343,7 @@ HEADERS = {
 			
 		
 			
-				<li><a href="/tags/Framework/" title="Framework">Framework<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
+				<li><a href="/tags/开发/" title="开发">开发<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -333,7 +353,7 @@ HEADERS = {
   <div class="linkslist">
     <p class="asidetitle">最新随笔</p>
     <div class="linkslist clearfix">
-		<ul class=""><li class=""><a href="/2016/01/11/Python-Troubleshooting/">Python Troubleshooting</a></li><li class=""><a href="/2016/01/07/The-Zen-of-Python/">The Zen of Python</a></li><li class=""><a href="/2015/12/23/Network-Troubleshooting/">网络排查</a></li><li class=""><a href="/2015/12/22/Play-with-DNS/">科学上网之DNS</a></li><li class=""><a href="/2015/12/22/Git-Best-Practices/">Git最佳实践</a></li><li class=""><a href="/2015/12/14/DNN8-Development/">DNN8 Development</a></li></ul>
+		<ul class=""><li class=""><a href="/2016/01/13/Python-esay-install-pip-for-Windows/">Windows下Python easy_install和pip的安装</a></li><li class=""><a href="/2016/01/13/Sublime-Text-for-Python-Dev/">Sublime Text for Python Dev</a></li><li class=""><a href="/2016/01/12/Python-Tricks/">Python Tricks</a></li><li class=""><a href="/2016/01/11/Python-Troubleshooting/">Python Troubleshooting</a></li><li class=""><a href="/2016/01/07/The-Zen-of-Python/">The Zen of Python</a></li><li class=""><a href="/2015/12/23/Network-Troubleshooting/">网络排查</a></li></ul>
 	</div>
 </div>
 

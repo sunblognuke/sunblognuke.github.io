@@ -2,8 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sunblognuke.github.io/2016/01/13/Python-esay-install-pip-for-Windows/</loc>
+    <lastmod>2016-01-13T03:45:57.210Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sunblognuke.github.io/2016/01/13/Sublime-Text-for-Python-Dev/</loc>
+    <lastmod>2016-01-13T02:42:18.181Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sunblognuke.github.io/2016/01/12/Python-Tricks/</loc>
+    <lastmod>2016-01-12T06:43:05.283Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sunblognuke.github.io/2016/01/11/Python-Troubleshooting/</loc>
-    <lastmod>2016-01-11T07:20:52.526Z</lastmod>
+    <lastmod>2016-01-12T06:43:00.232Z</lastmod>
   </url>
   
   <url>
