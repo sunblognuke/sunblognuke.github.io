@@ -11,46 +11,46 @@
     
 
     
-    <meta name="description" content="数组合并去重urls = []
-urls = []
-urls.extend(urls2)
-list(set(urls))
-利用PIL比较两个图片的相似度需要安装PIL图像模块，代码虽短但效果不错，还是非常靠谱的，前提是图片要大一些，太小的图片不好比较, 代码如下：
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
+    <meta name="description" content="获取数组交集#方法一:
+a=[2,3,4,5]
+b=[2,5,8]
+tmp = [val for val in a if val in b]
+print tmp
+#[2, 5]
 
-import Image, sys, os
-
-r">
+#方法二
+print list(set(a).intersection(set(b)))
+获取数组并集 (合并去重)print list(set(a).union(set(b)))
+获取数组差集print list(se">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python Tricks">
 <meta property="og:url" content="http://sunblognuke.github.io/2016/01/12/Python-Tricks/index.html">
 <meta property="og:site_name" content="Baldwin's Blog">
-<meta property="og:description" content="数组合并去重urls = []
-urls = []
-urls.extend(urls2)
-list(set(urls))
-利用PIL比较两个图片的相似度需要安装PIL图像模块，代码虽短但效果不错，还是非常靠谱的，前提是图片要大一些，太小的图片不好比较, 代码如下：
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
+<meta property="og:description" content="获取数组交集#方法一:
+a=[2,3,4,5]
+b=[2,5,8]
+tmp = [val for val in a if val in b]
+print tmp
+#[2, 5]
 
-import Image, sys, os
-
-r">
-<meta property="og:updated_time" content="2016-01-12T06:43:05.283Z">
+#方法二
+print list(set(a).intersection(set(b)))
+获取数组并集 (合并去重)print list(set(a).union(set(b)))
+获取数组差集print list(se">
+<meta property="og:updated_time" content="2016-02-24T10:48:33.411Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python Tricks">
-<meta name="twitter:description" content="数组合并去重urls = []
-urls = []
-urls.extend(urls2)
-list(set(urls))
-利用PIL比较两个图片的相似度需要安装PIL图像模块，代码虽短但效果不错，还是非常靠谱的，前提是图片要大一些，太小的图片不好比较, 代码如下：
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
+<meta name="twitter:description" content="获取数组交集#方法一:
+a=[2,3,4,5]
+b=[2,5,8]
+tmp = [val for val in a if val in b]
+print tmp
+#[2, 5]
 
-import Image, sys, os
-
-r">
+#方法二
+print list(set(a).intersection(set(b)))
+获取数组并集 (合并去重)print list(set(a).union(set(b)))
+获取数组差集print list(se">
 <meta name="twitter:creator" content="@sunblognuke">
 
     
@@ -128,14 +128,21 @@ r">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组合并去重"><span class="toc-number">1.</span> <span class="toc-text">数组合并去重</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利用PIL比较两个图片的相似度"><span class="toc-number">2.</span> <span class="toc-text">利用PIL比较两个图片的相似度</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取数组交集"><span class="toc-number">1.</span> <span class="toc-text">获取数组交集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取数组并集_(合并去重)"><span class="toc-number">2.</span> <span class="toc-text">获取数组并集 (合并去重)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取数组差集"><span class="toc-number">3.</span> <span class="toc-text">获取数组差集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利用PIL比较两个图片的相似度"><span class="toc-number">4.</span> <span class="toc-text">利用PIL比较两个图片的相似度</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="数组合并去重">数组合并去重</h2><pre><code>urls = []
-urls = []
-urls.<span class="function"><span class="title">extend</span><span class="params">(urls2)</span></span>
-<span class="function"><span class="title">list</span><span class="params">(set(urls)</span></span>)
+		<h2 id="获取数组交集">获取数组交集</h2><pre><code><span class="comment">#方法一:</span>
+a=[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]
+b=[<span class="number">2</span>,<span class="number">5</span>,<span class="number">8</span>]
+tmp = [val <span class="keyword">for</span> val <span class="keyword">in</span> a <span class="keyword">if</span> val <span class="keyword">in</span> b]
+<span class="keyword">print</span> tmp
+<span class="comment">#[2, 5]</span>
+
+<span class="comment">#方法二</span>
+<span class="keyword">print</span> <span class="typename">list</span>(<span class="typename">set</span>(a).intersection(<span class="typename">set</span>(b)))
+</code></pre><h2 id="获取数组并集_(合并去重)">获取数组并集 (合并去重)</h2><pre><code>print list<span class="list">(<span class="keyword">set</span><span class="list">(<span class="keyword">a</span>)</span>.union<span class="list">(<span class="keyword">set</span><span class="list">(<span class="keyword">b</span>)</span>)</span>)</span>
+</code></pre><h2 id="获取数组差集">获取数组差集</h2><pre><code><span class="keyword">print</span> <span class="typename">list</span>(<span class="typename">set</span>(b).difference(<span class="typename">set</span>(a))) <span class="comment"># b中有而a中没有的</span>
 </code></pre><h2 id="利用PIL比较两个图片的相似度">利用PIL比较两个图片的相似度</h2><p>需要安装<a href="http://www.pythonware.com/products/pil/" target="_blank" rel="external">PIL图像模块</a>，代码虽短但效果不错，还是非常靠谱的，前提是图片要大一些，太小的图片不好比较, 代码如下：</p>
 <pre><code><span class="comment">#!/usr/bin/python</span>
 <span class="comment"># -*- coding: utf-8 -*-</span>
@@ -294,7 +301,7 @@ sys.setdefaultencoding(<span class="string">'utf-8'</span>)
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组合并去重"><span class="toc-number">1.</span> <span class="toc-text">数组合并去重</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利用PIL比较两个图片的相似度"><span class="toc-number">2.</span> <span class="toc-text">利用PIL比较两个图片的相似度</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取数组交集"><span class="toc-number">1.</span> <span class="toc-text">获取数组交集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取数组并集_(合并去重)"><span class="toc-number">2.</span> <span class="toc-text">获取数组并集 (合并去重)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取数组差集"><span class="toc-number">3.</span> <span class="toc-text">获取数组差集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利用PIL比较两个图片的相似度"><span class="toc-number">4.</span> <span class="toc-text">利用PIL比较两个图片的相似度</span></a></li></ol>
  
   </div>
 
@@ -312,7 +319,7 @@ sys.setdefaultencoding(<span class="string">'utf-8'</span>)
 		  
 		
 		  
-			<li><a href="/categories/Dev/" title="Dev">Dev<sup>8</sup></a></li>
+			<li><a href="/categories/Dev/" title="Dev">Dev<sup>9</sup></a></li>
 		  
 		
 		  
@@ -328,7 +335,7 @@ sys.setdefaultencoding(<span class="string">'utf-8'</span>)
 		  
 		
 		  
-			<li><a href="/categories/Resources/" title="Resources">Resources<sup>5</sup></a></li>
+			<li><a href="/categories/Resources/" title="Resources">Resources<sup>6</sup></a></li>
 		  
 		
 		  
@@ -349,19 +356,15 @@ sys.setdefaultencoding(<span class="string">'utf-8'</span>)
 			
 		
 			
-				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Python/" title="Python">Python<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Baby/" title="Baby">Baby<sup>2</sup></a></li>
+				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
+				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
 			
 		
 			
@@ -369,7 +372,15 @@ sys.setdefaultencoding(<span class="string">'utf-8'</span>)
 			
 		
 			
-				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
+				<li><a href="/tags/Baby/" title="Baby">Baby<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Network/" title="Network">Network<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
 			
 		
 			
@@ -381,11 +392,7 @@ sys.setdefaultencoding(<span class="string">'utf-8'</span>)
 			
 		
 			
-				<li><a href="/tags/Startup/" title="Startup">Startup<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+				<li><a href="/tags/CMS/" title="CMS">CMS<sup>2</sup></a></li>
 			
 		
 			
@@ -413,7 +420,7 @@ sys.setdefaultencoding(<span class="string">'utf-8'</span>)
 			
 		
 			
-				<li><a href="/tags/Math/" title="Math">Math<sup>1</sup></a></li>
+				<li><a href="/tags/Framework/" title="Framework">Framework<sup>1</sup></a></li>
 			
 		
 			
@@ -431,7 +438,7 @@ sys.setdefaultencoding(<span class="string">'utf-8'</span>)
   <div class="linkslist">
     <p class="asidetitle">最新随笔</p>
     <div class="linkslist clearfix">
-		<ul class=""><li class=""><a href="/2016/01/13/Math-for-Programmers/">程序员的数学</a></li><li class=""><a href="/2016/01/13/Python-esay-install-pip-for-Windows/">Windows下Python easy_install和pip的安装</a></li><li class=""><a href="/2016/01/13/Sublime-Text-for-Python-Dev/">Sublime Text for Python Dev</a></li><li class=""><a href="/2016/01/12/Python-Tricks/">Python Tricks</a></li><li class=""><a href="/2016/01/11/Python-Troubleshooting/">Python Troubleshooting</a></li><li class=""><a href="/2016/01/07/The-Zen-of-Python/">The Zen of Python</a></li></ul>
+		<ul class=""><li class=""><a href="/2016/02/16/DNN-Tricks/">DNN技巧</a></li><li class=""><a href="/2016/01/29/Network-Operation-and-Maintenance/">网络运维</a></li><li class=""><a href="/2016/01/13/Math-for-Programmers/">程序员的数学</a></li><li class=""><a href="/2016/01/13/Python-esay-install-pip-for-Windows/">Windows下Python easy_install和pip的安装</a></li><li class=""><a href="/2016/01/13/Sublime-Text-for-Python-Dev/">Sublime Text for Python Dev</a></li><li class=""><a href="/2016/01/12/Python-Tricks/">Python Tricks</a></li></ul>
 	</div>
 </div>
 

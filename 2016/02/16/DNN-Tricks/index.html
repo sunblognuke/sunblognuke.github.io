@@ -4,117 +4,41 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>网络排查 | Baldwin&#39;s Blog</title>
+    <title>DNN技巧 | Baldwin&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Baldwin">
     
 
     
-    <meta name="description" content="网络排错大讲解
-基本命令
-
-
-命令
-用途
-
-
-
-
-ipconfig
-查看计算机的IP 地址、子网掩码和网关
-
-
-ipconfig /all
-查看计算机的IP 地址、子网掩码、网关和DNS 地址
-
-
-ping
-测试主机之间的网络连通性
-
-
-nslookup
-请求域名对应的IP 地址，并以此测试DNS 地址是否可用
-
-
-tracert -d
-路由追踪，并且不做反向解析
-
-
-arp -a
-查看计算机是否">
+    <meta name="description" content="创建永久链接只在7.4.1+版本提供支持，通过PageBase.CanonicalLinkUrl这一属性来设置。
+一般模块开发需要设置属性获得PageBase：
+public DotNetNuke.Framework.CDefault BasePage {
+    get { return (DotNetNuke.Framework.CDefault)this.Page; }
+}
+再应用如下：
+/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网络排查">
-<meta property="og:url" content="http://sunblognuke.github.io/2015/12/23/Network-Troubleshooting/index.html">
+<meta property="og:title" content="DNN技巧">
+<meta property="og:url" content="http://sunblognuke.github.io/2016/02/16/DNN-Tricks/index.html">
 <meta property="og:site_name" content="Baldwin's Blog">
-<meta property="og:description" content="网络排错大讲解
-基本命令
-
-
-命令
-用途
-
-
-
-
-ipconfig
-查看计算机的IP 地址、子网掩码和网关
-
-
-ipconfig /all
-查看计算机的IP 地址、子网掩码、网关和DNS 地址
-
-
-ping
-测试主机之间的网络连通性
-
-
-nslookup
-请求域名对应的IP 地址，并以此测试DNS 地址是否可用
-
-
-tracert -d
-路由追踪，并且不做反向解析
-
-
-arp -a
-查看计算机是否">
-<meta property="og:image" content="http://7xof1d.com1.z0.glb.clouddn.com/img/network%20topology.jpg">
-<meta property="og:updated_time" content="2016-01-29T06:35:20.558Z">
+<meta property="og:description" content="创建永久链接只在7.4.1+版本提供支持，通过PageBase.CanonicalLinkUrl这一属性来设置。
+一般模块开发需要设置属性获得PageBase：
+public DotNetNuke.Framework.CDefault BasePage {
+    get { return (DotNetNuke.Framework.CDefault)this.Page; }
+}
+再应用如下：
+/">
+<meta property="og:updated_time" content="2016-02-16T03:38:11.722Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="网络排查">
-<meta name="twitter:description" content="网络排错大讲解
-基本命令
-
-
-命令
-用途
-
-
-
-
-ipconfig
-查看计算机的IP 地址、子网掩码和网关
-
-
-ipconfig /all
-查看计算机的IP 地址、子网掩码、网关和DNS 地址
-
-
-ping
-测试主机之间的网络连通性
-
-
-nslookup
-请求域名对应的IP 地址，并以此测试DNS 地址是否可用
-
-
-tracert -d
-路由追踪，并且不做反向解析
-
-
-arp -a
-查看计算机是否">
+<meta name="twitter:title" content="DNN技巧">
+<meta name="twitter:description" content="创建永久链接只在7.4.1+版本提供支持，通过PageBase.CanonicalLinkUrl这一属性来设置。
+一般模块开发需要设置属性获得PageBase：
+public DotNetNuke.Framework.CDefault BasePage {
+    get { return (DotNetNuke.Framework.CDefault)this.Page; }
+}
+再应用如下：
+/">
 <meta name="twitter:creator" content="@sunblognuke">
 
     
@@ -176,14 +100,14 @@ arp -a
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/23/Network-Troubleshooting/" title="网络排查" itemprop="url">网络排查</a>
+      <a href="/2016/02/16/DNN-Tricks/" title="DNN技巧" itemprop="url">DNN技巧</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-23T03:18:54.000Z" itemprop="datePublished"> 发表于 2015-12-23</time>
+    <time datetime="2016-02-16T03:23:58.000Z" itemprop="datePublished"> 发表于 2016-02-16</time>
     
   </p>
 </header>
@@ -192,47 +116,21 @@ arp -a
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本命令"><span class="toc-number">1.</span> <span class="toc-text">基本命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抓包工具"><span class="toc-number">2.</span> <span class="toc-text">抓包工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#广播风暴"><span class="toc-number">3.</span> <span class="toc-text">广播风暴</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VLAN_、IP分部门管理"><span class="toc-number">4.</span> <span class="toc-text">VLAN 、IP分部门管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARP防火墙"><span class="toc-number">5.</span> <span class="toc-text">ARP防火墙</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建永久链接"><span class="toc-number">1.</span> <span class="toc-text">创建永久链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNN8开发模板"><span class="toc-number">2.</span> <span class="toc-text">DNN8开发模板</span></a></li></ol>
 		
 		</div>
 		
-		<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/network%20topology.jpg" alt=""></p>
-<p><a href="http://xpleaf.blog.51cto.com/9315560/1689438" target="_blank" rel="external">网络排错大讲解</a></p>
-<h2 id="基本命令">基本命令</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ipconfig</td>
-<td>查看计算机的IP 地址、子网掩码和网关</td>
-</tr>
-<tr>
-<td>ipconfig /all</td>
-<td>查看计算机的IP 地址、子网掩码、网关和DNS 地址</td>
-</tr>
-<tr>
-<td>ping</td>
-<td>测试主机之间的网络连通性</td>
-</tr>
-<tr>
-<td>nslookup</td>
-<td>请求域名对应的IP 地址，并以此测试DNS 地址是否可用</td>
-</tr>
-<tr>
-<td>tracert -d</td>
-<td>路由追踪，并且不做反向解析</td>
-</tr>
-<tr>
-<td>arp -a</td>
-<td>查看计算机是否已获取到网关的MAC地址</td>
-</tr>
-</tbody>
-</table>
-<h2 id="抓包工具">抓包工具</h2><h2 id="广播风暴">广播风暴</h2><h2 id="VLAN_、IP分部门管理">VLAN 、IP分部门管理</h2><h2 id="ARP防火墙">ARP防火墙</h2>
+		<h2 id="创建永久链接">创建永久链接</h2><p>只在7.4.1+版本提供支持，通过PageBase.CanonicalLinkUrl这一属性来设置。</p>
+<p>一般模块开发需要设置属性获得PageBase：</p>
+<pre><code><span class="keyword">public</span> DotNetNuke.Framework.CDefault BasePage {
+    <span class="keyword">get</span> { <span class="keyword">return</span> (DotNetNuke.Framework.CDefault)<span class="keyword">this</span>.Page; }
+}
+</code></pre><p>再应用如下：</p>
+<pre><code><span class="comment">//set the CanonicalLinkUrl property of the page </span>
+<span class="keyword">this</span>.BasePage.CanonicalLinkUrl = canonicalUrl;
+</code></pre><p><strong>来源</strong>：<a href="Create a Canonical Url Link in Dnn by using the CanonicalLinkUrl property">Create a Canonical Url Link in Dnn by using the CanonicalLinkUrl property</a></p>
+<h2 id="DNN8开发模板">DNN8开发模板</h2><p><a href="https://github.com/ChrisHammond/DNNTemplates/releases/tag/v06.01.00-beta" target="_blank" rel="external">BETA DNN 8 Project Templates V6.1 for Visual Studio 2015</a></p>
+
 		
 <style type="text/css">
 .article-content hr {
@@ -261,13 +159,13 @@ arp -a
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Network/">Network</a>
+  <span></span> <a href="/tags/CMS/">CMS</a><a href="/tags/DNN/">DNN</a>
   </div>
 
 </div>
@@ -276,7 +174,7 @@ arp -a
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://sunblognuke.github.io/2015/12/23/Network-Troubleshooting/" data-title="网络排查 | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://sunblognuke.github.io/2016/02/16/DNN-Tricks/" data-title="DNN技巧 | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -289,19 +187,11 @@ arp -a
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/01/07/The-Zen-of-Python/" title="The Zen of Python">
-  <strong>上一篇：</strong><br/>
-  <span>
-  The Zen of Python</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/12/22/Play-with-DNS/"  title="科学上网之DNS">
+<a href="/2016/01/29/Network-Operation-and-Maintenance/"  title="网络运维">
  <strong>下一篇：</strong><br/> 
- <span>科学上网之DNS
+ <span>网络运维
 </span>
 </a>
 </div>
@@ -310,7 +200,7 @@ arp -a
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/12/23/Network-Troubleshooting/" data-title="网络排查" data-url="http://sunblognuke.github.io/2015/12/23/Network-Troubleshooting/"></div>
+	<div class="ds-thread" data-thread-key="2016/02/16/DNN-Tricks/" data-title="DNN技巧" data-url="http://sunblognuke.github.io/2016/02/16/DNN-Tricks/"></div>
 </section>
 
 
@@ -320,7 +210,7 @@ arp -a
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本命令"><span class="toc-number">1.</span> <span class="toc-text">基本命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抓包工具"><span class="toc-number">2.</span> <span class="toc-text">抓包工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#广播风暴"><span class="toc-number">3.</span> <span class="toc-text">广播风暴</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VLAN_、IP分部门管理"><span class="toc-number">4.</span> <span class="toc-text">VLAN 、IP分部门管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARP防火墙"><span class="toc-number">5.</span> <span class="toc-text">ARP防火墙</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建永久链接"><span class="toc-number">1.</span> <span class="toc-text">创建永久链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNN8开发模板"><span class="toc-number">2.</span> <span class="toc-text">DNN8开发模板</span></a></li></ol>
  
   </div>
 

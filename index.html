@@ -83,6 +83,143 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/02/16/DNN-Tricks/" title="DNN技巧" itemprop="url">DNN技巧</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-16T03:23:58.000Z" itemprop="datePublished"> 发表于 2016-02-16</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="创建永久链接">创建永久链接</h2><p>只在7.4.1+版本提供支持，通过PageBase.CanonicalLinkUrl这一属性来设置。</p>
+<p>一般模块开发需要设置属性获得PageBase：</p>
+<pre><code><span class="keyword">public</span> DotNetNuke.Framework.CDefault BasePage {
+    <span class="keyword">get</span> { <span class="keyword">return</span> (DotNetNuke.Framework.CDefault)<span class="keyword">this</span>.Page; }
+}
+</code></pre><p>再应用如下：</p>
+<pre><code><span class="comment">//set the CanonicalLinkUrl property of the page </span>
+<span class="keyword">this</span>.BasePage.CanonicalLinkUrl = canonicalUrl;
+</code></pre><p><strong>来源</strong>：<a href="Create a Canonical Url Link in Dnn by using the CanonicalLinkUrl property">Create a Canonical Url Link in Dnn by using the CanonicalLinkUrl property</a></p>
+<h2 id="DNN8开发模板">DNN8开发模板</h2><p><a href="https://github.com/ChrisHammond/DNNTemplates/releases/tag/v06.01.00-beta" target="_blank" rel="external">BETA DNN 8 Project Templates V6.1 for Visual Studio 2015</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/CMS/">CMS</a><a href="/tags/DNN/">DNN</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/16/DNN-Tricks/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/16/DNN-Tricks/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/29/Network-Operation-and-Maintenance/" title="网络运维" itemprop="url">网络运维</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-29T03:53:44.000Z" itemprop="datePublished"> 发表于 2016-01-29</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Teamviewer现在无法捕捉屏幕">Teamviewer现在无法捕捉屏幕</h1><h3 id="根源或原因">根源或原因</h3><p>Teamviewer现在无法捕捉屏幕,这可能是由于快速的用户切换或远程桌面会话已经断开。</p>
+<p>这是由于你用“远程桌面”连过去开启teamview的话，当你退出“远程桌面”后，外网用teamview连接就会出现这个问题，</p>
+<h3 id="解决方法：">解决方法：</h3><p>不用远程连接过去开启teamview，直接在在电脑本机上手动开启teamview就可以了<br>或重启受控方的电脑或服务器即可：shutdown -r -t 0</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Network/">Network</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/01/29/Network-Operation-and-Maintenance/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/01/29/Network-Operation-and-Maintenance/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/01/13/Math-for-Programmers/" title="程序员的数学" itemprop="url">程序员的数学</a>
   </h1>
   <p class="article-author">By
@@ -325,10 +462,17 @@ setup<span class="class">.py</span> install
 </header>
     <div class="article-content">
         
-        <h2 id="数组合并去重">数组合并去重</h2><pre><code>urls = []
-urls = []
-urls.<span class="function"><span class="title">extend</span><span class="params">(urls2)</span></span>
-<span class="function"><span class="title">list</span><span class="params">(set(urls)</span></span>)
+        <h2 id="获取数组交集">获取数组交集</h2><pre><code><span class="comment">#方法一:</span>
+a=[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]
+b=[<span class="number">2</span>,<span class="number">5</span>,<span class="number">8</span>]
+tmp = [val <span class="keyword">for</span> val <span class="keyword">in</span> a <span class="keyword">if</span> val <span class="keyword">in</span> b]
+<span class="keyword">print</span> tmp
+<span class="comment">#[2, 5]</span>
+
+<span class="comment">#方法二</span>
+<span class="keyword">print</span> <span class="typename">list</span>(<span class="typename">set</span>(a).intersection(<span class="typename">set</span>(b)))
+</code></pre><h2 id="获取数组并集_(合并去重)">获取数组并集 (合并去重)</h2><pre><code>print list<span class="list">(<span class="keyword">set</span><span class="list">(<span class="keyword">a</span>)</span>.union<span class="list">(<span class="keyword">set</span><span class="list">(<span class="keyword">b</span>)</span>)</span>)</span>
+</code></pre><h2 id="获取数组差集">获取数组差集</h2><pre><code><span class="keyword">print</span> <span class="typename">list</span>(<span class="typename">set</span>(b).difference(<span class="typename">set</span>(a))) <span class="comment"># b中有而a中没有的</span>
 </code></pre><h2 id="利用PIL比较两个图片的相似度">利用PIL比较两个图片的相似度</h2><p>需要安装<a href="http://www.pythonware.com/products/pil/" target="_blank" rel="external">PIL图像模块</a>，代码虽短但效果不错，还是非常靠谱的，前提是图片要大一些，太小的图片不好比较, 代码如下：</p>
 <pre><code><span class="comment">#!/usr/bin/python</span>
 <span class="comment"># -*- coding: utf-8 -*-</span>
@@ -819,171 +963,6 @@ HEADERS = {
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/22/Git-Best-Practices/" title="Git最佳实践" itemprop="url">Git最佳实践</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-22T00:31:58.000Z" itemprop="datePublished"> 发表于 2015-12-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/Git.png" alt="Git最佳实践"></p>
-<p>参考资源：</p>
-<p><a href="http://blog.jobbole.com/22647/" target="_blank" rel="external">图解Git/图形化的Git参考手册</a><br><a href="http://blog.jobbole.com/23398/" target="_blank" rel="external">Git分支管理策略</a><br><a href="http://blog.jobbole.com/13916/" target="_blank" rel="external">Git 分支管理是一门艺术</a></p>
-<p>1) $ git checkout -b myfeature develop<br>Switched to a new branch “myfeature”</p>
-<p>2) $ git checkout develop<br>Switched to branch ‘develop’</p>
-<p>$ git merge –no-ff myfeature<br>Updating ea1b82a..05e9557<br>(Summary of changes)</p>
-<p>$ git branch -d myfeature<br>Deleted branch myfeature (was 05e9557).</p>
-<p>$ git push origin develop</p>
-<p>3) $ git checkout master<br>Switched to branch ‘master’</p>
-<p>$ git merge –no-ff release-1.2<br>Merge made by recursive.<br>(Summary of changes)</p>
-<p>$ git tag -a 1.2 -m ‘comments here’<br>$ git push –tags</p>
-<p>show all tags<br>$ git tag -n or git tag -n5<br>$ git show v5.0</p>
-<p>git tag -d 12345<br>git push origin :refs/tags/12345</p>
-<p>4) $ git commit -a -m “Bumped version number to 1.2.1”</p>
-<p>5) Push only to a remote branch</p>
-<p>   $ git checkout feature_x<br>   $ git push origin feature_x</p>
-<p>With modern git you should be able to simply “git push origin HEAD”, or even “git push HEAD” to push only currently checked-out branch</p>
-<p>6) push and delete remote branches</p>
-<p>$ git push origin :newfeature</p>
-<p>7) shows all local and remote branches<br>$ git branch -a</p>
-<p>shows only remote branches.<br>$ git branch -r</p>
-<p>8) When “git unable to push to unqualified destination” occured, try to<br>Do “git fetch -p origin” to make refs/remotes/origin/my_remote_branch go away if it’s already deleted in origin. The -p option tells fetch to delete any tracking branches that no longer exist in the corresponding remotes; by default they are kept around.</p>
-<p>9) Git分支管理策略，如图：</p>
-<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/git_art.png" alt=""></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Dev/">Dev</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Git/">Git</a><a href="/tags/Workflow/">Workflow</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/22/Git-Best-Practices/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/22/Git-Best-Practices/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/14/DNN8-Development/" title="DNN8 Development" itemprop="url">DNN8 Development</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-14T13:07:57.000Z" itemprop="datePublished"> 发表于 2015-12-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/SPA.png" alt=""></p>
-<h2 id="What_is_SPA?">What is SPA?</h2><blockquote>
-<p>A Single-page application (SPA), also known as a single-page interface (SPI), is a web application or web site that fits on a single web page with the goal of providing a more fluid user experience.</p>
-</blockquote>
-<p><a href="http://www.seguetech.com/blog/2013/04/18/what-is-single-page-application" target="_blank" rel="external">Single Page Application</a></p>
-<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/dnn_versions.jpg" alt=""></p>
-<h2 id="Breaking_changes">Breaking changes</h2><ol>
-<li>支持.net 4.5+版本</li>
-<li>向上兼容IE8+</li>
-<li>所有管理模块可插拔</li>
-<li>默认删除导航提供模块，只保留DDR</li>
-<li>轻量级default.css</li>
-<li>剔除Telerik控件</li>
-<li>更多查看下边链接…</li>
-</ol>
-<p><a href="http://www.dnnsoftware.com/wiki/dnn-8-breaking-changes" target="_blank" rel="external">DNN 8 BREAKING CHANGES</a></p>
-<h2 id="Set_up_environment">Set up environment</h2><p><a href="http://www.dnnsoftware.com/community-blog/cid/155221/module-development-in-dnn-8-3--introduction-to-spa-modules" target="_blank" rel="external">Introduction to SPA modules</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Dev/">Dev</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/DNN8/">DNN8</a><a href="/tags/MVC/">MVC</a><a href="/tags/SPA/">SPA</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/14/DNN8-Development/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/14/DNN8-Development/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -1006,7 +985,7 @@ HEADERS = {
 		  
 		
 		  
-			<li><a href="/categories/Dev/" title="Dev">Dev<sup>8</sup></a></li>
+			<li><a href="/categories/Dev/" title="Dev">Dev<sup>9</sup></a></li>
 		  
 		
 		  
@@ -1022,7 +1001,7 @@ HEADERS = {
 		  
 		
 		  
-			<li><a href="/categories/Resources/" title="Resources">Resources<sup>5</sup></a></li>
+			<li><a href="/categories/Resources/" title="Resources">Resources<sup>6</sup></a></li>
 		  
 		
 		  
@@ -1043,19 +1022,15 @@ HEADERS = {
 			
 		
 			
-				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Python/" title="Python">Python<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Baby/" title="Baby">Baby<sup>2</sup></a></li>
+				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
+				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
 			
 		
 			
@@ -1063,7 +1038,15 @@ HEADERS = {
 			
 		
 			
-				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
+				<li><a href="/tags/Baby/" title="Baby">Baby<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Network/" title="Network">Network<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
 			
 		
 			
@@ -1075,11 +1058,7 @@ HEADERS = {
 			
 		
 			
-				<li><a href="/tags/Startup/" title="Startup">Startup<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/DNS/" title="DNS">DNS<sup>1</sup></a></li>
+				<li><a href="/tags/CMS/" title="CMS">CMS<sup>2</sup></a></li>
 			
 		
 			
@@ -1107,7 +1086,7 @@ HEADERS = {
 			
 		
 			
-				<li><a href="/tags/Math/" title="Math">Math<sup>1</sup></a></li>
+				<li><a href="/tags/Framework/" title="Framework">Framework<sup>1</sup></a></li>
 			
 		
 			
@@ -1125,7 +1104,7 @@ HEADERS = {
   <div class="linkslist">
     <p class="asidetitle">最新随笔</p>
     <div class="linkslist clearfix">
-		<ul class=""><li class=""><a href="/2016/01/13/Math-for-Programmers/">程序员的数学</a></li><li class=""><a href="/2016/01/13/Python-esay-install-pip-for-Windows/">Windows下Python easy_install和pip的安装</a></li><li class=""><a href="/2016/01/13/Sublime-Text-for-Python-Dev/">Sublime Text for Python Dev</a></li><li class=""><a href="/2016/01/12/Python-Tricks/">Python Tricks</a></li><li class=""><a href="/2016/01/11/Python-Troubleshooting/">Python Troubleshooting</a></li><li class=""><a href="/2016/01/07/The-Zen-of-Python/">The Zen of Python</a></li></ul>
+		<ul class=""><li class=""><a href="/2016/02/16/DNN-Tricks/">DNN技巧</a></li><li class=""><a href="/2016/01/29/Network-Operation-and-Maintenance/">网络运维</a></li><li class=""><a href="/2016/01/13/Math-for-Programmers/">程序员的数学</a></li><li class=""><a href="/2016/01/13/Python-esay-install-pip-for-Windows/">Windows下Python easy_install和pip的安装</a></li><li class=""><a href="/2016/01/13/Sublime-Text-for-Python-Dev/">Sublime Text for Python Dev</a></li><li class=""><a href="/2016/01/12/Python-Tricks/">Python Tricks</a></li></ul>
 	</div>
 </div>
 
