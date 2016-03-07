@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sunblognuke.github.io/"/>
-  <updated>2016-02-16T03:38:11.722Z</updated>
+  <updated>2016-03-07T08:45:32.682Z</updated>
   <id>http://sunblognuke.github.io/</id>
   
   <author>
@@ -15,12 +15,100 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Python整合Selenium获取Ajax页面]]></title>
+    <link href="http://sunblognuke.github.io/2016/02/24/Integrated-Python-with-Selenium/"/>
+    <id>http://sunblognuke.github.io/2016/02/24/Integrated-Python-with-Selenium/</id>
+    <published>2016-02-24T11:03:19.000Z</published>
+    <updated>2016-03-07T08:45:32.682Z</updated>
+    <content type="html"><![CDATA[<h2 id="What_is_selenium?">What is selenium?</h2><p>Selenium 是一个可以让浏览器自动化地执行一系列任务的工具，常用于自动化测试</p>
+<h2 id="Selenium安装">Selenium安装</h2><p>参照另外一教程文章<a href="http://sunblognuke.github.io/2016/01/13/Python-esay-install-pip-for-Windows/">Windows下Python easy_install和pip的安装</a>:</p>
+<pre><code><span class="label">easy_install</span> <span class="keyword">selenium </span>
+</code></pre><h2 id="范例一：网页截图">范例一：网页截图</h2><pre><code><span class="comment">#!/usr/bin/env python</span>
+<span class="comment"># coding: utf-8</span>
+
+<span class="keyword">import</span> os, sys, time, datetime
+<span class="keyword">import</span> urllib
+<span class="keyword">import</span> urllib2
+<span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver
+
+reload(sys)
+sys.setdefaultencoding(<span class="string">'utf-8'</span>)
+
+<span class="function"><span class="keyword">def</span> <span class="title">mock_screenshot</span><span class="params">(url, width, height, imgPath = <span class="string">'screenshot.png'</span>)</span>:</span>
+    <span class="comment"># browser = webdriver.PhantomJS('E:\Downloads\phantomjs-1.9.7-windows\phantomjs.exe')  #浏览器初始化；Win下需要设置phantomjs路径，linux下置空即可</span>
+    browser = webdriver.Firefox()
+    browser.set_window_size(width, height) <span class="comment">#参考当前PC的分辨率</span>
+    browser.get(url)  <span class="comment"># 打开网页</span>
+
+    browser.execute_script(<span class="string">"""
+        (function () {
+          var y = 0;
+          var step = 100;
+          window.scroll(0, 0);
+
+          function f() {
+            if (y &lt; document.body.scrollHeight) {
+              y += step;
+              window.scroll(0, y);
+              setTimeout(f, 50);
+            } else {
+              window.scroll(0, 0);
+              document.title += "scroll-done";
+            }
+          }
+
+          setTimeout(f, 1000);
+        })();
+      """</span>)
+
+    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">1024</span>):
+        <span class="keyword">if</span> <span class="string">"scroll-done"</span> <span class="keyword">in</span> browser.title:
+          <span class="keyword">break</span>
+        time.sleep(<span class="number">1</span>)
+
+    browser.save_screenshot(imgPath)
+
+    browser.quit()  <span class="comment"># 关闭浏览器。当出现异常时记得在任务浏览器中关闭PhantomJS，因为会有多个PhantomJS在运行状态，影响电脑性能</span>
+</code></pre><p>注意到，上面的代码中，并没有在打开页面后立即截图，而是先在页面上执行了一段Javascript脚本，先将页面的滚动条拖到最下方，再拖回顶部，然后才截图。这样的好处是如果页面下方有一些ajax延迟加载的内容，在这个操作之后一般其他内容也都已加载了，如此截图才完整些。</p>
+<h2 id="范例二：模拟鼠标点击等行为">范例二：模拟鼠标点击等行为</h2><p>由范例一我们可以举一反三，我们可以执行某一段js脚本或ajax请求以获取指定或我们想要的内容，甚至模拟鼠标点击等行为让浏览器自动化地执行某些操作。</p>
+<pre><code><span class="preprocessor"># other coding above</span>
+
+browser.<span class="keyword">get</span>(url)  # 打开网页
+
+jsActionElem = browser.find_element_by_class_name(<span class="string">'tit_a'</span>)
+
+jsActionElem.click()
+
+<span class="preprocessor"># other coding continuing ...</span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="What_is_selenium?">What is selenium?</h2><p>Selenium 是一个可以让浏览器自动化地执行一系列任务的工具，常用于自动化测试</p>
+<h2 id="Selenium安装">Selenium安装</h2><p>参照另外]]>
+    </summary>
+    
+      <category term="Python" scheme="http://sunblognuke.github.io/tags/Python/"/>
+    
+      <category term="Selenium" scheme="http://sunblognuke.github.io/tags/Selenium/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[DNN技巧]]></title>
     <link href="http://sunblognuke.github.io/2016/02/16/DNN-Tricks/"/>
     <id>http://sunblognuke.github.io/2016/02/16/DNN-Tricks/</id>
     <published>2016-02-16T03:23:58.000Z</published>
-    <updated>2016-02-16T03:38:11.722Z</updated>
-    <content type="html"><![CDATA[<h2 id="创建永久链接">创建永久链接</h2><p>只在7.4.1+版本提供支持，通过PageBase.CanonicalLinkUrl这一属性来设置。</p>
+    <updated>2016-03-07T06:51:48.427Z</updated>
+    <content type="html"><![CDATA[<h2 id="免费可用的DNN模块">免费可用的DNN模块</h2><p>收集一些比较优秀的开源模块，其中包括官方原本提供服务支持的模块。</p>
+<p>还有一些来源于原本开发DNN商业模块的部分公司，由于业务转型需要不再专注DNN平台，故此之前售卖的DNN模块也因此开发源代码供客户下载，其中包括dnnspot等：</p>
+<ul>
+<li><a href="https://github.com/roman-yagodin?tab=repositories" target="_blank" rel="external">R7模块</a></li>
+<li><a href="http://www.dnnspot.com/Downloads" target="_blank" rel="external">dnnspot模块</a></li>
+<li><a href="https://github.com/EngageSoftware" target="_blank" rel="external">Engage模块</a></li>
+<li><a href="https://github.com/DNN-Connect" target="_blank" rel="external">DNN Connet社区模块</a></li>
+</ul>
+<h2 id="创建永久链接">创建永久链接</h2><p>只在7.4.1+版本提供支持，通过PageBase.CanonicalLinkUrl这一属性来设置。</p>
 <p>一般模块开发需要设置属性获得PageBase：</p>
 <pre><code><span class="keyword">public</span> DotNetNuke.Framework.CDefault BasePage {
     <span class="keyword">get</span> { <span class="keyword">return</span> (DotNetNuke.Framework.CDefault)<span class="keyword">this</span>.Page; }
@@ -32,9 +120,8 @@
 <h2 id="DNN8开发模板">DNN8开发模板</h2><p><a href="https://github.com/ChrisHammond/DNNTemplates/releases/tag/v06.01.00-beta" target="_blank" rel="external">BETA DNN 8 Project Templates V6.1 for Visual Studio 2015</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h2 id="创建永久链接">创建永久链接</h2><p>只在7.4.1+版本提供支持，通过PageBase.CanonicalLinkUrl这一属性来设置。</p>
-<p>一般模块开发需要设置属性获得PageBase：</p>
-<pre><code><span class="]]>
+    <![CDATA[<h2 id="免费可用的DNN模块">免费可用的DNN模块</h2><p>收集一些比较优秀的开源模块，其中包括官方原本提供服务支持的模块。</p>
+<p>还有一些来源于原本开发DNN商业模块的部分公司，由于业务转型需要不再专注DNN平台，故此之前售卖的DNN模块也因此开发源代码]]>
     </summary>
     
       <category term="CMS" scheme="http://sunblognuke.github.io/tags/CMS/"/>
@@ -1019,35 +1106,6 @@ widgets:
       <category term="Markdown" scheme="http://sunblognuke.github.io/tags/Markdown/"/>
     
       <category term="Blog" scheme="http://sunblognuke.github.io/categories/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[小孩教育]]></title>
-    <link href="http://sunblognuke.github.io/2015/12/02/Children-Issues/"/>
-    <id>http://sunblognuke.github.io/2015/12/02/Children-Issues/</id>
-    <published>2015-12-02T10:49:41.000Z</published>
-    <updated>2015-12-09T09:28:31.425Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/children.jpg" alt=""></p>
-<ul>
-<li><p>孩子其实不需要玩具，他们需要的是工具。给他工具，给他书，教他技能，他自己会玩出各种东西。</p>
-</li>
-<li><p>常带着孩子到野外走走，带他看看水里游泳的蚂蟥，看看野生的蛇。如果院子太小，给他租一亩地，给他买各种植物的种子，在一亩地里种上几十种作物。老农会教他怎样耕作，不会收他学费。</p>
-<p>  也许孩子长大后会说一口小镇口音的普通话，会说一口英国人听不懂的英文，但是这没什么，他是和土地和底层一起长大的，生命力会很顽强，也比一般的孩子健康。</p>
-</li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/children.jpg" alt=""></p>
-<ul>
-<li><p>孩子其实不需要玩具，他们需要的是工具。给他工具，给他书，教他技能，他自己会玩出各种东西。</p]]>
-    </summary>
-    
-      <category term="Baby" scheme="http://sunblognuke.github.io/tags/Baby/"/>
-    
-      <category term="Education" scheme="http://sunblognuke.github.io/tags/Education/"/>
-    
-      <category term="Life" scheme="http://sunblognuke.github.io/categories/Life/"/>
     
   </entry>
   

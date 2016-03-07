@@ -83,6 +83,128 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/02/24/Integrated-Python-with-Selenium/" title="Python整合Selenium获取Ajax页面" itemprop="url">Python整合Selenium获取Ajax页面</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-24T11:03:19.000Z" itemprop="datePublished"> 发表于 2016-02-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="What_is_selenium?">What is selenium?</h2><p>Selenium 是一个可以让浏览器自动化地执行一系列任务的工具，常用于自动化测试</p>
+<h2 id="Selenium安装">Selenium安装</h2><p>参照另外一教程文章<a href="http://sunblognuke.github.io/2016/01/13/Python-esay-install-pip-for-Windows/">Windows下Python easy_install和pip的安装</a>:</p>
+<pre><code><span class="label">easy_install</span> <span class="keyword">selenium </span>
+</code></pre><h2 id="范例一：网页截图">范例一：网页截图</h2><pre><code><span class="comment">#!/usr/bin/env python</span>
+<span class="comment"># coding: utf-8</span>
+
+<span class="keyword">import</span> os, sys, time, datetime
+<span class="keyword">import</span> urllib
+<span class="keyword">import</span> urllib2
+<span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver
+
+reload(sys)
+sys.setdefaultencoding(<span class="string">'utf-8'</span>)
+
+<span class="function"><span class="keyword">def</span> <span class="title">mock_screenshot</span><span class="params">(url, width, height, imgPath = <span class="string">'screenshot.png'</span>)</span>:</span>
+    <span class="comment"># browser = webdriver.PhantomJS('E:\Downloads\phantomjs-1.9.7-windows\phantomjs.exe')  #浏览器初始化；Win下需要设置phantomjs路径，linux下置空即可</span>
+    browser = webdriver.Firefox()
+    browser.set_window_size(width, height) <span class="comment">#参考当前PC的分辨率</span>
+    browser.get(url)  <span class="comment"># 打开网页</span>
+
+    browser.execute_script(<span class="string">"""
+        (function () {
+          var y = 0;
+          var step = 100;
+          window.scroll(0, 0);
+
+          function f() {
+            if (y &lt; document.body.scrollHeight) {
+              y += step;
+              window.scroll(0, y);
+              setTimeout(f, 50);
+            } else {
+              window.scroll(0, 0);
+              document.title += "scroll-done";
+            }
+          }
+
+          setTimeout(f, 1000);
+        })();
+      """</span>)
+
+    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">1024</span>):
+        <span class="keyword">if</span> <span class="string">"scroll-done"</span> <span class="keyword">in</span> browser.title:
+          <span class="keyword">break</span>
+        time.sleep(<span class="number">1</span>)
+
+    browser.save_screenshot(imgPath)
+
+    browser.quit()  <span class="comment"># 关闭浏览器。当出现异常时记得在任务浏览器中关闭PhantomJS，因为会有多个PhantomJS在运行状态，影响电脑性能</span>
+</code></pre><p>注意到，上面的代码中，并没有在打开页面后立即截图，而是先在页面上执行了一段Javascript脚本，先将页面的滚动条拖到最下方，再拖回顶部，然后才截图。这样的好处是如果页面下方有一些ajax延迟加载的内容，在这个操作之后一般其他内容也都已加载了，如此截图才完整些。</p>
+<h2 id="范例二：模拟鼠标点击等行为">范例二：模拟鼠标点击等行为</h2><p>由范例一我们可以举一反三，我们可以执行某一段js脚本或ajax请求以获取指定或我们想要的内容，甚至模拟鼠标点击等行为让浏览器自动化地执行某些操作。</p>
+<pre><code><span class="preprocessor"># other coding above</span>
+
+browser.<span class="keyword">get</span>(url)  # 打开网页
+
+jsActionElem = browser.find_element_by_class_name(<span class="string">'tit_a'</span>)
+
+jsActionElem.click()
+
+<span class="preprocessor"># other coding continuing ...</span>
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/Selenium/">Selenium</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/24/Integrated-Python-with-Selenium/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/24/Integrated-Python-with-Selenium/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/02/16/DNN-Tricks/" title="DNN技巧" itemprop="url">DNN技巧</a>
   </h1>
   <p class="article-author">By
@@ -96,7 +218,15 @@
 </header>
     <div class="article-content">
         
-        <h2 id="创建永久链接">创建永久链接</h2><p>只在7.4.1+版本提供支持，通过PageBase.CanonicalLinkUrl这一属性来设置。</p>
+        <h2 id="免费可用的DNN模块">免费可用的DNN模块</h2><p>收集一些比较优秀的开源模块，其中包括官方原本提供服务支持的模块。</p>
+<p>还有一些来源于原本开发DNN商业模块的部分公司，由于业务转型需要不再专注DNN平台，故此之前售卖的DNN模块也因此开发源代码供客户下载，其中包括dnnspot等：</p>
+<ul>
+<li><a href="https://github.com/roman-yagodin?tab=repositories" target="_blank" rel="external">R7模块</a></li>
+<li><a href="http://www.dnnspot.com/Downloads" target="_blank" rel="external">dnnspot模块</a></li>
+<li><a href="https://github.com/EngageSoftware" target="_blank" rel="external">Engage模块</a></li>
+<li><a href="https://github.com/DNN-Connect" target="_blank" rel="external">DNN Connet社区模块</a></li>
+</ul>
+<h2 id="创建永久链接">创建永久链接</h2><p>只在7.4.1+版本提供支持，通过PageBase.CanonicalLinkUrl这一属性来设置。</p>
 <p>一般模块开发需要设置属性获得PageBase：</p>
 <pre><code><span class="keyword">public</span> DotNetNuke.Framework.CDefault BasePage {
     <span class="keyword">get</span> { <span class="keyword">return</span> (DotNetNuke.Framework.CDefault)<span class="keyword">this</span>.Page; }
@@ -886,83 +1016,6 @@ HEADERS = {
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/22/Play-with-DNS/" title="科学上网之DNS" itemprop="url">科学上网之DNS</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-22T06:31:03.000Z" itemprop="datePublished"> 发表于 2015-12-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="何为DNS?">何为DNS?</h2><p>DNS 的全称是 Domain Name System 或者 Domain Name Service，以显浅的语言来解释，对于上网的用户来说，DNS 就是一台(或多台)在网络上的服务器，专门为大家上网时解析网址的IP地址的。互联网被发明时是需要靠 IP 地址去定位网络上的服务器或网络设备的，它可以看做是一个网站的门牌号，但IP地址(如 124.122.45.2)这样的数字实在太难被人们所记住，如果上任何网站都需要输入这样的地址恐怕对任何人来说都是噩梦！于是，人们发明了域名（网址），也就是像 iPlaySoft.com 这样有意义的单词组合来帮助人们记忆与输入。</p>
-<p>不过，虽然人能看懂域名，但电脑却只懂 IP 地址，那怎么办呢？嗯，当你用电脑访问异次元的域名 www.iPlaySoft.com 时，就要有一位懂得“翻译”的“指路人”去告诉你的电脑，www.iPlaySoft.com 究竟对应的是哪个IP地址了，这样你的电脑才懂得怎样去找到异次元的服务器并下载你要访问的网页内容。而这个“指路人”的角色就是DNS。</p>
-<p>更详细参看百科词条: <a href="http://baike.baidu.com/item/dns/427444" target="_blank" rel="external">http://baike.baidu.com/item/dns/427444</a></p>
-<p><a href="http://dudns.baidu.com/intro.html" target="_blank" rel="external">DNS知识平台</a></p>
-<h1 id="手动修改DNS">手动修改DNS</h1><p><a href="http://dudns.baidu.com/useDoc.html" target="_blank" rel="external">设置DNS详细教程</a></p>
-<p>一般修改了dns, 需要手动清除本地的dns缓存: 进入命令行提示符，输入 ipconfig /flushdns 并回车即可。</p>
-<h1 id="第三方DNS_服务">第三方DNS 服务</h1><ol>
-<li><a href="http://www.114dns.com/index.html" target="_blank" rel="external">114DNS</a>: 114.114.114.114</li>
-<li>谷歌DNS: 8.8.8.8 / 8.8.4.4</li>
-<li><a href="http://www.alidns.com/index.html" target="_blank" rel="external">阿里DNS</a>: 223.5.5.5 / 223.6.6.6</li>
-<li><a href="http://dudns.baidu.com/" target="_blank" rel="external">百度DNS</a>: 180.76.76.76</li>
-</ol>
-<h1 id="自动化软件_-_DnsJumper">自动化软件  - DnsJumper</h1><p>DNS Jumper 完全免费，绿色免安装，体积非常小巧，经测试支持 Windows 8、Win7、Vista、XP，支持64位与32位系统，支持多网卡分别设置（譬如WIFI无线网卡以及普通的以太网网卡），提供了包含简体中文在内的多国语言。</p>
-<p>它不但内置了 Google Open DNS、Comodo DNS 等大量免费公共DNS，还可以让用户自由手动添加/删除自己收集的地址。更实用的是，它还可以为你的DNS列表批量测速并自动选择最快的进行应用，而且也能一键清空本地DNS缓存。</p>
-<p><a href="http://www.iplaysoft.com/dnsjumper.html" target="_blank" rel="external">下载地址</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Resources/">Resources</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/DNS/">DNS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/22/Play-with-DNS/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/22/Play-with-DNS/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -985,7 +1038,7 @@ HEADERS = {
 		  
 		
 		  
-			<li><a href="/categories/Dev/" title="Dev">Dev<sup>9</sup></a></li>
+			<li><a href="/categories/Dev/" title="Dev">Dev<sup>10</sup></a></li>
 		  
 		
 		  
@@ -1018,11 +1071,11 @@ HEADERS = {
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>6</sup></a></li>
+				<li><a href="/tags/Python/" title="Python">Python<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Python/" title="Python">Python<sup>5</sup></a></li>
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>6</sup></a></li>
 			
 		
 			
@@ -1104,7 +1157,7 @@ HEADERS = {
   <div class="linkslist">
     <p class="asidetitle">最新随笔</p>
     <div class="linkslist clearfix">
-		<ul class=""><li class=""><a href="/2016/02/16/DNN-Tricks/">DNN技巧</a></li><li class=""><a href="/2016/01/29/Network-Operation-and-Maintenance/">网络运维</a></li><li class=""><a href="/2016/01/13/Math-for-Programmers/">程序员的数学</a></li><li class=""><a href="/2016/01/13/Python-esay-install-pip-for-Windows/">Windows下Python easy_install和pip的安装</a></li><li class=""><a href="/2016/01/13/Sublime-Text-for-Python-Dev/">Sublime Text for Python Dev</a></li><li class=""><a href="/2016/01/12/Python-Tricks/">Python Tricks</a></li></ul>
+		<ul class=""><li class=""><a href="/2016/02/24/Integrated-Python-with-Selenium/">Python整合Selenium获取Ajax页面</a></li><li class=""><a href="/2016/02/16/DNN-Tricks/">DNN技巧</a></li><li class=""><a href="/2016/01/29/Network-Operation-and-Maintenance/">网络运维</a></li><li class=""><a href="/2016/01/13/Math-for-Programmers/">程序员的数学</a></li><li class=""><a href="/2016/01/13/Python-esay-install-pip-for-Windows/">Windows下Python easy_install和pip的安装</a></li><li class=""><a href="/2016/01/13/Sublime-Text-for-Python-Dev/">Sublime Text for Python Dev</a></li></ul>
 	</div>
 </div>
 

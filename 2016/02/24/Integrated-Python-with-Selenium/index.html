@@ -4,29 +4,41 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Python Troubleshooting | Baldwin&#39;s Blog</title>
+    <title>Python整合Selenium获取Ajax页面 | Baldwin&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Baldwin">
     
 
     
-    <meta name="description" content="PyQuery: 一个类似jQuery的Python库PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：http://pyquery.org
-Python轻量级ORM - Peewee最新API：Python轻量级ORM - Peewee
-like匹配语句">
+    <meta name="description" content="What is selenium?Selenium 是一个可以让浏览器自动化地执行一系列任务的工具，常用于自动化测试
+Selenium安装参照另外一教程文章Windows下Python easy_install和pip的安装:
+easy_install selenium 
+范例一：网页截图#!/usr/bin/env python
+# coding: utf-8
+
+import os, sys,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python Troubleshooting">
-<meta property="og:url" content="http://sunblognuke.github.io/2016/01/11/Python-Troubleshooting/index.html">
+<meta property="og:title" content="Python整合Selenium获取Ajax页面">
+<meta property="og:url" content="http://sunblognuke.github.io/2016/02/24/Integrated-Python-with-Selenium/index.html">
 <meta property="og:site_name" content="Baldwin's Blog">
-<meta property="og:description" content="PyQuery: 一个类似jQuery的Python库PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：http://pyquery.org
-Python轻量级ORM - Peewee最新API：Python轻量级ORM - Peewee
-like匹配语句">
-<meta property="og:updated_time" content="2016-01-12T06:43:00.232Z">
+<meta property="og:description" content="What is selenium?Selenium 是一个可以让浏览器自动化地执行一系列任务的工具，常用于自动化测试
+Selenium安装参照另外一教程文章Windows下Python easy_install和pip的安装:
+easy_install selenium 
+范例一：网页截图#!/usr/bin/env python
+# coding: utf-8
+
+import os, sys,">
+<meta property="og:updated_time" content="2016-03-07T08:45:32.682Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python Troubleshooting">
-<meta name="twitter:description" content="PyQuery: 一个类似jQuery的Python库PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：http://pyquery.org
-Python轻量级ORM - Peewee最新API：Python轻量级ORM - Peewee
-like匹配语句">
+<meta name="twitter:title" content="Python整合Selenium获取Ajax页面">
+<meta name="twitter:description" content="What is selenium?Selenium 是一个可以让浏览器自动化地执行一系列任务的工具，常用于自动化测试
+Selenium安装参照另外一教程文章Windows下Python easy_install和pip的安装:
+easy_install selenium 
+范例一：网页截图#!/usr/bin/env python
+# coding: utf-8
+
+import os, sys,">
 <meta name="twitter:creator" content="@sunblognuke">
 
     
@@ -88,14 +100,14 @@ like匹配语句">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/01/11/Python-Troubleshooting/" title="Python Troubleshooting" itemprop="url">Python Troubleshooting</a>
+      <a href="/2016/02/24/Integrated-Python-with-Selenium/" title="Python整合Selenium获取Ajax页面" itemprop="url">Python整合Selenium获取Ajax页面</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
 		
   <p class="article-time">
-    <time datetime="2016-01-11T03:57:03.000Z" itemprop="datePublished"> 发表于 2016-01-11</time>
+    <time datetime="2016-02-24T11:03:19.000Z" itemprop="datePublished"> 发表于 2016-02-24</time>
     
   </p>
 </header>
@@ -104,62 +116,106 @@ like匹配语句">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PyQuery:_一个类似jQuery的Python库"><span class="toc-number">1.</span> <span class="toc-text">PyQuery: 一个类似jQuery的Python库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python轻量级ORM_-_Peewee"><span class="toc-number">2.</span> <span class="toc-text">Python轻量级ORM - Peewee</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#requests-get_获取页面乱码"><span class="toc-number">3.</span> <span class="toc-text">requests.get 获取页面乱码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#urllib2-HTTPError:_HTTP_Error_403:_Forbidden"><span class="toc-number">4.</span> <span class="toc-text">urllib2.HTTPError: HTTP Error 403: Forbidden</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装饰器"><span class="toc-number">5.</span> <span class="toc-text">装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#@classmethod_或_@staticmethod"><span class="toc-number">6.</span> <span class="toc-text">@classmethod 或 @staticmethod</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What_is_selenium?"><span class="toc-number">1.</span> <span class="toc-text">What is selenium?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Selenium安装"><span class="toc-number">2.</span> <span class="toc-text">Selenium安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#范例一：网页截图"><span class="toc-number">3.</span> <span class="toc-text">范例一：网页截图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#范例二：模拟鼠标点击等行为"><span class="toc-number">4.</span> <span class="toc-text">范例二：模拟鼠标点击等行为</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="PyQuery:_一个类似jQuery的Python库">PyQuery: 一个类似jQuery的Python库</h2><p>PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：<a href="http://pyquery.readthedocs.org/en/latest/api.html" target="_blank" rel="external">http://pyquery.org</a></p>
-<h2 id="Python轻量级ORM_-_Peewee">Python轻量级ORM - Peewee</h2><p>最新API：<a href="http://peewee.readthedocs.org/en/latest/" target="_blank" rel="external">Python轻量级ORM - Peewee</a></p>
-<p>like匹配语句:</p>
-<pre><code>xxModel.<span class="function"><span class="title">select</span><span class="params">()</span></span>.<span class="function"><span class="title">where</span><span class="params">(xxModel.author ** <span class="string">'zh%'</span>)</span></span>
-</code></pre><h2 id="requests-get_获取页面乱码">requests.get 获取页面乱码</h2><p>查看一下网页的编码，比如是gbk</p>
-<pre><code><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"Content-Type"</span> <span class="attribute">content</span>=<span class="value">"text/html; charset=gb2312"</span> /&gt;</span>
-</code></pre><p>那就需要response设置为r.encoding=’gbk’, 代码如下:</p>
-<pre><code>r = requests.<span class="function"><span class="title">get</span><span class="params">(self.url, headers=config.HEADERS)</span></span>
-r<span class="class">.encoding</span> = <span class="string">'gb2312'</span>
-return r.text
-</code></pre><h2 id="urllib2-HTTPError:_HTTP_Error_403:_Forbidden">urllib2.HTTPError: HTTP Error 403: Forbidden</h2><p>解决方案：ulr请求需要模拟真实的浏览器访问，需要设置User-Agent项，最简便的方式就是随机获取，代码如下:</p>
-<pre><code><span class="preprocessor"># -*- coding: UTF-8 -*-</span>
-import sys
-import <span class="built_in">random</span>
+		<h2 id="What_is_selenium?">What is selenium?</h2><p>Selenium 是一个可以让浏览器自动化地执行一系列任务的工具，常用于自动化测试</p>
+<h2 id="Selenium安装">Selenium安装</h2><p>参照另外一教程文章<a href="http://sunblognuke.github.io/2016/01/13/Python-esay-install-pip-for-Windows/">Windows下Python easy_install和pip的安装</a>:</p>
+<pre><code><span class="label">easy_install</span> <span class="keyword">selenium </span>
+</code></pre><h2 id="范例一：网页截图">范例一：网页截图</h2><pre><code><span class="comment">#!/usr/bin/env python</span>
+<span class="comment"># coding: utf-8</span>
+
+<span class="keyword">import</span> os, sys, time, datetime
+<span class="keyword">import</span> urllib
+<span class="keyword">import</span> urllib2
+<span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver
 
 reload(sys)
 sys.setdefaultencoding(<span class="string">'utf-8'</span>)
 
-USER_AGENTS = [
-                <span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'</span>,
-                <span class="string">'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11'</span>,
-                <span class="string">'Opera/9.25 (Windows NT 5.1; U; en)'</span>,
-                <span class="string">'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)'</span>,
-                <span class="string">'Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Kubuntu)'</span>,
-                <span class="string">'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'</span>,
-                <span class="string">'Lynx/2.8.5rel.1 libwww-FM/2.14 SSL-MM/1.4.1 GNUTLS/1.2.9'</span>,
-                <span class="string">'Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.7 (KHTML, like Gecko) Ubuntu/11.04 Chromium/16.0.912.77 Chrome/16.0.912.77 Safari/535.7'</span>,
-                <span class="string">'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:10.0) Gecko/20100101 Firefox/10.0'</span>
-            ]
+<span class="function"><span class="keyword">def</span> <span class="title">mock_screenshot</span><span class="params">(url, width, height, imgPath = <span class="string">'screenshot.png'</span>)</span>:</span>
+    <span class="comment"># browser = webdriver.PhantomJS('E:\Downloads\phantomjs-1.9.7-windows\phantomjs.exe')  #浏览器初始化；Win下需要设置phantomjs路径，linux下置空即可</span>
+    browser = webdriver.Firefox()
+    browser.set_window_size(width, height) <span class="comment">#参考当前PC的分辨率</span>
+    browser.get(url)  <span class="comment"># 打开网页</span>
 
-<span class="preprocessor">#伪装浏览器头</span>
-HEADERS = {
-    <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'</span>,
-    <span class="string">'User-Agent'</span>: <span class="built_in">random</span>.choice(USER_AGENTS),
-    <span class="string">'Referer'</span>: <span class="string">'http://www.baidu.com'</span> <span class="preprocessor"># or <span class="string">'http://www.google.cpm'</span></span>
+    browser.execute_script(<span class="string">"""
+        (function () {
+          var y = 0;
+          var step = 100;
+          window.scroll(0, 0);
+
+          function f() {
+            if (y &lt; document.body.scrollHeight) {
+              y += step;
+              window.scroll(0, y);
+              setTimeout(f, 50);
+            } else {
+              window.scroll(0, 0);
+              document.title += "scroll-done";
+            }
+          }
+
+          setTimeout(f, 1000);
+        })();
+      """</span>)
+
+    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">1024</span>):
+        <span class="keyword">if</span> <span class="string">"scroll-done"</span> <span class="keyword">in</span> browser.title:
+          <span class="keyword">break</span>
+        time.sleep(<span class="number">1</span>)
+
+    browser.save_screenshot(imgPath)
+
+    browser.quit()  <span class="comment"># 关闭浏览器。当出现异常时记得在任务浏览器中关闭PhantomJS，因为会有多个PhantomJS在运行状态，影响电脑性能</span>
+</code></pre><p>注意到，上面的代码中，并没有在打开页面后立即截图，而是先在页面上执行了一段Javascript脚本，先将页面的滚动条拖到最下方，再拖回顶部，然后才截图。这样的好处是如果页面下方有一些ajax延迟加载的内容，在这个操作之后一般其他内容也都已加载了，如此截图才完整些。</p>
+<h2 id="范例二：模拟鼠标点击等行为">范例二：模拟鼠标点击等行为</h2><p>由范例一我们可以举一反三，我们可以执行某一段js脚本或ajax请求以获取指定或我们想要的内容，甚至模拟鼠标点击等行为让浏览器自动化地执行某些操作。</p>
+<pre><code><span class="preprocessor"># other coding above</span>
+
+browser.<span class="keyword">get</span>(url)  # 打开网页
+
+jsActionElem = browser.find_element_by_class_name(<span class="string">'tit_a'</span>)
+
+jsActionElem.click()
+
+<span class="preprocessor"># other coding continuing ...</span>
+</code></pre>
+		
+<style type="text/css">
+.article-content hr {
+  text-align: center;
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
 }
-</code></pre><h2 id="装饰器">装饰器</h2><h2 id="@classmethod_或_@staticmethod">@classmethod 或 @staticmethod</h2><p>参考知乎话题 - <a href="https://www.zhihu.com/question/21084971" target="_blank" rel="external">https://www.zhihu.com/question/21084971</a></p>
-
-		    
+.article-content hr:after {
+  content: 'EOF';
+  display: inline-block;
+  position: relative;
+  top: -13px;
+  padding: 0 10px;
+  background: #fafafa;
+  color: #8c8b8b;
+}
+</style>
+    
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Framework/">Framework</a><a href="/tags/Python/">Python</a>
+  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/Selenium/">Selenium</a>
   </div>
 
 </div>
@@ -168,7 +224,7 @@ HEADERS = {
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://sunblognuke.github.io/2016/01/11/Python-Troubleshooting/" data-title="Python Troubleshooting | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://sunblognuke.github.io/2016/02/24/Integrated-Python-with-Selenium/" data-title="Python整合Selenium获取Ajax页面 | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -181,19 +237,11 @@ HEADERS = {
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/01/12/Python-Tricks/" title="Python Tricks">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Python Tricks</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/01/07/The-Zen-of-Python/"  title="The Zen of Python">
+<a href="/2016/02/16/DNN-Tricks/"  title="DNN技巧">
  <strong>下一篇：</strong><br/> 
- <span>The Zen of Python
+ <span>DNN技巧
 </span>
 </a>
 </div>
@@ -202,7 +250,7 @@ HEADERS = {
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/01/11/Python-Troubleshooting/" data-title="Python Troubleshooting" data-url="http://sunblognuke.github.io/2016/01/11/Python-Troubleshooting/"></div>
+	<div class="ds-thread" data-thread-key="2016/02/24/Integrated-Python-with-Selenium/" data-title="Python整合Selenium获取Ajax页面" data-url="http://sunblognuke.github.io/2016/02/24/Integrated-Python-with-Selenium/"></div>
 </section>
 
 
@@ -212,7 +260,7 @@ HEADERS = {
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PyQuery:_一个类似jQuery的Python库"><span class="toc-number">1.</span> <span class="toc-text">PyQuery: 一个类似jQuery的Python库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python轻量级ORM_-_Peewee"><span class="toc-number">2.</span> <span class="toc-text">Python轻量级ORM - Peewee</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#requests-get_获取页面乱码"><span class="toc-number">3.</span> <span class="toc-text">requests.get 获取页面乱码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#urllib2-HTTPError:_HTTP_Error_403:_Forbidden"><span class="toc-number">4.</span> <span class="toc-text">urllib2.HTTPError: HTTP Error 403: Forbidden</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装饰器"><span class="toc-number">5.</span> <span class="toc-text">装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#@classmethod_或_@staticmethod"><span class="toc-number">6.</span> <span class="toc-text">@classmethod 或 @staticmethod</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What_is_selenium?"><span class="toc-number">1.</span> <span class="toc-text">What is selenium?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Selenium安装"><span class="toc-number">2.</span> <span class="toc-text">Selenium安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#范例一：网页截图"><span class="toc-number">3.</span> <span class="toc-text">范例一：网页截图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#范例二：模拟鼠标点击等行为"><span class="toc-number">4.</span> <span class="toc-text">范例二：模拟鼠标点击等行为</span></a></li></ol>
  
   </div>
 

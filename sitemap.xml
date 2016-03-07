@@ -2,13 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://sunblognuke.github.io/2016/01/12/Python-Tricks/</loc>
-    <lastmod>2016-02-24T10:48:33.411Z</lastmod>
+    <loc>http://sunblognuke.github.io/2016/02/24/Integrated-Python-with-Selenium/</loc>
+    <lastmod>2016-03-07T08:45:32.682Z</lastmod>
   </url>
   
   <url>
     <loc>http://sunblognuke.github.io/2016/02/16/DNN-Tricks/</loc>
-    <lastmod>2016-02-16T03:38:11.722Z</lastmod>
+    <lastmod>2016-03-07T06:51:48.427Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sunblognuke.github.io/2016/01/12/Python-Tricks/</loc>
+    <lastmod>2016-02-24T10:48:33.411Z</lastmod>
   </url>
   
   <url>
