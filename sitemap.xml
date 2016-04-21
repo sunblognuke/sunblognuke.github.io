@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sunblognuke.github.io/resume/index.html</loc>
+    <lastmod>2016-04-21T05:47:25.755Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sunblognuke.github.io/2016/02/24/Integrated-Python-with-Selenium/</loc>
     <lastmod>2016-03-07T08:45:32.682Z</lastmod>
   </url>
@@ -153,11 +158,6 @@
   
   <url>
     <loc>http://sunblognuke.github.io/resume/index_en.html</loc>
-    <lastmod>2015-11-24T07:30:29.691Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sunblognuke.github.io/resume/index.html</loc>
     <lastmod>2015-11-24T07:30:29.691Z</lastmod>
   </url>
   
