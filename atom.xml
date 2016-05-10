@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sunblognuke.github.io/"/>
-  <updated>2016-03-07T08:45:32.682Z</updated>
+  <updated>2016-05-10T05:16:37.862Z</updated>
   <id>http://sunblognuke.github.io/</id>
   
   <author>
@@ -13,6 +13,117 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[基于Vagrant搭建全栈式的Python开发环境]]></title>
+    <link href="http://sunblognuke.github.io/2016/05/10/Setup-Python-Development-with-Vagrant/"/>
+    <id>http://sunblognuke.github.io/2016/05/10/Setup-Python-Development-with-Vagrant/</id>
+    <published>2016-05-10T02:14:35.000Z</published>
+    <updated>2016-05-10T05:16:37.862Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/vagrant.png" alt="基于Vagrant搭建全栈式的Python开发环境"></p>
+<h2 id="What_is_Vagrant?">What is Vagrant?</h2><p>vagrant是建立在虚拟机基础上的虚拟环境管理工具。可用于快速创建基于VirtualBox、VMware、AWS的虚拟机，提供易于配置，重复性好，便携式的工作环境。也可以和puppet，chef结合，实现虚拟机管理的自动化。</p>
+<p>对于前提——虚拟机，官方推荐使用VirtualBox，因为免费/容易获取/支持各平台/vagrant内嵌。</p>
+<p>对于被管理的对象——虚拟环境，vagrant就是为了避免创建虚拟机繁琐的过程而出现的，它将一个虚拟环境封装为一个基础镜像，并给了一个生动的名字——box，所以这里的虚拟环境就是box。而管理，也就是添加，使用，销毁这些操作了。</p>
+<h2 id="vagrant安装">vagrant安装</h2><p><a href="https://www.vagrantup.com" target="_blank" rel="external">https://www.vagrantup.com</a></p>
+<p><a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="external">https://www.virtualbox.org/wiki/Downloads</a></p>
+<h2 id="vagrant基本命令行">vagrant基本命令行</h2><ol>
+<li><p>vagrant init</p>
+<p> 一个普通的目录要成为vagrant可用的目录，需要初始化一下。初始化之后可以发现在目录下多了一个Vagrantfile文件，查看此文件，发现有很多被注释的配置示例，请参照《Vagrantfile基本配置文件详解》修改。</p>
+</li>
+<li><p>vagrant box add</p>
+<p> 目前我们只是拥有一个vagrant可用的目录。下一步自然是需要一个虚拟环境，在box列表中没有所需的虚拟环境时可以这么做：HashiCorp’s Atlas box catalog里聚集了各种可用的box，进入挑选一番，比如说看中了ubuntu/trusty64，在终端运行vagrant box add ubuntu/trusty64，vagrant会从服务器下载ubuntu/trusty64并添加进box列表，可用vagrant box list查看。当然也可以手动将box下载至本地，再添加vagrant box add boxname ~/box/ubuntu/trusty64。一般建议执行本地添加box。</p>
+</li>
+<li><p>vagrant up</p>
+<p> 一切就绪，启动虚拟环境，打开virtual box可以发现该虚拟机已启动。</p>
+</li>
+<li><p>vagrant ssh</p>
+<p> 以ssh登录虚拟环境，OK，已进入box，之后就可以通过终端在你的虚拟环境里做任何事情了</p>
+</li>
+<li><p>vagrant reload</p>
+<p> 重新加载当前虚拟环境。如果你修改了vagrantfile配置项后，一般需要执行此操作来更新起效。</p>
+</li>
+<li><p>vagrant halt</p>
+<p> 挂起，顾名思义，关闭当前虚拟环境。</p>
+</li>
+<li><p>vagrant destroy</p>
+<p> 彻底销毁当前虚拟环境。慎用。</p>
+</li>
+<li><p>vagrant package</p>
+<p> 可对当前虚拟环境打个包，不仅能存下当前环境，还能随身带随时用。其他用户只要添加这个box，用其初始化自己的开发目录就能得到一个一模一样的虚拟开发环境了。</p>
+</li>
+</ol>
+<h2 id="Vagrantfile基本配置文件详解">Vagrantfile基本配置文件详解</h2><p>Vagrant使用Ruby开发，所以它的配置语法也是Ruby的。<br>修改完Vagrantfile配置后，必须用vagrant reload重启VM后，配置才能生效。</p>
+<ol>
+<li><p>配置基本说明</p>
+<pre><code>Vagrant.configure(<span class="number">2</span>) <span class="keyword">do</span> |config|
+<span class="preprocessor">#......</span>
+end
+</code></pre><p> configure(“2”)描述的是使用Vagrant 2.0.x配置方式。<br> Vagrant 1.0.x的配置方式为:Vagrant::COnfig.run do |config| …</p>
+</li>
+<li><p>box设置</p>
+<pre><code>config<span class="class">.vm</span><span class="class">.box</span> = <span class="string">"boxIdentity"</span>
+</code></pre><p> 配置Vagrant要去启用哪个box作为系统</p>
+</li>
+<li><p>hostname设置</p>
+<pre><code>config<span class="class">.vm</span><span class="class">.hostname</span> = <span class="string">"go-app"</span>
+</code></pre><p> host用于识别虚拟主机。特别在有多台虚拟机时，务必进行设置。</p>
+</li>
+<li><p>网络设置</p>
+<p> Vagrant有两种方式进行网络连接.<br> (1)host-only主机模式，意思是主机与虚拟机之间的网络互访。其他人访问不到你的虚拟机。<br> (2)bridge桥接模式，此模式下VM如同局域网中的一台独立的直接虚拟机，可以被其他机器访问。</p>
+<pre><code><span class="tag">config</span><span class="class">.vm</span><span class="class">.network</span>: <span class="tag">private_network</span>, <span class="tag">ip</span>: "192<span class="class">.168</span><span class="class">.33</span><span class="class">.11</span>"
+</code></pre><p> 这里设置为host-only模式，且虚拟机ip设置为”192.168.33.11”</p>
+</li>
+<li><p>端口转发</p>
+<p> Vagrant会默认初始化一个端口映射为guest:22, host:2222 也就是说客户机的22端口，将被映射到宿主机的2222端口</p>
+<pre><code>config.vm.<span class="string">network:</span> forwarded_port, <span class="string">guest:</span> <span class="number">8080</span>, <span class="string">host:</span> <span class="number">5000</span>
+</code></pre><p> 而以上设置将主机上的5000端口forward到虚拟机的8080端口上。</p>
+<p> <strong>注意:</strong>linux在开启1024（不含1024）之前端口时是需要root权限的。所以一般建议在虚拟机上分配1024以上的端口。</p>
+</li>
+<li><p>同步目录</p>
+<p> 除了默认的/vagrant同步目录外，还可以设置额外的同步目录:</p>
+<pre><code>config<span class="class">.vm</span><span class="class">.synced_folder</span> <span class="string">"d:/local/dir"</span>, <span class="string">"/vagrant_data/"</span>
+</code></pre><p> 第一个参数是本地目录，第二个参数为虚拟机目录。</p>
+</li>
+</ol>
+<h2 id="Ubuntu安装pip和virtualenv">Ubuntu安装pip和virtualenv</h2><pre><code>$ sudo apt-get <span class="operator"><span class="keyword">install</span> python-pip python-dev <span class="keyword">build</span>-essential 
+$ sudo pip <span class="keyword">install</span> <span class="comment">--upgrade pip </span>
+$ sudo pip <span class="keyword">install</span> <span class="comment">--upgrade virtualenv</span></span>
+</code></pre><h2 id="Ubuntu安装git">Ubuntu安装git</h2><pre><code>sudo apt-<span class="keyword">get</span> install git
+</code></pre><h2 id="Ubuntu安装Web-py">Ubuntu安装Web.py</h2><pre><code><span class="tag">sudo</span> <span class="tag">easy_install</span> <span class="tag">web</span><span class="class">.py</span>
+</code></pre><p>执行完之后进入pytohn解释器输入</p>
+<pre><code><span class="prompt">&gt;&gt;</span>&gt;import web
+<span class="prompt">&gt;&gt;</span>&gt;
+</code></pre><p>如果没有出现错误提示（如上）那就证明安装配置成功了。</p>
+<h2 id="Ubuntu安装Flask">Ubuntu安装Flask</h2><pre><code>sudo apt-<span class="built_in">get</span> install <span class="keyword">python</span>-flask
+</code></pre><p><strong>注意：</strong>在虚拟机中，创建 Flask App 的时候，修改调用run()的方法使服务器公开可用，让操作系统监听所有公网 IP。不然你没法在主机访问到虚拟机对的web app。</p>
+<pre><code>app.<span class="function"><span class="title">run</span><span class="params">(host=<span class="string">'0.0.0.0'</span>)</span></span>
+</code></pre><p>详细代码如下:</p>
+<pre><code><span class="keyword">from</span> flask <span class="keyword">import</span> Flask  
+app = Flask(__name__)  
+
+<span class="decorator">@app.route('/')  </span>
+<span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span>  
+    <span class="keyword">return</span> <span class="string">'Hello World!'</span>  
+
+<span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:  
+    app.run(<span class="string">"0.0.0.0"</span>, debug=<span class="keyword">True</span>)
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/vagrant.png" alt="基于Vagrant搭建全栈式的Python开发环境"></p>
+<h2 id="What_is_Vagrant?">What is Vagra]]>
+    </summary>
+    
+      <category term="Python" scheme="http://sunblognuke.github.io/tags/Python/"/>
+    
+      <category term="Ubuntu" scheme="http://sunblognuke.github.io/tags/Ubuntu/"/>
+    
+      <category term="Vagrant" scheme="http://sunblognuke.github.io/tags/Vagrant/"/>
+    
+      <category term="Virtualbox" scheme="http://sunblognuke.github.io/tags/Virtualbox/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Python整合Selenium获取Ajax页面]]></title>
@@ -413,7 +524,7 @@ HEADERS = {
     <link href="http://sunblognuke.github.io/2016/01/07/The-Zen-of-Python/"/>
     <id>http://sunblognuke.github.io/2016/01/07/The-Zen-of-Python/</id>
     <published>2016-01-07T03:47:25.000Z</published>
-    <updated>2016-01-07T05:09:01.722Z</updated>
+    <updated>2016-05-04T03:26:30.976Z</updated>
     <content type="html"><![CDATA[<pre><code>&gt;&gt;&gt; <span class="keyword">import</span> <span class="keyword">this</span>
 </code></pre><p>The Zen of Python, by Tim Peters</p>
 <blockquote>
@@ -455,6 +566,8 @@ HEADERS = {
 <p>如果你无法向人描述你的方案，那肯定不是一个好方案；反之亦然（方案测评标准）</p>
 <p>命名空间是一种绝妙的理念，我们应当多加利用（倡导与号召）</p>
 </blockquote>
+<p>PS: <a href="http://www.codingpy.com/article/zen-of-python-illustrated/" target="_blank" rel="external">一图解读Python设计哲学：Python之禅</a> 以漫画的形式去解读每一句话后面的含义，更加形象直观。</p>
+<p><img src="http://ww3.sinaimg.cn/mw690/006faQNTgw1f39d4phtn8j30jg1uogxv.jpg" alt=""></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<pre><code>&gt;&gt;&gt; <span class="keyword">import</span> <span class="keyword">this</span>
@@ -1069,41 +1182,6 @@ widgets:
       <category term="Blogging" scheme="http://sunblognuke.github.io/tags/Blogging/"/>
     
       <category term="Hexo" scheme="http://sunblognuke.github.io/tags/Hexo/"/>
-    
-      <category term="Blog" scheme="http://sunblognuke.github.io/categories/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Blog & CMS & DotNetNuke]]></title>
-    <link href="http://sunblognuke.github.io/2015/12/03/Blog-CMS-DotNetNuke/"/>
-    <id>http://sunblognuke.github.io/2015/12/03/Blog-CMS-DotNetNuke/</id>
-    <published>2015-12-03T06:08:43.000Z</published>
-    <updated>2015-12-09T09:37:48.795Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/website.jpg?imageView2/0/w/600/q/80" alt=""></p>
-<p>最近重新拾起CMS这一领域的研究，希望借助DNN重新规划自己的职业生涯或工作方式。</p>
-<ul>
-<li><p><a href="http://blog.xdite.net/posts/2014/02/26/growing-cms-scaling-2" target="_blank" rel="external">CMS的扩展之术</a></p>
-</li>
-<li><p><a href="http://blog.xdite.net/posts/2013/09/27/mvp-logdown-learn" target="_blank" rel="external">一趟 MVP 的旅程：在 Logdown 學到的幾件事</a></p>
-<p>  一个台湾华人创建的博客网站，专注优雅的书写平台（Markdown）, 可对比国内的<a href="www.jianshu.com">简书</a> 或国外的 <a href="https://medium.com/" target="_blank" rel="external">Medium</a>。</p>
-</li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/img/website.jpg?imageView2/0/w/600/q/80" alt=""></p>
-<p>最近重新拾起CMS这一领域的研究，希望借助DNN重新规划自己的职业]]>
-    </summary>
-    
-      <category term="Blogging" scheme="http://sunblognuke.github.io/tags/Blogging/"/>
-    
-      <category term="CMS" scheme="http://sunblognuke.github.io/tags/CMS/"/>
-    
-      <category term="DNN8" scheme="http://sunblognuke.github.io/tags/DNN8/"/>
-    
-      <category term="DotNetNuke" scheme="http://sunblognuke.github.io/tags/DotNetNuke/"/>
-    
-      <category term="Markdown" scheme="http://sunblognuke.github.io/tags/Markdown/"/>
     
       <category term="Blog" scheme="http://sunblognuke.github.io/categories/Blog/"/>
     

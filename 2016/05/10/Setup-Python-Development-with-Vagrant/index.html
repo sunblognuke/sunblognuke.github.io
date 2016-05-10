@@ -4,29 +4,30 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Python Troubleshooting | Baldwin&#39;s Blog</title>
+    <title>基于Vagrant搭建全栈式的Python开发环境 | Baldwin&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Baldwin">
     
 
     
-    <meta name="description" content="PyQuery: 一个类似jQuery的Python库PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：http://pyquery.org
-Python轻量级ORM - Peewee最新API：Python轻量级ORM - Peewee
-like匹配语句">
+    <meta name="description" content="What is Vagrant?vagrant是建立在虚拟机基础上的虚拟环境管理工具。可用于快速创建基于VirtualBox、VMware、AWS的虚拟机，提供易于配置，重复性好，便携式的工作环境。也可以和puppet，chef结合，实现虚拟机管理的自动化。
+对于前提——虚拟机，官方推荐使用VirtualBox，因为免费/容易获取/支持各平台/vagrant内嵌。
+对于被管理的对象——虚拟环境，v">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python Troubleshooting">
-<meta property="og:url" content="http://sunblognuke.github.io/2016/01/11/Python-Troubleshooting/index.html">
+<meta property="og:title" content="基于Vagrant搭建全栈式的Python开发环境">
+<meta property="og:url" content="http://sunblognuke.github.io/2016/05/10/Setup-Python-Development-with-Vagrant/index.html">
 <meta property="og:site_name" content="Baldwin's Blog">
-<meta property="og:description" content="PyQuery: 一个类似jQuery的Python库PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：http://pyquery.org
-Python轻量级ORM - Peewee最新API：Python轻量级ORM - Peewee
-like匹配语句">
-<meta property="og:updated_time" content="2016-01-12T06:43:00.232Z">
+<meta property="og:description" content="What is Vagrant?vagrant是建立在虚拟机基础上的虚拟环境管理工具。可用于快速创建基于VirtualBox、VMware、AWS的虚拟机，提供易于配置，重复性好，便携式的工作环境。也可以和puppet，chef结合，实现虚拟机管理的自动化。
+对于前提——虚拟机，官方推荐使用VirtualBox，因为免费/容易获取/支持各平台/vagrant内嵌。
+对于被管理的对象——虚拟环境，v">
+<meta property="og:image" content="http://7xof1d.com1.z0.glb.clouddn.com/vagrant.png">
+<meta property="og:updated_time" content="2016-05-10T05:16:37.862Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python Troubleshooting">
-<meta name="twitter:description" content="PyQuery: 一个类似jQuery的Python库PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：http://pyquery.org
-Python轻量级ORM - Peewee最新API：Python轻量级ORM - Peewee
-like匹配语句">
+<meta name="twitter:title" content="基于Vagrant搭建全栈式的Python开发环境">
+<meta name="twitter:description" content="What is Vagrant?vagrant是建立在虚拟机基础上的虚拟环境管理工具。可用于快速创建基于VirtualBox、VMware、AWS的虚拟机，提供易于配置，重复性好，便携式的工作环境。也可以和puppet，chef结合，实现虚拟机管理的自动化。
+对于前提——虚拟机，官方推荐使用VirtualBox，因为免费/容易获取/支持各平台/vagrant内嵌。
+对于被管理的对象——虚拟环境，v">
 <meta name="twitter:creator" content="@sunblognuke">
 
     
@@ -88,14 +89,14 @@ like匹配语句">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/01/11/Python-Troubleshooting/" title="Python Troubleshooting" itemprop="url">Python Troubleshooting</a>
+      <a href="/2016/05/10/Setup-Python-Development-with-Vagrant/" title="基于Vagrant搭建全栈式的Python开发环境" itemprop="url">基于Vagrant搭建全栈式的Python开发环境</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
 		
   <p class="article-time">
-    <time datetime="2016-01-11T03:57:03.000Z" itemprop="datePublished"> 发表于 2016-01-11</time>
+    <time datetime="2016-05-10T02:14:35.000Z" itemprop="datePublished"> 发表于 2016-05-10</time>
     
   </p>
 </header>
@@ -104,62 +105,133 @@ like匹配语句">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PyQuery:_一个类似jQuery的Python库"><span class="toc-number">1.</span> <span class="toc-text">PyQuery: 一个类似jQuery的Python库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python轻量级ORM_-_Peewee"><span class="toc-number">2.</span> <span class="toc-text">Python轻量级ORM - Peewee</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#requests-get_获取页面乱码"><span class="toc-number">3.</span> <span class="toc-text">requests.get 获取页面乱码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#urllib2-HTTPError:_HTTP_Error_403:_Forbidden"><span class="toc-number">4.</span> <span class="toc-text">urllib2.HTTPError: HTTP Error 403: Forbidden</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装饰器"><span class="toc-number">5.</span> <span class="toc-text">装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#@classmethod_或_@staticmethod"><span class="toc-number">6.</span> <span class="toc-text">@classmethod 或 @staticmethod</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What_is_Vagrant?"><span class="toc-number">1.</span> <span class="toc-text">What is Vagrant?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vagrant安装"><span class="toc-number">2.</span> <span class="toc-text">vagrant安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vagrant基本命令行"><span class="toc-number">3.</span> <span class="toc-text">vagrant基本命令行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vagrantfile基本配置文件详解"><span class="toc-number">4.</span> <span class="toc-text">Vagrantfile基本配置文件详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装pip和virtualenv"><span class="toc-number">5.</span> <span class="toc-text">Ubuntu安装pip和virtualenv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装git"><span class="toc-number">6.</span> <span class="toc-text">Ubuntu安装git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装Web-py"><span class="toc-number">7.</span> <span class="toc-text">Ubuntu安装Web.py</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装Flask"><span class="toc-number">8.</span> <span class="toc-text">Ubuntu安装Flask</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="PyQuery:_一个类似jQuery的Python库">PyQuery: 一个类似jQuery的Python库</h2><p>PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：<a href="http://pyquery.readthedocs.org/en/latest/api.html" target="_blank" rel="external">http://pyquery.org</a></p>
-<h2 id="Python轻量级ORM_-_Peewee">Python轻量级ORM - Peewee</h2><p>最新API：<a href="http://peewee.readthedocs.org/en/latest/" target="_blank" rel="external">Python轻量级ORM - Peewee</a></p>
-<p>like匹配语句:</p>
-<pre><code>xxModel.<span class="function"><span class="title">select</span><span class="params">()</span></span>.<span class="function"><span class="title">where</span><span class="params">(xxModel.author ** <span class="string">'zh%'</span>)</span></span>
-</code></pre><h2 id="requests-get_获取页面乱码">requests.get 获取页面乱码</h2><p>查看一下网页的编码，比如是gbk</p>
-<pre><code><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"Content-Type"</span> <span class="attribute">content</span>=<span class="value">"text/html; charset=gb2312"</span> /&gt;</span>
-</code></pre><p>那就需要response设置为r.encoding=’gbk’, 代码如下:</p>
-<pre><code>r = requests.<span class="function"><span class="title">get</span><span class="params">(self.url, headers=config.HEADERS)</span></span>
-r<span class="class">.encoding</span> = <span class="string">'gb2312'</span>
-return r.text
-</code></pre><h2 id="urllib2-HTTPError:_HTTP_Error_403:_Forbidden">urllib2.HTTPError: HTTP Error 403: Forbidden</h2><p>解决方案：ulr请求需要模拟真实的浏览器访问，需要设置User-Agent项，最简便的方式就是随机获取，代码如下:</p>
-<pre><code><span class="preprocessor"># -*- coding: UTF-8 -*-</span>
-import sys
-import <span class="built_in">random</span>
+		<p><img src="http://7xof1d.com1.z0.glb.clouddn.com/vagrant.png" alt="基于Vagrant搭建全栈式的Python开发环境"></p>
+<h2 id="What_is_Vagrant?">What is Vagrant?</h2><p>vagrant是建立在虚拟机基础上的虚拟环境管理工具。可用于快速创建基于VirtualBox、VMware、AWS的虚拟机，提供易于配置，重复性好，便携式的工作环境。也可以和puppet，chef结合，实现虚拟机管理的自动化。</p>
+<p>对于前提——虚拟机，官方推荐使用VirtualBox，因为免费/容易获取/支持各平台/vagrant内嵌。</p>
+<p>对于被管理的对象——虚拟环境，vagrant就是为了避免创建虚拟机繁琐的过程而出现的，它将一个虚拟环境封装为一个基础镜像，并给了一个生动的名字——box，所以这里的虚拟环境就是box。而管理，也就是添加，使用，销毁这些操作了。</p>
+<h2 id="vagrant安装">vagrant安装</h2><p><a href="https://www.vagrantup.com" target="_blank" rel="external">https://www.vagrantup.com</a></p>
+<p><a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="external">https://www.virtualbox.org/wiki/Downloads</a></p>
+<h2 id="vagrant基本命令行">vagrant基本命令行</h2><ol>
+<li><p>vagrant init</p>
+<p> 一个普通的目录要成为vagrant可用的目录，需要初始化一下。初始化之后可以发现在目录下多了一个Vagrantfile文件，查看此文件，发现有很多被注释的配置示例，请参照《Vagrantfile基本配置文件详解》修改。</p>
+</li>
+<li><p>vagrant box add</p>
+<p> 目前我们只是拥有一个vagrant可用的目录。下一步自然是需要一个虚拟环境，在box列表中没有所需的虚拟环境时可以这么做：HashiCorp’s Atlas box catalog里聚集了各种可用的box，进入挑选一番，比如说看中了ubuntu/trusty64，在终端运行vagrant box add ubuntu/trusty64，vagrant会从服务器下载ubuntu/trusty64并添加进box列表，可用vagrant box list查看。当然也可以手动将box下载至本地，再添加vagrant box add boxname ~/box/ubuntu/trusty64。一般建议执行本地添加box。</p>
+</li>
+<li><p>vagrant up</p>
+<p> 一切就绪，启动虚拟环境，打开virtual box可以发现该虚拟机已启动。</p>
+</li>
+<li><p>vagrant ssh</p>
+<p> 以ssh登录虚拟环境，OK，已进入box，之后就可以通过终端在你的虚拟环境里做任何事情了</p>
+</li>
+<li><p>vagrant reload</p>
+<p> 重新加载当前虚拟环境。如果你修改了vagrantfile配置项后，一般需要执行此操作来更新起效。</p>
+</li>
+<li><p>vagrant halt</p>
+<p> 挂起，顾名思义，关闭当前虚拟环境。</p>
+</li>
+<li><p>vagrant destroy</p>
+<p> 彻底销毁当前虚拟环境。慎用。</p>
+</li>
+<li><p>vagrant package</p>
+<p> 可对当前虚拟环境打个包，不仅能存下当前环境，还能随身带随时用。其他用户只要添加这个box，用其初始化自己的开发目录就能得到一个一模一样的虚拟开发环境了。</p>
+</li>
+</ol>
+<h2 id="Vagrantfile基本配置文件详解">Vagrantfile基本配置文件详解</h2><p>Vagrant使用Ruby开发，所以它的配置语法也是Ruby的。<br>修改完Vagrantfile配置后，必须用vagrant reload重启VM后，配置才能生效。</p>
+<ol>
+<li><p>配置基本说明</p>
+<pre><code>Vagrant.configure(<span class="number">2</span>) <span class="keyword">do</span> |config|
+<span class="preprocessor">#......</span>
+end
+</code></pre><p> configure(“2”)描述的是使用Vagrant 2.0.x配置方式。<br> Vagrant 1.0.x的配置方式为:Vagrant::COnfig.run do |config| …</p>
+</li>
+<li><p>box设置</p>
+<pre><code>config<span class="class">.vm</span><span class="class">.box</span> = <span class="string">"boxIdentity"</span>
+</code></pre><p> 配置Vagrant要去启用哪个box作为系统</p>
+</li>
+<li><p>hostname设置</p>
+<pre><code>config<span class="class">.vm</span><span class="class">.hostname</span> = <span class="string">"go-app"</span>
+</code></pre><p> host用于识别虚拟主机。特别在有多台虚拟机时，务必进行设置。</p>
+</li>
+<li><p>网络设置</p>
+<p> Vagrant有两种方式进行网络连接.<br> (1)host-only主机模式，意思是主机与虚拟机之间的网络互访。其他人访问不到你的虚拟机。<br> (2)bridge桥接模式，此模式下VM如同局域网中的一台独立的直接虚拟机，可以被其他机器访问。</p>
+<pre><code><span class="tag">config</span><span class="class">.vm</span><span class="class">.network</span>: <span class="tag">private_network</span>, <span class="tag">ip</span>: "192<span class="class">.168</span><span class="class">.33</span><span class="class">.11</span>"
+</code></pre><p> 这里设置为host-only模式，且虚拟机ip设置为”192.168.33.11”</p>
+</li>
+<li><p>端口转发</p>
+<p> Vagrant会默认初始化一个端口映射为guest:22, host:2222 也就是说客户机的22端口，将被映射到宿主机的2222端口</p>
+<pre><code>config.vm.<span class="string">network:</span> forwarded_port, <span class="string">guest:</span> <span class="number">8080</span>, <span class="string">host:</span> <span class="number">5000</span>
+</code></pre><p> 而以上设置将主机上的5000端口forward到虚拟机的8080端口上。</p>
+<p> <strong>注意:</strong>linux在开启1024（不含1024）之前端口时是需要root权限的。所以一般建议在虚拟机上分配1024以上的端口。</p>
+</li>
+<li><p>同步目录</p>
+<p> 除了默认的/vagrant同步目录外，还可以设置额外的同步目录:</p>
+<pre><code>config<span class="class">.vm</span><span class="class">.synced_folder</span> <span class="string">"d:/local/dir"</span>, <span class="string">"/vagrant_data/"</span>
+</code></pre><p> 第一个参数是本地目录，第二个参数为虚拟机目录。</p>
+</li>
+</ol>
+<h2 id="Ubuntu安装pip和virtualenv">Ubuntu安装pip和virtualenv</h2><pre><code>$ sudo apt-get <span class="operator"><span class="keyword">install</span> python-pip python-dev <span class="keyword">build</span>-essential 
+$ sudo pip <span class="keyword">install</span> <span class="comment">--upgrade pip </span>
+$ sudo pip <span class="keyword">install</span> <span class="comment">--upgrade virtualenv</span></span>
+</code></pre><h2 id="Ubuntu安装git">Ubuntu安装git</h2><pre><code>sudo apt-<span class="keyword">get</span> install git
+</code></pre><h2 id="Ubuntu安装Web-py">Ubuntu安装Web.py</h2><pre><code><span class="tag">sudo</span> <span class="tag">easy_install</span> <span class="tag">web</span><span class="class">.py</span>
+</code></pre><p>执行完之后进入pytohn解释器输入</p>
+<pre><code><span class="prompt">&gt;&gt;</span>&gt;import web
+<span class="prompt">&gt;&gt;</span>&gt;
+</code></pre><p>如果没有出现错误提示（如上）那就证明安装配置成功了。</p>
+<h2 id="Ubuntu安装Flask">Ubuntu安装Flask</h2><pre><code>sudo apt-<span class="built_in">get</span> install <span class="keyword">python</span>-flask
+</code></pre><p><strong>注意：</strong>在虚拟机中，创建 Flask App 的时候，修改调用run()的方法使服务器公开可用，让操作系统监听所有公网 IP。不然你没法在主机访问到虚拟机对的web app。</p>
+<pre><code>app.<span class="function"><span class="title">run</span><span class="params">(host=<span class="string">'0.0.0.0'</span>)</span></span>
+</code></pre><p>详细代码如下:</p>
+<pre><code><span class="keyword">from</span> flask <span class="keyword">import</span> Flask  
+app = Flask(__name__)  
 
-reload(sys)
-sys.setdefaultencoding(<span class="string">'utf-8'</span>)
+<span class="decorator">@app.route('/')  </span>
+<span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span>  
+    <span class="keyword">return</span> <span class="string">'Hello World!'</span>  
 
-USER_AGENTS = [
-                <span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'</span>,
-                <span class="string">'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11'</span>,
-                <span class="string">'Opera/9.25 (Windows NT 5.1; U; en)'</span>,
-                <span class="string">'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)'</span>,
-                <span class="string">'Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Kubuntu)'</span>,
-                <span class="string">'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'</span>,
-                <span class="string">'Lynx/2.8.5rel.1 libwww-FM/2.14 SSL-MM/1.4.1 GNUTLS/1.2.9'</span>,
-                <span class="string">'Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.7 (KHTML, like Gecko) Ubuntu/11.04 Chromium/16.0.912.77 Chrome/16.0.912.77 Safari/535.7'</span>,
-                <span class="string">'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:10.0) Gecko/20100101 Firefox/10.0'</span>
-            ]
-
-<span class="preprocessor">#伪装浏览器头</span>
-HEADERS = {
-    <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'</span>,
-    <span class="string">'User-Agent'</span>: <span class="built_in">random</span>.choice(USER_AGENTS),
-    <span class="string">'Referer'</span>: <span class="string">'http://www.baidu.com'</span> <span class="preprocessor"># or <span class="string">'http://www.google.cpm'</span></span>
+<span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:  
+    app.run(<span class="string">"0.0.0.0"</span>, debug=<span class="keyword">True</span>)
+</code></pre>
+		
+<style type="text/css">
+.article-content hr {
+  text-align: center;
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
 }
-</code></pre><h2 id="装饰器">装饰器</h2><h2 id="@classmethod_或_@staticmethod">@classmethod 或 @staticmethod</h2><p>参考知乎话题 - <a href="https://www.zhihu.com/question/21084971" target="_blank" rel="external">https://www.zhihu.com/question/21084971</a></p>
-
-		    
+.article-content hr:after {
+  content: 'EOF';
+  display: inline-block;
+  position: relative;
+  top: -13px;
+  padding: 0 10px;
+  background: #fafafa;
+  color: #8c8b8b;
+}
+</style>
+    
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Framework/">Framework</a><a href="/tags/Python/">Python</a>
+  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/Ubuntu/">Ubuntu</a><a href="/tags/Vagrant/">Vagrant</a><a href="/tags/Virtualbox/">Virtualbox</a>
   </div>
 
 </div>
@@ -168,7 +240,7 @@ HEADERS = {
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://sunblognuke.github.io/2016/01/11/Python-Troubleshooting/" data-title="Python Troubleshooting | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://sunblognuke.github.io/2016/05/10/Setup-Python-Development-with-Vagrant/" data-title="基于Vagrant搭建全栈式的Python开发环境 | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -181,19 +253,11 @@ HEADERS = {
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/01/12/Python-Tricks/" title="Python Tricks">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Python Tricks</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/01/07/The-Zen-of-Python/"  title="The Zen of Python">
+<a href="/2016/02/24/Integrated-Python-with-Selenium/"  title="Python整合Selenium获取Ajax页面">
  <strong>下一篇：</strong><br/> 
- <span>The Zen of Python
+ <span>Python整合Selenium获取Ajax页面
 </span>
 </a>
 </div>
@@ -202,7 +266,7 @@ HEADERS = {
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/01/11/Python-Troubleshooting/" data-title="Python Troubleshooting" data-url="http://sunblognuke.github.io/2016/01/11/Python-Troubleshooting/"></div>
+	<div class="ds-thread" data-thread-key="2016/05/10/Setup-Python-Development-with-Vagrant/" data-title="基于Vagrant搭建全栈式的Python开发环境" data-url="http://sunblognuke.github.io/2016/05/10/Setup-Python-Development-with-Vagrant/"></div>
 </section>
 
 
@@ -212,7 +276,7 @@ HEADERS = {
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PyQuery:_一个类似jQuery的Python库"><span class="toc-number">1.</span> <span class="toc-text">PyQuery: 一个类似jQuery的Python库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python轻量级ORM_-_Peewee"><span class="toc-number">2.</span> <span class="toc-text">Python轻量级ORM - Peewee</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#requests-get_获取页面乱码"><span class="toc-number">3.</span> <span class="toc-text">requests.get 获取页面乱码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#urllib2-HTTPError:_HTTP_Error_403:_Forbidden"><span class="toc-number">4.</span> <span class="toc-text">urllib2.HTTPError: HTTP Error 403: Forbidden</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装饰器"><span class="toc-number">5.</span> <span class="toc-text">装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#@classmethod_或_@staticmethod"><span class="toc-number">6.</span> <span class="toc-text">@classmethod 或 @staticmethod</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What_is_Vagrant?"><span class="toc-number">1.</span> <span class="toc-text">What is Vagrant?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vagrant安装"><span class="toc-number">2.</span> <span class="toc-text">vagrant安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vagrant基本命令行"><span class="toc-number">3.</span> <span class="toc-text">vagrant基本命令行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vagrantfile基本配置文件详解"><span class="toc-number">4.</span> <span class="toc-text">Vagrantfile基本配置文件详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装pip和virtualenv"><span class="toc-number">5.</span> <span class="toc-text">Ubuntu安装pip和virtualenv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装git"><span class="toc-number">6.</span> <span class="toc-text">Ubuntu安装git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装Web-py"><span class="toc-number">7.</span> <span class="toc-text">Ubuntu安装Web.py</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装Flask"><span class="toc-number">8.</span> <span class="toc-text">Ubuntu安装Flask</span></a></li></ol>
  
   </div>
 

@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sunblognuke.github.io/2016/05/10/Setup-Python-Development-with-Vagrant/</loc>
+    <lastmod>2016-05-10T05:16:37.862Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sunblognuke.github.io/2016/01/07/The-Zen-of-Python/</loc>
+    <lastmod>2016-05-04T03:26:30.976Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sunblognuke.github.io/resume/index.html</loc>
     <lastmod>2016-04-21T05:55:08.009Z</lastmod>
   </url>
@@ -49,11 +59,6 @@
   <url>
     <loc>http://sunblognuke.github.io/2016/01/11/Python-Troubleshooting/</loc>
     <lastmod>2016-01-12T06:43:00.232Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sunblognuke.github.io/2016/01/07/The-Zen-of-Python/</loc>
-    <lastmod>2016-01-07T05:09:01.722Z</lastmod>
   </url>
   
   <url>
