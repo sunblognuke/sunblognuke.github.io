@@ -54,6 +54,8 @@ tags: [Hexo, Blogging]
 
 ## 整合Swiftype站内搜索
 
+__更新：swiftype开始收费，目前这一设置对大部分已经不实用了。__
+
 参考这两篇教程：
 
 [使用swiftype实现站内搜索](http://opiece.me/2015/04/16/site-search-by-swiftype/)

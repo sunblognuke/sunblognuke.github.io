@@ -5,7 +5,7 @@ description:
 tags: [Python, Vagrant, Virtualbox, Ubuntu]
 ---
 
-![基于Vagrant搭建全栈式的Python开发环境](http://7xof1d.com1.z0.glb.clouddn.com/vagrant.png)
+![基于Vagrant搭建全栈式的Python开发环境](https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/vagrant.png)
 
 ## What is Vagrant?
 
@@ -54,7 +54,12 @@ vagrant是建立在虚拟机基础上的虚拟环境管理工具。可用于快�
 8. vagrant package
 
     可对当前虚拟环境打个包，不仅能存下当前环境，还能随身带随时用。其他用户只要添加这个box，用其初始化自己的开发目录就能得到一个一模一样的虚拟开发环境了。
-    
+
+9. vagrant box remove virtualbox_name
+
+    删除本地指定名称的box，可通过vagrant box list得到当前所有存在的box名称里列表。
+
+
 ## Vagrantfile基本配置文件详解
 
 Vagrant使用Ruby开发，所以它的配置语法也是Ruby的。
@@ -111,8 +116,8 @@ Vagrant使用Ruby开发，所以它的配置语法也是Ruby的。
 
 ## Ubuntu安装pip和virtualenv
 
-    $ sudo apt-get install python-pip python-dev build-essential 
-    $ sudo pip install --upgrade pip 
+    $ sudo apt-get install python-pip python-dev build-essential
+    $ sudo pip install --upgrade pip
     $ sudo pip install --upgrade virtualenv
 
 ## Ubuntu安装git
@@ -142,10 +147,10 @@ __注意：__在虚拟机中，创建 Flask App 的时候，修改调用run()的
 
     from flask import Flask  
     app = Flask(__name__)  
-     
+
     @app.route('/')  
     def hello_world():  
         return 'Hello World!'  
-      
+
     if __name__ == '__main__':  
         app.run("0.0.0.0", debug=True)

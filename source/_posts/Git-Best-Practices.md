@@ -7,7 +7,7 @@ toc: false
 
 ---
 
-![Git最佳实践](http://7xof1d.com1.z0.glb.clouddn.com/img/Git.png)
+![Git最佳实践](https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/Git.png)
 
 参考资源：
 
@@ -66,9 +66,17 @@ $ git branch -a
 shows only remote branches.
 $ git branch -r
 
-8) When "git unable to push to unqualified destination" occured, try to 
+8) When "git unable to push to unqualified destination" occured, try to
 Do "git fetch -p origin" to make refs/remotes/origin/my_remote_branch go away if it's already deleted in origin. The -p option tells fetch to delete any tracking branches that no longer exist in the corresponding remotes; by default they are kept around.
 
-9) Git分支管理策略，如图：
+9) Fetch和Pull的简单区别如下：
 
-![](http://7xof1d.com1.z0.glb.clouddn.com/img/git_art.png)
+git fetch是将远程主机的最新内容拉到本地，用户在检查了以后决定是否合并到工作本机分支中。
+
+而git pull 则是将远程主机的最新内容拉下来后直接合并，即：git pull = git fetch + git merge，这样可能会产生冲突，需要手动解决。
+
+参考链接：[Git fetch & pull 详解](https://blog.csdn.net/qq_36113598/article/details/78906882)
+
+10) Git分支管理策略，如图：
+
+![](https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/git_art.png)

@@ -6,7 +6,7 @@ tags: [DotNetNuke]
 
 ---
 
-![](http://7xof1d.com1.z0.glb.clouddn.com/img/password.jpg?imageView2/2/w/680/q/90)
+![](https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/password.jpg?imageView2/2/w/680/q/90)
 
 在当今信息时代，管理密码本是一件很费时费力的事情。相对于DNN这一平台，由于版本较多不可避免地在开发过程中会搭建好多本地站点，时不时忘记密码也是常有的事。
 
@@ -29,42 +29,42 @@ tags: [DotNetNuke]
      registered DNN user in the database you wish to affect.
      -----------------------------------------------------------------------------------------------
      */
-     
+
     DECLARE @databaseName VARCHAR(128)
     SELECT @databaseName = DB_NAME()
-     
+
     PRINT 'RESET PASSWORD IN DATABASE : ' + @databaseName
     PRINT '-----------------------------' + REPLICATE('-', DATALENGTH(@databaseName ));
-     
+
     DECLARE @knownUserName NVARCHAR(128)
     DECLARE @lostUserName NVARCHAR(128)
     DECLARE @lostUserId NVARCHAR(128)
     DECLARE @knownPassword NVARCHAR(128)
     DECLARE @knownSalt NVARCHAR(128)
-     
+
     SET @knownUserName = 'windy' /* WHAT YOU NEED TO MODIFY */
     SET @lostUserName = 'host'
-     
+
     SELECT @knownPassword = Password, @knownSalt = PasswordSalt
     FROM aspnet_Membership
     INNER JOIN aspnet_users
     ON aspnet_Membership.UserId = aspnet_users.UserId
     where UserName = @knownUserName;
-     
+
     PRINT ''
     PRINT 'Known Password for "' + @knownUserName + '" is : ' + @knownPassword
     PRINT 'Known Password Salt for "' + @knownUserName + '" is : ' + @knownSalt
-     
+
     SELECT @lostUserId = aspnet_Membership.UserId
     FROM aspnet_Membership
     INNER JOIN aspnet_users
     ON aspnet_Membership.UserId = aspnet_users.UserId
     WHERE UserName = @lostUserName;
-     
+
     PRINT ''
     PRINT 'UserID for "' + @lostUserName + '" is : ' + @lostUserId
     PRINT ''
-     
+
     IF (DATALENGTH(@lostUserName) <= 0 OR @lostUserName IS NULL)
     PRINT 'Invalid Lost User Name ' + @lostUserName
     ELSE BEGIN
@@ -117,7 +117,7 @@ As there are frequent requests from users, who lost the password of the host acc
 1. if "register" is not displayed for the portal, go to table "Portals"  in your database and enter value "2" into column "Registration".
 2. create a new user account by registration (this time, please remember the password you enter!)
 3. go to database, enter table "ASPNet_Membership"
-4. go to new user account (usually the last one) and copy the encrypted values of columns "Password" and "PasswordSalt" into the same columns of user account "host" (usually th first entry in this table) 
+4. go to new user account (usually the last one) and copy the encrypted values of columns "Password" and "PasswordSalt" into the same columns of user account "host" (usually th first entry in this table)
 5. login as user "host" using the new password and delete the reshly created other user.
 
 Keep remembering your password ;)
@@ -132,11 +132,11 @@ Keep remembering your password ;)
     <script runat="server">
         void Page_Load(object sender, System.EventArgs e)
         {
-            DotNetNuke.Entities.Users.UserInfo uInfo = 
+            DotNetNuke.Entities.Users.UserInfo uInfo =
     DotNetNuke.Entities.Users.UserController.GetUserById(0, 1);
             if (uInfo != null)
             {
-                string password = 
+                string password =
     DotNetNuke.Entities.Users.UserController.GetPassword(ref uInfo, String.Empty);
                 Response.Write("Password: " + password);
             }
@@ -165,4 +165,3 @@ Keep remembering your password ;)
 ### 第三方模块
 
 [IowaComputerGurus's Secure Password Recovery module](https://dnnsecurepasswordrec.codeplex.com/)
-

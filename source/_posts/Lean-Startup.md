@@ -6,7 +6,7 @@ tags: [创业, 商业模式]
 
 ---
 
-![Lean Startup](http://7xof1d.com1.z0.glb.clouddn.com/img/success_vs_failure.jpg)
+![Lean Startup](https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/success_vs_failure.jpg)
 
 ## 创业公式
 

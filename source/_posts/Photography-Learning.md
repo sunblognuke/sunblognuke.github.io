@@ -7,7 +7,7 @@ copyright: false
 toc: false
 
 ---
-![](http://7xof1d.com1.z0.glb.clouddn.com/img/ps.png)
+![](https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/ps.png)
 
 分享一些学习摄影的资源及笔记心得。
 
@@ -17,7 +17,11 @@ toc: false
 
 [良知塾 - 李涛老师教程](http://www.liangzhishu.com/)
 
-本人第一个单反500D，也是目前还在用的，新增EF 50mm f/1.4 USM 人像头：
+本人第一个单反500D，也是目前还在用的，新增EF 50mm f/1.4 USM 人像头。
+
+镜头和焦距的关系如图：
+
+![](https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/lens_focus.jpg)
 
 [官方教程 - EOS 600D深度解析](http://www.canon.com.cn/specialsite/eos600d/)
 
@@ -33,7 +37,7 @@ Adobe Camera Raw预处理步骤：
 
 1. 自动校准：镜头校准，相机校准，白平衡校准
 2. 预处理：
-   
+
 	全局：正确的黑白场，准确的清晰度，适当的饱和度，丰富的层次
 	局部：目标调整工具HSL， 画笔，渐变，径向
 

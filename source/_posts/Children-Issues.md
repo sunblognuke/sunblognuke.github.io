@@ -8,7 +8,7 @@ toc: false
 
 ---
 
-![](http://7xof1d.com1.z0.glb.clouddn.com/img/children.jpg)
+![](https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/children.jpg)
 
 - 孩子其实不需要玩具，他们需要的是工具。给他工具，给他书，教他技能，他自己会玩出各种东西。
 

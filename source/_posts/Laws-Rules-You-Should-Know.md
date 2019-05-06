@@ -6,7 +6,7 @@ tags: [Laws & Rule]
 
 ---
 
-![](http://7xof1d.com1.z0.glb.clouddn.com/img/clean.png)
+![](https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/clean.png)
 
 ## 墨菲定律
 
@@ -86,9 +86,3 @@ http://baike.baidu.com/view/646319.htm
 参考资源：
 
 http://baike.baidu.com/view/47735.htm
-
-
-
-
-
-

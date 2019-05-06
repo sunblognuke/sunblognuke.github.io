@@ -10,11 +10,16 @@ date: 2015-10-22 10:32:28
 ## 分享内容
 - 将以前其他博客空间里一些有价值的日志搬移过来
 - 介绍一些有意思的开发项目
-- 分享一些开源框架，包括DotNetNuke，Orchard，Hexo的使用总结
+- 分享一些开源框架，包括DotNetNuke，Orchard，Hexo, Django的使用总结
 - 捣鼓一些黑科技
 - 自己的一些无聊吐槽
 - 小盆友的一些图片
 - 正在想
+
+## 正在捣鼓中...
+
+- [开源论坛Discourse - 基于Ruby on Rails 和 Ember.js 开发](https://www.discourse.org/)
+- [参与DjangoBlog项目](https://github.com/djangoStudyTeam/DjangoBlog)
 
 ## Why Hexo?
 

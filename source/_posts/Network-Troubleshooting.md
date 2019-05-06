@@ -6,7 +6,7 @@ tags: [Network]
 
 ---
 
-![](http://7xof1d.com1.z0.glb.clouddn.com/img/network%20topology.jpg)
+![](https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/network_topology.jpg)
 
 [网络排错大讲解](http://xpleaf.blog.51cto.com/9315560/1689438)
 
@@ -29,5 +29,3 @@ tags: [Network]
 ## VLAN 、IP分部门管理
 
 ## ARP防火墙
-
-

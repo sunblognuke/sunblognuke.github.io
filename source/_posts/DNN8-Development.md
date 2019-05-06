@@ -1,12 +1,12 @@
 title: DNN8 Development
-date: 2015-12-14 21:07:57
+date: 2016-10-24 21:07:57
 categories: Dev
 description:
 tags: [DNN8, SPA, MVC]
 
 ---
 
-![](http://7xof1d.com1.z0.glb.clouddn.com/img/SPA.png)
+![](https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/SPA.png)
 
 ## What is SPA?
 
@@ -14,7 +14,7 @@ tags: [DNN8, SPA, MVC]
 
 [Single Page Application](http://www.seguetech.com/blog/2013/04/18/what-is-single-page-application)
 
-![](http://7xof1d.com1.z0.glb.clouddn.com/img/dnn_versions.jpg)
+![](https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/dnn_versions.jpg)
 
 ## Breaking changes
 
@@ -32,4 +32,8 @@ tags: [DNN8, SPA, MVC]
 
 [Introduction to SPA modules](http://www.dnnsoftware.com/community-blog/cid/155221/module-development-in-dnn-8-3--introduction-to-spa-modules)
 
+## DNN8开发模板
 
+![](https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/dnn-community.png)
+
+[BETA DNN 8 Project Templates V6.1 for Visual Studio 2015](https://github.com/ChrisHammond/DNNTemplates/releases/tag/v06.01.00-beta)
