@@ -1,0 +1,1250 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Baldwin&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Baldwin">
+    
+
+    
+    <meta name="description" content="Hacker是一个基于Github和Hexo的静态Blog，希望用简单而清晰的写作方式Markdown分享自己的心得体会。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Baldwin's Blog">
+<meta property="og:url" content="http://sunblognuke.github.io/page/2/index.html">
+<meta property="og:site_name" content="Baldwin's Blog">
+<meta property="og:description" content="Hacker是一个基于Github和Hexo的静态Blog，希望用简单而清晰的写作方式Markdown分享自己的心得体会。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Baldwin's Blog">
+<meta name="twitter:description" content="Hacker是一个基于Github和Hexo的静态Blog，希望用简单而清晰的写作方式Markdown分享自己的心得体会。">
+<meta name="twitter:creator" content="@sunblognuke">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Baldwin&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/author.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/author.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/author.png" alt="Baldwin&#39;s Blog" title="Baldwin&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Baldwin&#39;s Blog">Baldwin&#39;s Blog</a></h1>
+				<h2 class="blog-motto">Coding - Keep Calm and Carry On</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/archives">归档 | Archives</a></li>
+					
+						<li><a href="/about">关于 | About</a></li>
+					
+						<li><a href="/resume">简历 | Resume</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:sunblognuke.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/13/Tranform-DNN-from-Host-Server-to-Local/" title="DNN番外篇 - 服务器到本地迁移" itemprop="url">DNN番外篇 - 服务器到本地迁移</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-13T02:09:39.000Z" itemprop="datePublished"> 发表于 2017-04-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>这段时间想把服务上的DNN7升级到最新版本DNN9，为了保险起见，提前在本地搭建一个测试的升级环境。故关键第一步就是如何把托管服务器上的网站环境部署到本地。期间碰到两个重要问题：</p>
+<h2 id="数据库备份文件的导入">数据库备份文件的导入</h2><p>本想新建一个空数据库，然后直接导入bak备份文件，系统提示错误（代码号：3154）：</p>
+<p>The backup set holds a backup of a database other than the existing “xx” database…</p>
+<p><strong>解决方案：</strong></p>
+<p>– Don’t create an empty database and restore the .bak file on to it.<br>– Use ‘Restore Database’ option accessible by right clicking the “Databases” branch of the SQL Server Management Studio and provide the database name while providing the source to restore.</p>
+<p>同时保证相应的xxx.mdf等文件是有效路径即可。</p>
+<h2 id="网站的本地部署">网站的本地部署</h2><p>DNN网站目录的权限、数据库的PortalAlias对应的记录也修改成本地IIS的相关设置完成后即可访问。然而我们碰到一个IIS的错误提示：</p>
+<p>HTTP 错误 500.19</p>
+<p>原因：原本托管服务上的IIS安装了<a href="http://www.iis.net/download/urlrewrite" target="_blank" rel="external">url rewrite module</a>, 而我们本地IIS没有安装这一组件。</p>
+<p><strong>解决方案：</strong> </p>
+<p>安装组件<a href="http://www.iis.net/download/urlrewrite" target="_blank" rel="external">url rewrite module</a>或注释web.config的配置项：</p>
+<pre><code>&lt;!--&lt;rewrite&gt;
+  &lt;rules&gt;
+    &lt;rule name=<span class="string">"Redirect01"</span> stopProcessing=<span class="string">"true"</span>&gt;
+      &lt;<span class="keyword">match</span> url=<span class="string">"^account-login.aspx$"</span> ignoreCase=<span class="string">"true"</span> /&gt;
+      &lt;action <span class="class"><span class="keyword">type</span></span>=<span class="string">"Redirect"</span> url=<span class="string">"/signin"</span> redirectType=<span class="string">"Permanent"</span> /&gt;
+    &lt;/rule&gt;
+    &lt;rule name=<span class="string">"Redirect02"</span> stopProcessing=<span class="string">"true"</span>&gt;
+      &lt;<span class="keyword">match</span> url=<span class="string">"^account_login.aspx$"</span> ignoreCase=<span class="string">"true"</span> /&gt;
+      &lt;action <span class="class"><span class="keyword">type</span></span>=<span class="string">"Redirect"</span> url=<span class="string">"/signin"</span> redirectType=<span class="string">"Permanent"</span> /&gt;
+    &lt;/rule&gt;
+    &lt;rule name=<span class="string">"Redirect03"</span> stopProcessing=<span class="string">"true"</span>&gt;
+      &lt;<span class="keyword">match</span> url=<span class="string">"^showcase.aspx$"</span> ignoreCase=<span class="string">"true"</span> /&gt;
+      &lt;action <span class="class"><span class="keyword">type</span></span>=<span class="string">"Redirect"</span> url=<span class="string">"/company/case-studies"</span> redirectType=<span class="string">"Permanent"</span> /&gt;
+    &lt;/rule&gt;
+  &lt;/rules&gt;
+&lt;/rewrite&gt;--&gt;
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/CMS/">CMS</a><a href="/tags/DNN9/">DNN9</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/01/19/SunBlogNuke-Runs-well-with-DNN9/" title="SunBlogNuke Runs well with DNN9" itemprop="url">SunBlogNuke Runs well with DNN9</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2017-01-19T10:59:27.000Z" itemprop="datePublished"> 发表于 2017-01-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><img src="https://github.com/sunblognuke/resources/blob/master/hexo/dnn9-community.png?raw=true" alt="SunBlogNuke Runs well with DNN9"></p>
+<h2 id="DNN9_finally_released">DNN9 finally released</h2><p>As the article <a href="http://www.dnnsoftware.com/community-blog/cid/155377/dnn-9-and-the-future-of-the-dnn-platform" target="_blank" rel="external">DNN 9 and the Future of the DNN Platform</a> mentioned, Few goals that DNN offical team wanted to accomplish for this platform:</p>
+<ul>
+<li>Reconstruct DNN to <strong>minimize our reliance on Web Forms</strong> architecture</li>
+<li>Provide developers the <strong>freedom to use a variety of frameworks</strong></li>
+<li><strong>Protect customers’ existing investments</strong> in DNN</li>
+<li>Provide a <strong>fully supported upgrade path</strong> for everyone</li>
+</ul>
+<p>DNN 9 represents the next step on our journey towards creating a more modern platform and further minimizing our use of Web Forms. Firstly the pre-released DNN9 with a brand new administrative experience that replaces the dated Web Forms based admin and host modules that we use today. Yes，this superstar is called “<a href="http://www.dnnsoftware.com/community-blog/cid/155380/dnn-9-understanding-the-persona-bar" target="_blank" rel="external">the Persona Bar</a>“.</p>
+<p>Plus there are some interesting points discussed in the comment section, for example:</p>
+<ul>
+<li>Dnn is losing the needle of the compass and is becoming another type of wordpress but not focus on DNN philosophy</li>
+<li>Why DNN lost more and more developers these years? due to the addition of MVC and SPA support or because they waited too long to support alternative frameworks.</li>
+<li>There is ZERO advantage of using MVC in DNN. Plese skip crippled MVC in DNN and just embrace the development in WebForms or the newer SPA</li>
+</ul>
+<p>Some notes for any dnn guys want to try DNN9:</p>
+<ul>
+<li>Telerik won’t be going away completely in DNN 9. We hope to have that project finished for 9.1 or 9.2. Redoing the Admin Experience has been a big job and we were not able to completely redo the remaining modules that still use Telerik.</li>
+<li>The host features did not go away at all. They have been incorporated and collapsed into the other administrative pages. see <a href="https://1drv.ms/i/s!AmCAjuMs3hO9j7Y6I_LdrZ5EVDMnzA" target="_blank" rel="external">https://1drv.ms/i/s!AmCAjuMs3hO9j7Y6I_LdrZ5EVDMnzA</a> These settings only show up for host users.</li>
+</ul>
+<p><strong>Other resources links:</strong></p>
+<p><a href="http://www.dnnsoftware.com/community-blog/cid/155385/dnn-9-appears-to-be-a-foundational-step-forward-for-the-future-of-dnn" target="_blank" rel="external">DNN 9 Appears to Be a Foundational Step Forward for the Future of DNN</a></p>
+<h2 id="DNN_Blog_Module_SunBlogNuke_compatible_well_with_DNN9">DNN Blog Module SunBlogNuke compatible well with DNN9</h2><p>Our DNN blog module SunBlogNuke straight out of the box comes ready to embrace any changes and always compatible well with the latest DNN core package DNN9. Not only we will apply any handy tools, such as SPA framework and Boostrap UI framework, with our products, but also we assure that SunBlogNuke is still the best publishing tool with News, Magazine &amp; Articles, for example Markdown support with better writing experience and the core Html/Text module is on road of integration.</p>
+<p>And another good news for any DNN guys interested in our modules, is that we will include all the separate modules into the one-collection for SunBlogNuke, for example:</p>
+<ul>
+<li><a href="http://www.sunblognuke.com/products/dotnetnuke-modules/galleryplus" target="_blank" rel="external">GalleryPlus module - Ultra DNN Media Gallery Module with Image, Video &amp; Slider</a></li>
+<li><a href="http://www.sunblognuke.com/products/dotnetnuke-modules/commentsplus" target="_blank" rel="external">CommentsPlus module - Universal comments/voting module for DNN</a></li>
+<li><a href="http://www.sunblognuke.com/products/dotnetnuke-modules/twitter-feed-widget" target="_blank" rel="external">Twitter feed module - highlight solution to display your most recent Twitter updates</a></li>
+<li>ContentSliderPlus module</li>
+</ul>
+<p>And the important point is that they will be all free for DNN Community. Please have a try on them later and if you are satisfied with those widgets, feel free to get us a coffee below :)  </p>
+<p><a href="https://www.paypal.me/sunblognuke/9.9" target="_blank" class="btn btn-lg btn-color">BUY ME A Coffee</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/CMS/">CMS</a><a href="/tags/DNN9/">DNN9</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/10/24/DNN8-Development/" title="DNN8 Development" itemprop="url">DNN8 Development</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-10-24T13:07:57.000Z" itemprop="datePublished"> 发表于 2016-10-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/SPA.png" alt=""></p>
+<h2 id="What_is_SPA?">What is SPA?</h2><blockquote>
+<p>A Single-page application (SPA), also known as a single-page interface (SPI), is a web application or web site that fits on a single web page with the goal of providing a more fluid user experience.</p>
+</blockquote>
+<p><a href="http://www.seguetech.com/blog/2013/04/18/what-is-single-page-application" target="_blank" rel="external">Single Page Application</a></p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/dnn_versions.jpg" alt=""></p>
+<h2 id="Breaking_changes">Breaking changes</h2><ol>
+<li>支持.net 4.5+版本</li>
+<li>向上兼容IE8+</li>
+<li>所有管理模块可插拔</li>
+<li>默认删除导航提供模块，只保留DDR</li>
+<li>轻量级default.css</li>
+<li>剔除Telerik控件</li>
+<li>更多查看下边链接…</li>
+</ol>
+<p><a href="http://www.dnnsoftware.com/wiki/dnn-8-breaking-changes" target="_blank" rel="external">DNN 8 BREAKING CHANGES</a></p>
+<h2 id="Set_up_environment">Set up environment</h2><p><a href="http://www.dnnsoftware.com/community-blog/cid/155221/module-development-in-dnn-8-3--introduction-to-spa-modules" target="_blank" rel="external">Introduction to SPA modules</a></p>
+<h2 id="DNN8开发模板">DNN8开发模板</h2><p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/dnn-community.png" alt=""></p>
+<p><a href="https://github.com/ChrisHammond/DNNTemplates/releases/tag/v06.01.00-beta" target="_blank" rel="external">BETA DNN 8 Project Templates V6.1 for Visual Studio 2015</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/DNN8/">DNN8</a><a href="/tags/SPA/">SPA</a><a href="/tags/MVC/">MVC</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/08/28/Laravel-5-with-Homestead-box/" title="Laravel 5 with Homestead box" itemprop="url">Laravel 5 with Homestead box</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-08-28T01:03:07.000Z" itemprop="datePublished"> 发表于 2016-08-28</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="Homestead操作备忘">Homestead操作备忘</h2><ol>
+<li>sudo apt-get/xxx -&gt;可获取root权限执行命令</li>
+<li>sudo passwd root -&gt; 修改root密码</li>
+<li>su username -&gt; 切换用户，比如su vagrant</li>
+</ol>
+<h2 id="Composer镜像更新">Composer镜像更新</h2><p><a href="http://www.phpcomposer.com/" target="_blank" rel="external">Composer中文网</a><br><a href="http://pkg.phpcomposer.com/" target="_blank" rel="external">Packagist / Composer 中国全量镜像</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Laravel/">Laravel</a><a href="/tags/Homestead/">Homestead</a><a href="/tags/Linux/">Linux</a><a href="/tags/Ubuntu/">Ubuntu</a><a href="/tags/VirtualBox/">VirtualBox</a><a href="/tags/Vagrant/">Vagrant</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/08/23/OA-Crashed-with-Mysql-Recovery/" title="通达OA的MYSQL崩溃法启用" itemprop="url">通达OA的MYSQL崩溃法启用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-08-23T02:23:58.000Z" itemprop="datePublished"> 发表于 2016-08-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>昨天公司UPS挂了导致服务器断电，重启以后通达OA的MYSQL服务再也无法启用。查询通达OA官方的文档，并根据log文件的错误提示最终把数据恢复回来，在此备忘记录一下。</p>
+<h2 id="修改innodb_buffer_pool_size">修改innodb_buffer_pool_size</h2><p>查找MySQL的错误日志文件（MYOA\data5\机器名.err）会记录如下类似内容：</p>
+<pre><code>130409 15:54:31 [<span class="keyword">Note</span>] <span class="keyword">Plugin</span> 'FEDERATED' is disabled.
+130409 15:54:31 InnoDB: The InnoDB <span class="keyword">memory</span> heap is disabled
+130409 15:54:31 InnoDB: Mutexes and rw_locks <span class="keyword">use</span> Windows interlocked functions
+130409 15:54:31 InnoDB: Compressed tables <span class="keyword">use</span> zlib 1.2.3
+130409 15:54:32 InnoDB: Initializing buffer pool, size = 1023.0M
+InnoDB: VirtualAlloc(1086849024 bytes) failed; Windows <span class="keyword">error</span> 8
+130409 15:54:32 InnoDB: Completed initialization of buffer pool
+130409 15:54:32 InnoDB: Fatal <span class="keyword">error</span>: cannot allocate <span class="keyword">memory</span> <span class="keyword">for</span> the buffer pool
+130409 15:54:32 [<span class="keyword">ERROR</span>] <span class="keyword">Plugin</span> 'InnoDB' init function returned <span class="keyword">error</span>.
+130409 15:54:32 [<span class="keyword">ERROR</span>] <span class="keyword">Plugin</span> 'InnoDB' registration <span class="keyword">as</span> a STORAGE ENGINE failed.
+130409 15:54:32 [<span class="keyword">ERROR</span>] Unknown/unsupported storage engine: Innodb
+130409 15:54:32 [<span class="keyword">ERROR</span>] Aborting
+</code></pre><h2 id="解决方法：">解决方法：</h2><p>此情况出现的原因是myoa\mysql5\my.ini中innodb_buffer_pool_size的值太大，OA服务器操作系统不支持所致。改小后再启动mysql5_OA服务即可，恢复正常可以再改回原来的值。默认为1024M。</p>
+<p>如果修改完innodb_buffer_pool_size依然运行不起来，查看log又出现如下类似内容：</p>
+<pre><code>160822 19:14:38 [Note] Plugin 'FEDERATED' is disabled.
+160822 19:14:38 InnoDB: The InnoDB memory heap is disabled
+160822 19:14:38 InnoDB: Mutexes and rw_locks <span class="operator"><span class="keyword">use</span> Windows interlocked functions
+<span class="number">160822</span> <span class="number">19</span>:<span class="number">14</span>:<span class="number">38</span> <span class="keyword">InnoDB</span>: Compressed <span class="keyword">tables</span> <span class="keyword">use</span> zlib <span class="number">1.2</span><span class="number">.3</span>
+<span class="number">160822</span> <span class="number">19</span>:<span class="number">14</span>:<span class="number">38</span> <span class="keyword">InnoDB</span>: Initializing buffer pool, <span class="keyword">size</span> = <span class="number">299.0</span><span class="keyword">M</span>
+<span class="number">160822</span> <span class="number">19</span>:<span class="number">14</span>:<span class="number">38</span> <span class="keyword">InnoDB</span>: Completed initialization <span class="keyword">of</span> buffer pool
+<span class="number">160822</span> <span class="number">19</span>:<span class="number">14</span>:<span class="number">38</span> <span class="keyword">InnoDB</span>: highest supported <span class="keyword">file</span> <span class="keyword">format</span> <span class="keyword">is</span> Barracuda.
+<span class="keyword">InnoDB</span>: <span class="keyword">Log</span> <span class="keyword">scan</span> progressed past the checkpoint lsn <span class="number">5772634979</span>
+<span class="number">160822</span> <span class="number">19</span>:<span class="number">14</span>:<span class="number">38</span>  <span class="keyword">InnoDB</span>: <span class="keyword">Database</span> was <span class="keyword">not</span> shut down normally!
+<span class="keyword">InnoDB</span>: <span class="keyword">Starting</span> crash <span class="keyword">recovery</span>.
+<span class="keyword">InnoDB</span>: Reading <span class="keyword">tablespace</span> information <span class="keyword">from</span> the .ibd files...
+<span class="keyword">InnoDB</span>: Restoring possible half-written <span class="keyword">data</span> pages <span class="keyword">from</span> the doublewrite
+<span class="keyword">InnoDB</span>: buffer...
+<span class="keyword">InnoDB</span>: Doing <span class="keyword">recovery</span>: scanned up <span class="keyword">to</span> <span class="keyword">log</span> <span class="keyword">sequence</span> <span class="built_in">number</span> <span class="number">5772636095</span>
+<span class="number">160822</span> <span class="number">19</span>:<span class="number">14</span>:<span class="number">38</span>  <span class="keyword">InnoDB</span>: <span class="keyword">Starting</span> an <span class="keyword">apply</span> batch <span class="keyword">of</span> <span class="keyword">log</span> <span class="keyword">records</span> <span class="keyword">to</span> the <span class="keyword">database</span>...
+<span class="keyword">InnoDB</span>: Progress <span class="keyword">in</span> percents: <span class="number">37</span> <span class="number">38</span> <span class="number">39</span> <span class="number">40</span> <span class="number">41</span> <span class="number">42</span> <span class="number">43</span> <span class="number">44</span> <span class="number">45</span> <span class="number">46</span> <span class="number">47</span> <span class="number">48</span> <span class="number">49</span> <span class="number">50</span> <span class="number">51</span> <span class="number">52</span> <span class="number">53</span> <span class="number">54</span> <span class="number">55</span> <span class="number">56</span> <span class="number">57</span> <span class="number">58</span> <span class="number">59</span> <span class="number">60</span> <span class="number">61</span> <span class="number">62</span> <span class="number">63</span> <span class="number">64</span> <span class="number">65</span> <span class="number">66</span> <span class="number">67</span> <span class="number">68</span> <span class="number">69</span> <span class="number">70</span> <span class="number">71</span> <span class="number">72</span> <span class="number">73</span> <span class="number">74</span> <span class="number">75</span> <span class="number">76</span> <span class="number">77</span> <span class="number">78</span> <span class="number">79</span> <span class="number">80</span> <span class="number">81</span> <span class="number">82</span> <span class="number">83</span> <span class="number">84</span> <span class="number">85</span> <span class="number">86</span> <span class="number">87</span> <span class="number">88</span> <span class="number">89</span> <span class="number">90</span> <span class="number">91</span> <span class="number">92</span> <span class="number">93</span> <span class="number">94</span> <span class="number">95</span> <span class="number">96</span> <span class="number">97</span> <span class="number">98</span> <span class="number">99</span> </span>
+</code></pre><p>需要执行：</p>
+<h2 id="强制启动mysql服务_-》修改_innodb_force_recovery_=_6">强制启动mysql服务 -》修改 innodb_force_recovery = 6</h2><p>具体步骤参照官方文档：</p>
+<p>1)打开\MYOA\mysql5\my.ini，去掉innodb_force_recovery=1前边的注释。</p>
+<p>2)启动MySQL5_OA服务，此时MySQL处于只读状态，可以导出，不可写入。如果仍不能启动，可以尝试将innodb_force_recovery修改为2、3、4、5、6等，直到可以启动为止。（备注：一般情况下，3、4、6、7步骤可选及可省略）</p>
+<p>3)使用MySQL管理工具比如Navicat for MySQL，将TD_OA等相关的数据库导出为SQL文件, 记得务必要保留创建表结构的导出结果。</p>
+<p>4)停止MySQL5_OA服务，删除TD_OA下的所有文件、ibdata1、ib_logfile0、ib_logfile1等文件。</p>
+<p>5）打开\MYOA\mysql5\my.ini，在innodb_force_recovery=1前边加上#号，将该项注释掉。</p>
+<p>6)启动MySQL5_OA服务，然后导入此前备份的SQL文件。比如运行bin目录下的TDRecovery.exe，对数据库进行还原。</p>
+<p>7)检查数据库，将无法通过该方法恢复的数据表，手动通过MySQL管理工具比如Navicat for MySQL把之前自动备份的单个SQL文件进行恢复。</p>
+<h2 id="参考链接：">参考链接：</h2><p>– <a href="http://support.tongda2000.com/kb11019002/" target="_blank" rel="external">如何解决mysql5_OA服务不能启动的问题？</a><br>– <a href="http://blog.csdn.net/aliyunoa/article/details/50176715" target="_blank" rel="external">通达OA服务器意外断电后数据库容易损坏的解决方案</a><br>– <a href="http://dev.mysql.com/doc/refman/5.5/en/forcing-innodb-recovery.html" target="_blank" rel="external">Forcing InnoDB Recovery</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/信息化/">信息化</a><a href="/tags/MYOA/">MYOA</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/08/12/Scheduler-Issues-with-DNN-7-3-x/" title="Scheduler Issues with DNN 7.3.x" itemprop="url">Scheduler Issues with DNN 7.3.x</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-08-12T10:49:18.000Z" itemprop="datePublished"> 发表于 2016-08-12</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Issue_Detail">Issue Detail</h1><p>Lot of logs in Event Viewer related with “Scheduler Exception -Sequence contains more than one matching element”. This occurs when there is a duplicate entry in the WebServers table.</p>
+<h1 id="Solution">Solution</h1><p> To verify if this is the issue, go to Host &gt; SQL and run the following SQL query:</p>
+<pre><code><span class="built_in">SELECT</span> <span class="built_in">ServerName</span> <span class="keyword">FROM</span> {databaseOwner}[{objectQualifier}WebServers]
+</code></pre><p>If you see the same entry more than once, you need to run the following SQL query: </p>
+<pre><code><span class="keyword">DELETE</span> <span class="keyword">FROM</span> {databaseOwner}[{objectQualifier}WebServers]
+</code></pre><p>Once that has been completed, hover over Tools-&gt;Recycle Application Domain to make it work with re-indexing.</p>
+<h1 id="Referrence">Referrence</h1><p><a href="https://support.managed.com/kb/a2170/scheduler-issues-in-dnn-7_3_x.aspx" target="_blank" rel="external">Scheduler Issues in DNN 7.3.x</a></p>
+<p><a href="http://www.dnnsoftware.com/forums/threadid/502348/scope/posts/scheduler-exception-after-upgrade-to-730" target="_blank" rel="external">Scheduler exception after Upgrade to 7.3.0 </a></p>
+<p><a href="http://www.dnnsoftware.com/answers/dnn-731-scheduler-exception" target="_blank" rel="external">DNN 7.3.1 SCHEDULER EXCEPTION</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/DNN/">DNN</a><a href="/tags/Troubleshooting/">Troubleshooting</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/24/Fixing-woff-Font-File-404-Error/" title="Fixing .woff Font File 404 Error" itemprop="url">Fixing .woff Font File 404 Error</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-07-24T01:58:52.000Z" itemprop="datePublished"> 发表于 2016-07-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="What_is_exactly_the_404_issue?">What is exactly the 404 issue?</h1><p>When using the Bootstrap iconic font and CSS toolkit, such as Glyphicons or <a href="http://fontawesome.io" target="_blank" rel="external">Font Awesome</a>, the font comes in a lot of flavors, including .ttf and woff. Somehow it seems that IIS will return a 404 not found when requesting the .woff file – even though the file definitely exists and the URL is correct.</p>
+<h1 id="Recommended_Solution">Recommended Solution</h1><p>The solution for this is to add the following segment to the WebServer section of your web.config:</p>
+<pre><code><span class="tag">&lt;<span class="title">staticContent</span>&gt;</span>
+    <span class="comment">&lt;!-- Fix issue about loading woff font failure --&gt;</span>
+    <span class="tag">&lt;<span class="title">remove</span> <span class="attribute">fileExtension</span>=<span class="value">".woff"</span> /&gt;</span>
+    <span class="tag">&lt;<span class="title">mimeMap</span> <span class="attribute">fileExtension</span>=<span class="value">".woff"</span> <span class="attribute">mimeType</span>=<span class="value">"application/font-woff"</span> /&gt;</span>
+    <span class="tag">&lt;<span class="title">remove</span> <span class="attribute">fileExtension</span>=<span class="value">".woff2"</span> /&gt;</span>
+    <span class="tag">&lt;<span class="title">mimeMap</span> <span class="attribute">fileExtension</span>=<span class="value">".woff2"</span> <span class="attribute">mimeType</span>=<span class="value">"font/x-woff"</span> /&gt;</span>
+<span class="tag">&lt;/<span class="title">staticContent</span>&gt;</span>
+</code></pre><p>This configures IIS to understand that there is a woff mime type that it should care about, which magically makes the 404 go away.</p>
+<p>You can add a remove node before adding the new mimeMap as the above coding to avoid a duplicate mime type error in case they are already there.</p>
+<h1 id="Alternative_solution">Alternative solution</h1><p>If you don’t want to add this to the web.config, you can also configure the IIS server in the UI.</p>
+<p>Just double-click the “MIME Types” configuration option while having IIS root node selected in the left panel and click “Add…” link in the Actions panel on the right. This will bring up the following dialog. Add .woff file extension and specify “application/x-font-woff” as the corresponding MIME type:</p>
+<p>Add MIME Type for .woff file name extension:</p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/404Errors.gif" alt="Add MIME Type for .woff file name extension"></p>
+<p>This will force IIS to process .woff files correctly and will fix 404 errors associated with these files.</p>
+<h2 id="resources_links:">resources links:</h2><p><a href="http://stackoverflow.com/questions/4015816/why-is-font-face-throwing-a-404-error-on-woff-files" target="_blank" rel="external">Why is @font-face throwing a 404 error on woff files?</a></p>
+<p><a href="http://www.dirigodev.com/blog/web-development-execution/404-errors-in-iis7-for-embedded-woff-font-files/" target="_blank" rel="external">404 errors in IIS7 for embedded .woff font files</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/DNN/">DNN</a><a href="/tags/Bootstrap/">Bootstrap</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/21/Integrated-DNN-Blog-Javascript-syntax-highlighter/" title="Integrated DNN Blog with Javascript syntax highlighter" itemprop="url">Integrated DNN Blog with Javascript syntax highlighter</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-07-21T11:32:58.000Z" itemprop="datePublished"> 发表于 2016-07-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="What_is_Highlight-js?">What is Highlight.js?</h1><p>Highlight.js is a syntax highlighter written in JavaScript. It works in the browser as well as on the server. It works with pretty much any markup, doesn’t depend on any framework and has automatic language detection.</p>
+<p><a href="https://github.com/isagalaev/highlight.js" target="_blank" rel="external">Project on Github</a></p>
+<h1 id="Why_we_should_use_Highlight-js?">Why we should use Highlight.js?</h1><ul>
+<li>162 languages and 74 styles</li>
+<li>automatic language detection</li>
+<li>multi-language code highlighting</li>
+<li>available for node.js</li>
+<li>works with any markup</li>
+<li>compatible with any js framework</li>
+<li>works well with Markdown</li>
+</ul>
+<h1 id="How_to_apply_Highlight-js_with_DNN_Blog?">How to apply Highlight.js with DNN Blog?</h1><ol>
+<li><p>Assume that you installed our blogging module called ‘<a href="http://www.sunblognuke.com/products/features" target="_blank" rel="external">SunBlogNuke</a>‘</p>
+</li>
+<li><p>Built blog instance with offical guidelin and enter Dashboadr/Customize/Style Editor section.</p>
+</li>
+<li><p>From the right section, you should be able choose any theme view to be apply with Highlight.js. For example, the BasicView.ascx is for every item of the default post list when first loading blog page.</p>
+<p> choose it and copy the following coding below to register Highlight.js into this view:</p>
+<pre><code><span class="tag">&lt;<span class="title">%@</span> <span class="attribute">Register</span> <span class="attribute">TagPrefix</span>=<span class="value">"dnn"</span> <span class="attribute">Namespace</span>=<span class="value">"DotNetNuke.Web.Client.ClientResourceManagement"</span> <span class="attribute">Assembly</span>=<span class="value">"DotNetNuke.Web.Client"</span> %&gt;</span>
+<span class="tag">&lt;<span class="title">dnn:DnnJsInclude</span> <span class="attribute">runat</span>=<span class="value">"server"</span> <span class="attribute">ID</span>=<span class="value">"jshighlight"</span> <span class="attribute">FilePath</span>=<span class="value">"~/DesktopModules/SunBlog/js/highlight/highlight.min.js"</span> <span class="attribute">Priority</span>=<span class="value">"100"</span> /&gt;</span>
+</code></pre><p> yes, you feel free to replace CDN-hosted package, like that:</p>
+<pre><code><span class="tag">&lt;<span class="title">%@</span> <span class="attribute">Register</span> <span class="attribute">TagPrefix</span>=<span class="value">"dnn"</span> <span class="attribute">Namespace</span>=<span class="value">"DotNetNuke.Web.Client.ClientResourceManagement"</span> <span class="attribute">Assembly</span>=<span class="value">"DotNetNuke.Web.Client"</span> %&gt;</span>
+<span class="tag">&lt;<span class="title">dnn:DnnJsInclude</span> <span class="attribute">runat</span>=<span class="value">"server"</span> <span class="attribute">ID</span>=<span class="value">"jshighlight"</span> <span class="attribute">FilePath</span>=<span class="value">"http://cdn.bootcss.com/highlight.js/9.5.0/highlight.min.js"</span> <span class="attribute">Priority</span>=<span class="value">"100"</span> /&gt;</span>
+</code></pre><p> click “save chanegs”.</p>
+</li>
+<li><p>Click the customized.js to add any javascript, now we want to init Highlight.js to make it work:</p>
+<pre><code>jQuery(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">if</span> (<span class="keyword">typeof</span> hljs=== <span class="string">'undefined'</span>){}
+    <span class="keyword">else</span>
+        hljs.initHighlightingOnLoad();
+});
+</code></pre></li>
+<li><p>In the last, just make sure that you also register Highlight.js style, there is lots of way to complete, such as in the dnn skin or module style or dnn blog theme style. The core simplicity theme includes Highlight.js style in default, you may have a try.</p>
+</li>
+</ol>
+<p>BTW, the curent post is exactly writtten by Markdown and live demo for this JavaScript syntax highlighter :)</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Markdown/">Markdown</a><a href="/tags/DNN/">DNN</a><a href="/tags/syntax-highlighter/">syntax highlighter</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/16/Some-tips-with-DNN-Manifest/" title="打包DNN模块的简易技巧" itemprop="url">打包DNN模块的简易技巧</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-07-16T12:16:07.000Z" itemprop="datePublished"> 发表于 2016-07-16</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>对于稍微复杂些的DNN模块，参考Manifest清单文件的相关节点信息可简易打包最易管理的模块安装包。比如可参考大神Bruce Chapman提到的以下5点：</p>
+<p><a href="http://www.ifinity.com.au/Blog/EntryId/89/Top-5-DotNetNuke-Manifest-file-Module-Packaging-Tips" target="_blank" rel="external">Top 5 DotNetNuke Manifest file Module Packaging Tips</a></p>
+<ol>
+<li>Use Html in the File for better layout in the install pages</li>
+<li>Use a resources.zip file for all your files</li>
+<li>Use a html file for your Licence Agreement</li>
+<li>Make your module DNN 4.x and DNN5.x compatible by using two separate manifest files.</li>
+<li>Use the ‘sourceFileName’ attribute for your assembly files.</li>
+</ol>
+<p>其他官方文档可参考如下链接：</p>
+<p><a href="http://www.dnnsoftware.com/wiki/manifests" target="_blank" rel="external">Types of Manifests</a></p>
+<p><a href="http://www.dnnsoftware.com/docs/designers/extensions/dnn-manifest-schema.html" target="_blank" rel="external">The DNN Manifest Schema</a></p>
+<p>目前发现releasenotes这一节点只能这样用：</p>
+<pre><code><span class="tag">&lt;<span class="title">releaseNotes</span> <span class="attribute">src</span>=<span class="value">"Installation\ReleaseNotes\Release.07.03.00.txt"</span>&gt;</span><span class="tag">&lt;/<span class="title">releaseNotes</span>&gt;</span>
+</code></pre><p>错误的用法：</p>
+<pre><code><span class="tag">&lt;<span class="title">releaseNotes</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">releaseNote</span> <span class="attribute">src</span>=<span class="value">"Installation\ReleaseNotes\Release.07.03.00.txt"</span>/&gt;</span>
+<span class="tag">&lt;/<span class="title">releaseNotes</span>&gt;</span>
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/DNN/">DNN</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/05/26/Blog-App-based-Django-with-Virtualenv/" title="基于Django和Virtualenv搭建博客开发实战" itemprop="url">基于Django和Virtualenv搭建博客开发实战</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-05-26T07:32:45.000Z" itemprop="datePublished"> 发表于 2016-05-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="利用Virtualenv搭建Django环境">利用Virtualenv搭建Django环境</h1><ol>
+<li>确保安装Python3，请参照python2和python3共存win7的解决方案。</li>
+<li><p>创建虚拟环境, 创建目录py3env</p>
+<pre><code><span class="title">python3</span> -m venv py3env
+</code></pre></li>
+<li><p>定位到目录py3env\scripts并激活虚拟环境：</p>
+<pre><code>E:<span class="command">\virt</span>_env<span class="command">\py</span>3env<span class="command">\Scripts</span>&gt;activate
+(py3env) E:<span class="command">\virt</span>_env<span class="command">\py</span>3env<span class="command">\Scripts</span>&gt;
+</code></pre></li>
+<li><p>手动安装Django</p>
+<pre><code>pip install django==<span class="number">1.9</span><span class="number">.6</span>
+</code></pre><p> 或直接clone项目到本目录下E:\virt_env\py3env\Scripts&gt;并定位到项目目录下执行：</p>
+<pre><code>pip <span class="keyword">install</span> -r requirements.txt
+</code></pre><p> requirements.txt文件，主要用于搭建运行这个项目所需要的环境，一般包含项目所需的一些包的名称和版本之类的信息。</p>
+</li>
+</ol>
+<h1 id="Django基本命令">Django基本命令</h1><ol>
+<li><p>运行命令 python manage.py makemigrations 生成迁移文件</p>
+</li>
+<li><p>运行命令 python manage.py migrate 迁移数据库</p>
+</li>
+<li><p>运行命令 python manage.py createsuperuser 创建超级用户</p>
+</li>
+<li><p>运行命令 python manage.py runserver 启动开发服务器</p>
+</li>
+</ol>
+<h1 id="参考资源">参考资源</h1><p><a href="http://python.usyiyi.cn/django/index.html" target="_blank" rel="external">Django 1.8.2 文档</a><br><a href="http://www.ziqiangxuetang.com/django/django-tutorial.html" target="_blank" rel="external">Django 基础教程</a><br><a href="http://virtualenv-chinese-docs.readthedocs.io/en/latest/#id29" target="_blank" rel="external">Virtualenv官网文档</a><br><a href="http://foofish.net/blog/88/virtualenv" target="_blank" rel="external">Python Virtualenv 介绍</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/Django/">Django</a><a href="/tags/VirtualEnv/">VirtualEnv</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
+  </nav>
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Blog/" title="Blog">Blog<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Dev/" title="Dev">Dev<sup>20</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Notes/" title="Notes">Notes<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Photography/" title="Photography">Photography<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Resources/" title="Resources">Resources<sup>16</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Startup/" title="Startup">Startup<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Python/" title="Python">Python<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNN/" title="DNN">DNN<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/信息化/" title="信息化">信息化<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CMS/" title="CMS">CMS<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MYOA/" title="MYOA">MYOA<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/通达OA/" title="通达OA">通达OA<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Pandas/" title="Pandas">Pandas<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNN8/" title="DNN8">DNN8<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Vagrant/" title="Vagrant">Vagrant<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Programmers/" title="Programmers">Programmers<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Network/" title="Network">Network<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Baby/" title="Baby">Baby<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+    <p class="asidetitle">近期文章</p>
+    <div class="linkslist clearfix">
+		<ul class=""><li class=""><a href="/2019/07/08/Notices-DNN9-Upgrade/">DNN9升级备忘</a></li><li class=""><a href="/2019/05/05/Andriod-Intsall-App-without-Google-Play-Store/">Android手机如何下载Google Play上的App</a></li><li class=""><a href="/2019/04/26/Git-Transfer-repo/">Git迁移代码仓库实践</a></li><li class=""><a href="/2018/08/04/Docker-Jupyter-Notebook-for-Data-Analysis/">基于Docker容器化搭建Jupyter Notebook数据科研环境</a></li><li class=""><a href="/2018/06/07/Python-Data-Analysis-with-Pandas/">Python数据分析利器Pandas</a></li><li class=""><a href="/2017/08/31/Excel-Learning/">Excel知识点集锦</a></li></ul>
+	</div>
+</div>
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.sunblognuke.com" target="_blank" title=" 一个牛哄哄的DNN模块">SunBlogNuke</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://dnnsoftware.com" target="_blank" title=" DNN官方网站">DNN官网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://zhihu.com" target="_blank" title=" 一个神奇的网站">知乎</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wowubuntu.com/markdown/" target="_blank" title=" Markdown简明语法目录">Markdown</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m Baldwin Sun in SunBlogNuke.com. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/sunblognuke" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/sunblognuke" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		
+		<a href="https://www.douban.com/people/sunblognuke" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		
+		
+		<a href="mailto:dnnsun@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Baldwin">Baldwin</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox({
+      'transitionIn'  : 'elastic',
+      'transitionOut' : 'elastic',
+    });
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+<!-- Swiftype_search Begin -->
+
+<!-- Swiftype_search End -->
+
+  </body>
+ </html>

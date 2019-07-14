@@ -1,0 +1,911 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Baldwin's Blog]]></title>
+  <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://sunblognuke.github.io/"/>
+  <updated>2019-07-14T06:52:10.836Z</updated>
+  <id>http://sunblognuke.github.io/</id>
+  
+  <author>
+    <name><![CDATA[Baldwin]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[DNN9升级备忘]]></title>
+    <link href="http://sunblognuke.github.io/2019/07/08/Notices-DNN9-Upgrade/"/>
+    <id>http://sunblognuke.github.io/2019/07/08/Notices-DNN9-Upgrade/</id>
+    <published>2019-07-08T03:23:58.000Z</published>
+    <updated>2019-07-14T06:52:10.836Z</updated>
+    <content type="html"><![CDATA[<p>自从2005年开始接触DNN这一平台以来，一直持续关注它的发展和整个生态圈的趋势，起初的确参与了很多，国内圈子也的确掀起一股小小的追捧，然而好景不长，陆续续续大家没了激情，DNN CMS在国内犹如昙花一现，大家转而找其他的替代品，比如Orchard等。不过我一直算还在这个圈子混，官网的资讯也在持续关注中，期盼它能有更好的未来。近期针对DNN9的升级做些功课，期待这次有更强大的性能提升。</p>
+<h2 id="DNN9的最佳升级路径">DNN9的最佳升级路径</h2><p>关于DNN9升级的技术文章和最佳实践：</p>
+<ul>
+<li><a href="https://www.dnnsoftware.com/wiki/upgrading-dotnetnuke" target="_blank" rel="external">UPGRADING DOTNETNUKE</a></li>
+<li><a href="https://www.dnnsoftware.com/wiki/suggested-upgrade-path" target="_blank" rel="external">SUGGESTED UPGRADE PATH</a></li>
+<li><a href="https://www.dnnsoftware.com/community-blog/cid/155511/dnn-92-upgrade-what-you-need-to-know" target="_blank" rel="external">DNN 9.2 Upgrade What You Need to Know</a></li>
+<li><a href="https://www.dnnsoftware.com/wiki/dnn-8-breaking-changes" target="_blank" rel="external">DNN 8 BREAKING CHANGES</a></li>
+</ul>
+<p>此外还有一些小提示：</p>
+<ol>
+<li>可备份数据库文件db_name.bak,拷贝该备份文件到网站根目录下的App_Data文件夹里，重命名为db_name.resources</li>
+<li>创建一个app_offline.htm.exclude文件, 让其在你执行正式升级时生效（重命名为app_offline.htm）</li>
+<li>默认升级链接 <a href="http://MYWEBSITE/install/install.aspx?mode=upgrade" target="_blank" rel="external">http://MYWEBSITE/install/install.aspx?mode=upgrade</a></li>
+</ol>
+<h2 id="DNN7-3_升级到_DNN9-3">DNN7.3 升级到 DNN9.3</h2><ol>
+<li>FTP下载网站根目录wwwroot到本地，创建本地测试应用程序localhost/xx_name，检查应用目录的权限配置是否正确, 比如network service, iis_user等</li>
+<li>恢复数据库文件到测试应用，修改PortalAlias数据库表www.xx_name.com-&gt;localhost/xx_name</li>
+<li>检查web.config,修改connectionString数据库连接字符串,验证web.config是否有效，比如可能需要删除节点<rewrite>…</rewrite></li>
+<li>访问应用链接localhost/xx_name检验是否迁移到本地成功</li>
+</ol>
+<h2 id="其他关于DNN9的注意点">其他关于DNN9的注意点</h2><ul>
+<li><a href="https://www.chrishammond.com/Blog/itemId/2898/Problems-with-DNN-9-and-the-HTML-Editor-Manager" target="_blank" rel="external">Problems with DNN 9 and the HTML Editor Manager</a></li>
+<li><a href="https://www.chrishammond.com/Blog/itemId/2693/Dealing-with-the-DNN-Exceptions-table-in-your-DotN" target="_blank" rel="external">Dealing with the DNN Exceptions table in your DotNetNuke Database</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>自从2005年开始接触DNN这一平台以来，一直持续关注它的发展和整个生态圈的趋势，起初的确参与了很多，国内圈子也的确掀起一股小小的追捧，然而好景不长，陆续续续大家没了激情，DNN CMS在国内犹如昙花一现，大家转而找其他的替代品，比如Orchard等。不过我一直算还在这个圈]]>
+    </summary>
+    
+      <category term="CMS" scheme="http://sunblognuke.github.io/tags/CMS/"/>
+    
+      <category term="DNN" scheme="http://sunblognuke.github.io/tags/DNN/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Android手机如何下载Google Play上的App]]></title>
+    <link href="http://sunblognuke.github.io/2019/05/05/Andriod-Intsall-App-without-Google-Play-Store/"/>
+    <id>http://sunblognuke.github.io/2019/05/05/Andriod-Intsall-App-without-Google-Play-Store/</id>
+    <published>2019-05-05T06:23:58.000Z</published>
+    <updated>2019-07-14T05:51:20.041Z</updated>
+    <content type="html"><![CDATA[<p>最近手头的华为Android手机越用越为臃肿，是不是提示需要清理内存及存储空间，DiskUsage这一App可以分析手机内存及SD卡包含的文件夹大小，以此来作为清理垃圾的依据也是不错，悲催的是DiskUsage只能在Google Play Store能安装，天朝的应用市场不够用了。故此有一下翻墙安装来源于Google Play Store的App这一曲线救国之道。</p>
+<h3 id="步骤如下:">步骤如下:</h3><ol>
+<li>浏览器打开google play store网站搜索某一应用：DiskUsage</li>
+<li>复制浏览器地址url：<a href="https://play.google.com/store/apps/details?id=com.google.android.diskusage" target="_blank" rel="external">https://play.google.com/store/apps/details?id=com.google.android.diskusage</a></li>
+<li>打开网址<a href="https://apps.evozi.com/apk-downloader/" target="_blank" rel="external">https://apps.evozi.com/apk-downloader/</a>，将其黏贴到网页的输入框中，并点击蓝色按钮【Generate Download Link】：</li>
+<li>等页面中出现绿色按钮点击它，直到下载完成。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/google-play-store-app.png" alt="download app from google play store"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>最近手头的华为Android手机越用越为臃肿，是不是提示需要清理内存及存储空间，DiskUsage这一App可以分析手机内存及SD卡包含的文件夹大小，以此来作为清理垃圾的依据也是不错，悲催的是DiskUsage只能在Google Play Store能安装，天朝的应用市场不]]>
+    </summary>
+    
+      <category term="Android" scheme="http://sunblognuke.github.io/tags/Android/"/>
+    
+      <category term="Mobile" scheme="http://sunblognuke.github.io/tags/Mobile/"/>
+    
+      <category term="App" scheme="http://sunblognuke.github.io/tags/App/"/>
+    
+      <category term="Resources" scheme="http://sunblognuke.github.io/categories/Resources/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Git迁移代码仓库实践]]></title>
+    <link href="http://sunblognuke.github.io/2019/04/26/Git-Transfer-repo/"/>
+    <id>http://sunblognuke.github.io/2019/04/26/Git-Transfer-repo/</id>
+    <published>2019-04-26T02:23:58.000Z</published>
+    <updated>2019-07-14T05:51:20.060Z</updated>
+    <content type="html"><![CDATA[<p>最近有个新需求，鉴于Github已具备免费搭建私有仓库的功能，于是我们团队立即着手迁移部分项目到Github来（原本托管于Dropbox），目前效果良好。</p>
+<p>我们需要的原本的仓库包括所有记录都能迁移到新库上，一开始找到的方案都只能迁移master和tag分支，其他分支branch还要一个一个来，麻烦得很。后来找最终解决方案，迁移所有记录包括所有的分支、标签、日志，一个不少。</p>
+<h2 id="GIT迁移全库">GIT迁移全库</h2><p>主要使用如下四行命令，建议直接在命令行窗口执行，比如DOS或Powershell:</p>
+<pre><code>git clone --mirror &lt;URL <span class="keyword">to</span> my <span class="keyword">OLD</span> repo location&gt;        <span class="comment">//git clone --mirror http://<span class="label">xxxx.com/yyyy.git</span></span>
+cd &lt;<span class="keyword">New</span> directory <span class="keyword">where</span> your <span class="keyword">OLD</span> repo was cloned&gt;       <span class="comment">//cd yyyy.git</span>
+git remote <span class="keyword">set</span>-url origin &lt;URL <span class="keyword">to</span> my <span class="keyword">NEW</span> repo location&gt; <span class="comment">//git remote set-url origin https://github.com/youracount/yyyyNEW.git</span>
+git push -f origin 
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>最近有个新需求，鉴于Github已具备免费搭建私有仓库的功能，于是我们团队立即着手迁移部分项目到Github来（原本托管于Dropbox），目前效果良好。</p>
+<p>我们需要的原本的仓库包括所有记录都能迁移到新库上，一开始找到的方案都只能迁移master和tag分支，其]]>
+    </summary>
+    
+      <category term="DNN" scheme="http://sunblognuke.github.io/tags/DNN/"/>
+    
+      <category term="Git" scheme="http://sunblognuke.github.io/tags/Git/"/>
+    
+      <category term="GitHub" scheme="http://sunblognuke.github.io/tags/GitHub/"/>
+    
+      <category term="Resources" scheme="http://sunblognuke.github.io/categories/Resources/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[基于Docker容器化搭建Jupyter Notebook数据科研环境]]></title>
+    <link href="http://sunblognuke.github.io/2018/08/04/Docker-Jupyter-Notebook-for-Data-Analysis/"/>
+    <id>http://sunblognuke.github.io/2018/08/04/Docker-Jupyter-Notebook-for-Data-Analysis/</id>
+    <published>2018-08-04T02:23:58.000Z</published>
+    <updated>2019-07-14T05:51:20.053Z</updated>
+    <content type="html"><![CDATA[<p>基于Docker隔离环境的方式，我们可以用于快速创建虚拟环境来隔离不同的Python和其他软件包版本，而不再需要漫长的逐个安装过程，这无疑降低数据科研的入门门槛。</p>
+<h2 id="Docker常用命令">Docker常用命令</h2><p>docker命令是你与Docker容器和镜像直接打交道所使用的主要命令。</p>
+<pre><code>docker   <span class="comment"># docker 命令帮助</span>
+
+Commands:
+    attach    Attach <span class="built_in">to</span> <span class="operator">a</span> running container                 <span class="comment"># 当前 shell 下 attach 连接指定运行镜像</span>
+    build     Build <span class="operator">an</span> image <span class="built_in">from</span> <span class="operator">a</span> Dockerfile              <span class="comment"># 通过 Dockerfile 定制镜像</span>
+    commit    Create <span class="operator">a</span> <span class="built_in">new</span> image based changes              <span class="comment"># 提交当前容器为新的镜像</span>
+    cp        Copy <span class="built_in">files</span>/<span class="built_in">folders</span> <span class="built_in">from</span> <span class="operator">the</span> containers filesystem <span class="built_in">to</span> <span class="operator">the</span> host path <span class="comment"># 从容器中拷贝指定文件或者目录到宿主机中</span>
+    <span class="built_in">create</span>    Create <span class="operator">a</span> <span class="built_in">new</span> container                        <span class="comment"># 创建一个新的容器，同 run，但不启动容器</span>
+    diff      Inspect changes <span class="command"><span class="keyword">on</span> <span class="title">a</span> <span class="title">container</span><span class="string">''</span><span class="title">s</span> <span class="title">filesystem</span>  # 查看 <span class="title">docker</span> 容器变化</span>
+    events    Get real <span class="built_in">time</span> events <span class="built_in">from</span> <span class="operator">the</span> server          <span class="comment"># 从 docker 服务获取容器实时事件</span>
+    exec      Run <span class="operator">a</span> <span class="command"><span class="keyword">command</span> <span class="title">in</span> <span class="title">an</span> <span class="title">existing</span> <span class="title">container</span>        # 在已存在的容器上运行命令</span>
+    export    Stream <span class="operator">the</span> contents <span class="operator">of</span> <span class="operator">a</span> container <span class="keyword">as</span> <span class="operator">a</span> tar archive <span class="comment"># 导出容器的内容流作为一个 tar 归档文件[对应 import ]</span>
+    history   Show <span class="operator">the</span> history <span class="operator">of</span> <span class="operator">an</span> image                  <span class="comment"># 展示一个镜像形成历史</span>
+    images    List images                                   <span class="comment"># 列出系统当前镜像</span>
+    import    Create <span class="operator">a</span> <span class="built_in">new</span> filesystem image <span class="built_in">from</span> <span class="operator">the</span> contents <span class="operator">of</span> <span class="operator">a</span> tarball  <span class="comment"># 从tar包中的内容创建一个新的文件系统映像[对应 export]</span>
+    info      Display <span class="keyword">system</span>-wide information               <span class="comment"># 显示系统相关信息</span>
+    inspect   Return low-level information <span class="command"><span class="keyword">on</span> <span class="title">a</span> <span class="title">container</span>   # 查看容器详细信息</span>
+    <span class="built_in">kill</span>      Kill <span class="operator">a</span> running container                      <span class="comment"># kill 指定 docker 容器</span>
+    <span class="built_in">load</span>      Load <span class="operator">an</span> image <span class="built_in">from</span> <span class="operator">a</span> tar archive              <span class="comment"># 从一个 tar 包中加载一个镜像[对应 save]</span>
+    login     Register <span class="operator">or</span> Login <span class="built_in">to</span> <span class="operator">the</span> docker registry server  <span class="comment"># 注册或者登陆一个 docker 源服务器</span>
+    logout    Log out <span class="built_in">from</span> <span class="operator">a</span> Docker registry server         <span class="comment"># 从当前 Docker registry 退出</span>
+    logs      Fetch <span class="operator">the</span> logs <span class="operator">of</span> <span class="operator">a</span> container                 <span class="comment"># 输出当前容器日志信息</span>
+    port      Lookup <span class="operator">the</span> public-facing port which is NAT-ed <span class="built_in">to</span> PRIVATE_PORT <span class="comment"># 查看映射端口对应的容器内部源端口</span>
+    pause     Pause all processes <span class="operator">within</span> <span class="operator">a</span> container        <span class="comment"># 暂停容器</span>
+    ps        List containers                               <span class="comment"># 列出容器列表</span>
+    pull      Pull <span class="operator">an</span> image <span class="operator">or</span> <span class="operator">a</span> repository <span class="built_in">from</span> <span class="operator">the</span> docker registry server <span class="comment"># 从docker镜像源服务器拉取指定镜像或者库镜像</span>
+    push      Push <span class="operator">an</span> image <span class="operator">or</span> <span class="operator">a</span> repository <span class="built_in">to</span> <span class="operator">the</span> docker registry server <span class="comment"># 推送指定镜像或者库镜像至docker源服务器</span>
+    restart   Restart <span class="operator">a</span> running container                   <span class="comment"># 重启运行的容器</span>
+    rm        Remove <span class="constant">one</span> <span class="operator">or</span> more containers                 <span class="comment"># 移除一个或者多个容器</span>
+    rmi       Remove <span class="constant">one</span> <span class="operator">or</span> more images                     <span class="comment"># 移除一个或多个镜像[无容器使用该镜像才可删除，否则需删除相关容器才可继续或 -f 强制删除]</span>
+    run       Run <span class="operator">a</span> <span class="command"><span class="keyword">command</span> <span class="title">in</span> <span class="title">a</span> <span class="title">new</span> <span class="title">container</span>              # 创建一个新的容器并运行一个命令</span>
+    save      Save <span class="operator">an</span> image <span class="built_in">to</span> <span class="operator">a</span> tar archive                <span class="comment"># 保存一个镜像为一个 tar 包[对应 load]</span>
+    search    Search <span class="keyword">for</span> <span class="operator">an</span> image <span class="command"><span class="keyword">on</span> <span class="title">the</span> <span class="title">Docker</span> <span class="title">Hub</span>         # 在 <span class="title">docker</span> <span class="title">hub</span> 中搜索镜像</span>
+    <span class="built_in">start</span>     Start <span class="operator">a</span> stopped containers                    <span class="comment"># 启动容器</span>
+    <span class="built_in">stop</span>      Stop <span class="operator">a</span> running containers                     <span class="comment"># 停止容器</span>
+    tag       Tag <span class="operator">an</span> image <span class="keyword">into</span> <span class="operator">a</span> repository                <span class="comment"># 给源中镜像打标签</span>
+    top       Lookup <span class="operator">the</span> running processes <span class="operator">of</span> <span class="operator">a</span> container   <span class="comment"># 查看容器中运行的进程信息</span>
+    unpause   Unpause <span class="operator">a</span> paused container                    <span class="comment"># 取消暂停容器</span>
+    <span class="built_in">version</span>   Show <span class="operator">the</span> docker <span class="built_in">version</span> information           <span class="comment"># 查看 docker 版本号</span>
+    <span class="built_in">wait</span>      Block <span class="keyword">until</span> <span class="operator">a</span> container stops, <span class="keyword">then</span> print its exit code   <span class="comment"># 截取容器停止时的退出状态值</span>
+</code></pre><p>docker exec 进入正在运行的容器</p>
+<pre><code><span class="label">docker</span> exec -<span class="keyword">it </span>db3 /<span class="keyword">bin/sh
+</span><span class="label">docker</span> exec -<span class="keyword">it </span>d48b21a7e439 /<span class="keyword">bin/sh
+</span># db3是后台容器的NAMES,d48b21a7e439是容器的进程ID, /<span class="keyword">bin/sh </span>是固定写法
+</code></pre><p>docker commit 封装新的镜像</p>
+<pre><code>docker <span class="operator"><span class="keyword">commit</span> dfg7xxxx wherein/ubuntu:v2
+docker <span class="keyword">commit</span> -a=<span class="string">"Baldwin Sun"</span> -<span class="keyword">m</span>=<span class="string">"fixed some issue"</span> dfg7xxxx wherein/ubuntu:v2
+# -a, <span class="comment">--author=""     Author (e.g., "John Hannibal Smith &lt;hannibal@a-team.com&gt;")</span>
+# -<span class="keyword">m</span>, <span class="comment">--message=""    Commit message</span>
+# -<span class="keyword">p</span>, <span class="comment">--pause=true    Pause container during commit</span>
+
+docker image #验证是否已生成新镜像</span>
+</code></pre><p>docker push 推送新镜像到Hub库</p>
+<pre><code><span class="label">docker</span> <span class="keyword">push </span>wherein/ubuntu:<span class="literal">v2</span>
+<span class="label">docker</span> inspect wherein/ubuntu #验证提交镜像信息
+</code></pre><p>docker 清理镜像和容器</p>
+<pre><code>删除容器: docker rm &lt;Container ID&gt;
+删除所有容器: docker rm $(docker ps -<span class="tag">a</span> -q)
+移除镜像: docker rmi &lt;Container ID&gt;
+移除所有镜像: docker rmi $(docker ps -<span class="tag">a</span> -q)
+</code></pre><p>Note: 在移除镜像前，你必须删除掉，所有依赖于该镜像的容器</p>
+<h2 id="参考链接：">参考链接：</h2>]]></content>
+    <summary type="html">
+    <![CDATA[<p>基于Docker隔离环境的方式，我们可以用于快速创建虚拟环境来隔离不同的Python和其他软件包版本，而不再需要漫长的逐个安装过程，这无疑降低数据科研的入门门槛。</p>
+<h2 id="Docker常用命令">Docker常用命令</h2><p>docker命令是你与Do]]>
+    </summary>
+    
+      <category term="Python" scheme="http://sunblognuke.github.io/tags/Python/"/>
+    
+      <category term="Pandas" scheme="http://sunblognuke.github.io/tags/Pandas/"/>
+    
+      <category term="Docker" scheme="http://sunblognuke.github.io/tags/Docker/"/>
+    
+      <category term="Resources" scheme="http://sunblognuke.github.io/categories/Resources/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Python数据分析利器Pandas]]></title>
+    <link href="http://sunblognuke.github.io/2018/06/07/Python-Data-Analysis-with-Pandas/"/>
+    <id>http://sunblognuke.github.io/2018/06/07/Python-Data-Analysis-with-Pandas/</id>
+    <published>2018-06-07T02:23:58.000Z</published>
+    <updated>2019-07-14T05:51:20.092Z</updated>
+    <content type="html"><![CDATA[<p>Python逐渐成为数据分析的中流砥柱，而Pandas、Numpy更无疑是数据分析必备的利器工具，最近就尝试把之前在Power Query实现的工具转化让Python来完成，以此对比两者的优劣势，顺带温习Python3的某些特性。</p>
+<h2 id="辅助工具_jupyter_notebook">辅助工具 jupyter notebook</h2><p>jupyter notebook</p>
+<h2 id="数据清洗案例">数据清洗案例</h2><pre><code># 清洗数据 参照<span class="name">Power</span> <span class="name">Query</span>的思路
+<span class="atom">import</span> <span class="atom">pandas</span> <span class="atom">as</span> <span class="atom">pd</span>
+<span class="atom">import</span> <span class="atom">numpy</span> <span class="atom">as</span> <span class="atom">np</span>
+
+<span class="name">DATA_DIR</span> = <span class="string">'E:/加班计算助手/'</span>
+<span class="atom">df</span> = <span class="atom">pd</span>.<span class="atom">read_excel</span>(<span class="name">DATA_DIR</span> + <span class="string">'Contact_sum.xlsx'</span>) #, <span class="atom">usecols</span>=<span class="string">'A:G'</span>)
+
+# <span class="atom">print</span>(<span class="atom">df</span>.<span class="atom">columns</span>)
+# <span class="atom">print</span>(<span class="atom">df</span>.<span class="atom">dtypes</span>)
+
+<span class="atom">df</span>[<span class="string">'年月'</span>]=<span class="atom">df</span>[<span class="string">'年月'</span>].<span class="atom">astype</span>(<span class="atom">str</span>) # 转化为字符类型
+<span class="atom">df</span>[<span class="string">'年月'</span>] = <span class="atom">df</span>[<span class="string">'年月'</span>].<span class="atom">apply</span>(<span class="atom">lambda</span> <span class="atom">x</span>:<span class="atom">x</span>[:-<span class="number">2</span>]) # 清洗数据, 把<span class="atom">float64</span>类型比如<span class="string">"201709.0"</span>转化为<span class="string">"201709"</span>
+
+<span class="atom">df_fixed</span> = <span class="atom">df</span>.<span class="atom">dropna</span>(<span class="atom">subset</span>=[<span class="string">'员工姓名'</span>, <span class="string">'员工编号'</span>], <span class="atom">how</span>=<span class="string">'any'</span>) # <span class="name">Define</span> <span class="atom">in</span> <span class="atom">which</span> <span class="atom">columns</span> <span class="atom">to</span> <span class="atom">look</span> <span class="atom">for</span> <span class="atom">missing</span> <span class="atom">values</span>.
+
+# 逆透视除了[<span class="string">'员工姓名'</span>, <span class="string">'员工编号'</span>]之外的列
+<span class="atom">df_fixed</span> = <span class="atom">df_fixed</span>.<span class="atom">melt</span>(<span class="atom">id_vars</span>=[<span class="string">'员工编号'</span>,<span class="string">'员工姓名'</span>,<span class="string">'年月'</span>],<span class="atom">var_name</span>=<span class="string">'具体日期'</span>, <span class="atom">value_name</span>=<span class="string">'加班小时'</span>)
+
+<span class="atom">df_fixed</span> = <span class="atom">df_fixed</span>.<span class="atom">dropna</span>(<span class="atom">subset</span>=[<span class="string">'加班小时'</span>], <span class="atom">how</span>=<span class="string">'any'</span>) # 再次过滤【加班小时】为空或<span class="name">NAN</span>的记录
+
+<span class="atom">df_fixed</span>[<span class="string">'具体日期'</span>] = <span class="atom">df_fixed</span>[<span class="string">'具体日期'</span>].<span class="atom">astype</span>(<span class="atom">str</span>)
+<span class="atom">df_fixed</span>[<span class="string">'具体日期'</span>] = <span class="atom">df_fixed</span>[<span class="string">'年月'</span>] + <span class="atom">df_fixed</span>[<span class="string">'具体日期'</span>].<span class="atom">apply</span>(<span class="atom">lambda</span> <span class="atom">x</span>:<span class="atom">x</span>.<span class="atom">zfill</span>(<span class="number">2</span>)) # 合并形成具体时间格式的字段
+
+<span class="atom">df_fixed</span>[<span class="string">'员工编号'</span>] = <span class="atom">df_fixed</span>[<span class="string">'员工编号'</span>].<span class="atom">astype</span>(<span class="atom">str</span>)
+<span class="atom">df_fixed</span>[<span class="string">'员工编号'</span>] = <span class="atom">df_fixed</span>[<span class="string">'员工编号'</span>].<span class="atom">apply</span>(<span class="atom">lambda</span> <span class="atom">x</span>:<span class="atom">x</span>.<span class="atom">zfill</span>(<span class="number">6</span>)) # 合并形成具体时间格式<span class="string">'20170901'</span>的字段
+
+<span class="atom">df_fixed</span> = <span class="atom">df_fixed</span>.<span class="atom">drop</span>(<span class="string">'年月'</span>,<span class="atom">axis</span>=<span class="number">1</span>) # 删除指定列“年月”
+<span class="atom">df_fixed</span> = <span class="atom">df_fixed</span>.<span class="atom">reset_index</span>(<span class="atom">drop</span>=<span class="name">True</span>) # 重置索引
+<span class="atom">df_fixed</span>
+</code></pre><h2 id="参考链接：">参考链接：</h2><p>– <a href="http://xx.com" target="_blank" rel="external">xxx</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Python逐渐成为数据分析的中流砥柱，而Pandas、Numpy更无疑是数据分析必备的利器工具，最近就尝试把之前在Power Query实现的工具转化让Python来完成，以此对比两者的优劣势，顺带温习Python3的某些特性。</p>
+<h2 id="辅助工具_jupy]]>
+    </summary>
+    
+      <category term="Python" scheme="http://sunblognuke.github.io/tags/Python/"/>
+    
+      <category term="Pandas" scheme="http://sunblognuke.github.io/tags/Pandas/"/>
+    
+      <category term="Power Query" scheme="http://sunblognuke.github.io/tags/Power-Query/"/>
+    
+      <category term="Resources" scheme="http://sunblognuke.github.io/categories/Resources/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Excel知识点集锦]]></title>
+    <link href="http://sunblognuke.github.io/2017/08/31/Excel-Learning/"/>
+    <id>http://sunblognuke.github.io/2017/08/31/Excel-Learning/</id>
+    <published>2017-08-31T00:23:58.000Z</published>
+    <updated>2019-07-14T05:51:20.055Z</updated>
+    <content type="html"><![CDATA[<h2 id="消除关联动态查询警告">消除关联动态查询警告</h2><p>如果在PQ查询中遇到</p>
+<blockquote>
+<p>Formula.Firewall: 查询”xx”(步骤”xx”) 将引用其他查询或步骤，因此可能不会直接访问数据源。请重新生成此数据组合。</p>
+</blockquote>
+<p>这样的问题，那是文件的隐私设置级别的原因：</p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/bi01.png" alt="查询警告"></p>
+<p>如此这般设置即可。</p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/bi02.png" alt="隐私设置"></p>
+<h2 id="补齐位数">补齐位数</h2><p>在做数据处理的时候经常要把表格内的数字处理XX位的一组数字。但是原始数据的位数不够则需要使用0来补充。手输是不可能的，使用自动补零的方法应该不错。</p>
+<h3 id="步骤或方法">步骤或方法</h3><ol>
+<li>选择你要补零的单元格点右键再选择进入设置单元格格式。</li>
+<li>进入设置单元格格式的界面，在数字选项下点击自定义，类型中找到G/通用格式，然后在上面的方框内输入你要多少位置补零就输入多少个零，最后点击确定。</li>
+</ol>
+<p><strong>参考链接：</strong><a href="https://jingyan.baidu.com/article/c843ea0b7d267177921e4a4b.html" target="_blank" rel="external">excel表格位数不够自动补0的方法</a></p>
+<h2 id="PowerQuery动态汇总文件夹下的多个Excel文件">PowerQuery动态汇总文件夹下的多个Excel文件</h2><p><strong>参考链接：</strong></p>
+<p><a href="https://zhuanlan.zhihu.com/p/26164792" target="_blank" rel="external">用PowerQuery动态汇总文件夹下的多个Excel文件（支持动态增删自动更新）</a></p>
+<p><a href="http://news.51cto.com/art/201612/524241.htm" target="_blank" rel="external">如何使用Power Query动态汇总文件夹下多个Excel文件</a></p>
+<h2 id="PowerQuery_补齐位数">PowerQuery 补齐位数</h2><p>比如编号或月份默认是1，而你需要的显示是类似”01”效果。</p>
+<h3 id="步骤或方法-1">步骤或方法</h3><p>新增一自定义列([Month]为原始列)，套用以下公式即可:</p>
+<pre><code>Text.<span class="function"><span class="title">PadStart</span><span class="params">(Text.From([Month])</span></span>,<span class="number">2</span>,<span class="string">"0"</span>)
+</code></pre><h2 id="PowerQuery_分组合并同类项">PowerQuery 分组合并同类项</h2><p>比如某一列”课程”可能是”初级班”、”中级班”、”高级班”，而我们需要分组合并看看总共都参与了哪些班，最终的结果可能类似于”初级班、中级班、高级班”。</p>
+<h3 id="步骤或方法-2">步骤或方法</h3><p>分组并求和”课程”这一列，无疑应该是报错。修改函数，将分组操作生成公式中的</p>
+<pre><code>List.<span class="function"><span class="title">Sum</span><span class="params">([课程])</span></span>
+</code></pre><p>修改为</p>
+<pre><code>Text.<span class="function"><span class="title">Combine</span><span class="params">([课程], <span class="string">"、"</span>)</span></span>
+</code></pre><p>另外一种方法：</p>
+<p><a href="https://www.powerquery.training/portfolio/group-summarize-data/" target="_blank" rel="external">Group or Summarize Data in Excel with Power Query</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="消除关联动态查询警告">消除关联动态查询警告</h2><p>如果在PQ查询中遇到</p>
+<blockquote>
+<p>Formula.Firewall: 查询”xx”(步骤”xx”) 将引用其他查询或步骤，因此可能不会直接访问数据源。请重新生成此数据组合。</]]>
+    </summary>
+    
+      <category term="信息化" scheme="http://sunblognuke.github.io/tags/%E4%BF%A1%E6%81%AF%E5%8C%96/"/>
+    
+      <category term="BI" scheme="http://sunblognuke.github.io/tags/BI/"/>
+    
+      <category term="Office" scheme="http://sunblognuke.github.io/tags/Office/"/>
+    
+      <category term="Resources" scheme="http://sunblognuke.github.io/categories/Resources/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[通达OA定制开发定时任务]]></title>
+    <link href="http://sunblognuke.github.io/2017/07/21/OA-Scheduled-Task/"/>
+    <id>http://sunblognuke.github.io/2017/07/21/OA-Scheduled-Task/</id>
+    <published>2017-07-21T10:23:58.000Z</published>
+    <updated>2019-07-14T05:51:20.084Z</updated>
+    <content type="html"><![CDATA[<p>任何一个系统都不可能把全部信息化覆盖完全，不可避免地，不同业务部门需要因地制材选型更合适的、更专业的系统。由此信息孤岛的形成也是必然的结果。随着信息化系统的落地和完善，信息共享、系统集成也是大势所趋。基础信息同步就是系统集成的第一步骤。<br>在此分享如何在通达OA二次开发一个定时同步任务 - 基础组织架构、人员信息的同步。</p>
+<h2 id="开发步骤">开发步骤</h2><h3 id="代码开发">代码开发</h3><p>整合第三方应用系统时，由于系统默认推荐使用IE兼容模式，若要用户每次都点击由极速模式切换为兼容模式，用户体验极其不好用。</p>
+<h3 id="安装部署">安装部署</h3><p>权限分配：TMD，OA的缓存能整死人。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>任何一个系统都不可能把全部信息化覆盖完全，不可避免地，不同业务部门需要因地制材选型更合适的、更专业的系统。由此信息孤岛的形成也是必然的结果。随着信息化系统的落地和完善，信息共享、系统集成也是大势所趋。基础信息同步就是系统集成的第一步骤。<br>在此分享如何在通达OA二次开发]]>
+    </summary>
+    
+      <category term="信息化" scheme="http://sunblognuke.github.io/tags/%E4%BF%A1%E6%81%AF%E5%8C%96/"/>
+    
+      <category term="通达OA" scheme="http://sunblognuke.github.io/tags/%E9%80%9A%E8%BE%BEOA/"/>
+    
+      <category term="MYOA" scheme="http://sunblognuke.github.io/tags/MYOA/"/>
+    
+      <category term="系统集成" scheme="http://sunblognuke.github.io/tags/%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/"/>
+    
+      <category term="Resources" scheme="http://sunblognuke.github.io/categories/Resources/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[定制开发通达OA平台]]></title>
+    <link href="http://sunblognuke.github.io/2017/07/18/OA-Trick/"/>
+    <id>http://sunblognuke.github.io/2017/07/18/OA-Trick/</id>
+    <published>2017-07-18T02:23:58.000Z</published>
+    <updated>2019-07-14T05:51:20.085Z</updated>
+    <content type="html"><![CDATA[<p>总体来说，通达OA的工作流的确让信息化迈进了一个新的台阶，不过精细度和扩展性依旧很弱，故此改造和二次开发无可避免。在此列举一些案例：</p>
+<h2 id="OA精灵窗口默认启用兼容模式">OA精灵窗口默认启用兼容模式</h2><h3 id="需求">需求</h3><p>整合第三方应用系统时，由于系统默认推荐使用IE兼容模式，若要用户每次都点击由极速模式切换为兼容模式，用户体验极其不好用。</p>
+<h3 id="解决方法">解决方法</h3><p>打开安装目录比如D:\MYOA\webroot\inc文件夹下的url_config.ini 文件。</p>
+<p>在文件末行增加 在后面加一行/general/erp/保存，重新登录OA精灵，凡是链接或调用该目录erp下的文件默认打开就是IE内核方式，遂满足用户的定制需求。</p>
+<h2 id="OA精灵打开定制大小的窗口">OA精灵打开定制大小的窗口</h2><h3 id="需求-1">需求</h3><p>整合第三方应用系统时，默认窗口有时不能满足需求，比如内容比较多的应用门户展示。</p>
+<h3 id="解决方法-1">解决方法</h3><p>在弹出的窗体调用的文件里，比如ssologin.php或<a href="http://xx.xx.xx.ip/client/login.jsp，加入如下JS语句：" target="_blank" rel="external">http://xx.xx.xx.ip/client/login.jsp，加入如下JS语句：</a></p>
+<pre><code><span class="tag">&lt;<span class="title">script</span> <span class="attribute">Language</span>=<span class="value">"javascript"</span>&gt;</span><span class="javascript">
+<span class="comment">//如果从OA精灵打开，则打开指定尺寸w/h大小的窗口</span>
+<span class="keyword">if</span>(<span class="built_in">window</span>.external &amp;&amp; <span class="keyword">typeof</span> <span class="built_in">window</span>.external.OA_SMS != <span class="string">'undefined'</span>)
+{        
+    <span class="keyword">var</span> h = <span class="built_in">Math</span>.min(<span class="number">1024</span>, screen.availHeight - <span class="number">180</span>),
+        w = <span class="built_in">Math</span>.min(<span class="number">1690</span>, screen.availWidth - <span class="number">180</span>);
+
+    <span class="built_in">window</span>.external.OA_SMS(w, h, <span class="string">"SET_SIZE"</span>);
+}
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+</code></pre><p>以上语句，使得OA精灵弹出的窗体的尺寸能得到正确控制，以上语句最好放到JS其他编码的前面，以上语句对各类内核浏览器的WEB状态的显示无任何影响。</p>
+<p>参考链接：<a href="http://club.tongda2000.com/forum.php?mod=viewthread&amp;tid=16723&amp;extra=&amp;page=1" target="_blank" rel="external">http://club.tongda2000.com/forum.php?mod=viewthread&amp;tid=16723&amp;extra=&amp;page=1</a></p>
+<h2 id="设置列表控件不可输入">设置列表控件不可输入</h2><h3 id="需求-2">需求</h3><p>一旦列表控件绑定数据源，为了保证数据的正确性，禁止用户输入、让用户只能选择无疑是最便捷的方式。可惜目前为止通达OA依然没有实现这一功能，错误数据随处可见，用户体验极其糟糕。</p>
+<h3 id="解决方法-2">解决方法</h3><p>设计表单时添加辅助脚本JS来在客户端强制验证：</p>
+<pre><code>window.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ 
+  jQuery(<span class="string">'#LISTVIEW_DATA_99 input.ConcelBigInput'</span>).<span class="keyword">each</span>(<span class="function"><span class="keyword">function</span><span class="params">(i)</span></span>{
+    jQuery(<span class="keyword">this</span>).keydown(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+      alert(<span class="string">"禁止输入，请选择"</span>); <span class="comment">//attr('readonly','readonly');</span>
+      jQuery(<span class="keyword">this</span>).val(<span class="string">''</span>);
+    });
+  });
+};
+</code></pre><p><strong>注意：</strong>不能用jQuery(document).ready,因为你读取不到动态生成列表控件的TR;不能用attr(‘readonly’,’readonly’)方式，因为这样你无法把选择后的值赋值到列表的输入框里。</p>
+<h2 id="列表控件编辑时样式撑大覆盖整个页面">列表控件编辑时样式撑大覆盖整个页面</h2><h3 id="问题截图">问题截图</h3><p><a href="http://114.55.1.254/forum.php?mod=viewthread&amp;tid=26385&amp;extra=page%3D1" target="_blank" rel="external"></a></p>
+<p><img src="http://114.55.1.254/forum.php?mod=attachment&amp;aid=MTUxOTJ8ZDQyYTE2ZmR8MTQ5NjMwNDc3M3wwfDI2Mzg1&amp;nothumb=yes" alt=""></p>
+<h3 id="解决方法-3">解决方法</h3><p>设计表单时添加辅助CSS样式如下：</p>
+<pre><code><span class="tag">table</span><span class="class">.LIST_VIEW</span><span class="rules">{<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">100%</span></span></span>;}</span>
+<span class="tag">tr</span><span class="class">.LIST_VIEW_HEADER</span> <span class="tag">td</span><span class="rules">{<span class="rule"><span class="attribute">padding</span>:<span class="value"><span class="number">10px</span> <span class="number">2px</span></span></span>;}</span>
+<span class="tag">table</span><span class="class">.LIST_VIEW</span> <span class="tag">td</span> <span class="tag">input</span><span class="rules">{<span class="rule"><span class="attribute">padding</span>:<span class="value"><span class="number">5px</span> <span class="number">2px</span></span></span>;<span class="rule"><span class="attribute">text-align</span>:<span class="value">center</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">100%</span></span></span>;}</span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>总体来说，通达OA的工作流的确让信息化迈进了一个新的台阶，不过精细度和扩展性依旧很弱，故此改造和二次开发无可避免。在此列举一些案例：</p>
+<h2 id="OA精灵窗口默认启用兼容模式">OA精灵窗口默认启用兼容模式</h2><h3 id="需求">需求</h3><p>整]]>
+    </summary>
+    
+      <category term="信息化" scheme="http://sunblognuke.github.io/tags/%E4%BF%A1%E6%81%AF%E5%8C%96/"/>
+    
+      <category term="通达OA" scheme="http://sunblognuke.github.io/tags/%E9%80%9A%E8%BE%BEOA/"/>
+    
+      <category term="MYOA" scheme="http://sunblognuke.github.io/tags/MYOA/"/>
+    
+      <category term="工作流" scheme="http://sunblognuke.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/"/>
+    
+      <category term="Resources" scheme="http://sunblognuke.github.io/categories/Resources/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[通达OA 2017更新的功能初尝试]]></title>
+    <link href="http://sunblognuke.github.io/2017/07/17/OA-2017-Features/"/>
+    <id>http://sunblognuke.github.io/2017/07/17/OA-2017-Features/</id>
+    <published>2017-07-17T02:23:58.000Z</published>
+    <updated>2019-07-14T05:51:20.081Z</updated>
+    <content type="html"><![CDATA[<p>随着办公平台的陆续深入使用，通达OA的软肋、不便捷性（移动化方面）、可扩展性（比如搭建子系统和整合应用）日趋明显，预想今年能把通达OA替换其他平台的办公OA，比如泛微OA、致远OA等等。不过涉及预算和变更带来的风险，并核实通达OA 2017的确发布了一些新功能的尝试和平台设想的构架，包括应用中心和流程中心是很值得期待的，让我跃跃欲试，很想把生产在用的OA平台升级到这个版本2017。不过冷静下来，还得等待稳定的版本再做定夺。</p>
+<p>期间，我简单尝试搭建一个免费20人用户的测试版本来验证2017是否能够符合我们公司业务需求的想法。在此分享一些用户和思路：</p>
+<h1 id="应用中心的删除和修改功能">应用中心的删除和修改功能</h1><p>若新应用启用了设定的流程，则删除和修改只能在流程中心的《我的工作》来做修改和删除。反之，可通过应用设计界面“是否停用流程”设置即可直接在应用中心的记录列表来操作修改和删除。</p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/OA_AppCenter_delete.png" alt="应用中心-记录删除和修改"></p>
+<p>参考链接：</p>
+<p><a href="http://club.tongda2000.com/forum.php?mod=viewthread&amp;tid=34931&amp;page=1#pid118530" target="_blank" rel="external">http://club.tongda2000.com/forum.php?mod=viewthread&amp;tid=34931&amp;page=1#pid118530</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>随着办公平台的陆续深入使用，通达OA的软肋、不便捷性（移动化方面）、可扩展性（比如搭建子系统和整合应用）日趋明显，预想今年能把通达OA替换其他平台的办公OA，比如泛微OA、致远OA等等。不过涉及预算和变更带来的风险，并核实通达OA 2017的确发布了一些新功能的尝试和平台设]]>
+    </summary>
+    
+      <category term="信息化" scheme="http://sunblognuke.github.io/tags/%E4%BF%A1%E6%81%AF%E5%8C%96/"/>
+    
+      <category term="通达OA" scheme="http://sunblognuke.github.io/tags/%E9%80%9A%E8%BE%BEOA/"/>
+    
+      <category term="MYOA" scheme="http://sunblognuke.github.io/tags/MYOA/"/>
+    
+      <category term="应用中心" scheme="http://sunblognuke.github.io/tags/%E5%BA%94%E7%94%A8%E4%B8%AD%E5%BF%83/"/>
+    
+      <category term="Resources" scheme="http://sunblognuke.github.io/categories/Resources/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[通达OA 2015升级注意事项]]></title>
+    <link href="http://sunblognuke.github.io/2017/05/13/OA-Update-Troubleboot/"/>
+    <id>http://sunblognuke.github.io/2017/05/13/OA-Update-Troubleboot/</id>
+    <published>2017-05-13T02:23:58.000Z</published>
+    <updated>2019-07-14T05:51:20.087Z</updated>
+    <content type="html"><![CDATA[<p>通达OA 2017已发布升级版本，公司有意向想升级到最新版本。故此在临时服务器上搭建测试环境。过程中碰到如下问题，记录并包括解决方案：</p>
+<ol>
+<li>停止OA所有服务并退出Monitor.exe.</li>
+<li>拷贝MYOA根目录下的大部分文件夹，可除去bak, attach等目录（这些文件都很大，可升级后慢慢迁移）。</li>
+<li>双机bin目录下的autoconfig.exe配置新环境。</li>
+</ol>
+<h2 id="office_redis服务不能启动">office_redis服务不能启动</h2><h3 id="可能原因：">可能原因：</h3><p>1、进行过替换bin目录的操作，替换前后两个bin目录对应的OA的安装路径不一致导致的。</p>
+<p>2、myoa\attach下缺少redis_data目录或redis_data\heap目录或redis_data目录下的aof文件损坏导致。</p>
+<h3 id="解决方法：">解决方法：</h3><p>1、记事本打开myoa\bin\redis.windows.conf，按盘符搜索，修改以下几处对应的路径：</p>
+<p>1）logfile D:/MYOA/logs/redis.log</p>
+<p>2）dir D:/MYOA/attach/redis_data</p>
+<p>3）heapdir D:/MYOA/attach/redis_data/heap</p>
+<p>2、从备份的myoa\attach中拷贝redis_data目录恢复或者把缺失的目录手动创建上，若目录都在，属于aof文件损坏导致，则将该文件重命名一下，再重启服务即可。</p>
+<p>我们的问题就是缺失attach目录，故此我们新建并补齐这一目录即可把office_redis服务正常运行起来。</p>
+<h2 id="Office_Web服务不能启动">Office_Web服务不能启动</h2><p>从log日志显示2367端口被占用：服务启动失败, 侦听线程创建不成功,端口 2367 被占用。</p>
+<h3 id="解决方法：-1">解决方法：</h3><p>打开OA的MYSQL数据执行语句：</p>
+<pre><code><span class="operator"><span class="keyword">update</span> sys_para <span class="keyword">set</span> PARA_VALUE=<span class="string">'2368'</span> <span class="keyword">where</span> PARA_NAME= <span class="string">'WEB_SVC_PORT'</span>;</span>
+</code></pre><p>改一下端口2368或其他端口直到可以运行为止。</p>
+<h2 id="参考链接：">参考链接：</h2><p>– <a href="http://support.tongda2000.com/kb11019070/" target="_blank" rel="external">如何解决office_redis服务不能启动的问题？</a><br>– <a href="http://club.tongda2000.com/forum.php?mod=viewthread&amp;tid=26282" target="_blank" rel="external">Office_Web服务启动不了，log日志显示2367端口被占用？</a></p>
+<h2 id="批量更新用户权限">批量更新用户权限</h2><p>禁止OA登录，禁止手机登录，禁止使用即时通讯（资源有限）：</p>
+<pre><code>UPDATE user SET NOT_LOGIN=<span class="number">1</span>, NOT_MOBILE_LOGIN=<span class="number">1</span>, IM_RANGE=<span class="number">2</span> WHERE DEPT_ID=<span class="number">0</span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>通达OA 2017已发布升级版本，公司有意向想升级到最新版本。故此在临时服务器上搭建测试环境。过程中碰到如下问题，记录并包括解决方案：</p>
+<ol>
+<li>停止OA所有服务并退出Monitor.exe.</li>
+<li>拷贝MYOA根目录下的大部分文件夹，可除去ba]]>
+    </summary>
+    
+      <category term="信息化" scheme="http://sunblognuke.github.io/tags/%E4%BF%A1%E6%81%AF%E5%8C%96/"/>
+    
+      <category term="通达OA" scheme="http://sunblognuke.github.io/tags/%E9%80%9A%E8%BE%BEOA/"/>
+    
+      <category term="MYOA" scheme="http://sunblognuke.github.io/tags/MYOA/"/>
+    
+      <category term="Resources" scheme="http://sunblognuke.github.io/categories/Resources/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[DNN番外篇 - 服务器到本地迁移]]></title>
+    <link href="http://sunblognuke.github.io/2017/04/13/Tranform-DNN-from-Host-Server-to-Local/"/>
+    <id>http://sunblognuke.github.io/2017/04/13/Tranform-DNN-from-Host-Server-to-Local/</id>
+    <published>2017-04-13T02:09:39.000Z</published>
+    <updated>2019-07-14T05:51:20.108Z</updated>
+    <content type="html"><![CDATA[<p>这段时间想把服务上的DNN7升级到最新版本DNN9，为了保险起见，提前在本地搭建一个测试的升级环境。故关键第一步就是如何把托管服务器上的网站环境部署到本地。期间碰到两个重要问题：</p>
+<h2 id="数据库备份文件的导入">数据库备份文件的导入</h2><p>本想新建一个空数据库，然后直接导入bak备份文件，系统提示错误（代码号：3154）：</p>
+<p>The backup set holds a backup of a database other than the existing “xx” database…</p>
+<p><strong>解决方案：</strong></p>
+<p>– Don’t create an empty database and restore the .bak file on to it.<br>– Use ‘Restore Database’ option accessible by right clicking the “Databases” branch of the SQL Server Management Studio and provide the database name while providing the source to restore.</p>
+<p>同时保证相应的xxx.mdf等文件是有效路径即可。</p>
+<h2 id="网站的本地部署">网站的本地部署</h2><p>DNN网站目录的权限、数据库的PortalAlias对应的记录也修改成本地IIS的相关设置完成后即可访问。然而我们碰到一个IIS的错误提示：</p>
+<p>HTTP 错误 500.19</p>
+<p>原因：原本托管服务上的IIS安装了<a href="http://www.iis.net/download/urlrewrite" target="_blank" rel="external">url rewrite module</a>, 而我们本地IIS没有安装这一组件。</p>
+<p><strong>解决方案：</strong> </p>
+<p>安装组件<a href="http://www.iis.net/download/urlrewrite" target="_blank" rel="external">url rewrite module</a>或注释web.config的配置项：</p>
+<pre><code>&lt;!--&lt;rewrite&gt;
+  &lt;rules&gt;
+    &lt;rule name=<span class="string">"Redirect01"</span> stopProcessing=<span class="string">"true"</span>&gt;
+      &lt;<span class="keyword">match</span> url=<span class="string">"^account-login.aspx$"</span> ignoreCase=<span class="string">"true"</span> /&gt;
+      &lt;action <span class="class"><span class="keyword">type</span></span>=<span class="string">"Redirect"</span> url=<span class="string">"/signin"</span> redirectType=<span class="string">"Permanent"</span> /&gt;
+    &lt;/rule&gt;
+    &lt;rule name=<span class="string">"Redirect02"</span> stopProcessing=<span class="string">"true"</span>&gt;
+      &lt;<span class="keyword">match</span> url=<span class="string">"^account_login.aspx$"</span> ignoreCase=<span class="string">"true"</span> /&gt;
+      &lt;action <span class="class"><span class="keyword">type</span></span>=<span class="string">"Redirect"</span> url=<span class="string">"/signin"</span> redirectType=<span class="string">"Permanent"</span> /&gt;
+    &lt;/rule&gt;
+    &lt;rule name=<span class="string">"Redirect03"</span> stopProcessing=<span class="string">"true"</span>&gt;
+      &lt;<span class="keyword">match</span> url=<span class="string">"^showcase.aspx$"</span> ignoreCase=<span class="string">"true"</span> /&gt;
+      &lt;action <span class="class"><span class="keyword">type</span></span>=<span class="string">"Redirect"</span> url=<span class="string">"/company/case-studies"</span> redirectType=<span class="string">"Permanent"</span> /&gt;
+    &lt;/rule&gt;
+  &lt;/rules&gt;
+&lt;/rewrite&gt;--&gt;
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>这段时间想把服务上的DNN7升级到最新版本DNN9，为了保险起见，提前在本地搭建一个测试的升级环境。故关键第一步就是如何把托管服务器上的网站环境部署到本地。期间碰到两个重要问题：</p>
+<h2 id="数据库备份文件的导入">数据库备份文件的导入</h2><p>本想新建一]]>
+    </summary>
+    
+      <category term="CMS" scheme="http://sunblognuke.github.io/tags/CMS/"/>
+    
+      <category term="DNN9" scheme="http://sunblognuke.github.io/tags/DNN9/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[SunBlogNuke Runs well with DNN9]]></title>
+    <link href="http://sunblognuke.github.io/2017/01/19/SunBlogNuke-Runs-well-with-DNN9/"/>
+    <id>http://sunblognuke.github.io/2017/01/19/SunBlogNuke-Runs-well-with-DNN9/</id>
+    <published>2017-01-19T10:59:27.000Z</published>
+    <updated>2019-07-14T05:51:20.105Z</updated>
+    <content type="html"><![CDATA[<p><img src="https://github.com/sunblognuke/resources/blob/master/hexo/dnn9-community.png?raw=true" alt="SunBlogNuke Runs well with DNN9"></p>
+<h2 id="DNN9_finally_released">DNN9 finally released</h2><p>As the article <a href="http://www.dnnsoftware.com/community-blog/cid/155377/dnn-9-and-the-future-of-the-dnn-platform" target="_blank" rel="external">DNN 9 and the Future of the DNN Platform</a> mentioned, Few goals that DNN offical team wanted to accomplish for this platform:</p>
+<ul>
+<li>Reconstruct DNN to <strong>minimize our reliance on Web Forms</strong> architecture</li>
+<li>Provide developers the <strong>freedom to use a variety of frameworks</strong></li>
+<li><strong>Protect customers’ existing investments</strong> in DNN</li>
+<li>Provide a <strong>fully supported upgrade path</strong> for everyone</li>
+</ul>
+<p>DNN 9 represents the next step on our journey towards creating a more modern platform and further minimizing our use of Web Forms. Firstly the pre-released DNN9 with a brand new administrative experience that replaces the dated Web Forms based admin and host modules that we use today. Yes，this superstar is called “<a href="http://www.dnnsoftware.com/community-blog/cid/155380/dnn-9-understanding-the-persona-bar" target="_blank" rel="external">the Persona Bar</a>“.</p>
+<p>Plus there are some interesting points discussed in the comment section, for example:</p>
+<ul>
+<li>Dnn is losing the needle of the compass and is becoming another type of wordpress but not focus on DNN philosophy</li>
+<li>Why DNN lost more and more developers these years? due to the addition of MVC and SPA support or because they waited too long to support alternative frameworks.</li>
+<li>There is ZERO advantage of using MVC in DNN. Plese skip crippled MVC in DNN and just embrace the development in WebForms or the newer SPA</li>
+</ul>
+<p>Some notes for any dnn guys want to try DNN9:</p>
+<ul>
+<li>Telerik won’t be going away completely in DNN 9. We hope to have that project finished for 9.1 or 9.2. Redoing the Admin Experience has been a big job and we were not able to completely redo the remaining modules that still use Telerik.</li>
+<li>The host features did not go away at all. They have been incorporated and collapsed into the other administrative pages. see <a href="https://1drv.ms/i/s!AmCAjuMs3hO9j7Y6I_LdrZ5EVDMnzA" target="_blank" rel="external">https://1drv.ms/i/s!AmCAjuMs3hO9j7Y6I_LdrZ5EVDMnzA</a> These settings only show up for host users.</li>
+</ul>
+<p><strong>Other resources links:</strong></p>
+<p><a href="http://www.dnnsoftware.com/community-blog/cid/155385/dnn-9-appears-to-be-a-foundational-step-forward-for-the-future-of-dnn" target="_blank" rel="external">DNN 9 Appears to Be a Foundational Step Forward for the Future of DNN</a></p>
+<h2 id="DNN_Blog_Module_SunBlogNuke_compatible_well_with_DNN9">DNN Blog Module SunBlogNuke compatible well with DNN9</h2><p>Our DNN blog module SunBlogNuke straight out of the box comes ready to embrace any changes and always compatible well with the latest DNN core package DNN9. Not only we will apply any handy tools, such as SPA framework and Boostrap UI framework, with our products, but also we assure that SunBlogNuke is still the best publishing tool with News, Magazine &amp; Articles, for example Markdown support with better writing experience and the core Html/Text module is on road of integration.</p>
+<p>And another good news for any DNN guys interested in our modules, is that we will include all the separate modules into the one-collection for SunBlogNuke, for example:</p>
+<ul>
+<li><a href="http://www.sunblognuke.com/products/dotnetnuke-modules/galleryplus" target="_blank" rel="external">GalleryPlus module - Ultra DNN Media Gallery Module with Image, Video &amp; Slider</a></li>
+<li><a href="http://www.sunblognuke.com/products/dotnetnuke-modules/commentsplus" target="_blank" rel="external">CommentsPlus module - Universal comments/voting module for DNN</a></li>
+<li><a href="http://www.sunblognuke.com/products/dotnetnuke-modules/twitter-feed-widget" target="_blank" rel="external">Twitter feed module - highlight solution to display your most recent Twitter updates</a></li>
+<li>ContentSliderPlus module</li>
+</ul>
+<p>And the important point is that they will be all free for DNN Community. Please have a try on them later and if you are satisfied with those widgets, feel free to get us a coffee below :)  </p>
+<p><a href="https://www.paypal.me/sunblognuke/9.9" target="_blank" class="btn btn-lg btn-color">BUY ME A Coffee</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="https://github.com/sunblognuke/resources/blob/master/hexo/dnn9-community.png?raw=true" alt="SunBlogNuke Runs well with DNN9"></]]>
+    </summary>
+    
+      <category term="CMS" scheme="http://sunblognuke.github.io/tags/CMS/"/>
+    
+      <category term="DNN9" scheme="http://sunblognuke.github.io/tags/DNN9/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[DNN8 Development]]></title>
+    <link href="http://sunblognuke.github.io/2016/10/24/DNN8-Development/"/>
+    <id>http://sunblognuke.github.io/2016/10/24/DNN8-Development/</id>
+    <published>2016-10-24T13:07:57.000Z</published>
+    <updated>2019-07-14T05:51:20.052Z</updated>
+    <content type="html"><![CDATA[<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/SPA.png" alt=""></p>
+<h2 id="What_is_SPA?">What is SPA?</h2><blockquote>
+<p>A Single-page application (SPA), also known as a single-page interface (SPI), is a web application or web site that fits on a single web page with the goal of providing a more fluid user experience.</p>
+</blockquote>
+<p><a href="http://www.seguetech.com/blog/2013/04/18/what-is-single-page-application" target="_blank" rel="external">Single Page Application</a></p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/dnn_versions.jpg" alt=""></p>
+<h2 id="Breaking_changes">Breaking changes</h2><ol>
+<li>支持.net 4.5+版本</li>
+<li>向上兼容IE8+</li>
+<li>所有管理模块可插拔</li>
+<li>默认删除导航提供模块，只保留DDR</li>
+<li>轻量级default.css</li>
+<li>剔除Telerik控件</li>
+<li>更多查看下边链接…</li>
+</ol>
+<p><a href="http://www.dnnsoftware.com/wiki/dnn-8-breaking-changes" target="_blank" rel="external">DNN 8 BREAKING CHANGES</a></p>
+<h2 id="Set_up_environment">Set up environment</h2><p><a href="http://www.dnnsoftware.com/community-blog/cid/155221/module-development-in-dnn-8-3--introduction-to-spa-modules" target="_blank" rel="external">Introduction to SPA modules</a></p>
+<h2 id="DNN8开发模板">DNN8开发模板</h2><p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/dnn-community.png" alt=""></p>
+<p><a href="https://github.com/ChrisHammond/DNNTemplates/releases/tag/v06.01.00-beta" target="_blank" rel="external">BETA DNN 8 Project Templates V6.1 for Visual Studio 2015</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/SPA.png" alt=""></p>
+<h2 id="What_is_SPA?">What is SPA?</h2]]>
+    </summary>
+    
+      <category term="DNN8" scheme="http://sunblognuke.github.io/tags/DNN8/"/>
+    
+      <category term="SPA" scheme="http://sunblognuke.github.io/tags/SPA/"/>
+    
+      <category term="MVC" scheme="http://sunblognuke.github.io/tags/MVC/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Laravel 5 with Homestead box]]></title>
+    <link href="http://sunblognuke.github.io/2016/08/28/Laravel-5-with-Homestead-box/"/>
+    <id>http://sunblognuke.github.io/2016/08/28/Laravel-5-with-Homestead-box/</id>
+    <published>2016-08-28T01:03:07.000Z</published>
+    <updated>2019-07-14T05:51:20.071Z</updated>
+    <content type="html"><![CDATA[<h2 id="Homestead操作备忘">Homestead操作备忘</h2><ol>
+<li>sudo apt-get/xxx -&gt;可获取root权限执行命令</li>
+<li>sudo passwd root -&gt; 修改root密码</li>
+<li>su username -&gt; 切换用户，比如su vagrant</li>
+</ol>
+<h2 id="Composer镜像更新">Composer镜像更新</h2><p><a href="http://www.phpcomposer.com/" target="_blank" rel="external">Composer中文网</a><br><a href="http://pkg.phpcomposer.com/" target="_blank" rel="external">Packagist / Composer 中国全量镜像</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="Homestead操作备忘">Homestead操作备忘</h2><ol>
+<li>sudo apt-get/xxx -&gt;可获取root权限执行命令</li>
+<li>sudo passwd root -&gt; 修改root密码</li>
+<li>su u]]>
+    </summary>
+    
+      <category term="Laravel" scheme="http://sunblognuke.github.io/tags/Laravel/"/>
+    
+      <category term="Homestead" scheme="http://sunblognuke.github.io/tags/Homestead/"/>
+    
+      <category term="Linux" scheme="http://sunblognuke.github.io/tags/Linux/"/>
+    
+      <category term="Ubuntu" scheme="http://sunblognuke.github.io/tags/Ubuntu/"/>
+    
+      <category term="VirtualBox" scheme="http://sunblognuke.github.io/tags/VirtualBox/"/>
+    
+      <category term="Vagrant" scheme="http://sunblognuke.github.io/tags/Vagrant/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[通达OA的MYSQL崩溃法启用]]></title>
+    <link href="http://sunblognuke.github.io/2016/08/23/OA-Crashed-with-Mysql-Recovery/"/>
+    <id>http://sunblognuke.github.io/2016/08/23/OA-Crashed-with-Mysql-Recovery/</id>
+    <published>2016-08-23T02:23:58.000Z</published>
+    <updated>2019-07-14T05:51:20.083Z</updated>
+    <content type="html"><![CDATA[<p>昨天公司UPS挂了导致服务器断电，重启以后通达OA的MYSQL服务再也无法启用。查询通达OA官方的文档，并根据log文件的错误提示最终把数据恢复回来，在此备忘记录一下。</p>
+<h2 id="修改innodb_buffer_pool_size">修改innodb_buffer_pool_size</h2><p>查找MySQL的错误日志文件（MYOA\data5\机器名.err）会记录如下类似内容：</p>
+<pre><code>130409 15:54:31 [<span class="keyword">Note</span>] <span class="keyword">Plugin</span> 'FEDERATED' is disabled.
+130409 15:54:31 InnoDB: The InnoDB <span class="keyword">memory</span> heap is disabled
+130409 15:54:31 InnoDB: Mutexes and rw_locks <span class="keyword">use</span> Windows interlocked functions
+130409 15:54:31 InnoDB: Compressed tables <span class="keyword">use</span> zlib 1.2.3
+130409 15:54:32 InnoDB: Initializing buffer pool, size = 1023.0M
+InnoDB: VirtualAlloc(1086849024 bytes) failed; Windows <span class="keyword">error</span> 8
+130409 15:54:32 InnoDB: Completed initialization of buffer pool
+130409 15:54:32 InnoDB: Fatal <span class="keyword">error</span>: cannot allocate <span class="keyword">memory</span> <span class="keyword">for</span> the buffer pool
+130409 15:54:32 [<span class="keyword">ERROR</span>] <span class="keyword">Plugin</span> 'InnoDB' init function returned <span class="keyword">error</span>.
+130409 15:54:32 [<span class="keyword">ERROR</span>] <span class="keyword">Plugin</span> 'InnoDB' registration <span class="keyword">as</span> a STORAGE ENGINE failed.
+130409 15:54:32 [<span class="keyword">ERROR</span>] Unknown/unsupported storage engine: Innodb
+130409 15:54:32 [<span class="keyword">ERROR</span>] Aborting
+</code></pre><h2 id="解决方法：">解决方法：</h2><p>此情况出现的原因是myoa\mysql5\my.ini中innodb_buffer_pool_size的值太大，OA服务器操作系统不支持所致。改小后再启动mysql5_OA服务即可，恢复正常可以再改回原来的值。默认为1024M。</p>
+<p>如果修改完innodb_buffer_pool_size依然运行不起来，查看log又出现如下类似内容：</p>
+<pre><code>160822 19:14:38 [Note] Plugin 'FEDERATED' is disabled.
+160822 19:14:38 InnoDB: The InnoDB memory heap is disabled
+160822 19:14:38 InnoDB: Mutexes and rw_locks <span class="operator"><span class="keyword">use</span> Windows interlocked functions
+<span class="number">160822</span> <span class="number">19</span>:<span class="number">14</span>:<span class="number">38</span> <span class="keyword">InnoDB</span>: Compressed <span class="keyword">tables</span> <span class="keyword">use</span> zlib <span class="number">1.2</span><span class="number">.3</span>
+<span class="number">160822</span> <span class="number">19</span>:<span class="number">14</span>:<span class="number">38</span> <span class="keyword">InnoDB</span>: Initializing buffer pool, <span class="keyword">size</span> = <span class="number">299.0</span><span class="keyword">M</span>
+<span class="number">160822</span> <span class="number">19</span>:<span class="number">14</span>:<span class="number">38</span> <span class="keyword">InnoDB</span>: Completed initialization <span class="keyword">of</span> buffer pool
+<span class="number">160822</span> <span class="number">19</span>:<span class="number">14</span>:<span class="number">38</span> <span class="keyword">InnoDB</span>: highest supported <span class="keyword">file</span> <span class="keyword">format</span> <span class="keyword">is</span> Barracuda.
+<span class="keyword">InnoDB</span>: <span class="keyword">Log</span> <span class="keyword">scan</span> progressed past the checkpoint lsn <span class="number">5772634979</span>
+<span class="number">160822</span> <span class="number">19</span>:<span class="number">14</span>:<span class="number">38</span>  <span class="keyword">InnoDB</span>: <span class="keyword">Database</span> was <span class="keyword">not</span> shut down normally!
+<span class="keyword">InnoDB</span>: <span class="keyword">Starting</span> crash <span class="keyword">recovery</span>.
+<span class="keyword">InnoDB</span>: Reading <span class="keyword">tablespace</span> information <span class="keyword">from</span> the .ibd files...
+<span class="keyword">InnoDB</span>: Restoring possible half-written <span class="keyword">data</span> pages <span class="keyword">from</span> the doublewrite
+<span class="keyword">InnoDB</span>: buffer...
+<span class="keyword">InnoDB</span>: Doing <span class="keyword">recovery</span>: scanned up <span class="keyword">to</span> <span class="keyword">log</span> <span class="keyword">sequence</span> <span class="built_in">number</span> <span class="number">5772636095</span>
+<span class="number">160822</span> <span class="number">19</span>:<span class="number">14</span>:<span class="number">38</span>  <span class="keyword">InnoDB</span>: <span class="keyword">Starting</span> an <span class="keyword">apply</span> batch <span class="keyword">of</span> <span class="keyword">log</span> <span class="keyword">records</span> <span class="keyword">to</span> the <span class="keyword">database</span>...
+<span class="keyword">InnoDB</span>: Progress <span class="keyword">in</span> percents: <span class="number">37</span> <span class="number">38</span> <span class="number">39</span> <span class="number">40</span> <span class="number">41</span> <span class="number">42</span> <span class="number">43</span> <span class="number">44</span> <span class="number">45</span> <span class="number">46</span> <span class="number">47</span> <span class="number">48</span> <span class="number">49</span> <span class="number">50</span> <span class="number">51</span> <span class="number">52</span> <span class="number">53</span> <span class="number">54</span> <span class="number">55</span> <span class="number">56</span> <span class="number">57</span> <span class="number">58</span> <span class="number">59</span> <span class="number">60</span> <span class="number">61</span> <span class="number">62</span> <span class="number">63</span> <span class="number">64</span> <span class="number">65</span> <span class="number">66</span> <span class="number">67</span> <span class="number">68</span> <span class="number">69</span> <span class="number">70</span> <span class="number">71</span> <span class="number">72</span> <span class="number">73</span> <span class="number">74</span> <span class="number">75</span> <span class="number">76</span> <span class="number">77</span> <span class="number">78</span> <span class="number">79</span> <span class="number">80</span> <span class="number">81</span> <span class="number">82</span> <span class="number">83</span> <span class="number">84</span> <span class="number">85</span> <span class="number">86</span> <span class="number">87</span> <span class="number">88</span> <span class="number">89</span> <span class="number">90</span> <span class="number">91</span> <span class="number">92</span> <span class="number">93</span> <span class="number">94</span> <span class="number">95</span> <span class="number">96</span> <span class="number">97</span> <span class="number">98</span> <span class="number">99</span> </span>
+</code></pre><p>需要执行：</p>
+<h2 id="强制启动mysql服务_-》修改_innodb_force_recovery_=_6">强制启动mysql服务 -》修改 innodb_force_recovery = 6</h2><p>具体步骤参照官方文档：</p>
+<p>1)打开\MYOA\mysql5\my.ini，去掉innodb_force_recovery=1前边的注释。</p>
+<p>2)启动MySQL5_OA服务，此时MySQL处于只读状态，可以导出，不可写入。如果仍不能启动，可以尝试将innodb_force_recovery修改为2、3、4、5、6等，直到可以启动为止。（备注：一般情况下，3、4、6、7步骤可选及可省略）</p>
+<p>3)使用MySQL管理工具比如Navicat for MySQL，将TD_OA等相关的数据库导出为SQL文件, 记得务必要保留创建表结构的导出结果。</p>
+<p>4)停止MySQL5_OA服务，删除TD_OA下的所有文件、ibdata1、ib_logfile0、ib_logfile1等文件。</p>
+<p>5）打开\MYOA\mysql5\my.ini，在innodb_force_recovery=1前边加上#号，将该项注释掉。</p>
+<p>6)启动MySQL5_OA服务，然后导入此前备份的SQL文件。比如运行bin目录下的TDRecovery.exe，对数据库进行还原。</p>
+<p>7)检查数据库，将无法通过该方法恢复的数据表，手动通过MySQL管理工具比如Navicat for MySQL把之前自动备份的单个SQL文件进行恢复。</p>
+<h2 id="参考链接：">参考链接：</h2><p>– <a href="http://support.tongda2000.com/kb11019002/" target="_blank" rel="external">如何解决mysql5_OA服务不能启动的问题？</a><br>– <a href="http://blog.csdn.net/aliyunoa/article/details/50176715" target="_blank" rel="external">通达OA服务器意外断电后数据库容易损坏的解决方案</a><br>– <a href="http://dev.mysql.com/doc/refman/5.5/en/forcing-innodb-recovery.html" target="_blank" rel="external">Forcing InnoDB Recovery</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>昨天公司UPS挂了导致服务器断电，重启以后通达OA的MYSQL服务再也无法启用。查询通达OA官方的文档，并根据log文件的错误提示最终把数据恢复回来，在此备忘记录一下。</p>
+<h2 id="修改innodb_buffer_pool_size">修改innodb_buff]]>
+    </summary>
+    
+      <category term="信息化" scheme="http://sunblognuke.github.io/tags/%E4%BF%A1%E6%81%AF%E5%8C%96/"/>
+    
+      <category term="MYOA" scheme="http://sunblognuke.github.io/tags/MYOA/"/>
+    
+      <category term="Resources" scheme="http://sunblognuke.github.io/categories/Resources/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Scheduler Issues with DNN 7.3.x]]></title>
+    <link href="http://sunblognuke.github.io/2016/08/12/Scheduler-Issues-with-DNN-7-3-x/"/>
+    <id>http://sunblognuke.github.io/2016/08/12/Scheduler-Issues-with-DNN-7-3-x/</id>
+    <published>2016-08-12T10:49:18.000Z</published>
+    <updated>2019-07-14T05:51:20.099Z</updated>
+    <content type="html"><![CDATA[<h1 id="Issue_Detail">Issue Detail</h1><p>Lot of logs in Event Viewer related with “Scheduler Exception -Sequence contains more than one matching element”. This occurs when there is a duplicate entry in the WebServers table.</p>
+<h1 id="Solution">Solution</h1><p> To verify if this is the issue, go to Host &gt; SQL and run the following SQL query:</p>
+<pre><code><span class="built_in">SELECT</span> <span class="built_in">ServerName</span> <span class="keyword">FROM</span> {databaseOwner}[{objectQualifier}WebServers]
+</code></pre><p>If you see the same entry more than once, you need to run the following SQL query: </p>
+<pre><code><span class="keyword">DELETE</span> <span class="keyword">FROM</span> {databaseOwner}[{objectQualifier}WebServers]
+</code></pre><p>Once that has been completed, hover over Tools-&gt;Recycle Application Domain to make it work with re-indexing.</p>
+<h1 id="Referrence">Referrence</h1><p><a href="https://support.managed.com/kb/a2170/scheduler-issues-in-dnn-7_3_x.aspx" target="_blank" rel="external">Scheduler Issues in DNN 7.3.x</a></p>
+<p><a href="http://www.dnnsoftware.com/forums/threadid/502348/scope/posts/scheduler-exception-after-upgrade-to-730" target="_blank" rel="external">Scheduler exception after Upgrade to 7.3.0 </a></p>
+<p><a href="http://www.dnnsoftware.com/answers/dnn-731-scheduler-exception" target="_blank" rel="external">DNN 7.3.1 SCHEDULER EXCEPTION</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Issue_Detail">Issue Detail</h1><p>Lot of logs in Event Viewer related with “Scheduler Exception -Sequence contains more than one mat]]>
+    </summary>
+    
+      <category term="DNN" scheme="http://sunblognuke.github.io/tags/DNN/"/>
+    
+      <category term="Troubleshooting" scheme="http://sunblognuke.github.io/tags/Troubleshooting/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Fixing .woff Font File 404 Error]]></title>
+    <link href="http://sunblognuke.github.io/2016/07/24/Fixing-woff-Font-File-404-Error/"/>
+    <id>http://sunblognuke.github.io/2016/07/24/Fixing-woff-Font-File-404-Error/</id>
+    <published>2016-07-24T01:58:52.000Z</published>
+    <updated>2019-07-14T05:51:20.056Z</updated>
+    <content type="html"><![CDATA[<h1 id="What_is_exactly_the_404_issue?">What is exactly the 404 issue?</h1><p>When using the Bootstrap iconic font and CSS toolkit, such as Glyphicons or <a href="http://fontawesome.io" target="_blank" rel="external">Font Awesome</a>, the font comes in a lot of flavors, including .ttf and woff. Somehow it seems that IIS will return a 404 not found when requesting the .woff file – even though the file definitely exists and the URL is correct.</p>
+<h1 id="Recommended_Solution">Recommended Solution</h1><p>The solution for this is to add the following segment to the WebServer section of your web.config:</p>
+<pre><code><span class="tag">&lt;<span class="title">staticContent</span>&gt;</span>
+    <span class="comment">&lt;!-- Fix issue about loading woff font failure --&gt;</span>
+    <span class="tag">&lt;<span class="title">remove</span> <span class="attribute">fileExtension</span>=<span class="value">".woff"</span> /&gt;</span>
+    <span class="tag">&lt;<span class="title">mimeMap</span> <span class="attribute">fileExtension</span>=<span class="value">".woff"</span> <span class="attribute">mimeType</span>=<span class="value">"application/font-woff"</span> /&gt;</span>
+    <span class="tag">&lt;<span class="title">remove</span> <span class="attribute">fileExtension</span>=<span class="value">".woff2"</span> /&gt;</span>
+    <span class="tag">&lt;<span class="title">mimeMap</span> <span class="attribute">fileExtension</span>=<span class="value">".woff2"</span> <span class="attribute">mimeType</span>=<span class="value">"font/x-woff"</span> /&gt;</span>
+<span class="tag">&lt;/<span class="title">staticContent</span>&gt;</span>
+</code></pre><p>This configures IIS to understand that there is a woff mime type that it should care about, which magically makes the 404 go away.</p>
+<p>You can add a remove node before adding the new mimeMap as the above coding to avoid a duplicate mime type error in case they are already there.</p>
+<h1 id="Alternative_solution">Alternative solution</h1><p>If you don’t want to add this to the web.config, you can also configure the IIS server in the UI.</p>
+<p>Just double-click the “MIME Types” configuration option while having IIS root node selected in the left panel and click “Add…” link in the Actions panel on the right. This will bring up the following dialog. Add .woff file extension and specify “application/x-font-woff” as the corresponding MIME type:</p>
+<p>Add MIME Type for .woff file name extension:</p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/404Errors.gif" alt="Add MIME Type for .woff file name extension"></p>
+<p>This will force IIS to process .woff files correctly and will fix 404 errors associated with these files.</p>
+<h2 id="resources_links:">resources links:</h2><p><a href="http://stackoverflow.com/questions/4015816/why-is-font-face-throwing-a-404-error-on-woff-files" target="_blank" rel="external">Why is @font-face throwing a 404 error on woff files?</a></p>
+<p><a href="http://www.dirigodev.com/blog/web-development-execution/404-errors-in-iis7-for-embedded-woff-font-files/" target="_blank" rel="external">404 errors in IIS7 for embedded .woff font files</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="What_is_exactly_the_404_issue?">What is exactly the 404 issue?</h1><p>When using the Bootstrap iconic font and CSS toolkit, such as ]]>
+    </summary>
+    
+      <category term="DNN" scheme="http://sunblognuke.github.io/tags/DNN/"/>
+    
+      <category term="Bootstrap" scheme="http://sunblognuke.github.io/tags/Bootstrap/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Integrated DNN Blog with Javascript syntax highlighter]]></title>
+    <link href="http://sunblognuke.github.io/2016/07/21/Integrated-DNN-Blog-Javascript-syntax-highlighter/"/>
+    <id>http://sunblognuke.github.io/2016/07/21/Integrated-DNN-Blog-Javascript-syntax-highlighter/</id>
+    <published>2016-07-21T11:32:58.000Z</published>
+    <updated>2019-07-14T05:51:20.068Z</updated>
+    <content type="html"><![CDATA[<h1 id="What_is_Highlight-js?">What is Highlight.js?</h1><p>Highlight.js is a syntax highlighter written in JavaScript. It works in the browser as well as on the server. It works with pretty much any markup, doesn’t depend on any framework and has automatic language detection.</p>
+<p><a href="https://github.com/isagalaev/highlight.js" target="_blank" rel="external">Project on Github</a></p>
+<h1 id="Why_we_should_use_Highlight-js?">Why we should use Highlight.js?</h1><ul>
+<li>162 languages and 74 styles</li>
+<li>automatic language detection</li>
+<li>multi-language code highlighting</li>
+<li>available for node.js</li>
+<li>works with any markup</li>
+<li>compatible with any js framework</li>
+<li>works well with Markdown</li>
+</ul>
+<h1 id="How_to_apply_Highlight-js_with_DNN_Blog?">How to apply Highlight.js with DNN Blog?</h1><ol>
+<li><p>Assume that you installed our blogging module called ‘<a href="http://www.sunblognuke.com/products/features" target="_blank" rel="external">SunBlogNuke</a>‘</p>
+</li>
+<li><p>Built blog instance with offical guidelin and enter Dashboadr/Customize/Style Editor section.</p>
+</li>
+<li><p>From the right section, you should be able choose any theme view to be apply with Highlight.js. For example, the BasicView.ascx is for every item of the default post list when first loading blog page.</p>
+<p> choose it and copy the following coding below to register Highlight.js into this view:</p>
+<pre><code><span class="tag">&lt;<span class="title">%@</span> <span class="attribute">Register</span> <span class="attribute">TagPrefix</span>=<span class="value">"dnn"</span> <span class="attribute">Namespace</span>=<span class="value">"DotNetNuke.Web.Client.ClientResourceManagement"</span> <span class="attribute">Assembly</span>=<span class="value">"DotNetNuke.Web.Client"</span> %&gt;</span>
+<span class="tag">&lt;<span class="title">dnn:DnnJsInclude</span> <span class="attribute">runat</span>=<span class="value">"server"</span> <span class="attribute">ID</span>=<span class="value">"jshighlight"</span> <span class="attribute">FilePath</span>=<span class="value">"~/DesktopModules/SunBlog/js/highlight/highlight.min.js"</span> <span class="attribute">Priority</span>=<span class="value">"100"</span> /&gt;</span>
+</code></pre><p> yes, you feel free to replace CDN-hosted package, like that:</p>
+<pre><code><span class="tag">&lt;<span class="title">%@</span> <span class="attribute">Register</span> <span class="attribute">TagPrefix</span>=<span class="value">"dnn"</span> <span class="attribute">Namespace</span>=<span class="value">"DotNetNuke.Web.Client.ClientResourceManagement"</span> <span class="attribute">Assembly</span>=<span class="value">"DotNetNuke.Web.Client"</span> %&gt;</span>
+<span class="tag">&lt;<span class="title">dnn:DnnJsInclude</span> <span class="attribute">runat</span>=<span class="value">"server"</span> <span class="attribute">ID</span>=<span class="value">"jshighlight"</span> <span class="attribute">FilePath</span>=<span class="value">"http://cdn.bootcss.com/highlight.js/9.5.0/highlight.min.js"</span> <span class="attribute">Priority</span>=<span class="value">"100"</span> /&gt;</span>
+</code></pre><p> click “save chanegs”.</p>
+</li>
+<li><p>Click the customized.js to add any javascript, now we want to init Highlight.js to make it work:</p>
+<pre><code>jQuery(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">if</span> (<span class="keyword">typeof</span> hljs=== <span class="string">'undefined'</span>){}
+    <span class="keyword">else</span>
+        hljs.initHighlightingOnLoad();
+});
+</code></pre></li>
+<li><p>In the last, just make sure that you also register Highlight.js style, there is lots of way to complete, such as in the dnn skin or module style or dnn blog theme style. The core simplicity theme includes Highlight.js style in default, you may have a try.</p>
+</li>
+</ol>
+<p>BTW, the curent post is exactly writtten by Markdown and live demo for this JavaScript syntax highlighter :)</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="What_is_Highlight-js?">What is Highlight.js?</h1><p>Highlight.js is a syntax highlighter written in JavaScript. It works in the brow]]>
+    </summary>
+    
+      <category term="Markdown" scheme="http://sunblognuke.github.io/tags/Markdown/"/>
+    
+      <category term="DNN" scheme="http://sunblognuke.github.io/tags/DNN/"/>
+    
+      <category term="syntax highlighter" scheme="http://sunblognuke.github.io/tags/syntax-highlighter/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[打包DNN模块的简易技巧]]></title>
+    <link href="http://sunblognuke.github.io/2016/07/16/Some-tips-with-DNN-Manifest/"/>
+    <id>http://sunblognuke.github.io/2016/07/16/Some-tips-with-DNN-Manifest/</id>
+    <published>2016-07-16T12:16:07.000Z</published>
+    <updated>2019-07-14T05:51:20.103Z</updated>
+    <content type="html"><![CDATA[<p>对于稍微复杂些的DNN模块，参考Manifest清单文件的相关节点信息可简易打包最易管理的模块安装包。比如可参考大神Bruce Chapman提到的以下5点：</p>
+<p><a href="http://www.ifinity.com.au/Blog/EntryId/89/Top-5-DotNetNuke-Manifest-file-Module-Packaging-Tips" target="_blank" rel="external">Top 5 DotNetNuke Manifest file Module Packaging Tips</a></p>
+<ol>
+<li>Use Html in the File for better layout in the install pages</li>
+<li>Use a resources.zip file for all your files</li>
+<li>Use a html file for your Licence Agreement</li>
+<li>Make your module DNN 4.x and DNN5.x compatible by using two separate manifest files.</li>
+<li>Use the ‘sourceFileName’ attribute for your assembly files.</li>
+</ol>
+<p>其他官方文档可参考如下链接：</p>
+<p><a href="http://www.dnnsoftware.com/wiki/manifests" target="_blank" rel="external">Types of Manifests</a></p>
+<p><a href="http://www.dnnsoftware.com/docs/designers/extensions/dnn-manifest-schema.html" target="_blank" rel="external">The DNN Manifest Schema</a></p>
+<p>目前发现releasenotes这一节点只能这样用：</p>
+<pre><code><span class="tag">&lt;<span class="title">releaseNotes</span> <span class="attribute">src</span>=<span class="value">"Installation\ReleaseNotes\Release.07.03.00.txt"</span>&gt;</span><span class="tag">&lt;/<span class="title">releaseNotes</span>&gt;</span>
+</code></pre><p>错误的用法：</p>
+<pre><code><span class="tag">&lt;<span class="title">releaseNotes</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">releaseNote</span> <span class="attribute">src</span>=<span class="value">"Installation\ReleaseNotes\Release.07.03.00.txt"</span>/&gt;</span>
+<span class="tag">&lt;/<span class="title">releaseNotes</span>&gt;</span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>对于稍微复杂些的DNN模块，参考Manifest清单文件的相关节点信息可简易打包最易管理的模块安装包。比如可参考大神Bruce Chapman提到的以下5点：</p>
+<p><a href="http://www.ifinity.com.au/Blog/EntryId/89]]>
+    </summary>
+    
+      <category term="DNN" scheme="http://sunblognuke.github.io/tags/DNN/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[基于Django和Virtualenv搭建博客开发实战]]></title>
+    <link href="http://sunblognuke.github.io/2016/05/26/Blog-App-based-Django-with-Virtualenv/"/>
+    <id>http://sunblognuke.github.io/2016/05/26/Blog-App-based-Django-with-Virtualenv/</id>
+    <published>2016-05-26T07:32:45.000Z</published>
+    <updated>2019-07-14T05:51:20.045Z</updated>
+    <content type="html"><![CDATA[<h1 id="利用Virtualenv搭建Django环境">利用Virtualenv搭建Django环境</h1><ol>
+<li>确保安装Python3，请参照python2和python3共存win7的解决方案。</li>
+<li><p>创建虚拟环境, 创建目录py3env</p>
+<pre><code><span class="title">python3</span> -m venv py3env
+</code></pre></li>
+<li><p>定位到目录py3env\scripts并激活虚拟环境：</p>
+<pre><code>E:<span class="command">\virt</span>_env<span class="command">\py</span>3env<span class="command">\Scripts</span>&gt;activate
+(py3env) E:<span class="command">\virt</span>_env<span class="command">\py</span>3env<span class="command">\Scripts</span>&gt;
+</code></pre></li>
+<li><p>手动安装Django</p>
+<pre><code>pip install django==<span class="number">1.9</span><span class="number">.6</span>
+</code></pre><p> 或直接clone项目到本目录下E:\virt_env\py3env\Scripts&gt;并定位到项目目录下执行：</p>
+<pre><code>pip <span class="keyword">install</span> -r requirements.txt
+</code></pre><p> requirements.txt文件，主要用于搭建运行这个项目所需要的环境，一般包含项目所需的一些包的名称和版本之类的信息。</p>
+</li>
+</ol>
+<h1 id="Django基本命令">Django基本命令</h1><ol>
+<li><p>运行命令 python manage.py makemigrations 生成迁移文件</p>
+</li>
+<li><p>运行命令 python manage.py migrate 迁移数据库</p>
+</li>
+<li><p>运行命令 python manage.py createsuperuser 创建超级用户</p>
+</li>
+<li><p>运行命令 python manage.py runserver 启动开发服务器</p>
+</li>
+</ol>
+<h1 id="参考资源">参考资源</h1><p><a href="http://python.usyiyi.cn/django/index.html" target="_blank" rel="external">Django 1.8.2 文档</a><br><a href="http://www.ziqiangxuetang.com/django/django-tutorial.html" target="_blank" rel="external">Django 基础教程</a><br><a href="http://virtualenv-chinese-docs.readthedocs.io/en/latest/#id29" target="_blank" rel="external">Virtualenv官网文档</a><br><a href="http://foofish.net/blog/88/virtualenv" target="_blank" rel="external">Python Virtualenv 介绍</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="利用Virtualenv搭建Django环境">利用Virtualenv搭建Django环境</h1><ol>
+<li>确保安装Python3，请参照python2和python3共存win7的解决方案。</li>
+<li><p>创建虚拟环境, 创建目录py3en]]>
+    </summary>
+    
+      <category term="Python" scheme="http://sunblognuke.github.io/tags/Python/"/>
+    
+      <category term="Django" scheme="http://sunblognuke.github.io/tags/Django/"/>
+    
+      <category term="VirtualEnv" scheme="http://sunblognuke.github.io/tags/VirtualEnv/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
+  
+</feed>

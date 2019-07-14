@@ -1,0 +1,1242 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Baldwin&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Baldwin">
+    
+
+    
+    <meta name="description" content="Hacker是一个基于Github和Hexo的静态Blog，希望用简单而清晰的写作方式Markdown分享自己的心得体会。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Baldwin's Blog">
+<meta property="og:url" content="http://sunblognuke.github.io/index.html">
+<meta property="og:site_name" content="Baldwin's Blog">
+<meta property="og:description" content="Hacker是一个基于Github和Hexo的静态Blog，希望用简单而清晰的写作方式Markdown分享自己的心得体会。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Baldwin's Blog">
+<meta name="twitter:description" content="Hacker是一个基于Github和Hexo的静态Blog，希望用简单而清晰的写作方式Markdown分享自己的心得体会。">
+<meta name="twitter:creator" content="@sunblognuke">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Baldwin&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/author.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/author.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/author.png" alt="Baldwin&#39;s Blog" title="Baldwin&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Baldwin&#39;s Blog">Baldwin&#39;s Blog</a></h1>
+				<h2 class="blog-motto">Coding - Keep Calm and Carry On</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/archives">归档 | Archives</a></li>
+					
+						<li><a href="/about">关于 | About</a></li>
+					
+						<li><a href="/resume">简历 | Resume</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:sunblognuke.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/07/08/Notices-DNN9-Upgrade/" title="DNN9升级备忘" itemprop="url">DNN9升级备忘</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2019-07-08T03:23:58.000Z" itemprop="datePublished"> 发表于 2019-07-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>自从2005年开始接触DNN这一平台以来，一直持续关注它的发展和整个生态圈的趋势，起初的确参与了很多，国内圈子也的确掀起一股小小的追捧，然而好景不长，陆续续续大家没了激情，DNN CMS在国内犹如昙花一现，大家转而找其他的替代品，比如Orchard等。不过我一直算还在这个圈子混，官网的资讯也在持续关注中，期盼它能有更好的未来。近期针对DNN9的升级做些功课，期待这次有更强大的性能提升。</p>
+<h2 id="DNN9的最佳升级路径">DNN9的最佳升级路径</h2><p>关于DNN9升级的技术文章和最佳实践：</p>
+<ul>
+<li><a href="https://www.dnnsoftware.com/wiki/upgrading-dotnetnuke" target="_blank" rel="external">UPGRADING DOTNETNUKE</a></li>
+<li><a href="https://www.dnnsoftware.com/wiki/suggested-upgrade-path" target="_blank" rel="external">SUGGESTED UPGRADE PATH</a></li>
+<li><a href="https://www.dnnsoftware.com/community-blog/cid/155511/dnn-92-upgrade-what-you-need-to-know" target="_blank" rel="external">DNN 9.2 Upgrade What You Need to Know</a></li>
+<li><a href="https://www.dnnsoftware.com/wiki/dnn-8-breaking-changes" target="_blank" rel="external">DNN 8 BREAKING CHANGES</a></li>
+</ul>
+<p>此外还有一些小提示：</p>
+<ol>
+<li>可备份数据库文件db_name.bak,拷贝该备份文件到网站根目录下的App_Data文件夹里，重命名为db_name.resources</li>
+<li>创建一个app_offline.htm.exclude文件, 让其在你执行正式升级时生效（重命名为app_offline.htm）</li>
+<li>默认升级链接 <a href="http://MYWEBSITE/install/install.aspx?mode=upgrade" target="_blank" rel="external">http://MYWEBSITE/install/install.aspx?mode=upgrade</a></li>
+</ol>
+<h2 id="DNN7-3_升级到_DNN9-3">DNN7.3 升级到 DNN9.3</h2><ol>
+<li>FTP下载网站根目录wwwroot到本地，创建本地测试应用程序localhost/xx_name，检查应用目录的权限配置是否正确, 比如network service, iis_user等</li>
+<li>恢复数据库文件到测试应用，修改PortalAlias数据库表www.xx_name.com-&gt;localhost/xx_name</li>
+<li>检查web.config,修改connectionString数据库连接字符串,验证web.config是否有效，比如可能需要删除节点<rewrite>…</rewrite></li>
+<li>访问应用链接localhost/xx_name检验是否迁移到本地成功</li>
+</ol>
+<h2 id="其他关于DNN9的注意点">其他关于DNN9的注意点</h2><ul>
+<li><a href="https://www.chrishammond.com/Blog/itemId/2898/Problems-with-DNN-9-and-the-HTML-Editor-Manager" target="_blank" rel="external">Problems with DNN 9 and the HTML Editor Manager</a></li>
+<li><a href="https://www.chrishammond.com/Blog/itemId/2693/Dealing-with-the-DNN-Exceptions-table-in-your-DotN" target="_blank" rel="external">Dealing with the DNN Exceptions table in your DotNetNuke Database</a></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/CMS/">CMS</a><a href="/tags/DNN/">DNN</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/05/05/Andriod-Intsall-App-without-Google-Play-Store/" title="Android手机如何下载Google Play上的App" itemprop="url">Android手机如何下载Google Play上的App</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2019-05-05T06:23:58.000Z" itemprop="datePublished"> 发表于 2019-05-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>最近手头的华为Android手机越用越为臃肿，是不是提示需要清理内存及存储空间，DiskUsage这一App可以分析手机内存及SD卡包含的文件夹大小，以此来作为清理垃圾的依据也是不错，悲催的是DiskUsage只能在Google Play Store能安装，天朝的应用市场不够用了。故此有一下翻墙安装来源于Google Play Store的App这一曲线救国之道。</p>
+<h3 id="步骤如下:">步骤如下:</h3><ol>
+<li>浏览器打开google play store网站搜索某一应用：DiskUsage</li>
+<li>复制浏览器地址url：<a href="https://play.google.com/store/apps/details?id=com.google.android.diskusage" target="_blank" rel="external">https://play.google.com/store/apps/details?id=com.google.android.diskusage</a></li>
+<li>打开网址<a href="https://apps.evozi.com/apk-downloader/" target="_blank" rel="external">https://apps.evozi.com/apk-downloader/</a>，将其黏贴到网页的输入框中，并点击蓝色按钮【Generate Download Link】：</li>
+<li>等页面中出现绿色按钮点击它，直到下载完成。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/google-play-store-app.png" alt="download app from google play store"></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Android/">Android</a><a href="/tags/Mobile/">Mobile</a><a href="/tags/App/">App</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/04/26/Git-Transfer-repo/" title="Git迁移代码仓库实践" itemprop="url">Git迁移代码仓库实践</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-26T02:23:58.000Z" itemprop="datePublished"> 发表于 2019-04-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>最近有个新需求，鉴于Github已具备免费搭建私有仓库的功能，于是我们团队立即着手迁移部分项目到Github来（原本托管于Dropbox），目前效果良好。</p>
+<p>我们需要的原本的仓库包括所有记录都能迁移到新库上，一开始找到的方案都只能迁移master和tag分支，其他分支branch还要一个一个来，麻烦得很。后来找最终解决方案，迁移所有记录包括所有的分支、标签、日志，一个不少。</p>
+<h2 id="GIT迁移全库">GIT迁移全库</h2><p>主要使用如下四行命令，建议直接在命令行窗口执行，比如DOS或Powershell:</p>
+<pre><code>git clone --mirror &lt;URL <span class="keyword">to</span> my <span class="keyword">OLD</span> repo location&gt;        <span class="comment">//git clone --mirror http://<span class="label">xxxx.com/yyyy.git</span></span>
+cd &lt;<span class="keyword">New</span> directory <span class="keyword">where</span> your <span class="keyword">OLD</span> repo was cloned&gt;       <span class="comment">//cd yyyy.git</span>
+git remote <span class="keyword">set</span>-url origin &lt;URL <span class="keyword">to</span> my <span class="keyword">NEW</span> repo location&gt; <span class="comment">//git remote set-url origin https://github.com/youracount/yyyyNEW.git</span>
+git push -f origin 
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/DNN/">DNN</a><a href="/tags/Git/">Git</a><a href="/tags/GitHub/">GitHub</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/08/04/Docker-Jupyter-Notebook-for-Data-Analysis/" title="基于Docker容器化搭建Jupyter Notebook数据科研环境" itemprop="url">基于Docker容器化搭建Jupyter Notebook数据科研环境</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2018-08-04T02:23:58.000Z" itemprop="datePublished"> 发表于 2018-08-04</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>基于Docker隔离环境的方式，我们可以用于快速创建虚拟环境来隔离不同的Python和其他软件包版本，而不再需要漫长的逐个安装过程，这无疑降低数据科研的入门门槛。</p>
+<h2 id="Docker常用命令">Docker常用命令</h2><p>docker命令是你与Docker容器和镜像直接打交道所使用的主要命令。</p>
+<pre><code>docker   <span class="comment"># docker 命令帮助</span>
+
+Commands:
+    attach    Attach <span class="built_in">to</span> <span class="operator">a</span> running container                 <span class="comment"># 当前 shell 下 attach 连接指定运行镜像</span>
+    build     Build <span class="operator">an</span> image <span class="built_in">from</span> <span class="operator">a</span> Dockerfile              <span class="comment"># 通过 Dockerfile 定制镜像</span>
+    commit    Create <span class="operator">a</span> <span class="built_in">new</span> image based changes              <span class="comment"># 提交当前容器为新的镜像</span>
+    cp        Copy <span class="built_in">files</span>/<span class="built_in">folders</span> <span class="built_in">from</span> <span class="operator">the</span> containers filesystem <span class="built_in">to</span> <span class="operator">the</span> host path <span class="comment"># 从容器中拷贝指定文件或者目录到宿主机中</span>
+    <span class="built_in">create</span>    Create <span class="operator">a</span> <span class="built_in">new</span> container                        <span class="comment"># 创建一个新的容器，同 run，但不启动容器</span>
+    diff      Inspect changes <span class="command"><span class="keyword">on</span> <span class="title">a</span> <span class="title">container</span><span class="string">''</span><span class="title">s</span> <span class="title">filesystem</span>  # 查看 <span class="title">docker</span> 容器变化</span>
+    events    Get real <span class="built_in">time</span> events <span class="built_in">from</span> <span class="operator">the</span> server          <span class="comment"># 从 docker 服务获取容器实时事件</span>
+    exec      Run <span class="operator">a</span> <span class="command"><span class="keyword">command</span> <span class="title">in</span> <span class="title">an</span> <span class="title">existing</span> <span class="title">container</span>        # 在已存在的容器上运行命令</span>
+    export    Stream <span class="operator">the</span> contents <span class="operator">of</span> <span class="operator">a</span> container <span class="keyword">as</span> <span class="operator">a</span> tar archive <span class="comment"># 导出容器的内容流作为一个 tar 归档文件[对应 import ]</span>
+    history   Show <span class="operator">the</span> history <span class="operator">of</span> <span class="operator">an</span> image                  <span class="comment"># 展示一个镜像形成历史</span>
+    images    List images                                   <span class="comment"># 列出系统当前镜像</span>
+    import    Create <span class="operator">a</span> <span class="built_in">new</span> filesystem image <span class="built_in">from</span> <span class="operator">the</span> contents <span class="operator">of</span> <span class="operator">a</span> tarball  <span class="comment"># 从tar包中的内容创建一个新的文件系统映像[对应 export]</span>
+    info      Display <span class="keyword">system</span>-wide information               <span class="comment"># 显示系统相关信息</span>
+    inspect   Return low-level information <span class="command"><span class="keyword">on</span> <span class="title">a</span> <span class="title">container</span>   # 查看容器详细信息</span>
+    <span class="built_in">kill</span>      Kill <span class="operator">a</span> running container                      <span class="comment"># kill 指定 docker 容器</span>
+    <span class="built_in">load</span>      Load <span class="operator">an</span> image <span class="built_in">from</span> <span class="operator">a</span> tar archive              <span class="comment"># 从一个 tar 包中加载一个镜像[对应 save]</span>
+    login     Register <span class="operator">or</span> Login <span class="built_in">to</span> <span class="operator">the</span> docker registry server  <span class="comment"># 注册或者登陆一个 docker 源服务器</span>
+    logout    Log out <span class="built_in">from</span> <span class="operator">a</span> Docker registry server         <span class="comment"># 从当前 Docker registry 退出</span>
+    logs      Fetch <span class="operator">the</span> logs <span class="operator">of</span> <span class="operator">a</span> container                 <span class="comment"># 输出当前容器日志信息</span>
+    port      Lookup <span class="operator">the</span> public-facing port which is NAT-ed <span class="built_in">to</span> PRIVATE_PORT <span class="comment"># 查看映射端口对应的容器内部源端口</span>
+    pause     Pause all processes <span class="operator">within</span> <span class="operator">a</span> container        <span class="comment"># 暂停容器</span>
+    ps        List containers                               <span class="comment"># 列出容器列表</span>
+    pull      Pull <span class="operator">an</span> image <span class="operator">or</span> <span class="operator">a</span> repository <span class="built_in">from</span> <span class="operator">the</span> docker registry server <span class="comment"># 从docker镜像源服务器拉取指定镜像或者库镜像</span>
+    push      Push <span class="operator">an</span> image <span class="operator">or</span> <span class="operator">a</span> repository <span class="built_in">to</span> <span class="operator">the</span> docker registry server <span class="comment"># 推送指定镜像或者库镜像至docker源服务器</span>
+    restart   Restart <span class="operator">a</span> running container                   <span class="comment"># 重启运行的容器</span>
+    rm        Remove <span class="constant">one</span> <span class="operator">or</span> more containers                 <span class="comment"># 移除一个或者多个容器</span>
+    rmi       Remove <span class="constant">one</span> <span class="operator">or</span> more images                     <span class="comment"># 移除一个或多个镜像[无容器使用该镜像才可删除，否则需删除相关容器才可继续或 -f 强制删除]</span>
+    run       Run <span class="operator">a</span> <span class="command"><span class="keyword">command</span> <span class="title">in</span> <span class="title">a</span> <span class="title">new</span> <span class="title">container</span>              # 创建一个新的容器并运行一个命令</span>
+    save      Save <span class="operator">an</span> image <span class="built_in">to</span> <span class="operator">a</span> tar archive                <span class="comment"># 保存一个镜像为一个 tar 包[对应 load]</span>
+    search    Search <span class="keyword">for</span> <span class="operator">an</span> image <span class="command"><span class="keyword">on</span> <span class="title">the</span> <span class="title">Docker</span> <span class="title">Hub</span>         # 在 <span class="title">docker</span> <span class="title">hub</span> 中搜索镜像</span>
+    <span class="built_in">start</span>     Start <span class="operator">a</span> stopped containers                    <span class="comment"># 启动容器</span>
+    <span class="built_in">stop</span>      Stop <span class="operator">a</span> running containers                     <span class="comment"># 停止容器</span>
+    tag       Tag <span class="operator">an</span> image <span class="keyword">into</span> <span class="operator">a</span> repository                <span class="comment"># 给源中镜像打标签</span>
+    top       Lookup <span class="operator">the</span> running processes <span class="operator">of</span> <span class="operator">a</span> container   <span class="comment"># 查看容器中运行的进程信息</span>
+    unpause   Unpause <span class="operator">a</span> paused container                    <span class="comment"># 取消暂停容器</span>
+    <span class="built_in">version</span>   Show <span class="operator">the</span> docker <span class="built_in">version</span> information           <span class="comment"># 查看 docker 版本号</span>
+    <span class="built_in">wait</span>      Block <span class="keyword">until</span> <span class="operator">a</span> container stops, <span class="keyword">then</span> print its exit code   <span class="comment"># 截取容器停止时的退出状态值</span>
+</code></pre><p>docker exec 进入正在运行的容器</p>
+<pre><code><span class="label">docker</span> exec -<span class="keyword">it </span>db3 /<span class="keyword">bin/sh
+</span><span class="label">docker</span> exec -<span class="keyword">it </span>d48b21a7e439 /<span class="keyword">bin/sh
+</span># db3是后台容器的NAMES,d48b21a7e439是容器的进程ID, /<span class="keyword">bin/sh </span>是固定写法
+</code></pre><p>docker commit 封装新的镜像</p>
+<pre><code>docker <span class="operator"><span class="keyword">commit</span> dfg7xxxx wherein/ubuntu:v2
+docker <span class="keyword">commit</span> -a=<span class="string">"Baldwin Sun"</span> -<span class="keyword">m</span>=<span class="string">"fixed some issue"</span> dfg7xxxx wherein/ubuntu:v2
+# -a, <span class="comment">--author=""     Author (e.g., "John Hannibal Smith &lt;hannibal@a-team.com&gt;")</span>
+# -<span class="keyword">m</span>, <span class="comment">--message=""    Commit message</span>
+# -<span class="keyword">p</span>, <span class="comment">--pause=true    Pause container during commit</span>
+
+docker image #验证是否已生成新镜像</span>
+</code></pre><p>docker push 推送新镜像到Hub库</p>
+<pre><code><span class="label">docker</span> <span class="keyword">push </span>wherein/ubuntu:<span class="literal">v2</span>
+<span class="label">docker</span> inspect wherein/ubuntu #验证提交镜像信息
+</code></pre><p>docker 清理镜像和容器</p>
+<pre><code>删除容器: docker rm &lt;Container ID&gt;
+删除所有容器: docker rm $(docker ps -<span class="tag">a</span> -q)
+移除镜像: docker rmi &lt;Container ID&gt;
+移除所有镜像: docker rmi $(docker ps -<span class="tag">a</span> -q)
+</code></pre><p>Note: 在移除镜像前，你必须删除掉，所有依赖于该镜像的容器</p>
+<h2 id="参考链接：">参考链接：</h2>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/Pandas/">Pandas</a><a href="/tags/Docker/">Docker</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/06/07/Python-Data-Analysis-with-Pandas/" title="Python数据分析利器Pandas" itemprop="url">Python数据分析利器Pandas</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2018-06-07T02:23:58.000Z" itemprop="datePublished"> 发表于 2018-06-07</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>Python逐渐成为数据分析的中流砥柱，而Pandas、Numpy更无疑是数据分析必备的利器工具，最近就尝试把之前在Power Query实现的工具转化让Python来完成，以此对比两者的优劣势，顺带温习Python3的某些特性。</p>
+<h2 id="辅助工具_jupyter_notebook">辅助工具 jupyter notebook</h2><p>jupyter notebook</p>
+<h2 id="数据清洗案例">数据清洗案例</h2><pre><code># 清洗数据 参照<span class="name">Power</span> <span class="name">Query</span>的思路
+<span class="atom">import</span> <span class="atom">pandas</span> <span class="atom">as</span> <span class="atom">pd</span>
+<span class="atom">import</span> <span class="atom">numpy</span> <span class="atom">as</span> <span class="atom">np</span>
+
+<span class="name">DATA_DIR</span> = <span class="string">'E:/加班计算助手/'</span>
+<span class="atom">df</span> = <span class="atom">pd</span>.<span class="atom">read_excel</span>(<span class="name">DATA_DIR</span> + <span class="string">'Contact_sum.xlsx'</span>) #, <span class="atom">usecols</span>=<span class="string">'A:G'</span>)
+
+# <span class="atom">print</span>(<span class="atom">df</span>.<span class="atom">columns</span>)
+# <span class="atom">print</span>(<span class="atom">df</span>.<span class="atom">dtypes</span>)
+
+<span class="atom">df</span>[<span class="string">'年月'</span>]=<span class="atom">df</span>[<span class="string">'年月'</span>].<span class="atom">astype</span>(<span class="atom">str</span>) # 转化为字符类型
+<span class="atom">df</span>[<span class="string">'年月'</span>] = <span class="atom">df</span>[<span class="string">'年月'</span>].<span class="atom">apply</span>(<span class="atom">lambda</span> <span class="atom">x</span>:<span class="atom">x</span>[:-<span class="number">2</span>]) # 清洗数据, 把<span class="atom">float64</span>类型比如<span class="string">"201709.0"</span>转化为<span class="string">"201709"</span>
+
+<span class="atom">df_fixed</span> = <span class="atom">df</span>.<span class="atom">dropna</span>(<span class="atom">subset</span>=[<span class="string">'员工姓名'</span>, <span class="string">'员工编号'</span>], <span class="atom">how</span>=<span class="string">'any'</span>) # <span class="name">Define</span> <span class="atom">in</span> <span class="atom">which</span> <span class="atom">columns</span> <span class="atom">to</span> <span class="atom">look</span> <span class="atom">for</span> <span class="atom">missing</span> <span class="atom">values</span>.
+
+# 逆透视除了[<span class="string">'员工姓名'</span>, <span class="string">'员工编号'</span>]之外的列
+<span class="atom">df_fixed</span> = <span class="atom">df_fixed</span>.<span class="atom">melt</span>(<span class="atom">id_vars</span>=[<span class="string">'员工编号'</span>,<span class="string">'员工姓名'</span>,<span class="string">'年月'</span>],<span class="atom">var_name</span>=<span class="string">'具体日期'</span>, <span class="atom">value_name</span>=<span class="string">'加班小时'</span>)
+
+<span class="atom">df_fixed</span> = <span class="atom">df_fixed</span>.<span class="atom">dropna</span>(<span class="atom">subset</span>=[<span class="string">'加班小时'</span>], <span class="atom">how</span>=<span class="string">'any'</span>) # 再次过滤【加班小时】为空或<span class="name">NAN</span>的记录
+
+<span class="atom">df_fixed</span>[<span class="string">'具体日期'</span>] = <span class="atom">df_fixed</span>[<span class="string">'具体日期'</span>].<span class="atom">astype</span>(<span class="atom">str</span>)
+<span class="atom">df_fixed</span>[<span class="string">'具体日期'</span>] = <span class="atom">df_fixed</span>[<span class="string">'年月'</span>] + <span class="atom">df_fixed</span>[<span class="string">'具体日期'</span>].<span class="atom">apply</span>(<span class="atom">lambda</span> <span class="atom">x</span>:<span class="atom">x</span>.<span class="atom">zfill</span>(<span class="number">2</span>)) # 合并形成具体时间格式的字段
+
+<span class="atom">df_fixed</span>[<span class="string">'员工编号'</span>] = <span class="atom">df_fixed</span>[<span class="string">'员工编号'</span>].<span class="atom">astype</span>(<span class="atom">str</span>)
+<span class="atom">df_fixed</span>[<span class="string">'员工编号'</span>] = <span class="atom">df_fixed</span>[<span class="string">'员工编号'</span>].<span class="atom">apply</span>(<span class="atom">lambda</span> <span class="atom">x</span>:<span class="atom">x</span>.<span class="atom">zfill</span>(<span class="number">6</span>)) # 合并形成具体时间格式<span class="string">'20170901'</span>的字段
+
+<span class="atom">df_fixed</span> = <span class="atom">df_fixed</span>.<span class="atom">drop</span>(<span class="string">'年月'</span>,<span class="atom">axis</span>=<span class="number">1</span>) # 删除指定列“年月”
+<span class="atom">df_fixed</span> = <span class="atom">df_fixed</span>.<span class="atom">reset_index</span>(<span class="atom">drop</span>=<span class="name">True</span>) # 重置索引
+<span class="atom">df_fixed</span>
+</code></pre><h2 id="参考链接：">参考链接：</h2><p>– <a href="http://xx.com" target="_blank" rel="external">xxx</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/Pandas/">Pandas</a><a href="/tags/Power-Query/">Power Query</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/08/31/Excel-Learning/" title="Excel知识点集锦" itemprop="url">Excel知识点集锦</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2017-08-31T00:23:58.000Z" itemprop="datePublished"> 发表于 2017-08-31</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="消除关联动态查询警告">消除关联动态查询警告</h2><p>如果在PQ查询中遇到</p>
+<blockquote>
+<p>Formula.Firewall: 查询”xx”(步骤”xx”) 将引用其他查询或步骤，因此可能不会直接访问数据源。请重新生成此数据组合。</p>
+</blockquote>
+<p>这样的问题，那是文件的隐私设置级别的原因：</p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/bi01.png" alt="查询警告"></p>
+<p>如此这般设置即可。</p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/bi02.png" alt="隐私设置"></p>
+<h2 id="补齐位数">补齐位数</h2><p>在做数据处理的时候经常要把表格内的数字处理XX位的一组数字。但是原始数据的位数不够则需要使用0来补充。手输是不可能的，使用自动补零的方法应该不错。</p>
+<h3 id="步骤或方法">步骤或方法</h3><ol>
+<li>选择你要补零的单元格点右键再选择进入设置单元格格式。</li>
+<li>进入设置单元格格式的界面，在数字选项下点击自定义，类型中找到G/通用格式，然后在上面的方框内输入你要多少位置补零就输入多少个零，最后点击确定。</li>
+</ol>
+<p><strong>参考链接：</strong><a href="https://jingyan.baidu.com/article/c843ea0b7d267177921e4a4b.html" target="_blank" rel="external">excel表格位数不够自动补0的方法</a></p>
+<h2 id="PowerQuery动态汇总文件夹下的多个Excel文件">PowerQuery动态汇总文件夹下的多个Excel文件</h2><p><strong>参考链接：</strong></p>
+<p><a href="https://zhuanlan.zhihu.com/p/26164792" target="_blank" rel="external">用PowerQuery动态汇总文件夹下的多个Excel文件（支持动态增删自动更新）</a></p>
+<p><a href="http://news.51cto.com/art/201612/524241.htm" target="_blank" rel="external">如何使用Power Query动态汇总文件夹下多个Excel文件</a></p>
+<h2 id="PowerQuery_补齐位数">PowerQuery 补齐位数</h2><p>比如编号或月份默认是1，而你需要的显示是类似”01”效果。</p>
+<h3 id="步骤或方法-1">步骤或方法</h3><p>新增一自定义列([Month]为原始列)，套用以下公式即可:</p>
+<pre><code>Text.<span class="function"><span class="title">PadStart</span><span class="params">(Text.From([Month])</span></span>,<span class="number">2</span>,<span class="string">"0"</span>)
+</code></pre><h2 id="PowerQuery_分组合并同类项">PowerQuery 分组合并同类项</h2><p>比如某一列”课程”可能是”初级班”、”中级班”、”高级班”，而我们需要分组合并看看总共都参与了哪些班，最终的结果可能类似于”初级班、中级班、高级班”。</p>
+<h3 id="步骤或方法-2">步骤或方法</h3><p>分组并求和”课程”这一列，无疑应该是报错。修改函数，将分组操作生成公式中的</p>
+<pre><code>List.<span class="function"><span class="title">Sum</span><span class="params">([课程])</span></span>
+</code></pre><p>修改为</p>
+<pre><code>Text.<span class="function"><span class="title">Combine</span><span class="params">([课程], <span class="string">"、"</span>)</span></span>
+</code></pre><p>另外一种方法：</p>
+<p><a href="https://www.powerquery.training/portfolio/group-summarize-data/" target="_blank" rel="external">Group or Summarize Data in Excel with Power Query</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/信息化/">信息化</a><a href="/tags/BI/">BI</a><a href="/tags/Office/">Office</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/07/21/OA-Scheduled-Task/" title="通达OA定制开发定时任务" itemprop="url">通达OA定制开发定时任务</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2017-07-21T10:23:58.000Z" itemprop="datePublished"> 发表于 2017-07-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>任何一个系统都不可能把全部信息化覆盖完全，不可避免地，不同业务部门需要因地制材选型更合适的、更专业的系统。由此信息孤岛的形成也是必然的结果。随着信息化系统的落地和完善，信息共享、系统集成也是大势所趋。基础信息同步就是系统集成的第一步骤。<br>在此分享如何在通达OA二次开发一个定时同步任务 - 基础组织架构、人员信息的同步。</p>
+<h2 id="开发步骤">开发步骤</h2><h3 id="代码开发">代码开发</h3><p>整合第三方应用系统时，由于系统默认推荐使用IE兼容模式，若要用户每次都点击由极速模式切换为兼容模式，用户体验极其不好用。</p>
+<h3 id="安装部署">安装部署</h3><p>权限分配：TMD，OA的缓存能整死人。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/信息化/">信息化</a><a href="/tags/通达OA/">通达OA</a><a href="/tags/MYOA/">MYOA</a><a href="/tags/系统集成/">系统集成</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/07/18/OA-Trick/" title="定制开发通达OA平台" itemprop="url">定制开发通达OA平台</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2017-07-18T02:23:58.000Z" itemprop="datePublished"> 发表于 2017-07-18</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>总体来说，通达OA的工作流的确让信息化迈进了一个新的台阶，不过精细度和扩展性依旧很弱，故此改造和二次开发无可避免。在此列举一些案例：</p>
+<h2 id="OA精灵窗口默认启用兼容模式">OA精灵窗口默认启用兼容模式</h2><h3 id="需求">需求</h3><p>整合第三方应用系统时，由于系统默认推荐使用IE兼容模式，若要用户每次都点击由极速模式切换为兼容模式，用户体验极其不好用。</p>
+<h3 id="解决方法">解决方法</h3><p>打开安装目录比如D:\MYOA\webroot\inc文件夹下的url_config.ini 文件。</p>
+<p>在文件末行增加 在后面加一行/general/erp/保存，重新登录OA精灵，凡是链接或调用该目录erp下的文件默认打开就是IE内核方式，遂满足用户的定制需求。</p>
+<h2 id="OA精灵打开定制大小的窗口">OA精灵打开定制大小的窗口</h2><h3 id="需求-1">需求</h3><p>整合第三方应用系统时，默认窗口有时不能满足需求，比如内容比较多的应用门户展示。</p>
+<h3 id="解决方法-1">解决方法</h3><p>在弹出的窗体调用的文件里，比如ssologin.php或<a href="http://xx.xx.xx.ip/client/login.jsp，加入如下JS语句：" target="_blank" rel="external">http://xx.xx.xx.ip/client/login.jsp，加入如下JS语句：</a></p>
+<pre><code><span class="tag">&lt;<span class="title">script</span> <span class="attribute">Language</span>=<span class="value">"javascript"</span>&gt;</span><span class="javascript">
+<span class="comment">//如果从OA精灵打开，则打开指定尺寸w/h大小的窗口</span>
+<span class="keyword">if</span>(<span class="built_in">window</span>.external &amp;&amp; <span class="keyword">typeof</span> <span class="built_in">window</span>.external.OA_SMS != <span class="string">'undefined'</span>)
+{        
+    <span class="keyword">var</span> h = <span class="built_in">Math</span>.min(<span class="number">1024</span>, screen.availHeight - <span class="number">180</span>),
+        w = <span class="built_in">Math</span>.min(<span class="number">1690</span>, screen.availWidth - <span class="number">180</span>);
+
+    <span class="built_in">window</span>.external.OA_SMS(w, h, <span class="string">"SET_SIZE"</span>);
+}
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+</code></pre><p>以上语句，使得OA精灵弹出的窗体的尺寸能得到正确控制，以上语句最好放到JS其他编码的前面，以上语句对各类内核浏览器的WEB状态的显示无任何影响。</p>
+<p>参考链接：<a href="http://club.tongda2000.com/forum.php?mod=viewthread&amp;tid=16723&amp;extra=&amp;page=1" target="_blank" rel="external">http://club.tongda2000.com/forum.php?mod=viewthread&amp;tid=16723&amp;extra=&amp;page=1</a></p>
+<h2 id="设置列表控件不可输入">设置列表控件不可输入</h2><h3 id="需求-2">需求</h3><p>一旦列表控件绑定数据源，为了保证数据的正确性，禁止用户输入、让用户只能选择无疑是最便捷的方式。可惜目前为止通达OA依然没有实现这一功能，错误数据随处可见，用户体验极其糟糕。</p>
+<h3 id="解决方法-2">解决方法</h3><p>设计表单时添加辅助脚本JS来在客户端强制验证：</p>
+<pre><code>window.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ 
+  jQuery(<span class="string">'#LISTVIEW_DATA_99 input.ConcelBigInput'</span>).<span class="keyword">each</span>(<span class="function"><span class="keyword">function</span><span class="params">(i)</span></span>{
+    jQuery(<span class="keyword">this</span>).keydown(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+      alert(<span class="string">"禁止输入，请选择"</span>); <span class="comment">//attr('readonly','readonly');</span>
+      jQuery(<span class="keyword">this</span>).val(<span class="string">''</span>);
+    });
+  });
+};
+</code></pre><p><strong>注意：</strong>不能用jQuery(document).ready,因为你读取不到动态生成列表控件的TR;不能用attr(‘readonly’,’readonly’)方式，因为这样你无法把选择后的值赋值到列表的输入框里。</p>
+<h2 id="列表控件编辑时样式撑大覆盖整个页面">列表控件编辑时样式撑大覆盖整个页面</h2><h3 id="问题截图">问题截图</h3><p><a href="http://114.55.1.254/forum.php?mod=viewthread&amp;tid=26385&amp;extra=page%3D1" target="_blank" rel="external"></a></p>
+<p><img src="http://114.55.1.254/forum.php?mod=attachment&amp;aid=MTUxOTJ8ZDQyYTE2ZmR8MTQ5NjMwNDc3M3wwfDI2Mzg1&amp;nothumb=yes" alt=""></p>
+<h3 id="解决方法-3">解决方法</h3><p>设计表单时添加辅助CSS样式如下：</p>
+<pre><code><span class="tag">table</span><span class="class">.LIST_VIEW</span><span class="rules">{<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">100%</span></span></span>;}</span>
+<span class="tag">tr</span><span class="class">.LIST_VIEW_HEADER</span> <span class="tag">td</span><span class="rules">{<span class="rule"><span class="attribute">padding</span>:<span class="value"><span class="number">10px</span> <span class="number">2px</span></span></span>;}</span>
+<span class="tag">table</span><span class="class">.LIST_VIEW</span> <span class="tag">td</span> <span class="tag">input</span><span class="rules">{<span class="rule"><span class="attribute">padding</span>:<span class="value"><span class="number">5px</span> <span class="number">2px</span></span></span>;<span class="rule"><span class="attribute">text-align</span>:<span class="value">center</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">100%</span></span></span>;}</span>
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/信息化/">信息化</a><a href="/tags/通达OA/">通达OA</a><a href="/tags/MYOA/">MYOA</a><a href="/tags/工作流/">工作流</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/07/17/OA-2017-Features/" title="通达OA 2017更新的功能初尝试" itemprop="url">通达OA 2017更新的功能初尝试</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2017-07-17T02:23:58.000Z" itemprop="datePublished"> 发表于 2017-07-17</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>随着办公平台的陆续深入使用，通达OA的软肋、不便捷性（移动化方面）、可扩展性（比如搭建子系统和整合应用）日趋明显，预想今年能把通达OA替换其他平台的办公OA，比如泛微OA、致远OA等等。不过涉及预算和变更带来的风险，并核实通达OA 2017的确发布了一些新功能的尝试和平台设想的构架，包括应用中心和流程中心是很值得期待的，让我跃跃欲试，很想把生产在用的OA平台升级到这个版本2017。不过冷静下来，还得等待稳定的版本再做定夺。</p>
+<p>期间，我简单尝试搭建一个免费20人用户的测试版本来验证2017是否能够符合我们公司业务需求的想法。在此分享一些用户和思路：</p>
+<h1 id="应用中心的删除和修改功能">应用中心的删除和修改功能</h1><p>若新应用启用了设定的流程，则删除和修改只能在流程中心的《我的工作》来做修改和删除。反之，可通过应用设计界面“是否停用流程”设置即可直接在应用中心的记录列表来操作修改和删除。</p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/OA_AppCenter_delete.png" alt="应用中心-记录删除和修改"></p>
+<p>参考链接：</p>
+<p><a href="http://club.tongda2000.com/forum.php?mod=viewthread&amp;tid=34931&amp;page=1#pid118530" target="_blank" rel="external">http://club.tongda2000.com/forum.php?mod=viewthread&amp;tid=34931&amp;page=1#pid118530</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/信息化/">信息化</a><a href="/tags/通达OA/">通达OA</a><a href="/tags/MYOA/">MYOA</a><a href="/tags/应用中心/">应用中心</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/05/13/OA-Update-Troubleboot/" title="通达OA 2015升级注意事项" itemprop="url">通达OA 2015升级注意事项</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2017-05-13T02:23:58.000Z" itemprop="datePublished"> 发表于 2017-05-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>通达OA 2017已发布升级版本，公司有意向想升级到最新版本。故此在临时服务器上搭建测试环境。过程中碰到如下问题，记录并包括解决方案：</p>
+<ol>
+<li>停止OA所有服务并退出Monitor.exe.</li>
+<li>拷贝MYOA根目录下的大部分文件夹，可除去bak, attach等目录（这些文件都很大，可升级后慢慢迁移）。</li>
+<li>双机bin目录下的autoconfig.exe配置新环境。</li>
+</ol>
+<h2 id="office_redis服务不能启动">office_redis服务不能启动</h2><h3 id="可能原因：">可能原因：</h3><p>1、进行过替换bin目录的操作，替换前后两个bin目录对应的OA的安装路径不一致导致的。</p>
+<p>2、myoa\attach下缺少redis_data目录或redis_data\heap目录或redis_data目录下的aof文件损坏导致。</p>
+<h3 id="解决方法：">解决方法：</h3><p>1、记事本打开myoa\bin\redis.windows.conf，按盘符搜索，修改以下几处对应的路径：</p>
+<p>1）logfile D:/MYOA/logs/redis.log</p>
+<p>2）dir D:/MYOA/attach/redis_data</p>
+<p>3）heapdir D:/MYOA/attach/redis_data/heap</p>
+<p>2、从备份的myoa\attach中拷贝redis_data目录恢复或者把缺失的目录手动创建上，若目录都在，属于aof文件损坏导致，则将该文件重命名一下，再重启服务即可。</p>
+<p>我们的问题就是缺失attach目录，故此我们新建并补齐这一目录即可把office_redis服务正常运行起来。</p>
+<h2 id="Office_Web服务不能启动">Office_Web服务不能启动</h2><p>从log日志显示2367端口被占用：服务启动失败, 侦听线程创建不成功,端口 2367 被占用。</p>
+<h3 id="解决方法：-1">解决方法：</h3><p>打开OA的MYSQL数据执行语句：</p>
+<pre><code><span class="operator"><span class="keyword">update</span> sys_para <span class="keyword">set</span> PARA_VALUE=<span class="string">'2368'</span> <span class="keyword">where</span> PARA_NAME= <span class="string">'WEB_SVC_PORT'</span>;</span>
+</code></pre><p>改一下端口2368或其他端口直到可以运行为止。</p>
+<h2 id="参考链接：">参考链接：</h2><p>– <a href="http://support.tongda2000.com/kb11019070/" target="_blank" rel="external">如何解决office_redis服务不能启动的问题？</a><br>– <a href="http://club.tongda2000.com/forum.php?mod=viewthread&amp;tid=26282" target="_blank" rel="external">Office_Web服务启动不了，log日志显示2367端口被占用？</a></p>
+<h2 id="批量更新用户权限">批量更新用户权限</h2><p>禁止OA登录，禁止手机登录，禁止使用即时通讯（资源有限）：</p>
+<pre><code>UPDATE user SET NOT_LOGIN=<span class="number">1</span>, NOT_MOBILE_LOGIN=<span class="number">1</span>, IM_RANGE=<span class="number">2</span> WHERE DEPT_ID=<span class="number">0</span>
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/信息化/">信息化</a><a href="/tags/通达OA/">通达OA</a><a href="/tags/MYOA/">MYOA</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+  </nav>
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Blog/" title="Blog">Blog<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Dev/" title="Dev">Dev<sup>20</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Notes/" title="Notes">Notes<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Photography/" title="Photography">Photography<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Resources/" title="Resources">Resources<sup>16</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Startup/" title="Startup">Startup<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Python/" title="Python">Python<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNN/" title="DNN">DNN<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/信息化/" title="信息化">信息化<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CMS/" title="CMS">CMS<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MYOA/" title="MYOA">MYOA<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/通达OA/" title="通达OA">通达OA<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Pandas/" title="Pandas">Pandas<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNN8/" title="DNN8">DNN8<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Vagrant/" title="Vagrant">Vagrant<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Programmers/" title="Programmers">Programmers<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Network/" title="Network">Network<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Baby/" title="Baby">Baby<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+    <p class="asidetitle">近期文章</p>
+    <div class="linkslist clearfix">
+		<ul class=""><li class=""><a href="/2019/07/08/Notices-DNN9-Upgrade/">DNN9升级备忘</a></li><li class=""><a href="/2019/05/05/Andriod-Intsall-App-without-Google-Play-Store/">Android手机如何下载Google Play上的App</a></li><li class=""><a href="/2019/04/26/Git-Transfer-repo/">Git迁移代码仓库实践</a></li><li class=""><a href="/2018/08/04/Docker-Jupyter-Notebook-for-Data-Analysis/">基于Docker容器化搭建Jupyter Notebook数据科研环境</a></li><li class=""><a href="/2018/06/07/Python-Data-Analysis-with-Pandas/">Python数据分析利器Pandas</a></li><li class=""><a href="/2017/08/31/Excel-Learning/">Excel知识点集锦</a></li></ul>
+	</div>
+</div>
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.sunblognuke.com" target="_blank" title=" 一个牛哄哄的DNN模块">SunBlogNuke</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://dnnsoftware.com" target="_blank" title=" DNN官方网站">DNN官网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://zhihu.com" target="_blank" title=" 一个神奇的网站">知乎</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wowubuntu.com/markdown/" target="_blank" title=" Markdown简明语法目录">Markdown</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m Baldwin Sun in SunBlogNuke.com. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/sunblognuke" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/sunblognuke" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		
+		<a href="https://www.douban.com/people/sunblognuke" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		
+		
+		<a href="mailto:dnnsun@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Baldwin">Baldwin</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox({
+      'transitionIn'  : 'elastic',
+      'transitionOut' : 'elastic',
+    });
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+<!-- Swiftype_search Begin -->
+
+<!-- Swiftype_search End -->
+
+  </body>
+ </html>

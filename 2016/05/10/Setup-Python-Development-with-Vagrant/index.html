@@ -1,0 +1,706 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>基于Vagrant搭建全栈式的Python开发环境 | Baldwin&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Baldwin">
+    
+
+    
+    <meta name="description" content="What is Vagrant?vagrant是建立在虚拟机基础上的虚拟环境管理工具。可用于快速创建基于VirtualBox、VMware、AWS的虚拟机，提供易于配置，重复性好，便携式的工作环境。也可以和puppet，chef结合，实现虚拟机管理的自动化。
+对于前提——虚拟机，官方推荐使用VirtualBox，因为免费/容易获取/支持各平台/vagrant内嵌。
+对于被管理的对象——虚拟环境，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Vagrant搭建全栈式的Python开发环境">
+<meta property="og:url" content="http://sunblognuke.github.io/2016/05/10/Setup-Python-Development-with-Vagrant/index.html">
+<meta property="og:site_name" content="Baldwin's Blog">
+<meta property="og:description" content="What is Vagrant?vagrant是建立在虚拟机基础上的虚拟环境管理工具。可用于快速创建基于VirtualBox、VMware、AWS的虚拟机，提供易于配置，重复性好，便携式的工作环境。也可以和puppet，chef结合，实现虚拟机管理的自动化。
+对于前提——虚拟机，官方推荐使用VirtualBox，因为免费/容易获取/支持各平台/vagrant内嵌。
+对于被管理的对象——虚拟环境，">
+<meta property="og:image" content="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/vagrant.png">
+<meta property="og:updated_time" content="2019-07-14T05:51:20.100Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于Vagrant搭建全栈式的Python开发环境">
+<meta name="twitter:description" content="What is Vagrant?vagrant是建立在虚拟机基础上的虚拟环境管理工具。可用于快速创建基于VirtualBox、VMware、AWS的虚拟机，提供易于配置，重复性好，便携式的工作环境。也可以和puppet，chef结合，实现虚拟机管理的自动化。
+对于前提——虚拟机，官方推荐使用VirtualBox，因为免费/容易获取/支持各平台/vagrant内嵌。
+对于被管理的对象——虚拟环境，">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/vagrant.png">
+<meta name="twitter:creator" content="@sunblognuke">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Baldwin&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/author.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/author.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/author.png" alt="Baldwin&#39;s Blog" title="Baldwin&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Baldwin&#39;s Blog">Baldwin&#39;s Blog</a></h1>
+				<h2 class="blog-motto">Coding - Keep Calm and Carry On</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/archives">归档 | Archives</a></li>
+					
+						<li><a href="/about">关于 | About</a></li>
+					
+						<li><a href="/resume">简历 | Resume</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:sunblognuke.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/05/10/Setup-Python-Development-with-Vagrant/" title="基于Vagrant搭建全栈式的Python开发环境" itemprop="url">基于Vagrant搭建全栈式的Python开发环境</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-05-10T02:14:35.000Z" itemprop="datePublished"> 发表于 2016-05-10</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What_is_Vagrant?"><span class="toc-number">1.</span> <span class="toc-text">What is Vagrant?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vagrant安装"><span class="toc-number">2.</span> <span class="toc-text">vagrant安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vagrant基本命令行"><span class="toc-number">3.</span> <span class="toc-text">vagrant基本命令行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vagrantfile基本配置文件详解"><span class="toc-number">4.</span> <span class="toc-text">Vagrantfile基本配置文件详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装pip和virtualenv"><span class="toc-number">5.</span> <span class="toc-text">Ubuntu安装pip和virtualenv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装git"><span class="toc-number">6.</span> <span class="toc-text">Ubuntu安装git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装Web-py"><span class="toc-number">7.</span> <span class="toc-text">Ubuntu安装Web.py</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装Flask"><span class="toc-number">8.</span> <span class="toc-text">Ubuntu安装Flask</span></a></li></ol>
+		
+		</div>
+		
+		<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/vagrant.png" alt="基于Vagrant搭建全栈式的Python开发环境"></p>
+<h2 id="What_is_Vagrant?">What is Vagrant?</h2><p>vagrant是建立在虚拟机基础上的虚拟环境管理工具。可用于快速创建基于VirtualBox、VMware、AWS的虚拟机，提供易于配置，重复性好，便携式的工作环境。也可以和puppet，chef结合，实现虚拟机管理的自动化。</p>
+<p>对于前提——虚拟机，官方推荐使用VirtualBox，因为免费/容易获取/支持各平台/vagrant内嵌。</p>
+<p>对于被管理的对象——虚拟环境，vagrant就是为了避免创建虚拟机繁琐的过程而出现的，它将一个虚拟环境封装为一个基础镜像，并给了一个生动的名字——box，所以这里的虚拟环境就是box。而管理，也就是添加，使用，销毁这些操作了。</p>
+<h2 id="vagrant安装">vagrant安装</h2><p><a href="https://www.vagrantup.com" target="_blank" rel="external">https://www.vagrantup.com</a></p>
+<p><a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="external">https://www.virtualbox.org/wiki/Downloads</a></p>
+<h2 id="vagrant基本命令行">vagrant基本命令行</h2><ol>
+<li><p>vagrant init</p>
+<p> 一个普通的目录要成为vagrant可用的目录，需要初始化一下。初始化之后可以发现在目录下多了一个Vagrantfile文件，查看此文件，发现有很多被注释的配置示例，请参照《Vagrantfile基本配置文件详解》修改。</p>
+</li>
+<li><p>vagrant box add</p>
+<p> 目前我们只是拥有一个vagrant可用的目录。下一步自然是需要一个虚拟环境，在box列表中没有所需的虚拟环境时可以这么做：HashiCorp’s Atlas box catalog里聚集了各种可用的box，进入挑选一番，比如说看中了ubuntu/trusty64，在终端运行vagrant box add ubuntu/trusty64，vagrant会从服务器下载ubuntu/trusty64并添加进box列表，可用vagrant box list查看。当然也可以手动将box下载至本地，再添加vagrant box add boxname ~/box/ubuntu/trusty64。一般建议执行本地添加box。</p>
+</li>
+<li><p>vagrant up</p>
+<p> 一切就绪，启动虚拟环境，打开virtual box可以发现该虚拟机已启动。</p>
+</li>
+<li><p>vagrant ssh</p>
+<p> 以ssh登录虚拟环境，OK，已进入box，之后就可以通过终端在你的虚拟环境里做任何事情了</p>
+</li>
+<li><p>vagrant reload</p>
+<p> 重新加载当前虚拟环境。如果你修改了vagrantfile配置项后，一般需要执行此操作来更新起效。</p>
+</li>
+<li><p>vagrant halt</p>
+<p> 挂起，顾名思义，关闭当前虚拟环境。</p>
+</li>
+<li><p>vagrant destroy</p>
+<p> 彻底销毁当前虚拟环境。慎用。</p>
+</li>
+<li><p>vagrant package</p>
+<p> 可对当前虚拟环境打个包，不仅能存下当前环境，还能随身带随时用。其他用户只要添加这个box，用其初始化自己的开发目录就能得到一个一模一样的虚拟开发环境了。</p>
+</li>
+<li><p>vagrant box remove virtualbox_name</p>
+<p> 删除本地指定名称的box，可通过vagrant box list得到当前所有存在的box名称里列表。</p>
+</li>
+</ol>
+<h2 id="Vagrantfile基本配置文件详解">Vagrantfile基本配置文件详解</h2><p>Vagrant使用Ruby开发，所以它的配置语法也是Ruby的。<br>修改完Vagrantfile配置后，必须用vagrant reload重启VM后，配置才能生效。</p>
+<ol>
+<li><p>配置基本说明</p>
+<pre><code>Vagrant.configure(<span class="number">2</span>) <span class="keyword">do</span> |config|
+<span class="preprocessor">#......</span>
+end
+</code></pre><p> configure(“2”)描述的是使用Vagrant 2.0.x配置方式。<br> Vagrant 1.0.x的配置方式为:Vagrant::COnfig.run do |config| …</p>
+</li>
+<li><p>box设置</p>
+<pre><code>config<span class="class">.vm</span><span class="class">.box</span> = <span class="string">"boxIdentity"</span>
+</code></pre><p> 配置Vagrant要去启用哪个box作为系统</p>
+</li>
+<li><p>hostname设置</p>
+<pre><code>config<span class="class">.vm</span><span class="class">.hostname</span> = <span class="string">"go-app"</span>
+</code></pre><p> host用于识别虚拟主机。特别在有多台虚拟机时，务必进行设置。</p>
+</li>
+<li><p>网络设置</p>
+<p> Vagrant有两种方式进行网络连接.<br> (1)host-only主机模式，意思是主机与虚拟机之间的网络互访。其他人访问不到你的虚拟机。<br> (2)bridge桥接模式，此模式下VM如同局域网中的一台独立的直接虚拟机，可以被其他机器访问。</p>
+<pre><code><span class="tag">config</span><span class="class">.vm</span><span class="class">.network</span>: <span class="tag">private_network</span>, <span class="tag">ip</span>: "192<span class="class">.168</span><span class="class">.33</span><span class="class">.11</span>"
+</code></pre><p> 这里设置为host-only模式，且虚拟机ip设置为”192.168.33.11”</p>
+</li>
+<li><p>端口转发</p>
+<p> Vagrant会默认初始化一个端口映射为guest:22, host:2222 也就是说客户机的22端口，将被映射到宿主机的2222端口</p>
+<pre><code>config.vm.<span class="string">network:</span> forwarded_port, <span class="string">guest:</span> <span class="number">8080</span>, <span class="string">host:</span> <span class="number">5000</span>
+</code></pre><p> 而以上设置将主机上的5000端口forward到虚拟机的8080端口上。</p>
+<p> <strong>注意:</strong>linux在开启1024（不含1024）之前端口时是需要root权限的。所以一般建议在虚拟机上分配1024以上的端口。</p>
+</li>
+<li><p>同步目录</p>
+<p> 除了默认的/vagrant同步目录外，还可以设置额外的同步目录:</p>
+<pre><code>config<span class="class">.vm</span><span class="class">.synced_folder</span> <span class="string">"d:/local/dir"</span>, <span class="string">"/vagrant_data/"</span>
+</code></pre><p> 第一个参数是本地目录，第二个参数为虚拟机目录。</p>
+</li>
+</ol>
+<h2 id="Ubuntu安装pip和virtualenv">Ubuntu安装pip和virtualenv</h2><pre><code>$ sudo apt-get <span class="operator"><span class="keyword">install</span> python-pip python-dev <span class="keyword">build</span>-essential
+$ sudo pip <span class="keyword">install</span> <span class="comment">--upgrade pip</span>
+$ sudo pip <span class="keyword">install</span> <span class="comment">--upgrade virtualenv</span></span>
+</code></pre><h2 id="Ubuntu安装git">Ubuntu安装git</h2><pre><code>sudo apt-<span class="keyword">get</span> install git
+</code></pre><h2 id="Ubuntu安装Web-py">Ubuntu安装Web.py</h2><pre><code><span class="tag">sudo</span> <span class="tag">easy_install</span> <span class="tag">web</span><span class="class">.py</span>
+</code></pre><p>执行完之后进入pytohn解释器输入</p>
+<pre><code><span class="prompt">&gt;&gt;</span>&gt;import web
+<span class="prompt">&gt;&gt;</span>&gt;
+</code></pre><p>如果没有出现错误提示（如上）那就证明安装配置成功了。</p>
+<h2 id="Ubuntu安装Flask">Ubuntu安装Flask</h2><pre><code>sudo apt-<span class="built_in">get</span> install <span class="keyword">python</span>-flask
+</code></pre><p><strong>注意：</strong>在虚拟机中，创建 Flask App 的时候，修改调用run()的方法使服务器公开可用，让操作系统监听所有公网 IP。不然你没法在主机访问到虚拟机对的web app。</p>
+<pre><code>app.<span class="function"><span class="title">run</span><span class="params">(host=<span class="string">'0.0.0.0'</span>)</span></span>
+</code></pre><p>详细代码如下:</p>
+<pre><code><span class="keyword">from</span> flask <span class="keyword">import</span> Flask  
+app = Flask(__name__)  
+
+<span class="decorator">@app.route('/')  </span>
+<span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span>  
+    <span class="keyword">return</span> <span class="string">'Hello World!'</span>  
+
+<span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:  
+    app.run(<span class="string">"0.0.0.0"</span>, debug=<span class="keyword">True</span>)
+</code></pre>
+		
+<style type="text/css">
+.article-content hr {
+  text-align: center;
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+}
+.article-content hr:after {
+  content: 'EOF';
+  display: inline-block;
+  position: relative;
+  top: -13px;
+  padding: 0 10px;
+  background: #fafafa;
+  color: #8c8b8b;
+}
+</style>
+    
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/Ubuntu/">Ubuntu</a><a href="/tags/Vagrant/">Vagrant</a><a href="/tags/Virtualbox/">Virtualbox</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://sunblognuke.github.io/2016/05/10/Setup-Python-Development-with-Vagrant/" data-title="基于Vagrant搭建全栈式的Python开发环境 | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/05/26/Blog-App-based-Django-with-Virtualenv/" title="基于Django和Virtualenv搭建博客开发实战">
+  <strong>上一篇：</strong><br/>
+  <span>
+  基于Django和Virtualenv搭建博客开发实战</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/02/24/Integrated-Python-with-Selenium/"  title="Python整合Selenium获取Ajax页面">
+ <strong>下一篇：</strong><br/> 
+ <span>Python整合Selenium获取Ajax页面
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What_is_Vagrant?"><span class="toc-number">1.</span> <span class="toc-text">What is Vagrant?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vagrant安装"><span class="toc-number">2.</span> <span class="toc-text">vagrant安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vagrant基本命令行"><span class="toc-number">3.</span> <span class="toc-text">vagrant基本命令行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vagrantfile基本配置文件详解"><span class="toc-number">4.</span> <span class="toc-text">Vagrantfile基本配置文件详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装pip和virtualenv"><span class="toc-number">5.</span> <span class="toc-text">Ubuntu安装pip和virtualenv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装git"><span class="toc-number">6.</span> <span class="toc-text">Ubuntu安装git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装Web-py"><span class="toc-number">7.</span> <span class="toc-text">Ubuntu安装Web.py</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu安装Flask"><span class="toc-number">8.</span> <span class="toc-text">Ubuntu安装Flask</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Blog/" title="Blog">Blog<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Dev/" title="Dev">Dev<sup>20</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Notes/" title="Notes">Notes<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Photography/" title="Photography">Photography<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Resources/" title="Resources">Resources<sup>16</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Startup/" title="Startup">Startup<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Python/" title="Python">Python<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNN/" title="DNN">DNN<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/信息化/" title="信息化">信息化<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CMS/" title="CMS">CMS<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MYOA/" title="MYOA">MYOA<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/通达OA/" title="通达OA">通达OA<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Pandas/" title="Pandas">Pandas<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNN8/" title="DNN8">DNN8<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Vagrant/" title="Vagrant">Vagrant<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Programmers/" title="Programmers">Programmers<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Network/" title="Network">Network<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Baby/" title="Baby">Baby<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+    <p class="asidetitle">近期文章</p>
+    <div class="linkslist clearfix">
+		<ul class=""><li class=""><a href="/2019/07/08/Notices-DNN9-Upgrade/">DNN9升级备忘</a></li><li class=""><a href="/2019/05/05/Andriod-Intsall-App-without-Google-Play-Store/">Android手机如何下载Google Play上的App</a></li><li class=""><a href="/2019/04/26/Git-Transfer-repo/">Git迁移代码仓库实践</a></li><li class=""><a href="/2018/08/04/Docker-Jupyter-Notebook-for-Data-Analysis/">基于Docker容器化搭建Jupyter Notebook数据科研环境</a></li><li class=""><a href="/2018/06/07/Python-Data-Analysis-with-Pandas/">Python数据分析利器Pandas</a></li><li class=""><a href="/2017/08/31/Excel-Learning/">Excel知识点集锦</a></li></ul>
+	</div>
+</div>
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.sunblognuke.com" target="_blank" title=" 一个牛哄哄的DNN模块">SunBlogNuke</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://dnnsoftware.com" target="_blank" title=" DNN官方网站">DNN官网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://zhihu.com" target="_blank" title=" 一个神奇的网站">知乎</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wowubuntu.com/markdown/" target="_blank" title=" Markdown简明语法目录">Markdown</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m Baldwin Sun in SunBlogNuke.com. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/sunblognuke" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/sunblognuke" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		
+		<a href="https://www.douban.com/people/sunblognuke" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		
+		
+		<a href="mailto:dnnsun@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Baldwin">Baldwin</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox({
+      'transitionIn'  : 'elastic',
+      'transitionOut' : 'elastic',
+    });
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+<!-- Swiftype_search Begin -->
+
+<!-- Swiftype_search End -->
+
+  </body>
+</html>
