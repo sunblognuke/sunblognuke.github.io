@@ -49,6 +49,6 @@ Adobe Camera Raw预处理步骤：
 
 最近关注的素材资源网站：
 
-[优界网](http://97ui.com/sucai)
+[摄图网](http://699pic.com/) - 拥有设计资源的账号(QQ)
 
 [千图网](http://www.58pic.com/)
