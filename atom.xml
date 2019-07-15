@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sunblognuke.github.io/"/>
-  <updated>2019-07-14T06:52:10.836Z</updated>
+  <updated>2019-07-15T06:40:46.216Z</updated>
   <id>http://sunblognuke.github.io/</id>
   
   <author>
@@ -15,11 +15,96 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[清理DNN数据库]]></title>
+    <link href="http://sunblognuke.github.io/2019/07/15/Clean-Up-DNN9-DataSize/"/>
+    <id>http://sunblognuke.github.io/2019/07/15/Clean-Up-DNN9-DataSize/</id>
+    <published>2019-07-15T06:23:58.000Z</published>
+    <updated>2019-07-15T06:40:46.216Z</updated>
+    <content type="html"><![CDATA[<p>DNN这一平台使用数据库的是SQL server, 随着时间的推移，其容量逐渐递增，特别的如果系统出现一些异常情况，包括模块出错等，则更让数据库文件的体积增加得更为迅速。故此隔段时间，网站管理员有必要巡查监视下，如有必要则做清理动作。</p>
+<h2 id="检查db所有数据库表的使用状况">检查db所有数据库表的使用状况</h2><pre><code>-- <span class="keyword">For</span> storing values <span class="keyword">in</span> the cursor
+DECLARE @TableName VARCHAR(<span class="number">100</span>);
+
+   -- Cursor <span class="keyword">to</span> get the name <span class="keyword">of</span> all user tables <span class="keyword">from</span> the sysobjects listing
+   DECLARE [tableCursor] CURSOR <span class="keyword">FOR</span> 
+    <span class="keyword">SELECT</span> [name]
+    <span class="keyword">FROM</span> [dbo].[sysobjects] 
+    <span class="keyword">WHERE</span> OBJECTPROPERTY([id], N<span class="string">'IsUserTable'</span>) = <span class="number">1</span>
+   <span class="keyword">FOR</span> <span class="keyword">READ</span> ONLY;
+
+   -- A <span class="function"><span class="keyword">procedure</span> <span class="title">level</span> <span class="title">temp</span> <span class="title">table</span> <span class="title">to</span> <span class="title">store</span> <span class="title">the</span> <span class="title">results</span>
+   <span class="title">CREATE</span> <span class="title">TABLE</span> #<span class="title">TempTable</span> <span class="params">(
+       [tableName] VARCHAR(100)</span>,
+      [<span class="title">numberofRows</span>] <span class="title">VARCHAR</span><span class="params">(100)</span>,
+       [<span class="title">reservedSize</span>] <span class="title">VARCHAR</span><span class="params">(50)</span>,
+       [<span class="title">dataSize</span>] <span class="title">VARCHAR</span><span class="params">(50)</span>,
+       [<span class="title">indexSize</span>] <span class="title">VARCHAR</span><span class="params">(50)</span>,
+       [<span class="title">unusedSize</span>] <span class="title">VARCHAR</span><span class="params">(50)</span>
+   );</span>
+
+-- Open the cursor
+OPEN [tableCursor];
+
+-- Get the first table name <span class="keyword">from</span> the cursor
+FETCH NEXT <span class="keyword">FROM</span> [tableCursor] <span class="keyword">INTO</span> @TableName;
+-- <span class="keyword">Loop</span> <span class="keyword">until</span> the cursor was <span class="keyword">not</span> able <span class="keyword">to</span> fetch
+<span class="keyword">WHILE</span> (@@Fetch_Status &gt;= <span class="number">0</span>)
+ <span class="keyword">BEGIN</span>
+     -- Dump the results <span class="keyword">of</span> the sp_spaceused query <span class="keyword">to</span> the temp table
+      INSERT  #TempTable
+          EXEC sp_spaceused @TableName;
+
+      -- Get the next table name
+     FETCH NEXT <span class="keyword">FROM</span> [tableCursor] <span class="keyword">INTO</span> @TableName;
+   <span class="keyword">END</span>
+
+ -- Get rid <span class="keyword">of</span> the cursor
+ CLOSE [tableCursor];
+ DEALLOCATE [tableCursor];
+
+-- <span class="keyword">remove</span> the text so we can convert the columns
+UPDATE #TempTable 
+<span class="keyword">SET</span> [reservedSize] = REPLACE([reservedSize], N<span class="string">' KB'</span>, N<span class="string">''</span>), 
+    [dataSize] = REPLACE([dataSize], N<span class="string">' KB'</span>, N<span class="string">''</span>), 
+    [indexSize] = REPLACE([indexSize], N<span class="string">' KB'</span>, N<span class="string">''</span>), 
+    [unusedSize] = REPLACE([unusedSize], N<span class="string">' KB'</span>, N<span class="string">''</span>); 
+
+  -- convert the columns <span class="keyword">to</span> INT so they will sort properly
+  ALTER TABLE #TempTable ALTER COLUMN [reservedSize] INT NULL;
+  ALTER TABLE #TempTable ALTER COLUMN [dataSize] INT NULL;
+  ALTER TABLE #TempTable ALTER COLUMN [indexSize] INT NULL;
+  ALTER TABLE #TempTable ALTER COLUMN [unusedSize] INT NULL;
+
+  -- <span class="keyword">Select</span> all records so we can use the reults
+  <span class="keyword">SELECT</span> * 
+  <span class="keyword">FROM</span> #TempTable 
+  <span class="keyword">ORDER</span> <span class="keyword">BY</span> [dataSize] <span class="keyword">DESC</span>, [reservedSize] <span class="keyword">DESC</span>, [indexSize] <span class="keyword">DESC</span>, [unusedSize] <span class="keyword">DESC</span>;
+
+-- <span class="keyword">Final</span> cleanup!
+DROP TABLE #TempTable;
+</code></pre><h2 id="清理数据库占用空间最大的TOP_3">清理数据库占用空间最大的TOP 3</h2><pre><code><span class="comment">/* TOP 3 with big TableSize*/</span>
+<span class="operator"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> [dbo].[sitelog];</span>
+<span class="operator"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> [dbo].[ScheduleHistory];</span>
+<span class="operator"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> [dbo].[EventLog];</span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>DNN这一平台使用数据库的是SQL server, 随着时间的推移，其容量逐渐递增，特别的如果系统出现一些异常情况，包括模块出错等，则更让数据库文件的体积增加得更为迅速。故此隔段时间，网站管理员有必要巡查监视下，如有必要则做清理动作。</p>
+<h2 id="检查db所有数]]>
+    </summary>
+    
+      <category term="CMS" scheme="http://sunblognuke.github.io/tags/CMS/"/>
+    
+      <category term="DNN" scheme="http://sunblognuke.github.io/tags/DNN/"/>
+    
+      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[DNN9升级备忘]]></title>
     <link href="http://sunblognuke.github.io/2019/07/08/Notices-DNN9-Upgrade/"/>
     <id>http://sunblognuke.github.io/2019/07/08/Notices-DNN9-Upgrade/</id>
     <published>2019-07-08T03:23:58.000Z</published>
-    <updated>2019-07-14T06:52:10.836Z</updated>
+    <updated>2019-07-15T06:39:56.378Z</updated>
     <content type="html"><![CDATA[<p>自从2005年开始接触DNN这一平台以来，一直持续关注它的发展和整个生态圈的趋势，起初的确参与了很多，国内圈子也的确掀起一股小小的追捧，然而好景不长，陆续续续大家没了激情，DNN CMS在国内犹如昙花一现，大家转而找其他的替代品，比如Orchard等。不过我一直算还在这个圈子混，官网的资讯也在持续关注中，期盼它能有更好的未来。近期针对DNN9的升级做些功课，期待这次有更强大的性能提升。</p>
 <h2 id="DNN9的最佳升级路径">DNN9的最佳升级路径</h2><p>关于DNN9升级的技术文章和最佳实践：</p>
 <ul>
@@ -43,6 +128,7 @@
 <h2 id="其他关于DNN9的注意点">其他关于DNN9的注意点</h2><ul>
 <li><a href="https://www.chrishammond.com/Blog/itemId/2898/Problems-with-DNN-9-and-the-HTML-Editor-Manager" target="_blank" rel="external">Problems with DNN 9 and the HTML Editor Manager</a></li>
 <li><a href="https://www.chrishammond.com/Blog/itemId/2693/Dealing-with-the-DNN-Exceptions-table-in-your-DotN" target="_blank" rel="external">Dealing with the DNN Exceptions table in your DotNetNuke Database</a></li>
+<li><a href="https://dnnconsulting.net/Blog/Post/1398/The-new-Dnn9-Administration-User-Experience" target="_blank" rel="external">The new Dnn9 Administration User Experience</a></li>
 </ul>
 ]]></content>
     <summary type="html">
@@ -190,9 +276,9 @@ docker image #验证是否已生成新镜像</span>
 <h2 id="Docker常用命令">Docker常用命令</h2><p>docker命令是你与Do]]>
     </summary>
     
-      <category term="Python" scheme="http://sunblognuke.github.io/tags/Python/"/>
-    
       <category term="Pandas" scheme="http://sunblognuke.github.io/tags/Pandas/"/>
+    
+      <category term="Python" scheme="http://sunblognuke.github.io/tags/Python/"/>
     
       <category term="Docker" scheme="http://sunblognuke.github.io/tags/Docker/"/>
     
@@ -244,9 +330,9 @@ docker image #验证是否已生成新镜像</span>
 <h2 id="辅助工具_jupy]]>
     </summary>
     
-      <category term="Python" scheme="http://sunblognuke.github.io/tags/Python/"/>
-    
       <category term="Pandas" scheme="http://sunblognuke.github.io/tags/Pandas/"/>
+    
+      <category term="Python" scheme="http://sunblognuke.github.io/tags/Python/"/>
     
       <category term="Power Query" scheme="http://sunblognuke.github.io/tags/Power-Query/"/>
     
@@ -853,56 +939,6 @@ InnoDB: VirtualAlloc(1086849024 bytes) failed; Windows <span class="keyword">err
     </summary>
     
       <category term="DNN" scheme="http://sunblognuke.github.io/tags/DNN/"/>
-    
-      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[基于Django和Virtualenv搭建博客开发实战]]></title>
-    <link href="http://sunblognuke.github.io/2016/05/26/Blog-App-based-Django-with-Virtualenv/"/>
-    <id>http://sunblognuke.github.io/2016/05/26/Blog-App-based-Django-with-Virtualenv/</id>
-    <published>2016-05-26T07:32:45.000Z</published>
-    <updated>2019-07-14T05:51:20.045Z</updated>
-    <content type="html"><![CDATA[<h1 id="利用Virtualenv搭建Django环境">利用Virtualenv搭建Django环境</h1><ol>
-<li>确保安装Python3，请参照python2和python3共存win7的解决方案。</li>
-<li><p>创建虚拟环境, 创建目录py3env</p>
-<pre><code><span class="title">python3</span> -m venv py3env
-</code></pre></li>
-<li><p>定位到目录py3env\scripts并激活虚拟环境：</p>
-<pre><code>E:<span class="command">\virt</span>_env<span class="command">\py</span>3env<span class="command">\Scripts</span>&gt;activate
-(py3env) E:<span class="command">\virt</span>_env<span class="command">\py</span>3env<span class="command">\Scripts</span>&gt;
-</code></pre></li>
-<li><p>手动安装Django</p>
-<pre><code>pip install django==<span class="number">1.9</span><span class="number">.6</span>
-</code></pre><p> 或直接clone项目到本目录下E:\virt_env\py3env\Scripts&gt;并定位到项目目录下执行：</p>
-<pre><code>pip <span class="keyword">install</span> -r requirements.txt
-</code></pre><p> requirements.txt文件，主要用于搭建运行这个项目所需要的环境，一般包含项目所需的一些包的名称和版本之类的信息。</p>
-</li>
-</ol>
-<h1 id="Django基本命令">Django基本命令</h1><ol>
-<li><p>运行命令 python manage.py makemigrations 生成迁移文件</p>
-</li>
-<li><p>运行命令 python manage.py migrate 迁移数据库</p>
-</li>
-<li><p>运行命令 python manage.py createsuperuser 创建超级用户</p>
-</li>
-<li><p>运行命令 python manage.py runserver 启动开发服务器</p>
-</li>
-</ol>
-<h1 id="参考资源">参考资源</h1><p><a href="http://python.usyiyi.cn/django/index.html" target="_blank" rel="external">Django 1.8.2 文档</a><br><a href="http://www.ziqiangxuetang.com/django/django-tutorial.html" target="_blank" rel="external">Django 基础教程</a><br><a href="http://virtualenv-chinese-docs.readthedocs.io/en/latest/#id29" target="_blank" rel="external">Virtualenv官网文档</a><br><a href="http://foofish.net/blog/88/virtualenv" target="_blank" rel="external">Python Virtualenv 介绍</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="利用Virtualenv搭建Django环境">利用Virtualenv搭建Django环境</h1><ol>
-<li>确保安装Python3，请参照python2和python3共存win7的解决方案。</li>
-<li><p>创建虚拟环境, 创建目录py3en]]>
-    </summary>
-    
-      <category term="Python" scheme="http://sunblognuke.github.io/tags/Python/"/>
-    
-      <category term="Django" scheme="http://sunblognuke.github.io/tags/Django/"/>
-    
-      <category term="VirtualEnv" scheme="http://sunblognuke.github.io/tags/VirtualEnv/"/>
     
       <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
     

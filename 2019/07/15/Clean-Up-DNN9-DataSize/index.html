@@ -4,26 +4,29 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>摄影篇 - 小区也能DIY | Baldwin&#39;s Blog</title>
+    <title>清理DNN数据库 | Baldwin&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Baldwin">
     
 
     
-    <meta name="description" content="好久没给宝贝拍照了，今天特意就在小区来一次DIY，敢情来点后期创意效果修饰也是不错的 :)">
+    <meta name="description" content="DNN这一平台使用数据库的是SQL server, 随着时间的推移，其容量逐渐递增，特别的如果系统出现一些异常情况，包括模块出错等，则更让数据库文件的体积增加得更为迅速。故此隔段时间，网站管理员有必要巡查监视下，如有必要则做清理动作。
+检查db所有数据库表的使用状况-- For storing values in the cursor
+DECLARE @TableName VARCHAR(100)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="摄影篇 - 小区也能DIY">
-<meta property="og:url" content="http://sunblognuke.github.io/2015/11/18/摄影篇-小区也能DIY/index.html">
+<meta property="og:title" content="清理DNN数据库">
+<meta property="og:url" content="http://sunblognuke.github.io/2019/07/15/Clean-Up-DNN9-DataSize/index.html">
 <meta property="og:site_name" content="Baldwin's Blog">
-<meta property="og:description" content="好久没给宝贝拍照了，今天特意就在小区来一次DIY，敢情来点后期创意效果修饰也是不错的 :)">
-<meta property="og:image" content="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/IMG_6506.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/IMG_6488.jpg">
-<meta property="og:updated_time" content="2019-07-14T05:51:20.111Z">
+<meta property="og:description" content="DNN这一平台使用数据库的是SQL server, 随着时间的推移，其容量逐渐递增，特别的如果系统出现一些异常情况，包括模块出错等，则更让数据库文件的体积增加得更为迅速。故此隔段时间，网站管理员有必要巡查监视下，如有必要则做清理动作。
+检查db所有数据库表的使用状况-- For storing values in the cursor
+DECLARE @TableName VARCHAR(100)">
+<meta property="og:updated_time" content="2019-07-15T06:40:46.216Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="摄影篇 - 小区也能DIY">
-<meta name="twitter:description" content="好久没给宝贝拍照了，今天特意就在小区来一次DIY，敢情来点后期创意效果修饰也是不错的 :)">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/IMG_6506.jpg">
+<meta name="twitter:title" content="清理DNN数据库">
+<meta name="twitter:description" content="DNN这一平台使用数据库的是SQL server, 随着时间的推移，其容量逐渐递增，特别的如果系统出现一些异常情况，包括模块出错等，则更让数据库文件的体积增加得更为迅速。故此隔段时间，网站管理员有必要巡查监视下，如有必要则做清理动作。
+检查db所有数据库表的使用状况-- For storing values in the cursor
+DECLARE @TableName VARCHAR(100)">
 <meta name="twitter:creator" content="@sunblognuke">
 
     
@@ -86,36 +89,127 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/11/18/摄影篇-小区也能DIY/" title="摄影篇 - 小区也能DIY" itemprop="url">摄影篇 - 小区也能DIY</a>
+      <a href="/2019/07/15/Clean-Up-DNN9-DataSize/" title="清理DNN数据库" itemprop="url">清理DNN数据库</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
 		
   <p class="article-time">
-    <time datetime="2015-11-18T10:23:30.000Z" itemprop="datePublished"> 发表于 2015-11-18</time>
+    <time datetime="2019-07-15T06:23:58.000Z" itemprop="datePublished"> 发表于 2019-07-15</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>好久没给宝贝拍照了，今天特意就在小区来一次DIY，敢情来点后期创意效果修饰也是不错的 :)</p>
-<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/IMG_6506.jpg" alt="小小的背影，莫名的感动"><br><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/IMG_6488.jpg" alt="林中的小精灵，你在找什么呢？"></p>
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#检查db所有数据库表的使用状况"><span class="toc-number">1.</span> <span class="toc-text">检查db所有数据库表的使用状况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#清理数据库占用空间最大的TOP_3"><span class="toc-number">2.</span> <span class="toc-text">清理数据库占用空间最大的TOP 3</span></a></li></ol>
+		
+		</div>
+		
+		<p>DNN这一平台使用数据库的是SQL server, 随着时间的推移，其容量逐渐递增，特别的如果系统出现一些异常情况，包括模块出错等，则更让数据库文件的体积增加得更为迅速。故此隔段时间，网站管理员有必要巡查监视下，如有必要则做清理动作。</p>
+<h2 id="检查db所有数据库表的使用状况">检查db所有数据库表的使用状况</h2><pre><code>-- <span class="keyword">For</span> storing values <span class="keyword">in</span> the cursor
+DECLARE @TableName VARCHAR(<span class="number">100</span>);
 
-		    
+   -- Cursor <span class="keyword">to</span> get the name <span class="keyword">of</span> all user tables <span class="keyword">from</span> the sysobjects listing
+   DECLARE [tableCursor] CURSOR <span class="keyword">FOR</span> 
+    <span class="keyword">SELECT</span> [name]
+    <span class="keyword">FROM</span> [dbo].[sysobjects] 
+    <span class="keyword">WHERE</span> OBJECTPROPERTY([id], N<span class="string">'IsUserTable'</span>) = <span class="number">1</span>
+   <span class="keyword">FOR</span> <span class="keyword">READ</span> ONLY;
+
+   -- A <span class="function"><span class="keyword">procedure</span> <span class="title">level</span> <span class="title">temp</span> <span class="title">table</span> <span class="title">to</span> <span class="title">store</span> <span class="title">the</span> <span class="title">results</span>
+   <span class="title">CREATE</span> <span class="title">TABLE</span> #<span class="title">TempTable</span> <span class="params">(
+       [tableName] VARCHAR(100)</span>,
+      [<span class="title">numberofRows</span>] <span class="title">VARCHAR</span><span class="params">(100)</span>,
+       [<span class="title">reservedSize</span>] <span class="title">VARCHAR</span><span class="params">(50)</span>,
+       [<span class="title">dataSize</span>] <span class="title">VARCHAR</span><span class="params">(50)</span>,
+       [<span class="title">indexSize</span>] <span class="title">VARCHAR</span><span class="params">(50)</span>,
+       [<span class="title">unusedSize</span>] <span class="title">VARCHAR</span><span class="params">(50)</span>
+   );</span>
+
+-- Open the cursor
+OPEN [tableCursor];
+
+-- Get the first table name <span class="keyword">from</span> the cursor
+FETCH NEXT <span class="keyword">FROM</span> [tableCursor] <span class="keyword">INTO</span> @TableName;
+-- <span class="keyword">Loop</span> <span class="keyword">until</span> the cursor was <span class="keyword">not</span> able <span class="keyword">to</span> fetch
+<span class="keyword">WHILE</span> (@@Fetch_Status &gt;= <span class="number">0</span>)
+ <span class="keyword">BEGIN</span>
+     -- Dump the results <span class="keyword">of</span> the sp_spaceused query <span class="keyword">to</span> the temp table
+      INSERT  #TempTable
+          EXEC sp_spaceused @TableName;
+
+      -- Get the next table name
+     FETCH NEXT <span class="keyword">FROM</span> [tableCursor] <span class="keyword">INTO</span> @TableName;
+   <span class="keyword">END</span>
+
+ -- Get rid <span class="keyword">of</span> the cursor
+ CLOSE [tableCursor];
+ DEALLOCATE [tableCursor];
+
+-- <span class="keyword">remove</span> the text so we can convert the columns
+UPDATE #TempTable 
+<span class="keyword">SET</span> [reservedSize] = REPLACE([reservedSize], N<span class="string">' KB'</span>, N<span class="string">''</span>), 
+    [dataSize] = REPLACE([dataSize], N<span class="string">' KB'</span>, N<span class="string">''</span>), 
+    [indexSize] = REPLACE([indexSize], N<span class="string">' KB'</span>, N<span class="string">''</span>), 
+    [unusedSize] = REPLACE([unusedSize], N<span class="string">' KB'</span>, N<span class="string">''</span>); 
+
+  -- convert the columns <span class="keyword">to</span> INT so they will sort properly
+  ALTER TABLE #TempTable ALTER COLUMN [reservedSize] INT NULL;
+  ALTER TABLE #TempTable ALTER COLUMN [dataSize] INT NULL;
+  ALTER TABLE #TempTable ALTER COLUMN [indexSize] INT NULL;
+  ALTER TABLE #TempTable ALTER COLUMN [unusedSize] INT NULL;
+
+  -- <span class="keyword">Select</span> all records so we can use the reults
+  <span class="keyword">SELECT</span> * 
+  <span class="keyword">FROM</span> #TempTable 
+  <span class="keyword">ORDER</span> <span class="keyword">BY</span> [dataSize] <span class="keyword">DESC</span>, [reservedSize] <span class="keyword">DESC</span>, [indexSize] <span class="keyword">DESC</span>, [unusedSize] <span class="keyword">DESC</span>;
+
+-- <span class="keyword">Final</span> cleanup!
+DROP TABLE #TempTable;
+</code></pre><h2 id="清理数据库占用空间最大的TOP_3">清理数据库占用空间最大的TOP 3</h2><pre><code><span class="comment">/* TOP 3 with big TableSize*/</span>
+<span class="operator"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> [dbo].[sitelog];</span>
+<span class="operator"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> [dbo].[ScheduleHistory];</span>
+<span class="operator"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> [dbo].[EventLog];</span>
+</code></pre>
+		
+<style type="text/css">
+.article-content hr {
+  text-align: center;
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+}
+.article-content hr:after {
+  content: 'EOF';
+  display: inline-block;
+  position: relative;
+  top: -13px;
+  padding: 0 10px;
+  background: #fafafa;
+  color: #8c8b8b;
+}
+</style>
+    
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Life/">Life</a>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Baby/">Baby</a>
+  <span></span> <a href="/tags/CMS/">CMS</a><a href="/tags/DNN/">DNN</a>
   </div>
 
 </div>
@@ -124,7 +218,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://sunblognuke.github.io/2015/11/18/摄影篇-小区也能DIY/" data-title="摄影篇 - 小区也能DIY | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://sunblognuke.github.io/2019/07/15/Clean-Up-DNN9-DataSize/" data-title="清理DNN数据库 | Baldwin&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -137,19 +231,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/11/20/Integratd-Hexo-with-Github/" title="在Github平台搭建Hexo免费静态博客">
-  <strong>上一篇：</strong><br/>
-  <span>
-  在Github平台搭建Hexo免费静态博客</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/10/22/Hello-Hexo-Github/"  title="Hello Hexo &amp; Github">
+<a href="/2019/07/08/Notices-DNN9-Upgrade/"  title="DNN9升级备忘">
  <strong>下一篇：</strong><br/> 
- <span>Hello Hexo &amp; Github
+ <span>DNN9升级备忘
 </span>
 </a>
 </div>
@@ -160,6 +246,13 @@
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#检查db所有数据库表的使用状况"><span class="toc-number">1.</span> <span class="toc-text">检查db所有数据库表的使用状况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#清理数据库占用空间最大的TOP_3"><span class="toc-number">2.</span> <span class="toc-text">清理数据库占用空间最大的TOP 3</span></a></li></ol>
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -425,6 +518,8 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });

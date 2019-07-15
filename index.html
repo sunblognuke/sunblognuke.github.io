@@ -84,6 +84,130 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/07/15/Clean-Up-DNN9-DataSize/" title="清理DNN数据库" itemprop="url">清理DNN数据库</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2019-07-15T06:23:58.000Z" itemprop="datePublished"> 发表于 2019-07-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>DNN这一平台使用数据库的是SQL server, 随着时间的推移，其容量逐渐递增，特别的如果系统出现一些异常情况，包括模块出错等，则更让数据库文件的体积增加得更为迅速。故此隔段时间，网站管理员有必要巡查监视下，如有必要则做清理动作。</p>
+<h2 id="检查db所有数据库表的使用状况">检查db所有数据库表的使用状况</h2><pre><code>-- <span class="keyword">For</span> storing values <span class="keyword">in</span> the cursor
+DECLARE @TableName VARCHAR(<span class="number">100</span>);
+
+   -- Cursor <span class="keyword">to</span> get the name <span class="keyword">of</span> all user tables <span class="keyword">from</span> the sysobjects listing
+   DECLARE [tableCursor] CURSOR <span class="keyword">FOR</span> 
+    <span class="keyword">SELECT</span> [name]
+    <span class="keyword">FROM</span> [dbo].[sysobjects] 
+    <span class="keyword">WHERE</span> OBJECTPROPERTY([id], N<span class="string">'IsUserTable'</span>) = <span class="number">1</span>
+   <span class="keyword">FOR</span> <span class="keyword">READ</span> ONLY;
+
+   -- A <span class="function"><span class="keyword">procedure</span> <span class="title">level</span> <span class="title">temp</span> <span class="title">table</span> <span class="title">to</span> <span class="title">store</span> <span class="title">the</span> <span class="title">results</span>
+   <span class="title">CREATE</span> <span class="title">TABLE</span> #<span class="title">TempTable</span> <span class="params">(
+       [tableName] VARCHAR(100)</span>,
+      [<span class="title">numberofRows</span>] <span class="title">VARCHAR</span><span class="params">(100)</span>,
+       [<span class="title">reservedSize</span>] <span class="title">VARCHAR</span><span class="params">(50)</span>,
+       [<span class="title">dataSize</span>] <span class="title">VARCHAR</span><span class="params">(50)</span>,
+       [<span class="title">indexSize</span>] <span class="title">VARCHAR</span><span class="params">(50)</span>,
+       [<span class="title">unusedSize</span>] <span class="title">VARCHAR</span><span class="params">(50)</span>
+   );</span>
+
+-- Open the cursor
+OPEN [tableCursor];
+
+-- Get the first table name <span class="keyword">from</span> the cursor
+FETCH NEXT <span class="keyword">FROM</span> [tableCursor] <span class="keyword">INTO</span> @TableName;
+-- <span class="keyword">Loop</span> <span class="keyword">until</span> the cursor was <span class="keyword">not</span> able <span class="keyword">to</span> fetch
+<span class="keyword">WHILE</span> (@@Fetch_Status &gt;= <span class="number">0</span>)
+ <span class="keyword">BEGIN</span>
+     -- Dump the results <span class="keyword">of</span> the sp_spaceused query <span class="keyword">to</span> the temp table
+      INSERT  #TempTable
+          EXEC sp_spaceused @TableName;
+
+      -- Get the next table name
+     FETCH NEXT <span class="keyword">FROM</span> [tableCursor] <span class="keyword">INTO</span> @TableName;
+   <span class="keyword">END</span>
+
+ -- Get rid <span class="keyword">of</span> the cursor
+ CLOSE [tableCursor];
+ DEALLOCATE [tableCursor];
+
+-- <span class="keyword">remove</span> the text so we can convert the columns
+UPDATE #TempTable 
+<span class="keyword">SET</span> [reservedSize] = REPLACE([reservedSize], N<span class="string">' KB'</span>, N<span class="string">''</span>), 
+    [dataSize] = REPLACE([dataSize], N<span class="string">' KB'</span>, N<span class="string">''</span>), 
+    [indexSize] = REPLACE([indexSize], N<span class="string">' KB'</span>, N<span class="string">''</span>), 
+    [unusedSize] = REPLACE([unusedSize], N<span class="string">' KB'</span>, N<span class="string">''</span>); 
+
+  -- convert the columns <span class="keyword">to</span> INT so they will sort properly
+  ALTER TABLE #TempTable ALTER COLUMN [reservedSize] INT NULL;
+  ALTER TABLE #TempTable ALTER COLUMN [dataSize] INT NULL;
+  ALTER TABLE #TempTable ALTER COLUMN [indexSize] INT NULL;
+  ALTER TABLE #TempTable ALTER COLUMN [unusedSize] INT NULL;
+
+  -- <span class="keyword">Select</span> all records so we can use the reults
+  <span class="keyword">SELECT</span> * 
+  <span class="keyword">FROM</span> #TempTable 
+  <span class="keyword">ORDER</span> <span class="keyword">BY</span> [dataSize] <span class="keyword">DESC</span>, [reservedSize] <span class="keyword">DESC</span>, [indexSize] <span class="keyword">DESC</span>, [unusedSize] <span class="keyword">DESC</span>;
+
+-- <span class="keyword">Final</span> cleanup!
+DROP TABLE #TempTable;
+</code></pre><h2 id="清理数据库占用空间最大的TOP_3">清理数据库占用空间最大的TOP 3</h2><pre><code><span class="comment">/* TOP 3 with big TableSize*/</span>
+<span class="operator"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> [dbo].[sitelog];</span>
+<span class="operator"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> [dbo].[ScheduleHistory];</span>
+<span class="operator"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> [dbo].[EventLog];</span>
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/CMS/">CMS</a><a href="/tags/DNN/">DNN</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/07/08/Notices-DNN9-Upgrade/" title="DNN9升级备忘" itemprop="url">DNN9升级备忘</a>
   </h1>
   <p class="article-author">By
@@ -120,6 +244,7 @@
 <h2 id="其他关于DNN9的注意点">其他关于DNN9的注意点</h2><ul>
 <li><a href="https://www.chrishammond.com/Blog/itemId/2898/Problems-with-DNN-9-and-the-HTML-Editor-Manager" target="_blank" rel="external">Problems with DNN 9 and the HTML Editor Manager</a></li>
 <li><a href="https://www.chrishammond.com/Blog/itemId/2693/Dealing-with-the-DNN-Exceptions-table-in-your-DotN" target="_blank" rel="external">Dealing with the DNN Exceptions table in your DotNetNuke Database</a></li>
+<li><a href="https://dnnconsulting.net/Blog/Post/1398/The-new-Dnn9-Administration-User-Experience" target="_blank" rel="external">The new Dnn9 Administration User Experience</a></li>
 </ul>
 
         
@@ -394,7 +519,7 @@ docker image #验证是否已生成新镜像</span>
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/Pandas/">Pandas</a><a href="/tags/Docker/">Docker</a>
+  <span></span> <a href="/tags/Pandas/">Pandas</a><a href="/tags/Python/">Python</a><a href="/tags/Docker/">Docker</a>
   </div>
 
 </div>
@@ -485,7 +610,7 @@ docker image #验证是否已生成新镜像</span>
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/Pandas/">Pandas</a><a href="/tags/Power-Query/">Power Query</a>
+  <span></span> <a href="/tags/Pandas/">Pandas</a><a href="/tags/Python/">Python</a><a href="/tags/Power-Query/">Power Query</a>
   </div>
 
 </div>
@@ -814,89 +939,9 @@ docker image #验证是否已生成新镜像</span>
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/05/13/OA-Update-Troubleboot/" title="通达OA 2015升级注意事项" itemprop="url">通达OA 2015升级注意事项</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2017-05-13T02:23:58.000Z" itemprop="datePublished"> 发表于 2017-05-13</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>通达OA 2017已发布升级版本，公司有意向想升级到最新版本。故此在临时服务器上搭建测试环境。过程中碰到如下问题，记录并包括解决方案：</p>
-<ol>
-<li>停止OA所有服务并退出Monitor.exe.</li>
-<li>拷贝MYOA根目录下的大部分文件夹，可除去bak, attach等目录（这些文件都很大，可升级后慢慢迁移）。</li>
-<li>双机bin目录下的autoconfig.exe配置新环境。</li>
-</ol>
-<h2 id="office_redis服务不能启动">office_redis服务不能启动</h2><h3 id="可能原因：">可能原因：</h3><p>1、进行过替换bin目录的操作，替换前后两个bin目录对应的OA的安装路径不一致导致的。</p>
-<p>2、myoa\attach下缺少redis_data目录或redis_data\heap目录或redis_data目录下的aof文件损坏导致。</p>
-<h3 id="解决方法：">解决方法：</h3><p>1、记事本打开myoa\bin\redis.windows.conf，按盘符搜索，修改以下几处对应的路径：</p>
-<p>1）logfile D:/MYOA/logs/redis.log</p>
-<p>2）dir D:/MYOA/attach/redis_data</p>
-<p>3）heapdir D:/MYOA/attach/redis_data/heap</p>
-<p>2、从备份的myoa\attach中拷贝redis_data目录恢复或者把缺失的目录手动创建上，若目录都在，属于aof文件损坏导致，则将该文件重命名一下，再重启服务即可。</p>
-<p>我们的问题就是缺失attach目录，故此我们新建并补齐这一目录即可把office_redis服务正常运行起来。</p>
-<h2 id="Office_Web服务不能启动">Office_Web服务不能启动</h2><p>从log日志显示2367端口被占用：服务启动失败, 侦听线程创建不成功,端口 2367 被占用。</p>
-<h3 id="解决方法：-1">解决方法：</h3><p>打开OA的MYSQL数据执行语句：</p>
-<pre><code><span class="operator"><span class="keyword">update</span> sys_para <span class="keyword">set</span> PARA_VALUE=<span class="string">'2368'</span> <span class="keyword">where</span> PARA_NAME= <span class="string">'WEB_SVC_PORT'</span>;</span>
-</code></pre><p>改一下端口2368或其他端口直到可以运行为止。</p>
-<h2 id="参考链接：">参考链接：</h2><p>– <a href="http://support.tongda2000.com/kb11019070/" target="_blank" rel="external">如何解决office_redis服务不能启动的问题？</a><br>– <a href="http://club.tongda2000.com/forum.php?mod=viewthread&amp;tid=26282" target="_blank" rel="external">Office_Web服务启动不了，log日志显示2367端口被占用？</a></p>
-<h2 id="批量更新用户权限">批量更新用户权限</h2><p>禁止OA登录，禁止手机登录，禁止使用即时通讯（资源有限）：</p>
-<pre><code>UPDATE user SET NOT_LOGIN=<span class="number">1</span>, NOT_MOBILE_LOGIN=<span class="number">1</span>, IM_RANGE=<span class="number">2</span> WHERE DEPT_ID=<span class="number">0</span>
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Resources/">Resources</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/信息化/">信息化</a><a href="/tags/通达OA/">通达OA</a><a href="/tags/MYOA/">MYOA</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -916,7 +961,7 @@ docker image #验证是否已生成新镜像</span>
 		  
 		
 		  
-			<li><a href="/categories/Dev/" title="Dev">Dev<sup>20</sup></a></li>
+			<li><a href="/categories/Dev/" title="Dev">Dev<sup>21</sup></a></li>
 		  
 		
 		  
@@ -953,7 +998,7 @@ docker image #验证是否已生成新镜像</span>
 			
 		
 			
-				<li><a href="/tags/DNN/" title="DNN">DNN<sup>7</sup></a></li>
+				<li><a href="/tags/DNN/" title="DNN">DNN<sup>8</sup></a></li>
 			
 		
 			
@@ -961,15 +1006,11 @@ docker image #验证是否已生成新镜像</span>
 			
 		
 			
+				<li><a href="/tags/CMS/" title="CMS">CMS<sup>6</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/CMS/" title="CMS">CMS<sup>5</sup></a></li>
 			
 		
 			
@@ -977,35 +1018,11 @@ docker image #验证是否已生成新镜像</span>
 			
 		
 			
+				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/通达OA/" title="通达OA">通达OA<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Pandas/" title="Pandas">Pandas<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/DNN8/" title="DNN8">DNN8<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
 			
 		
 			
@@ -1013,7 +1030,35 @@ docker image #验证是否已生成新镜像</span>
 			
 		
 			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNN8/" title="DNN8">DNN8<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Pandas/" title="Pandas">Pandas<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Vagrant/" title="Vagrant">Vagrant<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
 			
 		
 			
@@ -1035,7 +1080,7 @@ docker image #验证是否已生成新镜像</span>
   <div class="linkslist">
     <p class="asidetitle">近期文章</p>
     <div class="linkslist clearfix">
-		<ul class=""><li class=""><a href="/2019/07/08/Notices-DNN9-Upgrade/">DNN9升级备忘</a></li><li class=""><a href="/2019/05/05/Andriod-Intsall-App-without-Google-Play-Store/">Android手机如何下载Google Play上的App</a></li><li class=""><a href="/2019/04/26/Git-Transfer-repo/">Git迁移代码仓库实践</a></li><li class=""><a href="/2018/08/04/Docker-Jupyter-Notebook-for-Data-Analysis/">基于Docker容器化搭建Jupyter Notebook数据科研环境</a></li><li class=""><a href="/2018/06/07/Python-Data-Analysis-with-Pandas/">Python数据分析利器Pandas</a></li><li class=""><a href="/2017/08/31/Excel-Learning/">Excel知识点集锦</a></li></ul>
+		<ul class=""><li class=""><a href="/2019/07/15/Clean-Up-DNN9-DataSize/">清理DNN数据库</a></li><li class=""><a href="/2019/07/08/Notices-DNN9-Upgrade/">DNN9升级备忘</a></li><li class=""><a href="/2019/05/05/Andriod-Intsall-App-without-Google-Play-Store/">Android手机如何下载Google Play上的App</a></li><li class=""><a href="/2019/04/26/Git-Transfer-repo/">Git迁移代码仓库实践</a></li><li class=""><a href="/2018/08/04/Docker-Jupyter-Notebook-for-Data-Analysis/">基于Docker容器化搭建Jupyter Notebook数据科研环境</a></li><li class=""><a href="/2018/06/07/Python-Data-Analysis-with-Pandas/">Python数据分析利器Pandas</a></li></ul>
 	</div>
 </div>
 
