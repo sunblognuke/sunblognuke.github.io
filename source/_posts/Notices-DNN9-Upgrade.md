@@ -34,4 +34,5 @@ tags: [DNN, CMS]
 
 + [Problems with DNN 9 and the HTML Editor Manager](https://www.chrishammond.com/Blog/itemId/2898/Problems-with-DNN-9-and-the-HTML-Editor-Manager)
 + [Dealing with the DNN Exceptions table in your DotNetNuke Database](https://www.chrishammond.com/Blog/itemId/2693/Dealing-with-the-DNN-Exceptions-table-in-your-DotN)
++ [The new Dnn9 Administration User Experience](https://dnnconsulting.net/Blog/Post/1398/The-new-Dnn9-Administration-User-Experience)
 
