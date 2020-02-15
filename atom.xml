@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Coding - Keep Calm and Carry On]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sunblognuke.github.io/"/>
-  <updated>2019-07-15T06:40:46.216Z</updated>
+  <updated>2020-02-15T07:01:30.332Z</updated>
   <id>http://sunblognuke.github.io/</id>
   
   <author>
@@ -13,6 +13,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[非华为笔记本使用多屏协同功能]]></title>
+    <link href="http://sunblognuke.github.io/2020/02/15/HuaWei-Mobile-Shared-With-Notebook/"/>
+    <id>http://sunblognuke.github.io/2020/02/15/HuaWei-Mobile-Shared-With-Notebook/</id>
+    <published>2020-02-15T06:23:58.000Z</published>
+    <updated>2020-02-15T07:01:30.332Z</updated>
+    <content type="html"><![CDATA[<p>多屏协同的功能</p>
+<ol>
+<li>可以在电脑上直接控制手机，可以打开任意APP，非常方便！</li>
+<li>手机和电脑共享剪切板，共享文件，传输东西非常方便！</li>
+</ol>
+<h2 id="必备基本条件">必备基本条件</h2><ol>
+<li>有无线网卡的电脑，最好直接是笔记本</li>
+<li>华为手机，系统是EMUI10+，芯片麒麟980+</li>
+<li>破解版华为电脑管家软件</li>
+</ol>
+<h2 id="安装华为电脑管家软件">安装华为电脑管家软件</h2><p>1.下载电脑管家</p>
+<p>度盘链接：<a href="https://pan.baidu.com/s/1h-VGSrgPWK_PKUYfvSrHpw#list/path=%2F" target="_blank" rel="external">https://pan.baidu.com/s/1h-VGSrgPWK_PKUYfvSrHpw#list/path=%2F</a>   密码：8j8c</p>
+<p>2.安装电脑管家</p>
+<p>3.替换文件util.dll</p>
+<p>首先在打开任务管理器停止掉几个服务，都是huawei开头的，右键停止就好了。</p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/2020/huawei-services.png" alt="关闭华为电脑管家的服务进程"></p>
+<p>然后用度盘链接里面的Util.dll 文件替换电脑管家安装目录下面的同名文件，安装目录一般在C:\Program Files\Huawei\PCManager。</p>
+<p>4.重启大法</p>
+<p>重启电脑，然后右下角就会出现电脑管家的图标，双击可以打开，点击我的手机，单击是通知中心的页面。</p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/2020/0934463o0pwxvh7wzdvcxq.png" alt="华为电脑管家"></p>
+<p>5.联接手机</p>
+<p>连接手机时确保电脑的蓝牙和无线网卡是打开的，确保蓝牙和手机能够配对。扫码要使用手机上的华为浏览器或者智慧视觉扫码。</p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/2020/913ad51f3a292df5d766b167b3315c6035a8736a.jpg" alt="扫码链接"></p>
+<h2 id="成功连接了电脑之后不能呼出手机的界面，怎么破">成功连接了电脑之后不能呼出手机的界面，怎么破</h2><p>参照以下原理设置，比如先把电脑的wifi链接断开，然后扫码连接上手机，手机界面正常呈现到电脑端再开启电脑端的wifi。</p>
+<h2 id="原理">原理</h2><p>其实就是靠WIFI通信的，802.11n，建议把WIFI切成2.4G的话，就很流畅了，延迟非常小，总的来说还不错。<br>前提你手机必须开着wifi，但可以不连接网络，电脑也是同理，wifi网卡必须能使用，但可以不连接wifi网络。软件是靠开wifi热点的方式连接的，电脑的任务管理器可以看到多了个WIFI Direct连着手机。</p>
+<p>还有个发现，手机分辨率会影响到你快速滑动页面的时候卡不卡，比如在B站这种很多图片的地方滑动，我是mate20pro原来强制开2K，滑动快会顿卡，那种网络卡顿的样子，我看任务管理器瞬时的通信流量可以到30Mbps这样，比较高</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>多屏协同的功能</p>
+<ol>
+<li>可以在电脑上直接控制手机，可以打开任意APP，非常方便！</li>
+<li>手机和电脑共享剪切板，共享文件，传输东西非常方便！</li>
+</ol>
+<h2 id="必备基本条件">必备基本条件</h2><ol>
+<li>有无线网卡]]>
+    </summary>
+    
+      <category term="HuWei" scheme="http://sunblognuke.github.io/tags/HuWei/"/>
+    
+      <category term="多屏协同" scheme="http://sunblognuke.github.io/tags/%E5%A4%9A%E5%B1%8F%E5%8D%8F%E5%90%8C/"/>
+    
+      <category term="Life" scheme="http://sunblognuke.github.io/categories/Life/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[清理DNN数据库]]></title>
@@ -276,9 +327,9 @@ docker image #验证是否已生成新镜像</span>
 <h2 id="Docker常用命令">Docker常用命令</h2><p>docker命令是你与Do]]>
     </summary>
     
-      <category term="Pandas" scheme="http://sunblognuke.github.io/tags/Pandas/"/>
-    
       <category term="Python" scheme="http://sunblognuke.github.io/tags/Python/"/>
+    
+      <category term="Pandas" scheme="http://sunblognuke.github.io/tags/Pandas/"/>
     
       <category term="Docker" scheme="http://sunblognuke.github.io/tags/Docker/"/>
     
@@ -330,9 +381,9 @@ docker image #验证是否已生成新镜像</span>
 <h2 id="辅助工具_jupy]]>
     </summary>
     
-      <category term="Pandas" scheme="http://sunblognuke.github.io/tags/Pandas/"/>
-    
       <category term="Python" scheme="http://sunblognuke.github.io/tags/Python/"/>
+    
+      <category term="Pandas" scheme="http://sunblognuke.github.io/tags/Pandas/"/>
     
       <category term="Power Query" scheme="http://sunblognuke.github.io/tags/Power-Query/"/>
     
@@ -903,42 +954,6 @@ InnoDB: VirtualAlloc(1086849024 bytes) failed; Windows <span class="keyword">err
       <category term="DNN" scheme="http://sunblognuke.github.io/tags/DNN/"/>
     
       <category term="syntax highlighter" scheme="http://sunblognuke.github.io/tags/syntax-highlighter/"/>
-    
-      <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[打包DNN模块的简易技巧]]></title>
-    <link href="http://sunblognuke.github.io/2016/07/16/Some-tips-with-DNN-Manifest/"/>
-    <id>http://sunblognuke.github.io/2016/07/16/Some-tips-with-DNN-Manifest/</id>
-    <published>2016-07-16T12:16:07.000Z</published>
-    <updated>2019-07-14T05:51:20.103Z</updated>
-    <content type="html"><![CDATA[<p>对于稍微复杂些的DNN模块，参考Manifest清单文件的相关节点信息可简易打包最易管理的模块安装包。比如可参考大神Bruce Chapman提到的以下5点：</p>
-<p><a href="http://www.ifinity.com.au/Blog/EntryId/89/Top-5-DotNetNuke-Manifest-file-Module-Packaging-Tips" target="_blank" rel="external">Top 5 DotNetNuke Manifest file Module Packaging Tips</a></p>
-<ol>
-<li>Use Html in the File for better layout in the install pages</li>
-<li>Use a resources.zip file for all your files</li>
-<li>Use a html file for your Licence Agreement</li>
-<li>Make your module DNN 4.x and DNN5.x compatible by using two separate manifest files.</li>
-<li>Use the ‘sourceFileName’ attribute for your assembly files.</li>
-</ol>
-<p>其他官方文档可参考如下链接：</p>
-<p><a href="http://www.dnnsoftware.com/wiki/manifests" target="_blank" rel="external">Types of Manifests</a></p>
-<p><a href="http://www.dnnsoftware.com/docs/designers/extensions/dnn-manifest-schema.html" target="_blank" rel="external">The DNN Manifest Schema</a></p>
-<p>目前发现releasenotes这一节点只能这样用：</p>
-<pre><code><span class="tag">&lt;<span class="title">releaseNotes</span> <span class="attribute">src</span>=<span class="value">"Installation\ReleaseNotes\Release.07.03.00.txt"</span>&gt;</span><span class="tag">&lt;/<span class="title">releaseNotes</span>&gt;</span>
-</code></pre><p>错误的用法：</p>
-<pre><code><span class="tag">&lt;<span class="title">releaseNotes</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">releaseNote</span> <span class="attribute">src</span>=<span class="value">"Installation\ReleaseNotes\Release.07.03.00.txt"</span>/&gt;</span>
-<span class="tag">&lt;/<span class="title">releaseNotes</span>&gt;</span>
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<p>对于稍微复杂些的DNN模块，参考Manifest清单文件的相关节点信息可简易打包最易管理的模块安装包。比如可参考大神Bruce Chapman提到的以下5点：</p>
-<p><a href="http://www.ifinity.com.au/Blog/EntryId/89]]>
-    </summary>
-    
-      <category term="DNN" scheme="http://sunblognuke.github.io/tags/DNN/"/>
     
       <category term="Dev" scheme="http://sunblognuke.github.io/categories/Dev/"/>
     

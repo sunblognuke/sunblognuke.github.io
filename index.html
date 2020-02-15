@@ -84,6 +84,91 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2020/02/15/HuaWei-Mobile-Shared-With-Notebook/" title="非华为笔记本使用多屏协同功能" itemprop="url">非华为笔记本使用多屏协同功能</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2020-02-15T06:23:58.000Z" itemprop="datePublished"> 发表于 2020-02-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>多屏协同的功能</p>
+<ol>
+<li>可以在电脑上直接控制手机，可以打开任意APP，非常方便！</li>
+<li>手机和电脑共享剪切板，共享文件，传输东西非常方便！</li>
+</ol>
+<h2 id="必备基本条件">必备基本条件</h2><ol>
+<li>有无线网卡的电脑，最好直接是笔记本</li>
+<li>华为手机，系统是EMUI10+，芯片麒麟980+</li>
+<li>破解版华为电脑管家软件</li>
+</ol>
+<h2 id="安装华为电脑管家软件">安装华为电脑管家软件</h2><p>1.下载电脑管家</p>
+<p>度盘链接：<a href="https://pan.baidu.com/s/1h-VGSrgPWK_PKUYfvSrHpw#list/path=%2F" target="_blank" rel="external">https://pan.baidu.com/s/1h-VGSrgPWK_PKUYfvSrHpw#list/path=%2F</a>   密码：8j8c</p>
+<p>2.安装电脑管家</p>
+<p>3.替换文件util.dll</p>
+<p>首先在打开任务管理器停止掉几个服务，都是huawei开头的，右键停止就好了。</p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/2020/huawei-services.png" alt="关闭华为电脑管家的服务进程"></p>
+<p>然后用度盘链接里面的Util.dll 文件替换电脑管家安装目录下面的同名文件，安装目录一般在C:\Program Files\Huawei\PCManager。</p>
+<p>4.重启大法</p>
+<p>重启电脑，然后右下角就会出现电脑管家的图标，双击可以打开，点击我的手机，单击是通知中心的页面。</p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/2020/0934463o0pwxvh7wzdvcxq.png" alt="华为电脑管家"></p>
+<p>5.联接手机</p>
+<p>连接手机时确保电脑的蓝牙和无线网卡是打开的，确保蓝牙和手机能够配对。扫码要使用手机上的华为浏览器或者智慧视觉扫码。</p>
+<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/2020/913ad51f3a292df5d766b167b3315c6035a8736a.jpg" alt="扫码链接"></p>
+<h2 id="成功连接了电脑之后不能呼出手机的界面，怎么破">成功连接了电脑之后不能呼出手机的界面，怎么破</h2><p>参照以下原理设置，比如先把电脑的wifi链接断开，然后扫码连接上手机，手机界面正常呈现到电脑端再开启电脑端的wifi。</p>
+<h2 id="原理">原理</h2><p>其实就是靠WIFI通信的，802.11n，建议把WIFI切成2.4G的话，就很流畅了，延迟非常小，总的来说还不错。<br>前提你手机必须开着wifi，但可以不连接网络，电脑也是同理，wifi网卡必须能使用，但可以不连接wifi网络。软件是靠开wifi热点的方式连接的，电脑的任务管理器可以看到多了个WIFI Direct连着手机。</p>
+<p>还有个发现，手机分辨率会影响到你快速滑动页面的时候卡不卡，比如在B站这种很多图片的地方滑动，我是mate20pro原来强制开2K，滑动快会顿卡，那种网络卡顿的样子，我看任务管理器瞬时的通信流量可以到30Mbps这样，比较高</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Life/">Life</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/HuWei/">HuWei</a><a href="/tags/多屏协同/">多屏协同</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/07/15/Clean-Up-DNN9-DataSize/" title="清理DNN数据库" itemprop="url">清理DNN数据库</a>
   </h1>
   <p class="article-author">By
@@ -519,7 +604,7 @@ docker image #验证是否已生成新镜像</span>
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Pandas/">Pandas</a><a href="/tags/Python/">Python</a><a href="/tags/Docker/">Docker</a>
+  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/Pandas/">Pandas</a><a href="/tags/Docker/">Docker</a>
   </div>
 
 </div>
@@ -610,7 +695,7 @@ docker image #验证是否已生成新镜像</span>
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Pandas/">Pandas</a><a href="/tags/Python/">Python</a><a href="/tags/Power-Query/">Power Query</a>
+  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/Pandas/">Pandas</a><a href="/tags/Power-Query/">Power Query</a>
   </div>
 
 </div>
@@ -874,71 +959,6 @@ docker image #验证是否已生成新镜像</span>
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/07/17/OA-2017-Features/" title="通达OA 2017更新的功能初尝试" itemprop="url">通达OA 2017更新的功能初尝试</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2017-07-17T02:23:58.000Z" itemprop="datePublished"> 发表于 2017-07-17</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>随着办公平台的陆续深入使用，通达OA的软肋、不便捷性（移动化方面）、可扩展性（比如搭建子系统和整合应用）日趋明显，预想今年能把通达OA替换其他平台的办公OA，比如泛微OA、致远OA等等。不过涉及预算和变更带来的风险，并核实通达OA 2017的确发布了一些新功能的尝试和平台设想的构架，包括应用中心和流程中心是很值得期待的，让我跃跃欲试，很想把生产在用的OA平台升级到这个版本2017。不过冷静下来，还得等待稳定的版本再做定夺。</p>
-<p>期间，我简单尝试搭建一个免费20人用户的测试版本来验证2017是否能够符合我们公司业务需求的想法。在此分享一些用户和思路：</p>
-<h1 id="应用中心的删除和修改功能">应用中心的删除和修改功能</h1><p>若新应用启用了设定的流程，则删除和修改只能在流程中心的《我的工作》来做修改和删除。反之，可通过应用设计界面“是否停用流程”设置即可直接在应用中心的记录列表来操作修改和删除。</p>
-<p><img src="https://raw.githubusercontent.com/sunblognuke/resources/master/hexo/OA_AppCenter_delete.png" alt="应用中心-记录删除和修改"></p>
-<p>参考链接：</p>
-<p><a href="http://club.tongda2000.com/forum.php?mod=viewthread&amp;tid=34931&amp;page=1#pid118530" target="_blank" rel="external">http://club.tongda2000.com/forum.php?mod=viewthread&amp;tid=34931&amp;page=1#pid118530</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Resources/">Resources</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/信息化/">信息化</a><a href="/tags/通达OA/">通达OA</a><a href="/tags/MYOA/">MYOA</a><a href="/tags/应用中心/">应用中心</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -965,7 +985,7 @@ docker image #验证是否已生成新镜像</span>
 		  
 		
 		  
-			<li><a href="/categories/Life/" title="Life">Life<sup>3</sup></a></li>
+			<li><a href="/categories/Life/" title="Life">Life<sup>4</sup></a></li>
 		  
 		
 		  
@@ -1002,11 +1022,11 @@ docker image #验证是否已生成新镜像</span>
 			
 		
 			
-				<li><a href="/tags/信息化/" title="信息化">信息化<sup>6</sup></a></li>
+				<li><a href="/tags/CMS/" title="CMS">CMS<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CMS/" title="CMS">CMS<sup>6</sup></a></li>
+				<li><a href="/tags/信息化/" title="信息化">信息化<sup>6</sup></a></li>
 			
 		
 			
@@ -1014,11 +1034,11 @@ docker image #验证是否已生成新镜像</span>
 			
 		
 			
-				<li><a href="/tags/MYOA/" title="MYOA">MYOA<sup>5</sup></a></li>
+				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
+				<li><a href="/tags/MYOA/" title="MYOA">MYOA<sup>5</sup></a></li>
 			
 		
 			
@@ -1026,39 +1046,7 @@ docker image #验证是否已生成新镜像</span>
 			
 		
 			
-				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/DNN8/" title="DNN8">DNN8<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Pandas/" title="Pandas">Pandas<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Vagrant/" title="Vagrant">Vagrant<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
 			
 		
 			
@@ -1066,11 +1054,43 @@ docker image #验证是否已生成新镜像</span>
 			
 		
 			
-				<li><a href="/tags/Network/" title="Network">Network<sup>2</sup></a></li>
+				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>2</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Baby/" title="Baby">Baby<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Vagrant/" title="Vagrant">Vagrant<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNN9/" title="DNN9">DNN9<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Pandas/" title="Pandas">Pandas<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Network/" title="Network">Network<sup>2</sup></a></li>
 			
 		
 		</ul>
@@ -1080,7 +1100,7 @@ docker image #验证是否已生成新镜像</span>
   <div class="linkslist">
     <p class="asidetitle">近期文章</p>
     <div class="linkslist clearfix">
-		<ul class=""><li class=""><a href="/2019/07/15/Clean-Up-DNN9-DataSize/">清理DNN数据库</a></li><li class=""><a href="/2019/07/08/Notices-DNN9-Upgrade/">DNN9升级备忘</a></li><li class=""><a href="/2019/05/05/Andriod-Intsall-App-without-Google-Play-Store/">Android手机如何下载Google Play上的App</a></li><li class=""><a href="/2019/04/26/Git-Transfer-repo/">Git迁移代码仓库实践</a></li><li class=""><a href="/2018/08/04/Docker-Jupyter-Notebook-for-Data-Analysis/">基于Docker容器化搭建Jupyter Notebook数据科研环境</a></li><li class=""><a href="/2018/06/07/Python-Data-Analysis-with-Pandas/">Python数据分析利器Pandas</a></li></ul>
+		<ul class=""><li class=""><a href="/2020/02/15/HuaWei-Mobile-Shared-With-Notebook/">非华为笔记本使用多屏协同功能</a></li><li class=""><a href="/2019/07/15/Clean-Up-DNN9-DataSize/">清理DNN数据库</a></li><li class=""><a href="/2019/07/08/Notices-DNN9-Upgrade/">DNN9升级备忘</a></li><li class=""><a href="/2019/05/05/Andriod-Intsall-App-without-Google-Play-Store/">Android手机如何下载Google Play上的App</a></li><li class=""><a href="/2019/04/26/Git-Transfer-repo/">Git迁移代码仓库实践</a></li><li class=""><a href="/2018/08/04/Docker-Jupyter-Notebook-for-Data-Analysis/">基于Docker容器化搭建Jupyter Notebook数据科研环境</a></li></ul>
 	</div>
 </div>
 
@@ -1159,7 +1179,7 @@ docker image #验证是否已生成新镜像</span>
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2020 
 		
 		<a href="/about" target="_blank" title="Baldwin">Baldwin</a>
 		

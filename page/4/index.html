@@ -84,6 +84,103 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/01/11/Python-Troubleshooting/" title="Python Troubleshooting" itemprop="url">Python Troubleshooting</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-11T03:57:03.000Z" itemprop="datePublished"> 发表于 2016-01-11</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="PyQuery:_一个类似jQuery的Python库">PyQuery: 一个类似jQuery的Python库</h2><p>PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：<a href="http://pyquery.readthedocs.org/en/latest/api.html" target="_blank" rel="external">http://pyquery.org</a></p>
+<h2 id="Python轻量级ORM_-_Peewee">Python轻量级ORM - Peewee</h2><p>最新API：<a href="http://peewee.readthedocs.org/en/latest/" target="_blank" rel="external">Python轻量级ORM - Peewee</a></p>
+<p>like匹配语句:</p>
+<pre><code>xxModel.<span class="function"><span class="title">select</span><span class="params">()</span></span>.<span class="function"><span class="title">where</span><span class="params">(xxModel.author ** <span class="string">'zh%'</span>)</span></span>
+</code></pre><h2 id="requests-get_获取页面乱码">requests.get 获取页面乱码</h2><p>查看一下网页的编码，比如是gbk</p>
+<pre><code><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"Content-Type"</span> <span class="attribute">content</span>=<span class="value">"text/html; charset=gb2312"</span> /&gt;</span>
+</code></pre><p>那就需要response设置为r.encoding=’gbk’, 代码如下:</p>
+<pre><code>r = requests.<span class="function"><span class="title">get</span><span class="params">(self.url, headers=config.HEADERS)</span></span>
+r<span class="class">.encoding</span> = <span class="string">'gb2312'</span>
+return r.text
+</code></pre><h2 id="IndentationError:_unindent_does_not_match_any_outer_indentation_level">IndentationError: unindent does not match any outer indentation level</h2><p>解决方案：这主要是TAB键和空格混搭使用造成的，需要统一一下对齐的风格即可。</p>
+<h2 id="urllib2-HTTPError:_HTTP_Error_403:_Forbidden">urllib2.HTTPError: HTTP Error 403: Forbidden</h2><p>解决方案：ulr请求需要模拟真实的浏览器访问，需要设置User-Agent项，最简便的方式就是随机获取，代码如下:</p>
+<pre><code><span class="preprocessor"># -*- coding: UTF-8 -*-</span>
+import sys
+import <span class="built_in">random</span>
+
+reload(sys)
+sys.setdefaultencoding(<span class="string">'utf-8'</span>)
+
+USER_AGENTS = [
+                <span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'</span>,
+                <span class="string">'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11'</span>,
+                <span class="string">'Opera/9.25 (Windows NT 5.1; U; en)'</span>,
+                <span class="string">'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)'</span>,
+                <span class="string">'Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Kubuntu)'</span>,
+                <span class="string">'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'</span>,
+                <span class="string">'Lynx/2.8.5rel.1 libwww-FM/2.14 SSL-MM/1.4.1 GNUTLS/1.2.9'</span>,
+                <span class="string">'Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.7 (KHTML, like Gecko) Ubuntu/11.04 Chromium/16.0.912.77 Chrome/16.0.912.77 Safari/535.7'</span>,
+                <span class="string">'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:10.0) Gecko/20100101 Firefox/10.0'</span>
+            ]
+
+<span class="preprocessor">#伪装浏览器头</span>
+HEADERS = {
+    <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'</span>,
+    <span class="string">'User-Agent'</span>: <span class="built_in">random</span>.choice(USER_AGENTS),
+    <span class="string">'Referer'</span>: <span class="string">'http://www.baidu.com'</span> <span class="preprocessor"># or <span class="string">'http://www.google.cpm'</span></span>
+}
+</code></pre><h2 id="装饰器">装饰器</h2><h2 id="@classmethod_或_@staticmethod">@classmethod 或 @staticmethod</h2><p>参考知乎话题 - <a href="https://www.zhihu.com/question/21084971" target="_blank" rel="external">https://www.zhihu.com/question/21084971</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Resources/">Resources</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/Framework/">Framework</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/01/07/The-Zen-of-Python/" title="The Zen of Python" itemprop="url">The Zen of Python</a>
   </h1>
   <p class="article-author">By
@@ -995,111 +1092,6 @@ DotNetNuke.Entities.Users.UserController.GetPassword(ref uInfo, <span class="bui
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/04/Hexo-Customization-Ⅲ/" title="Hexo折腾记 Ⅲ" itemprop="url">Hexo折腾记 Ⅲ</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-04T01:17:35.000Z" itemprop="datePublished"> 发表于 2015-12-04</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>用Hexo搭建本博客至今为止，感觉不错，管理起来很方便，Markdown排版文字的确很赞。接下来这一篇文章想更为深入的探讨，比如如何编程的方式来修改Hexo成更为灵活的布局或创建新的功能：</p>
-<h2 id="边栏Widget_-_最新随笔">边栏Widget - 最新随笔</h2><p>可直接自己在模板template写或通过帮助创建Hexo helper plugin来实现。在此分享后者的做法：</p>
-<p><strong>代码原理</strong></p>
-<p>获取指定目录或全站的随笔并排序遍历输出而已</p>
-<pre><code><span class="xml"></span>&lt;%<span class="perl"> site.categories.findOne({name: <span class="string">'project'</span>}).posts.<span class="keyword">sort</span>(<span class="string">'date'</span>, -<span class="number">1</span>).<span class="keyword">each</span>(function(post){ </span>%&gt;<span class="xml">
-    <span class="tag">&lt;<span class="title">li</span>&gt;</span>
-      <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"</span></span></span>&lt;%<span class="perl">- url_for(post.path) </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span>&gt;</span></span>&lt;%=<span class="perl"> post.title || <span class="string">'(no title)'</span> </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">a</span>&gt;</span>
-    <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-</span>&lt;%<span class="perl"> }) </span>%&gt;<span class="xml"></span>
-</code></pre><ul>
-<li><p>执行代码安装插件recent_posts</p>
-<pre><code>npm <span class="operator"><span class="keyword">install</span> hexo-helper-recent_posts <span class="comment">--save</span></span>
-</code></pre></li>
-<li><p>在主题目录下的_widget目录下新建widget文件recent_posts.ejs (比如ROOT\themes\jacman\layout_widget)，代码如下（如有必要可自定义修改ulClass和liClass并添加相关的样式）：</p>
-<pre><code><span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"linkslist"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"asidetitle"</span>&gt;</span></span>&lt;%=<span class="ruby"> _<span class="number">_</span>(<span class="string">'recent_posts'</span>) </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"linkslist clearfix"</span>&gt;</span>
-        </span>&lt;%-<span class="ruby"> recent_posts({     <span class="symbol">count:</span> <span class="number">6</span>, 
-                            <span class="symbol">ulClass:</span> <span class="string">''</span>,
-                            <span class="symbol">liClass:</span> <span class="string">''</span>}) </span>%&gt;<span class="xml">
-    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>    </span>
-</code></pre></li>
-</ul>
-<ul>
-<li><p>打开主题_config.yml, 启用recent_posts这一widget：</p>
-<pre><code>#### Widgets
-widgets: 
--<span class="ruby"> github-card
-</span>-<span class="ruby"> category
-</span>-<span class="ruby"> tag
-</span>-<span class="ruby"> recent_posts /<span class="regexp">/ 启用recent_posts
-</span></span>-<span class="ruby"><span class="regexp"> links
-</span></span>##- douban
--<span class="ruby"><span class="regexp"> rss
-</span></span>##- weibo
-</code></pre></li>
-</ul>
-<p>相关链接：</p>
-<p><a href="https://github.com/floriancargoet/hexo-helper-recent_posts" target="_blank" rel="external">hexo-helper-recent_posts</a></p>
-<p><a href="https://github.com/hexojs/hexo/issues/459" target="_blank" rel="external">https://github.com/hexojs/hexo/issues/459</a></p>
-<p><a href="http://tobuildsomething.com/2015/08/01/Finding-all-posts-with-a-given-category-in-Hexo/" target="_blank" rel="external">Querying posts in Hexo</a></p>
-<p><a href="https://github.com/JamesPan/hexo-theme-icarus/blob/master/layout/_widget/recent_posts.ejs" target="_blank" rel="external">https://github.com/JamesPan/hexo-theme-icarus/blob/master/layout/_widget/recent_posts.ejs</a></p>
-<h2 id="创建Filter_-_文章尾部增加版权信息">创建Filter - 文章尾部增加版权信息</h2><p>Hexo博客系统天生具有良好的可扩展性，Hexo的插件基本上分为Deployer、Filter、Generator、Renderer、Tag等很多种类。其中Filter插件可用于修改一些特定的数据。比如这种<a href="https://hexo.io/api/filter.html#before_post_render" target="_blank" rel="external">before_post_render Filter</a>会在文章正式渲染之前执行，具体的执行和渲染步骤可以参见关于<a href="https://hexo.io/api/posts.html#Render" target="_blank" rel="external">渲染的官方文档</a>。</p>
-<p>相关链接:</p>
-<p><a href="http://kuangqi.me/tricks/append-a-copyright-info-after-every-post/index.html" target="_blank" rel="external">为Hexo博客的每一篇文章自动追加版权信息</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Blog/">Blog</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Blogging/">Blogging</a><a href="/tags/Hexo/">Hexo</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
@@ -1126,7 +1118,7 @@ widgets:
 		  
 		
 		  
-			<li><a href="/categories/Life/" title="Life">Life<sup>3</sup></a></li>
+			<li><a href="/categories/Life/" title="Life">Life<sup>4</sup></a></li>
 		  
 		
 		  
@@ -1163,11 +1155,11 @@ widgets:
 			
 		
 			
-				<li><a href="/tags/信息化/" title="信息化">信息化<sup>6</sup></a></li>
+				<li><a href="/tags/CMS/" title="CMS">CMS<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CMS/" title="CMS">CMS<sup>6</sup></a></li>
+				<li><a href="/tags/信息化/" title="信息化">信息化<sup>6</sup></a></li>
 			
 		
 			
@@ -1175,11 +1167,11 @@ widgets:
 			
 		
 			
-				<li><a href="/tags/MYOA/" title="MYOA">MYOA<sup>5</sup></a></li>
+				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
+				<li><a href="/tags/MYOA/" title="MYOA">MYOA<sup>5</sup></a></li>
 			
 		
 			
@@ -1187,39 +1179,7 @@ widgets:
 			
 		
 			
-				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/DNN8/" title="DNN8">DNN8<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Pandas/" title="Pandas">Pandas<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Vagrant/" title="Vagrant">Vagrant<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
 			
 		
 			
@@ -1227,11 +1187,43 @@ widgets:
 			
 		
 			
-				<li><a href="/tags/Network/" title="Network">Network<sup>2</sup></a></li>
+				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>2</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Baby/" title="Baby">Baby<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Vagrant/" title="Vagrant">Vagrant<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNN9/" title="DNN9">DNN9<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Pandas/" title="Pandas">Pandas<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Network/" title="Network">Network<sup>2</sup></a></li>
 			
 		
 		</ul>
@@ -1241,7 +1233,7 @@ widgets:
   <div class="linkslist">
     <p class="asidetitle">近期文章</p>
     <div class="linkslist clearfix">
-		<ul class=""><li class=""><a href="/2019/07/15/Clean-Up-DNN9-DataSize/">清理DNN数据库</a></li><li class=""><a href="/2019/07/08/Notices-DNN9-Upgrade/">DNN9升级备忘</a></li><li class=""><a href="/2019/05/05/Andriod-Intsall-App-without-Google-Play-Store/">Android手机如何下载Google Play上的App</a></li><li class=""><a href="/2019/04/26/Git-Transfer-repo/">Git迁移代码仓库实践</a></li><li class=""><a href="/2018/08/04/Docker-Jupyter-Notebook-for-Data-Analysis/">基于Docker容器化搭建Jupyter Notebook数据科研环境</a></li><li class=""><a href="/2018/06/07/Python-Data-Analysis-with-Pandas/">Python数据分析利器Pandas</a></li></ul>
+		<ul class=""><li class=""><a href="/2020/02/15/HuaWei-Mobile-Shared-With-Notebook/">非华为笔记本使用多屏协同功能</a></li><li class=""><a href="/2019/07/15/Clean-Up-DNN9-DataSize/">清理DNN数据库</a></li><li class=""><a href="/2019/07/08/Notices-DNN9-Upgrade/">DNN9升级备忘</a></li><li class=""><a href="/2019/05/05/Andriod-Intsall-App-without-Google-Play-Store/">Android手机如何下载Google Play上的App</a></li><li class=""><a href="/2019/04/26/Git-Transfer-repo/">Git迁移代码仓库实践</a></li><li class=""><a href="/2018/08/04/Docker-Jupyter-Notebook-for-Data-Analysis/">基于Docker容器化搭建Jupyter Notebook数据科研环境</a></li></ul>
 	</div>
 </div>
 
@@ -1320,7 +1312,7 @@ widgets:
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2020 
 		
 		<a href="/about" target="_blank" title="Baldwin">Baldwin</a>
 		

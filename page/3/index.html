@@ -84,6 +84,83 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/07/16/Some-tips-with-DNN-Manifest/" title="打包DNN模块的简易技巧" itemprop="url">打包DNN模块的简易技巧</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
+		
+  <p class="article-time">
+    <time datetime="2016-07-16T12:16:07.000Z" itemprop="datePublished"> 发表于 2016-07-16</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>对于稍微复杂些的DNN模块，参考Manifest清单文件的相关节点信息可简易打包最易管理的模块安装包。比如可参考大神Bruce Chapman提到的以下5点：</p>
+<p><a href="http://www.ifinity.com.au/Blog/EntryId/89/Top-5-DotNetNuke-Manifest-file-Module-Packaging-Tips" target="_blank" rel="external">Top 5 DotNetNuke Manifest file Module Packaging Tips</a></p>
+<ol>
+<li>Use Html in the File for better layout in the install pages</li>
+<li>Use a resources.zip file for all your files</li>
+<li>Use a html file for your Licence Agreement</li>
+<li>Make your module DNN 4.x and DNN5.x compatible by using two separate manifest files.</li>
+<li>Use the ‘sourceFileName’ attribute for your assembly files.</li>
+</ol>
+<p>其他官方文档可参考如下链接：</p>
+<p><a href="http://www.dnnsoftware.com/wiki/manifests" target="_blank" rel="external">Types of Manifests</a></p>
+<p><a href="http://www.dnnsoftware.com/docs/designers/extensions/dnn-manifest-schema.html" target="_blank" rel="external">The DNN Manifest Schema</a></p>
+<p>目前发现releasenotes这一节点只能这样用：</p>
+<pre><code><span class="tag">&lt;<span class="title">releaseNotes</span> <span class="attribute">src</span>=<span class="value">"Installation\ReleaseNotes\Release.07.03.00.txt"</span>&gt;</span><span class="tag">&lt;/<span class="title">releaseNotes</span>&gt;</span>
+</code></pre><p>错误的用法：</p>
+<pre><code><span class="tag">&lt;<span class="title">releaseNotes</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">releaseNote</span> <span class="attribute">src</span>=<span class="value">"Installation\ReleaseNotes\Release.07.03.00.txt"</span>/&gt;</span>
+<span class="tag">&lt;/<span class="title">releaseNotes</span>&gt;</span>
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Dev/">Dev</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/DNN/">DNN</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/05/26/Blog-App-based-Django-with-Virtualenv/" title="基于Django和Virtualenv搭建博客开发实战" itemprop="url">基于Django和Virtualenv搭建博客开发实战</a>
   </h1>
   <p class="article-author">By
@@ -981,103 +1058,6 @@ sys.setdefaultencoding(<span class="string">'utf-8'</span>)
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/01/11/Python-Troubleshooting/" title="Python Troubleshooting" itemprop="url">Python Troubleshooting</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Baldwin" target="_blank" itemprop="author">Baldwin</a>
-		
-  <p class="article-time">
-    <time datetime="2016-01-11T03:57:03.000Z" itemprop="datePublished"> 发表于 2016-01-11</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="PyQuery:_一个类似jQuery的Python库">PyQuery: 一个类似jQuery的Python库</h2><p>PyQuery是一个类似于jQuery的Python库，也可以说是jQuery在Python上的实现。pyQuery是使用lxml来实现快速的xml和html操作的。具体的PyQuery文档见：<a href="http://pyquery.readthedocs.org/en/latest/api.html" target="_blank" rel="external">http://pyquery.org</a></p>
-<h2 id="Python轻量级ORM_-_Peewee">Python轻量级ORM - Peewee</h2><p>最新API：<a href="http://peewee.readthedocs.org/en/latest/" target="_blank" rel="external">Python轻量级ORM - Peewee</a></p>
-<p>like匹配语句:</p>
-<pre><code>xxModel.<span class="function"><span class="title">select</span><span class="params">()</span></span>.<span class="function"><span class="title">where</span><span class="params">(xxModel.author ** <span class="string">'zh%'</span>)</span></span>
-</code></pre><h2 id="requests-get_获取页面乱码">requests.get 获取页面乱码</h2><p>查看一下网页的编码，比如是gbk</p>
-<pre><code><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"Content-Type"</span> <span class="attribute">content</span>=<span class="value">"text/html; charset=gb2312"</span> /&gt;</span>
-</code></pre><p>那就需要response设置为r.encoding=’gbk’, 代码如下:</p>
-<pre><code>r = requests.<span class="function"><span class="title">get</span><span class="params">(self.url, headers=config.HEADERS)</span></span>
-r<span class="class">.encoding</span> = <span class="string">'gb2312'</span>
-return r.text
-</code></pre><h2 id="IndentationError:_unindent_does_not_match_any_outer_indentation_level">IndentationError: unindent does not match any outer indentation level</h2><p>解决方案：这主要是TAB键和空格混搭使用造成的，需要统一一下对齐的风格即可。</p>
-<h2 id="urllib2-HTTPError:_HTTP_Error_403:_Forbidden">urllib2.HTTPError: HTTP Error 403: Forbidden</h2><p>解决方案：ulr请求需要模拟真实的浏览器访问，需要设置User-Agent项，最简便的方式就是随机获取，代码如下:</p>
-<pre><code><span class="preprocessor"># -*- coding: UTF-8 -*-</span>
-import sys
-import <span class="built_in">random</span>
-
-reload(sys)
-sys.setdefaultencoding(<span class="string">'utf-8'</span>)
-
-USER_AGENTS = [
-                <span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'</span>,
-                <span class="string">'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11'</span>,
-                <span class="string">'Opera/9.25 (Windows NT 5.1; U; en)'</span>,
-                <span class="string">'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)'</span>,
-                <span class="string">'Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Kubuntu)'</span>,
-                <span class="string">'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'</span>,
-                <span class="string">'Lynx/2.8.5rel.1 libwww-FM/2.14 SSL-MM/1.4.1 GNUTLS/1.2.9'</span>,
-                <span class="string">'Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.7 (KHTML, like Gecko) Ubuntu/11.04 Chromium/16.0.912.77 Chrome/16.0.912.77 Safari/535.7'</span>,
-                <span class="string">'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:10.0) Gecko/20100101 Firefox/10.0'</span>
-            ]
-
-<span class="preprocessor">#伪装浏览器头</span>
-HEADERS = {
-    <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'</span>,
-    <span class="string">'User-Agent'</span>: <span class="built_in">random</span>.choice(USER_AGENTS),
-    <span class="string">'Referer'</span>: <span class="string">'http://www.baidu.com'</span> <span class="preprocessor"># or <span class="string">'http://www.google.cpm'</span></span>
-}
-</code></pre><h2 id="装饰器">装饰器</h2><h2 id="@classmethod_或_@staticmethod">@classmethod 或 @staticmethod</h2><p>参考知乎话题 - <a href="https://www.zhihu.com/question/21084971" target="_blank" rel="external">https://www.zhihu.com/question/21084971</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Resources/">Resources</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/Framework/">Framework</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
@@ -1104,7 +1084,7 @@ HEADERS = {
 		  
 		
 		  
-			<li><a href="/categories/Life/" title="Life">Life<sup>3</sup></a></li>
+			<li><a href="/categories/Life/" title="Life">Life<sup>4</sup></a></li>
 		  
 		
 		  
@@ -1141,11 +1121,11 @@ HEADERS = {
 			
 		
 			
-				<li><a href="/tags/信息化/" title="信息化">信息化<sup>6</sup></a></li>
+				<li><a href="/tags/CMS/" title="CMS">CMS<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CMS/" title="CMS">CMS<sup>6</sup></a></li>
+				<li><a href="/tags/信息化/" title="信息化">信息化<sup>6</sup></a></li>
 			
 		
 			
@@ -1153,11 +1133,11 @@ HEADERS = {
 			
 		
 			
-				<li><a href="/tags/MYOA/" title="MYOA">MYOA<sup>5</sup></a></li>
+				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Blogging/" title="Blogging">Blogging<sup>5</sup></a></li>
+				<li><a href="/tags/MYOA/" title="MYOA">MYOA<sup>5</sup></a></li>
 			
 		
 			
@@ -1165,39 +1145,7 @@ HEADERS = {
 			
 		
 			
-				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/DNN8/" title="DNN8">DNN8<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Pandas/" title="Pandas">Pandas<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Vagrant/" title="Vagrant">Vagrant<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
 			
 		
 			
@@ -1205,11 +1153,43 @@ HEADERS = {
 			
 		
 			
-				<li><a href="/tags/Network/" title="Network">Network<sup>2</sup></a></li>
+				<li><a href="/tags/创业/" title="创业">创业<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>2</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Baby/" title="Baby">Baby<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Vagrant/" title="Vagrant">Vagrant<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DNN9/" title="DNN9">DNN9<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Pandas/" title="Pandas">Pandas<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DotNetNuke/" title="DotNetNuke">DotNetNuke<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Network/" title="Network">Network<sup>2</sup></a></li>
 			
 		
 		</ul>
@@ -1219,7 +1199,7 @@ HEADERS = {
   <div class="linkslist">
     <p class="asidetitle">近期文章</p>
     <div class="linkslist clearfix">
-		<ul class=""><li class=""><a href="/2019/07/15/Clean-Up-DNN9-DataSize/">清理DNN数据库</a></li><li class=""><a href="/2019/07/08/Notices-DNN9-Upgrade/">DNN9升级备忘</a></li><li class=""><a href="/2019/05/05/Andriod-Intsall-App-without-Google-Play-Store/">Android手机如何下载Google Play上的App</a></li><li class=""><a href="/2019/04/26/Git-Transfer-repo/">Git迁移代码仓库实践</a></li><li class=""><a href="/2018/08/04/Docker-Jupyter-Notebook-for-Data-Analysis/">基于Docker容器化搭建Jupyter Notebook数据科研环境</a></li><li class=""><a href="/2018/06/07/Python-Data-Analysis-with-Pandas/">Python数据分析利器Pandas</a></li></ul>
+		<ul class=""><li class=""><a href="/2020/02/15/HuaWei-Mobile-Shared-With-Notebook/">非华为笔记本使用多屏协同功能</a></li><li class=""><a href="/2019/07/15/Clean-Up-DNN9-DataSize/">清理DNN数据库</a></li><li class=""><a href="/2019/07/08/Notices-DNN9-Upgrade/">DNN9升级备忘</a></li><li class=""><a href="/2019/05/05/Andriod-Intsall-App-without-Google-Play-Store/">Android手机如何下载Google Play上的App</a></li><li class=""><a href="/2019/04/26/Git-Transfer-repo/">Git迁移代码仓库实践</a></li><li class=""><a href="/2018/08/04/Docker-Jupyter-Notebook-for-Data-Analysis/">基于Docker容器化搭建Jupyter Notebook数据科研环境</a></li></ul>
 	</div>
 </div>
 
@@ -1298,7 +1278,7 @@ HEADERS = {
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2020 
 		
 		<a href="/about" target="_blank" title="Baldwin">Baldwin</a>
 		
